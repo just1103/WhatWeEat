@@ -16,6 +16,7 @@
 		3636DE6C283B225200F04111 /* WhatWeEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE6B283B225200F04111 /* WhatWeEatTests.swift */; };
 		3636DE76283B225200F04111 /* WhatWeEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE75283B225200F04111 /* WhatWeEatUITests.swift */; };
 		3636DE78283B225200F04111 /* WhatWeEatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE77283B225200F04111 /* WhatWeEatUITestsLaunchTests.swift */; };
+		3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3636DE84283B24DC00F04111 /* .swiftlint.yml */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		3636DE71283B225200F04111 /* WhatWeEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatWeEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3636DE75283B225200F04111 /* WhatWeEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWeEatUITests.swift; sourceTree = "<group>"; };
 		3636DE77283B225200F04111 /* WhatWeEatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWeEatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3636DE84283B24DC00F04111 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		3636DE48283B225100F04111 = {
 			isa = PBXGroup;
 			children = (
+				3636DE84283B24DC00F04111 /* .swiftlint.yml */,
 				3636DE53283B225100F04111 /* WhatWeEat */,
 				3636DE6A283B225200F04111 /* WhatWeEatTests */,
 				3636DE74283B225200F04111 /* WhatWeEatUITests */,
@@ -141,6 +144,7 @@
 				3636DE4D283B225100F04111 /* Sources */,
 				3636DE4E283B225100F04111 /* Frameworks */,
 				3636DE4F283B225100F04111 /* Resources */,
+				3636DE86283B250600F04111 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -242,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */,
 				3636DE61283B225200F04111 /* LaunchScreen.storyboard in Resources */,
 				3636DE5E283B225200F04111 /* Assets.xcassets in Resources */,
 				3636DE5C283B225100F04111 /* Main.storyboard in Resources */,
@@ -263,6 +268,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3636DE86283B250600F04111 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3636DE4D283B225100F04111 /* Sources */ = {
