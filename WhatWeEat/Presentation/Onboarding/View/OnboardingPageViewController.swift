@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 
-class OnboardingPageViewController: UIPageViewController {
+final class OnboardingPageViewController: UIPageViewController {
     // MARK: - Properties
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
@@ -11,7 +11,7 @@ class OnboardingPageViewController: UIPageViewController {
         pageControl.currentPage = 0
         return pageControl
     }()
-    let skipAndConfirmButton: UIButton = {
+    let skipButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.skipButtonTitle, for: .normal)
@@ -61,17 +61,18 @@ class OnboardingPageViewController: UIPageViewController {
     }
     
     private func configureUI() {
+        view.backgroundColor = .white
         view.addSubview(pageControl)
-        view.addSubview(skipAndConfirmButton)
+        view.addSubview(skipButton)
         
         NSLayoutConstraint.activate([
             pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             pageControl.heightAnchor.constraint(equalToConstant: 20),
             pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             
-            skipAndConfirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            skipAndConfirmButton.widthAnchor.constraint(equalToConstant: skipAndConfirmButton.intrinsicContentSize.width + 30),
-            skipAndConfirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            skipButton.widthAnchor.constraint(equalToConstant: skipButton.intrinsicContentSize.width + 30),
+            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
         ])
     }
 }
@@ -151,7 +152,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     }
 }
 
-// MARK: - Namespace
+// MARK: - NameSpaces
 extension OnboardingPageViewController {
     private enum Design {
         static let pageControlCurrentPageIndicatorTintColor: UIColor = ColorPalette.mainYellow
@@ -163,7 +164,6 @@ extension OnboardingPageViewController {
     
     private enum Content {
         static let skipButtonTitle: String = "Skip"
-        static let confirmButtonTitle: String = "확인"
         static let firstPageTitleLabelText: String = "안녕하세요"
         static let firstPageDescriptionLabelText: String = """
         메뉴 고르다 점심시간이 사라진 경험..

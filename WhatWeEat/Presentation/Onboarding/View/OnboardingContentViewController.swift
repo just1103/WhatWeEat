@@ -1,6 +1,6 @@
 import UIKit
 
-class OnboardingContentViewController: UIViewController {
+final class OnboardingContentViewController: UIViewController {
     // MARK: - Properties
     let containerStackView: UIStackView = {
         let stackView = UIStackView()
