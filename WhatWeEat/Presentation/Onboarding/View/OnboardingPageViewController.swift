@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 class OnboardingPageViewController: UIPageViewController {
     // MARK: - Properties
@@ -31,13 +32,20 @@ class OnboardingPageViewController: UIPageViewController {
         descriptionLabelText: Content.secondPageDescriptionLabelText,
         image: Content.secondPageImage
     )
-    var onboardingPages = [UIViewController]()
+    private var onboardingPages = [UIViewController]()
+    private let currentIndexForPreviousPage = PublishSubject<Int>()
+    private let currentIndexForNextPageAndPageCount = PublishSubject<(Int, Int)>()
+    // TODO: Coordinator 생성 후 주입하는 방식으로 변경
+    private var viewModel: OnboardingViewModel = OnboardingViewModel()
+    private var viewModelOutput: OnboardingViewModel.Output?
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPages()
         configureUI()
+        bind()
     }
     
     // MARK: - Methods
@@ -68,18 +76,41 @@ class OnboardingPageViewController: UIPageViewController {
     }
 }
 
+// MARK: - Rx Binding Methods
+extension OnboardingPageViewController {
+    private func bind() {
+        let input = OnboardingViewModel.Input(
+            currentIndexForPreviousPage: currentIndexForPreviousPage.asObservable(),
+            currentIndexForNextPageAndPageCount: currentIndexForNextPageAndPageCount.asObservable()
+        )
+        
+        viewModelOutput = viewModel.transform(input)
+    }
+}
+
+// MARK: - PageViewController DataSource
 extension OnboardingPageViewController: UIPageViewControllerDataSource {
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
         guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return nil }
+        var viewController: UIViewController?
         
-        if currentIndex == 0 {
-            return nil
-        } else {
-            return onboardingPages[currentIndex - 1] 
-        }
+        viewModelOutput?.previousPageIndex
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] previousIndex in
+                guard let previousIndex = previousIndex else {
+                    viewController = nil
+                    return
+                }
+                viewController = self?.onboardingPages[previousIndex]
+            })
+            .disposed(by: disposeBag)
+        
+        currentIndexForPreviousPage.onNext(currentIndex)
+        
+        return viewController
     }
     
     func pageViewController(
@@ -87,15 +118,26 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
         guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return nil }
+        var viewController: UIViewController?
 
-        if currentIndex < onboardingPages.count - 1 {
-            return onboardingPages[currentIndex + 1]
-        } else {
-            return nil
-        }
+        viewModelOutput?.nextPageIndex
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] nextIndex in
+                guard let nextIndex = nextIndex else {
+                    viewController = nil
+                    return
+                }
+                viewController = self?.onboardingPages[nextIndex]
+            })
+            .disposed(by: disposeBag)
+        
+        currentIndexForNextPageAndPageCount.onNext((currentIndex, onboardingPages.count))
+        
+        return viewController
     }
 }
 
+// MARK: - PageViewController Delegate
 extension OnboardingPageViewController: UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController,
@@ -103,12 +145,13 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
         previousViewControllers: [UIViewController],
         transitionCompleted completed: Bool
     ) {
-        guard let viewControllers = pageViewController.viewControllers else { return }
-        guard let currentIndex = onboardingPages.firstIndex(of: viewControllers[0]) else { return }
+        guard let viewController = pageViewController.viewControllers?.first else { return }
+        guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return }
         pageControl.currentPage = currentIndex
     }
 }
 
+// MARK: - Namespace
 extension OnboardingPageViewController {
     private enum Design {
         static let pageControlCurrentPageIndicatorTintColor: UIColor = ColorPalette.mainYellow
