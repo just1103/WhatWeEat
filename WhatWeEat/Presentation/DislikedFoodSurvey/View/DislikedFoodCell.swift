@@ -4,7 +4,7 @@ import WebKit
 final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Nested Types
     struct DislikedFood: Hashable {
-        let uniqueID = UUID()
+        var isChecked: Bool = false
         let descriptionImage: UIImage
         let descriptionText: String
     }
@@ -40,6 +40,7 @@ final class DislikedFoodCell: UICollectionViewCell {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
+    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -1,4 +1,6 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class DislikedFoodSurveyViewController: UIViewController {
     // MARK: - Nested Types
@@ -14,7 +16,7 @@ final class DislikedFoodSurveyViewController: UIViewController {
     }
     
     // MARK: - Properties
-    let containerStackView: UIStackView = {
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -23,7 +25,7 @@ final class DislikedFoodSurveyViewController: UIViewController {
         stackView.spacing = 20
         return stackView
     }()
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "못먹는 음식을 알려주세요"
@@ -33,7 +35,7 @@ final class DislikedFoodSurveyViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }()
-    let confirmButton: UIButton = {
+    private let confirmButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("확인", for: .normal)
@@ -46,11 +48,15 @@ final class DislikedFoodSurveyViewController: UIViewController {
         return button
     }()
     
+    private var viewModel: DislikedFoodSurveyViewModel! = DislikedFoodSurveyViewModel() // TODO: 생성자 주입
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: DiffableDataSource!
     private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>!
     private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFoodCell.DislikedFood>
     private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFoodCell.DislikedFood>
+    
+    private let invokedViewDidLoad = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -59,9 +65,10 @@ final class DislikedFoodSurveyViewController: UIViewController {
         configureCollectionView()
         configureStackView()
         configureCellRegistrationAndDataSource()
-        configureInitialSnapshot(with: [])
+        bind()
+        invokedViewDidLoad.onNext(())
     }
-    
+
     // MARK: - Methods
     private func checkIOSVersion() {
         let versionNumbers = UIDevice.current.systemVersion.components(separatedBy: ".")
@@ -95,14 +102,11 @@ final class DislikedFoodSurveyViewController: UIViewController {
                 self?.showUnknownSectionErrorAlert()
                 return nil
             }
-            let screenWidth = UIScreen.main.bounds.width
-            let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-//            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
 
             return section
@@ -113,23 +117,12 @@ final class DislikedFoodSurveyViewController: UIViewController {
     
     private func configureCellRegistrationAndDataSource() {
         let cellRegistration = CellRegistration { cell, _, dislikedFood in
-//            guard let image = UIImage(named: "fish") else { return }
-//            let disliked = DislikedFoodCell.DislikedFood(descriptionImage: image, descriptionText: "해산물")
             cell.apply(descriptionImage: dislikedFood.descriptionImage, descriptionText: dislikedFood.descriptionText)
         }
         
         dataSource = DiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, dislikedFood in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dislikedFood)
         })
-    }
-    
-    private func configureInitialSnapshot(with dislikedFood: [DislikedFoodCell.DislikedFood]) {
-        guard let image = UIImage(named: "fish") else { return }
-        let disliked = DislikedFoodCell.DislikedFood(descriptionImage: image, descriptionText: "해산물")
-        snapshot = NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems([disliked])
-        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func showUnknownSectionErrorAlert() {
@@ -152,6 +145,35 @@ final class DislikedFoodSurveyViewController: UIViewController {
             containerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.9)
         ])
+    }
+}
+
+// MARK: - Rx binding Methods
+extension DislikedFoodSurveyViewController {
+    private func bind() {
+        let input = DislikedFoodSurveyViewModel.Input(
+            invokedViewDidLoad: invokedViewDidLoad.asObservable()
+        )
+        
+        let output = viewModel.transform(input)
+        
+        configureItems(with: output.dislikedFoods)
+    }
+
+    private func configureItems(with dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>) {
+        dislikedFoods
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] dislikedFoods in
+                self?.configureInitialSnapshot(with: dislikedFoods)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureInitialSnapshot(with dislikedFood: [DislikedFoodCell.DislikedFood]) {
+        snapshot = NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(dislikedFood)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 

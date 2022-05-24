@@ -18,6 +18,7 @@
 		3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE8F283B5D6800F04111 /* ColorPalette.swift */; };
 		3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE93283C870800F04111 /* DislikedFoodSurveyViewController.swift */; };
 		3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE95283CCFD000F04111 /* AlertFactory.swift */; };
+		3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
@@ -49,6 +50,7 @@
 		3636DE8F283B5D6800F04111 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		3636DE93283C870800F04111 /* DislikedFoodSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewController.swift; sourceTree = "<group>"; };
 		3636DE95283CCFD000F04111 /* AlertFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
+		3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModel.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				3636DE92283C86EA00F04111 /* View */,
+				3636DE97283CF97400F04111 /* ViewModel */,
 			);
 			path = DislikedFoodSurvey;
 			sourceTree = "<group>";
@@ -162,6 +165,14 @@
 				DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3636DE97283CF97400F04111 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DE095C88283B259300C7E109 /* App */ = {
@@ -327,6 +338,7 @@
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
+				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
 			);
