@@ -47,6 +47,10 @@ final class DislikedFoodSurveyViewController: UIViewController {
     }()
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private var dataSource: DiffableDataSource!
+    private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>!
+    private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFoodCell.DislikedFood>
+    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFoodCell.DislikedFood>
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -54,6 +58,8 @@ final class DislikedFoodSurveyViewController: UIViewController {
         checkIOSVersion()
         configureCollectionView()
         configureStackView()
+        configureCellRegistrationAndDataSource()
+        configureInitialSnapshot(with: [])
     }
     
     // MARK: - Methods
@@ -91,16 +97,39 @@ final class DislikedFoodSurveyViewController: UIViewController {
             }
             let screenWidth = UIScreen.main.bounds.width
             let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columnCount)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+//            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
             let section = NSCollectionLayoutSection(group: group)
-            
+
             return section
         }
-        
+
         return layout
+    }
+    
+    private func configureCellRegistrationAndDataSource() {
+        let cellRegistration = CellRegistration { cell, _, dislikedFood in
+//            guard let image = UIImage(named: "fish") else { return }
+//            let disliked = DislikedFoodCell.DislikedFood(descriptionImage: image, descriptionText: "해산물")
+            cell.apply(descriptionImage: dislikedFood.descriptionImage, descriptionText: dislikedFood.descriptionText)
+        }
+        
+        dataSource = DiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, dislikedFood in
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dislikedFood)
+        })
+    }
+    
+    private func configureInitialSnapshot(with dislikedFood: [DislikedFoodCell.DislikedFood]) {
+        guard let image = UIImage(named: "fish") else { return }
+        let disliked = DislikedFoodCell.DislikedFood(descriptionImage: image, descriptionText: "해산물")
+        snapshot = NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([disliked])
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func showUnknownSectionErrorAlert() {
@@ -121,6 +150,7 @@ final class DislikedFoodSurveyViewController: UIViewController {
             containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.9)
         ])
     }
 }
