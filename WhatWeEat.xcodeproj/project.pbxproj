@@ -19,6 +19,9 @@
 		3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE93283C870800F04111 /* DislikedFoodSurveyViewController.swift */; };
 		3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE95283CCFD000F04111 /* AlertFactory.swift */; };
 		3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */; };
+		3636DE9C283DFE2300F04111 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3636DE9B283DFE2300F04111 /* RealmSwift */; };
+		3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA1283E00FE00F04111 /* RealmManager.swift */; };
+		3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
@@ -51,6 +54,8 @@
 		3636DE93283C870800F04111 /* DislikedFoodSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewController.swift; sourceTree = "<group>"; };
 		3636DE95283CCFD000F04111 /* AlertFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModel.swift; sourceTree = "<group>"; };
+		3636DEA1283E00FE00F04111 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodForRealm.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636DE9C283DFE2300F04111 /* RealmSwift in Frameworks */,
 				DE095C87283B241A00C7E109 /* RxSwift in Frameworks */,
 				DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */,
 			);
@@ -99,6 +105,7 @@
 			children = (
 				DE095C88283B259300C7E109 /* App */,
 				DE095C89283B259D00C7E109 /* Presentation */,
+				3636DE9E283E00CA00F04111 /* Data */,
 				3636DE8E283B5D2600F04111 /* Utility */,
 				DE095C8A283B25AD00C7E109 /* Resource */,
 				3636DE62283B225200F04111 /* Info.plist */,
@@ -175,6 +182,31 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3636DE9E283E00CA00F04111 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3636DE9F283E00E300F04111 /* LocalDB */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3636DE9F283E00E300F04111 /* LocalDB */ = {
+			isa = PBXGroup;
+			children = (
+				3636DEA3283E067900F04111 /* Entity */,
+				3636DEA1283E00FE00F04111 /* RealmManager.swift */,
+			);
+			path = LocalDB;
+			sourceTree = "<group>";
+		};
+		3636DEA3283E067900F04111 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		DE095C88283B259300C7E109 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +254,7 @@
 			packageProductDependencies = (
 				DE095C84283B241A00C7E109 /* RxCocoa */,
 				DE095C86283B241A00C7E109 /* RxSwift */,
+				3636DE9B283DFE2300F04111 /* RealmSwift */,
 			);
 			productName = WhatWeEat;
 			productReference = 3636DE51283B225100F04111 /* WhatWeEat.app */;
@@ -275,6 +308,7 @@
 			mainGroup = 3636DE48283B225100F04111;
 			packageReferences = (
 				DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3636DE9A283DFE2300F04111 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 3636DE52283B225100F04111 /* Products */;
 			projectDirPath = "";
@@ -333,6 +367,8 @@
 			files = (
 				3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
+				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
+				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
@@ -615,6 +651,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3636DE9A283DFE2300F04111 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.26.0;
+			};
+		};
 		DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -626,6 +670,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3636DE9B283DFE2300F04111 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3636DE9A283DFE2300F04111 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		DE095C84283B241A00C7E109 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */;

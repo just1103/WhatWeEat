@@ -9,6 +9,7 @@ final class OnboardingPageViewController: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = Design.pageControlCurrentPageIndicatorTintColor
         pageControl.pageIndicatorTintColor = Design.pageControlPageIndicatorTintColor
         pageControl.currentPage = 0
+        pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
     let skipButton: UIButton = {
@@ -83,10 +84,26 @@ extension OnboardingPageViewController {
     private func bind() {
         let input = OnboardingViewModel.Input(
             currentIndexForPreviousPage: currentIndexForPreviousPage.asObservable(),
-            currentIndexForNextPageAndPageCount: currentIndexForNextPageAndPageCount.asObservable()
+            currentIndexForNextPageAndPageCount: currentIndexForNextPageAndPageCount.asObservable(),
+            skipButtonDidTap: skipButton.rx.tap.asObservable()
         )
         
         viewModelOutput = viewModel.transform(input)
+        guard let skipButtonDidTap = viewModelOutput?.skipButtonDidTap else { return }
+        
+        configureSkipButtonDidTap(with: skipButtonDidTap)
+    }
+    
+    private func configureSkipButtonDidTap(with skipButtonDidTap: Observable<Void>) {
+        skipButtonDidTap
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let lastPageIndex = 2
+                self.hideButtonIfLastPage(lastPageIndex)
+                self.setViewControllers([self.thirdPage], direction: .forward, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

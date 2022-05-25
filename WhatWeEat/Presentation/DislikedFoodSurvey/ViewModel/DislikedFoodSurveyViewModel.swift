@@ -1,16 +1,19 @@
 import UIKit
 import RxSwift
+import RealmSwift
 
 final class DislikedFoodSurveyViewModel {
     // MARK: - Nested Types
     struct Input {
         let invokedViewDidLoad: Observable<Void>
         let cellDidSelect: Observable<IndexPath>
+        let confirmButtonDidTap: Observable<Void>
     }
 
     struct Output {
         let dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>
         let selectedFoodIndexPath: Observable<IndexPath>
+        let confirmButtonDidTap: Observable<Void>
     }
     
     // MARK: - Properties
@@ -19,9 +22,14 @@ final class DislikedFoodSurveyViewModel {
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let dislikedFoods = configureDislikedFoods(by: input.invokedViewDidLoad)
-        let checkedFood = configureCellDidSelected(by: input.cellDidSelect)
+        let selectedFood = configureSelectedFoodIndexPathObservable(by: input.cellDidSelect)
+        let confirmButtonDidTap = configureconfirmButtonDidTapObservable(by: input.confirmButtonDidTap)
 
-        let output = Output(dislikedFoods: dislikedFoods, selectedFoodIndexPath: checkedFood)
+        let output = Output(
+            dislikedFoods: dislikedFoods,
+            selectedFoodIndexPath: selectedFood,
+            confirmButtonDidTap: confirmButtonDidTap
+        )
 
         return output
     }
@@ -49,10 +57,27 @@ final class DislikedFoodSurveyViewModel {
         }
     }
     
-    private func configureCellDidSelected(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
+    private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
         return inputObserver.map { [weak self] indexPath in
             self?.dislikedFoods[indexPath.row].isChecked.toggle()
             return indexPath
+        }
+    }
+    
+    private func configureconfirmButtonDidTapObservable(by inputObserver: Observable<Void>) -> Observable<Void> {
+        return inputObserver.map { [weak self] in
+            let realm = RealmManager.shared.realm
+            
+            try! realm.write {
+                realm.deleteAll()
+                
+                _ = self?.dislikedFoods
+                    .filter { $0.isChecked }
+                    .map {
+                        let dislikedFood = DislikedFoodForRealM(name: $0.descriptionText)
+                        realm.add(dislikedFood)
+                    }
+            }
         }
     }
 }
