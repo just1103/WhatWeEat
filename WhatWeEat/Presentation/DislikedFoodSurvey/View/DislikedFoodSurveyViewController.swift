@@ -153,13 +153,15 @@ extension DislikedFoodSurveyViewController {
     private func bind() {
         let input = DislikedFoodSurveyViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
-            cellDidSelect: collectionView.rx.itemSelected.asObservable()
+            cellDidSelect: collectionView.rx.itemSelected.asObservable(),
+            confirmButtonDidTap: confirmButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input)
         
         configureItems(with: output.dislikedFoods)
         configureSelectedCell(at: output.selectedFoodIndexPath)
+        configureConfirmButtonDidTap(with: output.confirmButtonDidTap)
     }
 
     private func configureItems(with dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>) {
@@ -184,6 +186,15 @@ extension DislikedFoodSurveyViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 guard let selectedCell = self?.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
                 selectedCell.toggleSelectedCellUI()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureConfirmButtonDidTap(with confirmButtonDidTap: Observable<Void>) {
+        confirmButtonDidTap
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {
+                // TODO: didTap 받아서 화면이동
             })
             .disposed(by: disposeBag)
     }
