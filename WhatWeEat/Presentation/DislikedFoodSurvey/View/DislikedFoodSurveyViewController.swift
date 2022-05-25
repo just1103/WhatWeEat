@@ -152,12 +152,14 @@ final class DislikedFoodSurveyViewController: UIViewController {
 extension DislikedFoodSurveyViewController {
     private func bind() {
         let input = DislikedFoodSurveyViewModel.Input(
-            invokedViewDidLoad: invokedViewDidLoad.asObservable()
+            invokedViewDidLoad: invokedViewDidLoad.asObservable(),
+            cellDidSelect: collectionView.rx.itemSelected.asObservable()
         )
         
         let output = viewModel.transform(input)
         
         configureItems(with: output.dislikedFoods)
+        configureSelectedCell(at: output.selectedFoodIndexPath)
     }
 
     private func configureItems(with dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>) {
@@ -174,6 +176,16 @@ extension DislikedFoodSurveyViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(dislikedFood)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func configureSelectedCell(at indexPath: Observable<IndexPath>) {
+        indexPath
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let selectedCell = self?.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
+                selectedCell.toggleSelectedCellUI()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

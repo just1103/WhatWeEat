@@ -23,24 +23,22 @@ final class OnboardingViewModel {
     }
     
     private func configurePreviousPageIndexObservable(by inputObserver: Observable<Int>) -> Observable<Int?> {
-        inputObserver
-            .flatMap { currentIndex -> Observable<Int?> in
-                if currentIndex == 0 {
-                    return Observable.just(nil)
-                } else {
-                    return Observable.just(currentIndex - 1)
-                }
+        inputObserver.flatMap { currentIndex -> Observable<Int?> in
+            if currentIndex == 0 {
+                return Observable.just(nil)
+            } else {
+                return Observable.just(currentIndex - 1)
             }
+        }
     }
     
     private func configureNextPageIndexObservable(by inputObserver: Observable<(Int, Int)>) -> Observable<Int?> {
-        inputObserver
-            .flatMap { (currentIndex, pageCount) -> Observable<Int?> in
-                if currentIndex < pageCount - 1 {
-                    return Observable.just(currentIndex + 1)
-                } else {
-                    return Observable.just(nil)
-                }
+        inputObserver.flatMap { (currentIndex, pageCount) -> Observable<Int?> in
+            if currentIndex < pageCount - 1 {
+                return Observable.just(currentIndex + 1)
+            } else {
+                return Observable.just(nil)
             }
+        }
     }
 }

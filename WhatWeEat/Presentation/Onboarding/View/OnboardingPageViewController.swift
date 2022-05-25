@@ -32,6 +32,7 @@ final class OnboardingPageViewController: UIPageViewController {
         descriptionLabelText: Content.secondPageDescriptionLabelText,
         image: Content.secondPageImage
     )
+    let thirdPage = DislikedFoodSurveyViewController()
     private var onboardingPages = [UIViewController]()
     private let currentIndexForPreviousPage = PublishSubject<Int>()
     private let currentIndexForNextPageAndPageCount = PublishSubject<(Int, Int)>()
@@ -53,7 +54,7 @@ final class OnboardingPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-        let pageConfiguration = [firstPage, secondPage] // TODO: page 변화에 대응하는 방법 고민
+        let pageConfiguration = [firstPage, secondPage, thirdPage] // TODO: page 변화에 대응하는 방법 고민
         onboardingPages = pageConfiguration
         guard let firstPage = onboardingPages.first else { return }
         setViewControllers([firstPage], direction: .forward, animated: true)
@@ -120,7 +121,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
     ) -> UIViewController? {
         guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return nil }
         var viewController: UIViewController?
-
+        
         viewModelOutput?.nextPageIndex
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] nextIndex in
@@ -148,7 +149,27 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     ) {
         guard let viewController = pageViewController.viewControllers?.first else { return }
         guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return }
+        hideButtonIfLastPage(currentIndex)
+    }
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        willTransitionTo pendingViewControllers: [UIViewController]
+    ) {
+        guard let viewController = pendingViewControllers.first else { return }
+        guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return }
         pageControl.currentPage = currentIndex
+        hideButtonIfLastPage(currentIndex)
+    }
+    
+    private func hideButtonIfLastPage(_ currentIndex: Int) {
+        if currentIndex == onboardingPages.count - 1 {
+            skipButton.isHidden = true
+            pageControl.isHidden = true
+        } else {
+            skipButton.isHidden = false
+            pageControl.isHidden = false
+        }
     }
 }
 
@@ -171,7 +192,7 @@ extension OnboardingPageViewController {
         
         우리 뭐먹지는 여러분의 취향을 바탕으로
         적합한 메뉴를 추천해주는 앱입니다.
-
+        
         혼밥 메뉴도,
         우리 팀의 회식 메뉴도 정할 수 있어요.
         """

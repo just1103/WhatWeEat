@@ -5,10 +5,12 @@ final class DislikedFoodSurveyViewModel {
     // MARK: - Nested Types
     struct Input {
         let invokedViewDidLoad: Observable<Void>
+        let cellDidSelect: Observable<IndexPath>
     }
 
     struct Output {
         let dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>
+        let selectedFoodIndexPath: Observable<IndexPath>
     }
     
     // MARK: - Properties
@@ -17,8 +19,9 @@ final class DislikedFoodSurveyViewModel {
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let dislikedFoods = configureDislikedFoods(by: input.invokedViewDidLoad)
+        let checkedFood = configureCellDidSelected(by: input.cellDidSelect)
 
-        let output = Output(dislikedFoods: dislikedFoods)
+        let output = Output(dislikedFoods: dislikedFoods, selectedFoodIndexPath: checkedFood)
 
         return output
     }
@@ -35,7 +38,6 @@ final class DislikedFoodSurveyViewModel {
             else {
                 return Observable.just([])
             }
-            // TODO: var 확인
             let chilliFood = DislikedFoodCell.DislikedFood(descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
             let intestineFood = DislikedFoodCell.DislikedFood(descriptionImage: intestineFoodImage, descriptionText: "내장")
             let sashimiFood = DislikedFoodCell.DislikedFood(descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
@@ -44,6 +46,13 @@ final class DislikedFoodSurveyViewModel {
 
             self.dislikedFoods = [chilliFood, intestineFood, sashimiFood, seaFood, meatFood]
             return Observable.just(self.dislikedFoods)
+        }
+    }
+    
+    private func configureCellDidSelected(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
+        return inputObserver.map { [weak self] indexPath in
+            self?.dislikedFoods[indexPath.row].isChecked.toggle()
+            return indexPath
         }
     }
 }

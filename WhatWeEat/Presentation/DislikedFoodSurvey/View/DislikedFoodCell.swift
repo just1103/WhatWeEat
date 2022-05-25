@@ -66,7 +66,7 @@ final class DislikedFoodCell: UICollectionViewCell {
         descriptionLabel.text = descriptionText
     }
     
-    func toggleCheckBoxImageView() {
+    func toggleSelectedCellUI() {
         if checkBoxImageView.image == Content.uncheckedImage {
             checkBoxImageView.image = Content.checkedImage
             self.backgroundColor = ColorPalette.mainYellow

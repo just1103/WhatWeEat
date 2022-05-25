@@ -9,10 +9,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         let onboardingPageViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-//        onboardingPageViewController.view.backgroundColor = .white
+        onboardingPageViewController.view.backgroundColor = .white
         
-//        window?.rootViewController = onboardingPageViewController
-        window?.rootViewController = DislikedFoodSurveyViewController()
+        window?.rootViewController = onboardingPageViewController
+//        window?.rootViewController = DislikedFoodSurveyViewController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

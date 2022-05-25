@@ -17,7 +17,6 @@ final class OnboardingContentViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = Design.imageCornerRadius
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemGray6
         return imageView
     }()
     let titleLabel: UILabel = {
