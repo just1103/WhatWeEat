@@ -6,18 +6,21 @@ final class OnboardingViewModel {
     struct Input {
         let currentIndexForPreviousPage: Observable<Int>
         let currentIndexForNextPageAndPageCount: Observable<(Int, Int)>
+        let skipButtonDidTap: Observable<Void>
     }
     
     struct Output {
         let previousPageIndex: Observable<Int?>
         let nextPageIndex: Observable<Int?>
+        let skipButtonDidTap: Observable<Void>
     }
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let previousPageIndex = configurePreviousPageIndexObservable(by: input.currentIndexForPreviousPage)
         let nextPageIndex = configureNextPageIndexObservable(by: input.currentIndexForNextPageAndPageCount)
-        let output = Output(previousPageIndex: previousPageIndex, nextPageIndex: nextPageIndex)
+        let skipButtonDidTap = configureSkipButtonDidTapObservable(by: input.skipButtonDidTap)
+        let output = Output(previousPageIndex: previousPageIndex, nextPageIndex: nextPageIndex, skipButtonDidTap: skipButtonDidTap)
         
         return output
     }
@@ -40,5 +43,9 @@ final class OnboardingViewModel {
                 return Observable.just(nil)
             }
         }
+    }
+    
+    private func configureSkipButtonDidTapObservable(by inputObserver: Observable<Void>) -> Observable<Void> {
+        return inputObserver
     }
 }
