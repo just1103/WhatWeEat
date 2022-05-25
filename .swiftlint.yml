@@ -4,6 +4,7 @@ disabled_rules:
 - function_parameter_count
 - legacy_constructor
 - force_cast
+- trailing_comma
 
 file_length: 500
 type_body_length: 250
