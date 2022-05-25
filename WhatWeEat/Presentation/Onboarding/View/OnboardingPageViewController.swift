@@ -149,9 +149,17 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     ) {
         guard let viewController = pageViewController.viewControllers?.first else { return }
         guard let currentIndex = onboardingPages.firstIndex(of: viewController) else { return }
-        hideButtonIfLastPage(currentIndex)
+        
+        presentButtonUnlessLastPage(currentIndex)
     }
     
+    private func presentButtonUnlessLastPage(_ currentIndex: Int) {
+        if currentIndex != onboardingPages.count - 1 {
+            skipButton.isHidden = false
+            pageControl.isHidden = false
+        }
+    }
+        
     func pageViewController(
         _ pageViewController: UIPageViewController,
         willTransitionTo pendingViewControllers: [UIViewController]
@@ -166,9 +174,6 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
         if currentIndex == onboardingPages.count - 1 {
             skipButton.isHidden = true
             pageControl.isHidden = true
-        } else {
-            skipButton.isHidden = false
-            pageControl.isHidden = false
         }
     }
 }
