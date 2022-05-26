@@ -54,6 +54,7 @@ final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
         configureTabBar()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -62,7 +63,7 @@ final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
-        configureStackView()
+        configureUI()
     }
     
     // MARK: - Methods
@@ -72,7 +73,7 @@ final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
         tabBarItem.selectedImage = UIImage(systemName: "person.fill")
     }
     
-    private func configureStackView() {
+    private func configureUI() {
         view.backgroundColor = ColorPalette.mainYellow
         view.addSubview(containerStackView)
         containerStackView.addArrangedSubview(descriptionLabel)

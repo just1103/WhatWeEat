@@ -53,17 +53,20 @@ class FlowCoordinator {
 
     func showMainTabBarPage() {
         let homeViewController = HomeViewController()
-        
-//        let togetherMenuViewController = UIViewController()  // TODO: 수정
-//        togetherMenuViewController.tabBarItem.title = "함께 메뉴 결정"
-//        togetherMenuViewController.tabBarItem.image = UIImage(systemName: "person.3")
-//        togetherMenuViewController.tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
-//
+        let actions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
+        let togetherMenuViewModel = TogetherMenuViewModel(actions: actions)
+        let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
         let soloMenuViewController = SoloMenuViewController()
 
-        let mainTabBarController = MainTabBarController(pages: [homeViewController, soloMenuViewController])
+        let mainTabBarController = MainTabBarController(
+            pages: [homeViewController, togetherMenuViewController, soloMenuViewController]
+        )
         
         navigationController?.pushViewController(mainTabBarController, animated: true)
+    }
+    
+    func showSharePinNumberPage() {
+        // TODO: 핀번호 공유 페이지 띄우기
     }
 }
 

@@ -32,6 +32,9 @@
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
+		DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */; };
+		DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */; };
+		DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +75,9 @@
 		3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewController.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
+		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
+		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
+		DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModelAction.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,14 +231,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		3636DEA6283E1A3800F04111 /* MainTapBar */ = {
+		3636DEA6283E1A3800F04111 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
 				3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */,
 				3636DEA8283E1AC800F04111 /* Home */,
 				3636DEBC283F75C800F04111 /* SoloMenu */,
+				DE31032B283F7FE3009CA7C3 /* togetherMenu */,
 			);
-			path = MainTapBar;
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		3636DEA7283E1A4600F04111 /* View */ = {
@@ -291,7 +298,7 @@
 				3636DEAD283E302600F04111 /* FlowCoordinator.swift */,
 				3636DE87283B558300F04111 /* Onboarding */,
 				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
-				3636DEA6283E1A3800F04111 /* MainTapBar */,
+				3636DEA6283E1A3800F04111 /* MainTabBar */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -320,6 +327,32 @@
 				DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		DE31032B283F7FE3009CA7C3 /* togetherMenu */ = {
+			isa = PBXGroup;
+			children = (
+				DE31032E283F8040009CA7C3 /* View */,
+				DE31032F283F84C0009CA7C3 /* ViewModel */,
+			);
+			path = togetherMenu;
+			sourceTree = "<group>";
+		};
+		DE31032E283F8040009CA7C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DE31032F283F84C0009CA7C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */,
+				DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +488,7 @@
 			files = (
 				3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */,
 				DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */,
+				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
 				3636DEB5283F1D5F00F04111 /* TapBarContentProtocol.swift in Sources */,
 				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
@@ -463,6 +497,8 @@
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
+				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
+				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
