@@ -48,3 +48,20 @@ final class MainTabBarController: UITabBarController {
         viewControllers = pages as? [UIViewController]
     }
 }
+
+// MARK: - TabBarController Delegate
+extension MainTabBarController: UITabBarControllerDelegate {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let selectedIndex = tabBar.items?.firstIndex(of: item) else { return }
+        switch selectedIndex {
+        case 0:
+            navigationItem.title = "우리뭐먹지"
+        case 1:
+            navigationItem.title = "함께 메뉴 결정"
+        case 2:
+            navigationItem.title = "혼밥 메뉴 결정"
+        default:
+            navigationItem.title = "우리뭐먹지"
+        }
+    }
+}

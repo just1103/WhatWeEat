@@ -1,6 +1,7 @@
 import UIKit
 
 final class HomeViewController: UIViewController, TapBarContentProtocol {
+    // MARK: - Properties
     let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -10,7 +11,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         stackView.backgroundColor = .white
         stackView.spacing = 20
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: 20,
+            top: 40,
             leading: 40,
             bottom: UIScreen.main.bounds.height * 0.25,
             trailing: 40
@@ -48,7 +49,6 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "fish")
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
         imageView.setContentHuggingPriority(.init(rawValue: 100), for: .vertical)
         return imageView
     }()
@@ -61,12 +61,14 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         return button
     }()
 
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
     }
     
+    // MARK: - Methods
     private func configureNavigationBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")

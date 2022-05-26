@@ -56,17 +56,12 @@ class FlowCoordinator {
         
 //        let togetherMenuViewController = UIViewController()  // TODO: 수정
 //        togetherMenuViewController.tabBarItem.title = "함께 메뉴 결정"
-//        togetherMenuViewController.view.backgroundColor = .white
 //        togetherMenuViewController.tabBarItem.image = UIImage(systemName: "person.3")
 //        togetherMenuViewController.tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
 //
-//        let soloMenuViewController = UIViewController()
-//        soloMenuViewController.tabBarItem.title = "혼밥 메뉴 결정"
-//        soloMenuViewController.view.backgroundColor = .white
-//        soloMenuViewController.tabBarItem.image = UIImage(systemName: "person")
-//        soloMenuViewController.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
-        
-        let mainTabBarController = MainTabBarController(pages: [homeViewController, homeViewController, homeViewController])
+        let soloMenuViewController = SoloMenuViewController()
+
+        let mainTabBarController = MainTabBarController(pages: [homeViewController, soloMenuViewController])
         
         navigationController?.pushViewController(mainTabBarController, animated: true)
     }
