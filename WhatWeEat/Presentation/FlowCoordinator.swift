@@ -19,7 +19,13 @@ class FlowCoordinator {
     
     // MARK: - Methods
     func start() {
-        showOnboardingPage()
+        guard UserDefaults.standard.object(forKey: "isFirstLaunched") != nil else {
+            showOnboardingPage()
+            UserDefaults.standard.set(false, forKey: "isFirstLaunched")
+            return
+        }
+        
+        showMainTabBarPage()
     }
     
     func showOnboardingPage() {
