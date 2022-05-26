@@ -2,17 +2,19 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var flowCoordinator: FlowCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         
-        let onboardingPageViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        onboardingPageViewController.view.backgroundColor = .white
+        let navigationController = UINavigationController()
+        navigationController.view.backgroundColor = .white
+        window?.rootViewController = navigationController
         
-        window?.rootViewController = onboardingPageViewController
-//        window?.rootViewController = DislikedFoodSurveyViewController()
+        let flowCoordinator = FlowCoordinator(navigationController: navigationController)
+        flowCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
