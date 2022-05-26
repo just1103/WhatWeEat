@@ -2,7 +2,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class DislikedFoodSurveyViewController: UIViewController {
+final class DislikedFoodSurveyViewController: UIViewController, OnboardingContentProtocol {
     // MARK: - Nested Types
     private enum SectionKind: Int {
         case main
@@ -48,7 +48,7 @@ final class DislikedFoodSurveyViewController: UIViewController {
         return button
     }()
     
-    private var viewModel: DislikedFoodSurveyViewModel! = DislikedFoodSurveyViewModel() // TODO: 생성자 주입
+    private var viewModel: DislikedFoodSurveyViewModel! 
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: DiffableDataSource!
     private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>!
@@ -57,6 +57,12 @@ final class DislikedFoodSurveyViewController: UIViewController {
     
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
+    
+    // MARK: - Initializers
+    convenience init(viewModel: DislikedFoodSurveyViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -132,7 +138,6 @@ final class DislikedFoodSurveyViewController: UIViewController {
     }
     
     private func configureStackView() {
-        view.backgroundColor = .white // TODO: 나중에 삭제
         view.addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleLabel)
         containerStackView.addArrangedSubview(collectionView)
@@ -161,7 +166,6 @@ extension DislikedFoodSurveyViewController {
         
         configureItems(with: output.dislikedFoods)
         configureSelectedCell(at: output.selectedFoodIndexPath)
-        configureConfirmButtonDidTap(with: output.confirmButtonDidTap)
     }
 
     private func configureItems(with dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>) {
@@ -186,15 +190,6 @@ extension DislikedFoodSurveyViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 guard let selectedCell = self?.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
                 selectedCell.toggleSelectedCellUI()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func configureConfirmButtonDidTap(with confirmButtonDidTap: Observable<Void>) {
-        confirmButtonDidTap
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {
-                // TODO: didTap 받아서 화면이동
             })
             .disposed(by: disposeBag)
     }

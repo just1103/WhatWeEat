@@ -1,6 +1,6 @@
 import UIKit
 
-final class OnboardingContentViewController: UIViewController {
+final class OnboardingContentViewController: UIViewController, OnboardingContentProtocol {
     // MARK: - Properties
     let containerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -73,7 +73,7 @@ final class OnboardingContentViewController: UIViewController {
         containerStackView.addArrangedSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.15),
+            containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.15),
             containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             descriptionImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.height * 0.25),

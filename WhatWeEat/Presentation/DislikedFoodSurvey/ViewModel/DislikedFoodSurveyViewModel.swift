@@ -13,22 +13,27 @@ final class DislikedFoodSurveyViewModel {
     struct Output {
         let dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>
         let selectedFoodIndexPath: Observable<IndexPath>
-        let confirmButtonDidTap: Observable<Void>
     }
     
     // MARK: - Properties
+    private let actions: DislikedFoodSurveyViewModelAction!
     private var dislikedFoods = [DislikedFoodCell.DislikedFood]()
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initializers
+    init(actions: DislikedFoodSurveyViewModelAction) {
+        self.actions = actions
+    }
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let dislikedFoods = configureDislikedFoods(by: input.invokedViewDidLoad)
         let selectedFood = configureSelectedFoodIndexPathObservable(by: input.cellDidSelect)
-        let confirmButtonDidTap = configureconfirmButtonDidTapObservable(by: input.confirmButtonDidTap)
+        configureconfirmButtonDidTapObservable(by: input.confirmButtonDidTap)
 
         let output = Output(
             dislikedFoods: dislikedFoods,
-            selectedFoodIndexPath: selectedFood,
-            confirmButtonDidTap: confirmButtonDidTap
+            selectedFoodIndexPath: selectedFood
         )
 
         return output
@@ -64,20 +69,25 @@ final class DislikedFoodSurveyViewModel {
         }
     }
     
-    private func configureconfirmButtonDidTapObservable(by inputObserver: Observable<Void>) -> Observable<Void> {
-        return inputObserver.map { [weak self] in
-            let realm = RealmManager.shared.realm
-            
-            try! realm.write {
-                realm.deleteAll()
+    private func configureconfirmButtonDidTapObservable(by inputObserver: Observable<Void>) {
+        inputObserver
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                let realm = RealmManager.shared.realm
                 
-                _ = self?.dislikedFoods
-                    .filter { $0.isChecked }
-                    .map {
-                        let dislikedFood = DislikedFoodForRealM(name: $0.descriptionText)
-                        realm.add(dislikedFood)
-                    }
-            }
-        }
-    }
+                try! realm.write {
+                    realm.deleteAll()
+                    
+                    _ = self?.dislikedFoods
+                        .filter { $0.isChecked }
+                        .map {
+                            let dislikedFood = DislikedFoodForRealM(name: $0.descriptionText)
+                            realm.add(dislikedFood)
+                        }
+                }
+                
+                self?.actions.showMainTapBarPage()
+            })
+            .disposed(by: disposeBag)
+       }
 }
