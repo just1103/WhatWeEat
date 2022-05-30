@@ -66,7 +66,10 @@ class FlowCoordinator {
     }
     
     func showSharePinNumberPage() {
-        // TODO: 핀번호 공유 페이지 띄우기
+        let sharePinNumberPageViewModel = SharePinNumberPageViewModel()
+        let sharePinNumberPageViewController = SharePinNumberPageViewController(viewModel: sharePinNumberPageViewModel)
+        
+        navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)
     }
 }
 

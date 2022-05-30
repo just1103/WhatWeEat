@@ -1,8 +1,8 @@
 import UIKit
 
-final class HomeViewController: UIViewController, TapBarContentProtocol {
+final class HomeViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
-    let containerStackView: UIStackView = {
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -19,7 +19,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -29,7 +29,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -42,7 +42,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    let descriptionImageView: UIImageView = {
+    private let descriptionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -52,7 +52,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         imageView.setContentHuggingPriority(.init(rawValue: 100), for: .vertical)
         return imageView
     }()
-    let restaurantLocationButton: UIButton = {
+    private let restaurantLocationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("식당 위치 보기", for: .normal)

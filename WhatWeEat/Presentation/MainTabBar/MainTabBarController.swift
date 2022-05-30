@@ -2,10 +2,10 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
-    private var pages: [TapBarContentProtocol]!
+    private var pages: [TabBarContentProtocol]!
     
     // MARK: - Initializers
-    init(pages: [TapBarContentProtocol]) {
+    init(pages: [TabBarContentProtocol]) {
         super.init(nibName: nil, bundle: nil)
         self.pages = pages
     }

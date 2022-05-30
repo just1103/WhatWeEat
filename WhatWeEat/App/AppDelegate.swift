@@ -20,6 +20,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    // 다른앱에서 URL을 클릭하면 호출됨
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Determine who sent the URL.
+        let sendingAppID = options[.sourceApplication]
+        print("source application = \(sendingAppID ?? "Unknown")")
 
-
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let path = components.path,
+            let params = components.queryItems else {
+                print("Invalid URL or PIN Number path missing")
+                return false
+        }
+        
+        if let pinNumber = params.first(where: { $0.name == "pinNumber" })?.value {
+            print("path = \(path)")
+            print("pinNumber = \(pinNumber)")
+            return true
+        } else {
+            print("Group not found")
+            return false
+        }
+    }
 }

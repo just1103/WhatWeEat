@@ -1,8 +1,8 @@
 import UIKit
 
-final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
+final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
-    let containerStackView: UIStackView = {
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -18,7 +18,7 @@ final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -36,7 +36,7 @@ final class SoloMenuViewController: UIViewController, TapBarContentProtocol {
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
-    let gameStartButton: UIButton = {
+    private let gameStartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("미니게임 시작", for: .normal)

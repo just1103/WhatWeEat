@@ -27,8 +27,10 @@
 		3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* FlowCoordinator.swift */; };
 		3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */; };
 		3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */; };
-		3636DEB5283F1D5F00F04111 /* TapBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */; };
+		3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */; };
 		3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */; };
+		3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */; };
+		3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
@@ -72,8 +74,10 @@
 		3636DEAD283E302600F04111 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModelAction.swift; sourceTree = "<group>"; };
-		3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarContentProtocol.swift; sourceTree = "<group>"; };
+		3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewController.swift; sourceTree = "<group>"; };
+		3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewController.swift; sourceTree = "<group>"; };
+		3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewModel.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
@@ -262,7 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */,
-				3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */,
+				3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -342,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */,
+				3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			children = (
 				DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */,
 				DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */,
+				3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -486,10 +492,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */,
+				3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */,
 				3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */,
 				DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */,
 				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
-				3636DEB5283F1D5F00F04111 /* TapBarContentProtocol.swift in Sources */,
+				3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */,
 				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,

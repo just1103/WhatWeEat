@@ -1,8 +1,8 @@
 import UIKit
 
-class TogetherMenuViewController: UIViewController, TapBarContentProtocol {
+final class TogetherMenuViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
-    let containerStackView: UIStackView = {
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -18,7 +18,7 @@ class TogetherMenuViewController: UIViewController, TapBarContentProtocol {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    let makeGroupButton: UIButton = {
+    private let makeGroupButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("그룹 만들기", for: .normal)
@@ -29,7 +29,7 @@ class TogetherMenuViewController: UIViewController, TapBarContentProtocol {
         button.clipsToBounds = true
         return button
     }()
-    let pinNumberButton: UIButton = {
+    private let pinNumberButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("PIN으로 입장하기", for: .normal)
@@ -44,19 +44,10 @@ class TogetherMenuViewController: UIViewController, TapBarContentProtocol {
     private var viewModel: TogetherMenuViewModel!
     
     // MARK: - Initializers
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-        configureTabBar()
-    }
-    
     convenience init(viewModel: TogetherMenuViewModel) {
-        self.init(nibName: nil, bundle: nil)
+        self.init()
         self.viewModel = viewModel
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        configureTabBar()
     }
     
     // MARK: - Lifecycle Methods
