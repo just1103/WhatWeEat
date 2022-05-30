@@ -37,6 +37,7 @@
 		DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */; };
 		DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */; };
 		DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */; };
+		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
 		DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModelAction.swift; sourceTree = "<group>"; };
+		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -347,6 +349,7 @@
 			children = (
 				DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */,
 				3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */,
+				DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
+				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
 			);
@@ -671,7 +675,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XD7KFVM4LP;
+				DEVELOPMENT_TEAM = FA464JRW3F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -698,7 +702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XD7KFVM4LP;
+				DEVELOPMENT_TEAM = FA464JRW3F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

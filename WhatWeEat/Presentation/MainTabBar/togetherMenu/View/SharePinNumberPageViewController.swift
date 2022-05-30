@@ -1,6 +1,7 @@
-import UIKit
-import RxSwift
+import LinkPresentation
 import RxCocoa
+import RxSwift
+import UIKit
 
 final class SharePinNumberPageViewController: UIViewController {
     // MARK: - Properties
@@ -175,8 +176,18 @@ extension SharePinNumberPageViewController {
         shareButtonDidTap
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                // TODO: ActivityView 구현
-                print("ActivityView")
+                let title = "[우리뭐먹지] 팀원과 PIN 번호를 공유해보세요"
+                let content = """
+                [우리뭐먹지] 팀원이 공유한 PIN 번호: 1111
+                
+                PIN 번호를 통해 입장하여 오늘의 메뉴를 골라보세요
+                """
+                let items = [SharePinNumberActivityItemSource(title: title, content: content)]
+                
+                let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self?.shareButton
+                activityViewController.popoverPresentationController?.permittedArrowDirections = .down
+                self?.present(activityViewController, animated: true)
             })
             .disposed(by: disposeBag)
     }
