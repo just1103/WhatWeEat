@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 final class HomeViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
@@ -48,7 +49,6 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "fish")
         imageView.setContentHuggingPriority(.init(rawValue: 100), for: .vertical)
         return imageView
     }()
@@ -60,15 +60,57 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         button.contentHorizontalAlignment = .right
         return button
     }()
+    
+    private var viewModel: HomeViewModel!
+    private let invokedViewDidLoad = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initializers
+    convenience init(viewModel: HomeViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         configureNavigationBar()
         configureUI()
+        invokedViewDidLoad.onNext(())
     }
     
     // MARK: - Methods
+    private func bind() {
+        let input = HomeViewModel.Input(invokedViewDidLoad: invokedViewDidLoad.asObservable())
+        
+        let output = viewModel.transform(input)
+        
+        configureRandomMenu(with: output.randomMenu)
+    }
+    
+    private func configureRandomMenu(with randomMenu: Observable<Menu>) {
+        randomMenu
+            .subscribe(onNext: { [weak self] menu in
+                DispatchQueue.global().async {
+                    guard let imageURL = URL(string: menu.imageURL),
+                          let imageData = try? Data(contentsOf: imageURL),
+                          let loadedImage = UIImage(data: imageData) else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self?.descriptionImageView.image = loadedImage
+                        self?.descriptionLabel.text = """
+                        랜덤으로 골라봤어요.
+                        오늘 점심은 \(menu.name) 어떠세요?
+                        """
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func configureNavigationBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")

@@ -1,6 +1,7 @@
+import RxSwift
 import UIKit
 
-class FlowCoordinator {
+final class FlowCoordinator {
     // MARK: - Properties
     weak private var navigationController: UINavigationController?
     private var onboardingPageViewController: OnboardingPageViewController!
@@ -26,7 +27,7 @@ class FlowCoordinator {
         }
     }
     
-    func showOnboardingPage() {
+    private func showOnboardingPage() {
         let firstPage = OnboardingContentViewController(
             titleLabelText: Content.firstPageTitleLabelText,
             descriptionLabelText: Content.firstPageDescriptionLabelText,
@@ -51,8 +52,9 @@ class FlowCoordinator {
         navigationController?.pushViewController(onboardingPageViewController, animated: true)
     }
 
-    func showMainTabBarPage() {
-        let homeViewController = HomeViewController()
+    private func showMainTabBarPage() {
+        let homeViewModel = HomeViewModel()
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
         let actions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
         let togetherMenuViewModel = TogetherMenuViewModel(actions: actions)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
@@ -65,8 +67,8 @@ class FlowCoordinator {
         navigationController?.pushViewController(mainTabBarController, animated: true)
     }
     
-    func showSharePinNumberPage() {
-        let sharePinNumberPageViewModel = SharePinNumberPageViewModel()
+    private func showSharePinNumberPage(with pinNumber: Observable<Data>) {
+        let sharePinNumberPageViewModel = SharePinNumberPageViewModel(pinNumberData: pinNumber)
         let sharePinNumberPageViewController = SharePinNumberPageViewController(viewModel: sharePinNumberPageViewModel)
         
         navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)

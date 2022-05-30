@@ -31,7 +31,7 @@ final class SharePinNumberActivityItemSource: NSObject, UIActivityItemSource {
     
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metaData = LPLinkMetadata()
-        guard let iconImage = UIImage(named: "meat") else {
+        guard let iconImage = UIImage(named: "meat") else {  // TODO: 디자인 작업 후 앱 로고로 변경
             return LPLinkMetadata()
         }
         metaData.title = title

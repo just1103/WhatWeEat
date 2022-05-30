@@ -52,11 +52,11 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: DiffableDataSource!
     private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>!
-    private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFoodCell.DislikedFood>
-    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFoodCell.DislikedFood>
-    
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
+    
+    private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFoodCell.DislikedFood>
+    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFoodCell.DislikedFood>
     
     // MARK: - Initializers
     convenience init(viewModel: DislikedFoodSurveyViewModel) {

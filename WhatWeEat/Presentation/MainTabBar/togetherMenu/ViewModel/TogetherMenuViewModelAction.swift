@@ -1,5 +1,6 @@
 import Foundation
+import RxSwift
 
 struct TogetherMenuViewModelAction {
-    let showSharePinNumberPage: () -> Void
+    let showSharePinNumberPage: (Observable<Data>) -> Void
 }
