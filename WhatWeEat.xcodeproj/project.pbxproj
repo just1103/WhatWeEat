@@ -27,10 +27,17 @@
 		3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* FlowCoordinator.swift */; };
 		3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */; };
 		3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */; };
-		3636DEB5283F1D5F00F04111 /* TapBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */; };
+		3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */; };
+		3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */; };
+		3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */; };
+		3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
+		DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */; };
+		DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */; };
+		DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */; };
+		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
 /* End PBXBuildFile section */
@@ -68,8 +75,15 @@
 		3636DEAD283E302600F04111 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModelAction.swift; sourceTree = "<group>"; };
-		3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarContentProtocol.swift; sourceTree = "<group>"; };
+		3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentProtocol.swift; sourceTree = "<group>"; };
+		3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewController.swift; sourceTree = "<group>"; };
+		3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewController.swift; sourceTree = "<group>"; };
+		3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewModel.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
+		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
+		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
+		DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModelAction.swift; sourceTree = "<group>"; };
+		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,13 +237,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		3636DEA6283E1A3800F04111 /* MainTapBar */ = {
+		3636DEA6283E1A3800F04111 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
 				3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */,
 				3636DEA8283E1AC800F04111 /* Home */,
+				3636DEBC283F75C800F04111 /* SoloMenu */,
+				DE31032B283F7FE3009CA7C3 /* togetherMenu */,
 			);
-			path = MainTapBar;
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		3636DEA7283E1A4600F04111 /* View */ = {
@@ -252,9 +268,25 @@
 			isa = PBXGroup;
 			children = (
 				3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */,
-				3636DEB4283F1D5F00F04111 /* TapBarContentProtocol.swift */,
+				3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3636DEBC283F75C800F04111 /* SoloMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3636DEBD283F75EB00F04111 /* View */,
+			);
+			path = SoloMenu;
+			sourceTree = "<group>";
+		};
+		3636DEBD283F75EB00F04111 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DE095C88283B259300C7E109 /* App */ = {
@@ -272,7 +304,7 @@
 				3636DEAD283E302600F04111 /* FlowCoordinator.swift */,
 				3636DE87283B558300F04111 /* Onboarding */,
 				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
-				3636DEA6283E1A3800F04111 /* MainTapBar */,
+				3636DEA6283E1A3800F04111 /* MainTabBar */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -301,6 +333,35 @@
 				DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		DE31032B283F7FE3009CA7C3 /* togetherMenu */ = {
+			isa = PBXGroup;
+			children = (
+				DE31032E283F8040009CA7C3 /* View */,
+				DE31032F283F84C0009CA7C3 /* ViewModel */,
+			);
+			path = togetherMenu;
+			sourceTree = "<group>";
+		};
+		DE31032E283F8040009CA7C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */,
+				3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */,
+				DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DE31032F283F84C0009CA7C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */,
+				DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */,
+				3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,15 +495,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */,
+				3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */,
 				3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */,
 				DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */,
-				3636DEB5283F1D5F00F04111 /* TapBarContentProtocol.swift in Sources */,
+				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
+				3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */,
 				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
+				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
 				3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */,
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
+				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
+				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
@@ -451,6 +518,7 @@
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
+				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
 			);
@@ -607,7 +675,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XD7KFVM4LP;
+				DEVELOPMENT_TEAM = FA464JRW3F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -634,7 +702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XD7KFVM4LP;
+				DEVELOPMENT_TEAM = FA464JRW3F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

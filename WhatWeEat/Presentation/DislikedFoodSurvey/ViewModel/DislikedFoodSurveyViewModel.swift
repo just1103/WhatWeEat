@@ -51,11 +51,11 @@ final class DislikedFoodSurveyViewModel {
             else {
                 return Observable.just([])
             }
-            let chilliFood = DislikedFoodCell.DislikedFood(descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
-            let intestineFood = DislikedFoodCell.DislikedFood(descriptionImage: intestineFoodImage, descriptionText: "내장")
-            let sashimiFood = DislikedFoodCell.DislikedFood(descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
-            let seaFood = DislikedFoodCell.DislikedFood(descriptionImage: seaFoodImage, descriptionText: "해산물")
-            let meatFood = DislikedFoodCell.DislikedFood(descriptionImage: meatFoodImage, descriptionText: "고기")
+            let chilliFood = DislikedFoodCell.DislikedFood(name: "매움", descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
+            let intestineFood = DislikedFoodCell.DislikedFood(name: "내장", descriptionImage: intestineFoodImage, descriptionText: "내장")
+            let sashimiFood = DislikedFoodCell.DislikedFood(name: "날것", descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
+            let seaFood = DislikedFoodCell.DislikedFood(name: "해산물", descriptionImage: seaFoodImage, descriptionText: "해산물")
+            let meatFood = DislikedFoodCell.DislikedFood(name: "고기", descriptionImage: meatFoodImage, descriptionText: "고기")
 
             self.dislikedFoods = [chilliFood, intestineFood, sashimiFood, seaFood, meatFood]
             return Observable.just(self.dislikedFoods)
@@ -81,7 +81,7 @@ final class DislikedFoodSurveyViewModel {
                     _ = self?.dislikedFoods
                         .filter { $0.isChecked }
                         .map {
-                            let dislikedFood = DislikedFoodForRealM(name: $0.descriptionText)
+                            let dislikedFood = DislikedFoodForRealM(name: $0.name)
                             realm.add(dislikedFood)
                         }
                 }

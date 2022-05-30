@@ -2,7 +2,7 @@ import UIKit
 
 final class OnboardingContentViewController: UIViewController, OnboardingContentProtocol {
     // MARK: - Properties
-    let containerStackView: UIStackView = {
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -11,7 +11,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         stackView.spacing = 20
         return stackView
     }()
-    let descriptionImageView: UIImageView = {
+    private let descriptionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -19,7 +19,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         imageView.clipsToBounds = true
         return imageView
     }()
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -30,7 +30,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left

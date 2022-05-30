@@ -53,22 +53,23 @@ class FlowCoordinator {
 
     func showMainTabBarPage() {
         let homeViewController = HomeViewController()
-        
-//        let togetherMenuViewController = UIViewController()  // TODO: 수정
-//        togetherMenuViewController.tabBarItem.title = "함께 메뉴 결정"
-//        togetherMenuViewController.view.backgroundColor = .white
-//        togetherMenuViewController.tabBarItem.image = UIImage(systemName: "person.3")
-//        togetherMenuViewController.tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
-//
-//        let soloMenuViewController = UIViewController()
-//        soloMenuViewController.tabBarItem.title = "혼밥 메뉴 결정"
-//        soloMenuViewController.view.backgroundColor = .white
-//        soloMenuViewController.tabBarItem.image = UIImage(systemName: "person")
-//        soloMenuViewController.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
-        
-        let mainTabBarController = MainTabBarController(pages: [homeViewController, homeViewController, homeViewController])
+        let actions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
+        let togetherMenuViewModel = TogetherMenuViewModel(actions: actions)
+        let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
+        let soloMenuViewController = SoloMenuViewController()
+
+        let mainTabBarController = MainTabBarController(
+            pages: [homeViewController, togetherMenuViewController, soloMenuViewController]
+        )
         
         navigationController?.pushViewController(mainTabBarController, animated: true)
+    }
+    
+    func showSharePinNumberPage() {
+        let sharePinNumberPageViewModel = SharePinNumberPageViewModel()
+        let sharePinNumberPageViewController = SharePinNumberPageViewController(viewModel: sharePinNumberPageViewModel)
+        
+        navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)
     }
 }
 

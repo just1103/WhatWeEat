@@ -1,7 +1,8 @@
 import UIKit
 
-final class HomeViewController: UIViewController, TapBarContentProtocol {
-    let containerStackView: UIStackView = {
+final class HomeViewController: UIViewController, TabBarContentProtocol {
+    // MARK: - Properties
+    private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -10,7 +11,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         stackView.backgroundColor = .white
         stackView.spacing = 20
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: 20,
+            top: 40,
             leading: 40,
             bottom: UIScreen.main.bounds.height * 0.25,
             trailing: 40
@@ -18,7 +19,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -28,7 +29,7 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -41,18 +42,17 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    let descriptionImageView: UIImageView = {
+    private let descriptionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "fish")
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
         imageView.setContentHuggingPriority(.init(rawValue: 100), for: .vertical)
         return imageView
     }()
-    let restaurantLocationButton: UIButton = {
+    private let restaurantLocationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("식당 위치 보기", for: .normal)
@@ -61,12 +61,14 @@ final class HomeViewController: UIViewController, TapBarContentProtocol {
         return button
     }()
 
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
     }
     
+    // MARK: - Methods
     private func configureNavigationBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")

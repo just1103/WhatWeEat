@@ -3,7 +3,7 @@ import RxSwift
 
 final class OnboardingPageViewController: UIPageViewController {
     // MARK: - Properties
-    let pageControl: UIPageControl = {
+    private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = Design.pageControlCurrentPageIndicatorTintColor
@@ -12,7 +12,7 @@ final class OnboardingPageViewController: UIPageViewController {
         pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
-    let skipButton: UIButton = {
+    private let skipButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.skipButtonTitle, for: .normal)

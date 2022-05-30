@@ -5,6 +5,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Nested Types
     struct DislikedFood: Hashable {
         var isChecked: Bool = false
+        let name: String
         let descriptionImage: UIImage
         let descriptionText: String
     }
