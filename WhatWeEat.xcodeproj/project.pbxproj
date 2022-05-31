@@ -32,7 +32,6 @@
 		3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */; };
 		3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */; };
 		3636DEC62844ACD900F04111 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC52844ACD900F04111 /* NetworkProvider.swift */; };
-		3636DEC82844AD3000F04111 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC72844AD3000F04111 /* URLSessionProtocol.swift */; };
 		3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC92844AD3900F04111 /* BaseURLProtocol.swift */; };
 		3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DECB2844AD4B00F04111 /* APIProtocol.swift */; };
 		3636DECF2844AD8300F04111 /* URLRequest+Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DECE2844AD8300F04111 /* URLRequest+Initializer.swift */; };
@@ -90,7 +89,6 @@
 		3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewController.swift; sourceTree = "<group>"; };
 		3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewModel.swift; sourceTree = "<group>"; };
 		3636DEC52844ACD900F04111 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
-		3636DEC72844AD3000F04111 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		3636DEC92844AD3900F04111 /* BaseURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseURLProtocol.swift; sourceTree = "<group>"; };
 		3636DECB2844AD4B00F04111 /* APIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		3636DECE2844AD8300F04111 /* URLRequest+Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Initializer.swift"; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 			children = (
 				3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */,
 				3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */,
-				3636DEC72844AD3000F04111 /* URLSessionProtocol.swift */,
 				3636DEC92844AD3900F04111 /* BaseURLProtocol.swift */,
 				3636DECB2844AD4B00F04111 /* APIProtocol.swift */,
 			);
@@ -557,7 +554,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3636DEC82844AD3000F04111 /* URLSessionProtocol.swift in Sources */,
 				3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */,
 				3636DEC328448A7200F04111 /* SharePinNumberPageViewModel.swift in Sources */,
 				3636DEC62844ACD900F04111 /* NetworkProvider.swift in Sources */,
