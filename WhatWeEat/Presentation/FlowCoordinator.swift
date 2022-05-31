@@ -55,13 +55,16 @@ final class FlowCoordinator {
     private func showMainTabBarPage() {
         let homeViewModel = HomeViewModel()
         let homeViewController = HomeViewController(viewModel: homeViewModel)
-        let actions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
-        let togetherMenuViewModel = TogetherMenuViewModel(actions: actions)
+        let togetherMenuViewModelactions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
+        let togetherMenuViewModel = TogetherMenuViewModel(actions: togetherMenuViewModelactions)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
         let soloMenuViewController = SoloMenuViewController()
-
+        
+        let mainTabBarViewModelAction = MainTabBarViewModelAction(showSettingPage: showSettingPage)
+        let mainTabBarViewModel = MainTabBarViewModel(actions: mainTabBarViewModelAction)
         let mainTabBarController = MainTabBarController(
-            pages: [homeViewController, togetherMenuViewController, soloMenuViewController]
+            pages: [homeViewController, togetherMenuViewController, soloMenuViewController],
+            viewModel: mainTabBarViewModel
         )
         
         navigationController?.pushViewController(mainTabBarController, animated: true)
@@ -72,6 +75,13 @@ final class FlowCoordinator {
         let sharePinNumberPageViewController = SharePinNumberPageViewController(viewModel: sharePinNumberPageViewModel)
         
         navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)
+    }
+    
+    private func showSettingPage() {
+        let settingViewModel = SettingViewModel()
+        let settingViewController = SettingViewController(viewModel: settingViewModel)
+        
+        navigationController?.pushViewController(settingViewController, animated: true)
     }
 }
 
