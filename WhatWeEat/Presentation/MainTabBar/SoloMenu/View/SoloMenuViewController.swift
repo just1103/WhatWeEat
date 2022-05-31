@@ -36,7 +36,7 @@ final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
-    private let gameStartButton: UIButton = {
+    private let gameStartButton: UIButton = {  // TODO: ViewModel 추가하고 화면전환 구현
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("미니게임 시작", for: .normal)

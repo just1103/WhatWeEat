@@ -50,9 +50,6 @@ final class SharePinNumberPageViewController: UIViewController {
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title1)
         label.backgroundColor = .systemGray4
-        label.text = """
-        PIN Number : 111
-        """
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -159,8 +156,18 @@ extension SharePinNumberPageViewController {
         
         let output = viewModel.transform(input)
         
+        configurePINNumber(with: output.pinNumber)
         configureBackButtonDidTap(with: output.backButtonDidTap)
         configureShareButtonDidTap(with: output.shareButtonDidTap)
+    }
+    
+    private func configurePINNumber(with pinNumber: Observable<String>) {
+        pinNumber
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] pinNumberText in
+                self?.pinNumberLabel.text = "PIN 번호 : \(pinNumberText)"
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureBackButtonDidTap(with backButtonDidTap: Observable<Void>) {
@@ -176,9 +183,11 @@ extension SharePinNumberPageViewController {
         shareButtonDidTap
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
+                guard let pinNumber = self?.pinNumberLabel.text else { return }
+                
                 let title = "[우리뭐먹지] 팀원과 PIN 번호를 공유해보세요"
                 let content = """
-                [우리뭐먹지] 팀원이 공유한 PIN 번호: 1111
+                [우리뭐먹지] 팀원이 공유한 \(pinNumber)
                 
                 PIN 번호를 통해 입장하여 오늘의 메뉴를 골라보세요
                 """
