@@ -6,12 +6,12 @@ final class SettingViewController: UIViewController {
     // MARK: - Nested Types
     enum SectionKind: Int, CaseIterable {
         case dislikedFood
-        case ordinarySetting
+        case ordinary 
         case version
     }
     
     // MARK: - Properties
-    private let tableView = UITableView()
+    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     private var viewModel: SettingViewModel!
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
@@ -50,9 +50,10 @@ final class SettingViewController: UIViewController {
         self.view.backgroundColor = ColorPalette.mainYellow
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemGray6
         tableView.register(cellType: VersionCell.self)
         tableView.register(cellType: SettingCell.self)
+        tableView.dataSource = self
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -60,7 +61,6 @@ final class SettingViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
         ])
-        tableView.dataSource = self
     }
 }
 
@@ -71,7 +71,8 @@ extension SettingViewController {
         
         let input = SettingViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
-            backButtonDidTap: leftNavigationItem.rx.tap.asObservable()
+            backButtonDidTap: leftNavigationItem.rx.tap.asObservable(),
+            settingItemDidSelect: tableView.rx.itemSelected.asObservable()
         )
         
         let output = viewModel.transform(input)
@@ -110,8 +111,8 @@ extension SettingViewController: UITableViewDataSource {
         case .dislikedFood:
             let dislikedFoodItems = settingItems.filter { $0.sectionKind == .dislikedFood }
             return dislikedFoodItems.count
-        case .ordinarySetting:
-            let ordinarySettingItems = settingItems.filter { $0.sectionKind == .ordinarySetting }
+        case .ordinary:
+            let ordinarySettingItems = settingItems.filter { $0.sectionKind == .ordinary }
             return ordinarySettingItems.count
         case .version:
             let versionItems = settingItems.filter { $0.sectionKind == .version }
@@ -132,9 +133,9 @@ extension SettingViewController: UITableViewDataSource {
             }
 
             return cell
-        case .ordinarySetting:
+        case .ordinary:
             let cell = tableView.dequeueReusableCell(of: SettingCell.self, for: indexPath)
-            guard let ordinarySettingItems = settingItems.filter({ $0.sectionKind == .ordinarySetting }) as? [SettingViewModel.OrdinarySettingItem] else {
+            guard let ordinarySettingItems = settingItems.filter({ $0.sectionKind == .ordinary }) as? [SettingViewModel.OrdinarySettingItem] else {
                 return UITableViewCell()
             }
             

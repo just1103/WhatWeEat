@@ -1,10 +1,3 @@
-//
-//  SettingCell.swift
-//  WhatWeEat
-//
-//  Created by 양호준 on 2022/05/31.
-//
-
 import UIKit
 
 class SettingCell: UITableViewCell {
@@ -30,15 +23,10 @@ class SettingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - LifeCycle Methods
+    // MARK: - Lifecycle Methods
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-//        self.backgroundColor = ColorPalette.subYellow
     }
     
     // MARK: - Methods
@@ -48,18 +36,19 @@ class SettingCell: UITableViewCell {
     
     private func configureUI() {
         self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .none
         addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -60),
-            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5),
-            titleLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
     }
 }
 
-// MARK: - NameSpace
+// MARK: - NameSpaces
 extension SettingCell {
     private enum Design {
         static let titleLabelFont: UIFont = .preferredFont(forTextStyle: .title3)

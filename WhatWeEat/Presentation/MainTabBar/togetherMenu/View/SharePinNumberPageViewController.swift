@@ -174,7 +174,7 @@ extension SharePinNumberPageViewController {
         backButtonDidTap
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: false)
+                self?.navigationController?.popViewController(animated: false) // TODO: ViewModel Action으로 연결 고려
             })
             .disposed(by: disposeBag)
     }

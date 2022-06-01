@@ -39,7 +39,7 @@ final class FlowCoordinator {
             image: Content.secondPageImage
         )
         
-        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage)
+        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage, popCurrentPage: nil)
         let dislikedFoodSurveyViewModel = DislikedFoodSurveyViewModel(actions: actions)
         let thirdPage = DislikedFoodSurveyViewController(viewModel: dislikedFoodSurveyViewModel)
         
@@ -78,10 +78,27 @@ final class FlowCoordinator {
     }
     
     private func showSettingPage() {
-        let settingViewModel = SettingViewModel()
+        let settingViewModelAction = SettingViewModelAction(showDislikedFoodSurveyPage: showDislikedFoodSurveyPage) // 여러개 전달
+        let settingViewModel = SettingViewModel(actions: settingViewModelAction)
         let settingViewController = SettingViewController(viewModel: settingViewModel)
         
         navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    private func showDislikedFoodSurveyPage() {
+        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage, popCurrentPage: popCurrentPage)
+        let dislikedFoodSurveyViewModel = DislikedFoodSurveyViewModel(actions: actions) // 다시 설정으로 돌아오도록
+        let dislikedFoodSurveyViewController = DislikedFoodSurveyViewController(viewModel: dislikedFoodSurveyViewModel)
+        
+        navigationController?.pushViewController(dislikedFoodSurveyViewController, animated: false)
+    }
+    
+    private func popCurrentPage() {
+        navigationController?.popViewController(animated: false)
+    }
+    
+    private func showAppStorePage() {
+        // TODO: 링크를 통해 APPStore 앱 연결
     }
 }
 

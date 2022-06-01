@@ -68,6 +68,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIOSVersion()
+        configureNavigationBar()
         configureCollectionView()
         configureStackView()
         configureCellRegistrationAndDataSource()
@@ -94,6 +95,10 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         let okAlertAction = UIAlertAction(title: Content.okAlertActionTitle, style: .default)
         let alert = AlertFactory().createAlert(title: Content.versionErrorTitle, message: nil, actions: okAlertAction)
         present(alert, animated: true)
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.hidesBackButton = true
     }
     
     private func configureCollectionView() {
@@ -123,7 +128,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     
     private func configureCellRegistrationAndDataSource() {
         let cellRegistration = CellRegistration { cell, _, dislikedFood in
-            cell.apply(descriptionImage: dislikedFood.descriptionImage, descriptionText: dislikedFood.descriptionText)
+            cell.apply(isChecked: dislikedFood.isChecked, descriptionImage: dislikedFood.descriptionImage, descriptionText: dislikedFood.descriptionText)
         }
         
         dataSource = DiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, dislikedFood in

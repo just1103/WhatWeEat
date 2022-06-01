@@ -40,6 +40,7 @@
 		3636DED62844B00000F04111 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED52844B00000F04111 /* Menu.swift */; };
 		3636DED82844B06C00F04111 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED72844B06C00F04111 /* GameResult.swift */; };
 		3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */; };
+		3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
@@ -104,6 +105,7 @@
 		3636DED52844B00000F04111 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		3636DED72844B06C00F04111 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelAction.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */,
+				3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
 				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
+				3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */,
 				3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */,
 				3636DED12844ADFD00F04111 /* JSONParser.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
@@ -811,7 +815,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FA464JRW3F;
+				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -823,7 +827,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -838,7 +842,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FA464JRW3F;
+				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -850,7 +854,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

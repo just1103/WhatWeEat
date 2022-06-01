@@ -11,6 +11,7 @@ final class SettingViewModel {
     struct Input {
         let invokedViewDidLoad: Observable<Void>
         let backButtonDidTap: Observable<Void>
+        let settingItemDidSelect: Observable<IndexPath>
     }
     
     struct Output {
@@ -31,16 +32,32 @@ final class SettingViewModel {
         let sectionKind: SettingViewController.SectionKind = .version
     }
     
+    // MARK: - Properties
+    private var actions: SettingViewModelAction!
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initializers
+    init(actions: SettingViewModelAction) {
+        self.actions = actions
+    }
+    
+    // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let tableViewItems = configureTableViewItems(with: input.invokedViewDidLoad)
-        let ouput = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
+        configureSettingItemDidSelectObservable(with: input.settingItemDidSelect)
         
+        let ouput = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
+
         return ouput
     }
     
     private func configureTableViewItems(with inputObserver: Observable<Void>) -> Observable<[SettingItem]> {
         inputObserver
-            .flatMap { () -> Observable<[SettingItem]> in
+            .flatMap { [weak self] () -> Observable<[SettingItem]> in
+                guard let self = self else {
+                    return Observable.just([])
+                }
+                
                 let editDislikedFoods = OrdinarySettingItem(
                     title: Content.editDislikedFoodsTitle,
                     content: Content.editDislikedFoodsContent,
@@ -49,27 +66,27 @@ final class SettingViewModel {
                 let privacyPolicies = OrdinarySettingItem(
                     title: Content.privacyPoliciesTitle,
                     content: Content.privacyPoliciesContent,
-                    sectionKind: .ordinarySetting
+                    sectionKind: .ordinary
                 )
                 let openSourceLicense = OrdinarySettingItem(
                     title: Content.openSourceLicenseTitle,
                     content: Content.openSourceLicenseContent,
-                    sectionKind: .ordinarySetting
+                    sectionKind: .ordinary
                 )
                 let feedBackToDeveloper = OrdinarySettingItem(
                     title: Content.feedBackToDeveloperTitle,
                     content: Content.feedBackToDeveloperContent,
-                    sectionKind: .ordinarySetting
+                    sectionKind: .ordinary
                 )
                 let recommendToFriend = OrdinarySettingItem(
                     title: Content.recommendToFriendTitle,
                     content: Content.recommendToFriendContent,
-                    sectionKind: .ordinarySetting
+                    sectionKind: .ordinary
                 )
                 let versionInformation = VersionSettingItem(
                     title: Content.versionInformationTitle,
-                    subtitle: Content.versionInformationSubtitle,
-                    buttonTitle: Content.versionInformationButtonLatestTitle
+                    subtitle: self.configureVersionInformationSubtitle(),
+                    buttonTitle: self.configureVersionInformationButtonUpdateTitle()
                 )
                 let settingItems: [SettingItem] = [
                     editDislikedFoods, privacyPolicies, openSourceLicense, feedBackToDeveloper, recommendToFriend, versionInformation
@@ -77,6 +94,68 @@ final class SettingViewModel {
                 
                 return Observable.just(settingItems)
             }
+    }
+    
+    private func configureVersionInformationSubtitle() -> String {
+        let currentAppVersion = checkCurrentAppVersion()
+        let latestAppVersion = checkLatestAppVersion()
+        return "현재 \(currentAppVersion) / 최신 \(latestAppVersion)"
+    }
+    
+    private func checkCurrentAppVersion() -> String {
+        guard let currentAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return Content.versionCheckErrorTitle
+        }
+        return currentAppVersion
+    }
+    
+    private func checkLatestAppVersion() -> String {
+        let appBundleID = "com.WhatWeEat"
+        
+        guard
+            let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appBundleID)"),
+            let data = try? Data(contentsOf: url),
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
+            let results = json["reslts"] as? [[String: Any]],
+            results.count > 0,
+            let latestAppVersion = results[0]["version"] as? String
+        else {
+//            return "1.0"  // TODO: 테스트코드
+            return Content.versionCheckErrorTitle
+        }
+        
+        return latestAppVersion
+    }
+    
+    private func configureVersionInformationButtonUpdateTitle() -> String {
+        if isUpdateNeeded() {
+            return Content.versionInformationButtonUpdateTitle
+        } else {
+            return Content.versionInformationButtonLatestTitle
+        }
+    }
+    
+    private func isUpdateNeeded() -> Bool {
+        let currentAppVersion = checkCurrentAppVersion()
+        let latestAppVersion = checkLatestAppVersion()
+        
+        return currentAppVersion == latestAppVersion ? false : true
+    }
+    
+    private func configureSettingItemDidSelectObservable(with inputObserver: Observable<IndexPath>) {
+        inputObserver
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section) else { return }
+                switch sectionKind {
+                case .dislikedFood:
+                    self?.actions.showDislikedFoodSurveyPage()
+                case .ordinary:
+                    print("!!!")
+                case .version:
+                    return
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -94,9 +173,8 @@ extension SettingViewModel {
         static let recommendToFriendTitle = "친구에게 추천하기"
         static let recommendToFriendContent = ""
         static let versionInformationTitle = "버전 정보"
-        static let versionInformationSubtitle = "현재 1.0 / 최신 1.0"
+        static let versionCheckErrorTitle = "버전 확인 불가"
         static let versionInformationButtonUpdateTitle = "업데이트"
         static let versionInformationButtonLatestTitle = "최신버전"
     }
 }
-
