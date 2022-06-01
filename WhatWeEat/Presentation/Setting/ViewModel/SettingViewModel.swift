@@ -34,6 +34,7 @@ final class SettingViewModel {
     
     // MARK: - Properties
     private var actions: SettingViewModelAction!
+    private var settingItems: [SettingItem] = []
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -88,11 +89,11 @@ final class SettingViewModel {
                     subtitle: self.configureVersionInformationSubtitle(),
                     buttonTitle: self.configureVersionInformationButtonUpdateTitle()
                 )
-                let settingItems: [SettingItem] = [
+                self.settingItems = [
                     editDislikedFoods, privacyPolicies, openSourceLicense, feedBackToDeveloper, recommendToFriend, versionInformation
                 ]
                 
-                return Observable.just(settingItems)
+                return Observable.just(self.settingItems)
             }
     }
     
@@ -145,12 +146,20 @@ final class SettingViewModel {
     private func configureSettingItemDidSelectObservable(with inputObserver: Observable<IndexPath>) {
         inputObserver
             .subscribe(onNext: { [weak self] indexPath in
-                guard let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section) else { return }
+                guard
+                    let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section),
+                    let self = self
+                else { return }
+                
                 switch sectionKind {
                 case .dislikedFood:
-                    self?.actions.showDislikedFoodSurveyPage()
+                    self.actions.showDislikedFoodSurveyPage()
                 case .ordinary:
-                    print("!!!")
+                    guard
+                        let ordinarySettingItems = self.settingItems.filter({ $0.sectionKind == .ordinary }) as? [OrdinarySettingItem],
+                        let content = ordinarySettingItems[indexPath.row].content
+                    else { return }
+                    self.actions.showSettingDetailPage(ordinarySettingItems[indexPath.row].title, content)
                 case .version:
                     return
                 }
@@ -165,11 +174,55 @@ extension SettingViewModel {
         static let editDislikedFoodsTitle = "못먹는 음식 수정하기"
         static let editDislikedFoodsContent = ""
         static let privacyPoliciesTitle = "개인정보 처리방침"
-        static let privacyPoliciesContent = ""
+        static let privacyPoliciesContent = """
+        개인정보 처리방침입니다.
+        """
         static let openSourceLicenseTitle = "오픈소스 라이센스"
-        static let openSourceLicenseContent = ""
+        static let openSourceLicenseContent = """
+        Rx for iOS
+        https://github.com/ReactiveX/RxSwift
+        Apache License Version 6.5.0
+
+        Realm Swift
+        https://github.com/realm/realm-swift
+        Apache License Version 10.26.0
+        
+        Rx for iOS
+        https://github.com/ReactiveX/RxSwift
+        Apache License Version 6.5.0
+
+        Realm Swift
+        https://github.com/realm/realm-swift
+        Apache License Version 10.26.0
+        
+        Rx for iOS
+        https://github.com/ReactiveX/RxSwift
+        Apache License Version 6.5.0
+
+        Realm Swift
+        https://github.com/realm/realm-swift
+        Apache License Version 10.26.0
+
+        Rx for iOS
+        https://github.com/ReactiveX/RxSwift
+        Apache License Version 6.5.0
+
+        Realm Swift
+        https://github.com/realm/realm-swift
+        Apache License Version 10.26.0
+
+        Rx for iOS
+        https://github.com/ReactiveX/RxSwift
+        Apache License Version 6.5.0
+
+        Realm Swift
+        https://github.com/realm/realm-swift
+        Apache License Version 10.26.0
+        """
         static let feedBackToDeveloperTitle = "개발자에게 피드백하기"
-        static let feedBackToDeveloperContent = ""
+        static let feedBackToDeveloperContent = """
+        개발자 이메일: aaaa@gmail.com
+        """
         static let recommendToFriendTitle = "친구에게 추천하기"
         static let recommendToFriendContent = ""
         static let versionInformationTitle = "버전 정보"

@@ -50,6 +50,9 @@
 		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
+		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
+		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
+		DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105928476288002D781B /* SettingDetailViewModelAction.swift */; };
 		DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3902845C5DC002697B5 /* SettingViewController.swift */; };
 		DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3922845C6D3002697B5 /* SettingCell.swift */; };
 		DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3942845C6E6002697B5 /* VersionCell.swift */; };
@@ -113,6 +116,9 @@
 		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
+		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
+		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
+		DE86105928476288002D781B /* SettingDetailViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModelAction.swift; sourceTree = "<group>"; };
 		DEEBE3902845C5DC002697B5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DEEBE3922845C6D3002697B5 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		DEEBE3942845C6E6002697B5 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
@@ -457,6 +463,7 @@
 				DEEBE3902845C5DC002697B5 /* SettingViewController.swift */,
 				DEEBE3922845C6D3002697B5 /* SettingCell.swift */,
 				DEEBE3942845C6E6002697B5 /* VersionCell.swift */,
+				DE86105528475881002D781B /* SettingDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -466,6 +473,8 @@
 			children = (
 				DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */,
 				3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */,
+				DE8610572847625E002D781B /* SettingDetailViewModel.swift */,
+				DE86105928476288002D781B /* SettingDetailViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -634,6 +643,7 @@
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
+				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
@@ -655,9 +665,11 @@
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
+				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
 				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
+				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,

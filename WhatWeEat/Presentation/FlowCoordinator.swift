@@ -78,7 +78,10 @@ final class FlowCoordinator {
     }
     
     private func showSettingPage() {
-        let settingViewModelAction = SettingViewModelAction(showDislikedFoodSurveyPage: showDislikedFoodSurveyPage) // 여러개 전달
+        let settingViewModelAction = SettingViewModelAction(
+            showDislikedFoodSurveyPage: showDislikedFoodSurveyPage,
+            showSettingDetailPage: showSettingDetailPageWith
+        )
         let settingViewModel = SettingViewModel(actions: settingViewModelAction)
         let settingViewController = SettingViewController(viewModel: settingViewModel)
         
@@ -95,6 +98,18 @@ final class FlowCoordinator {
     
     private func popCurrentPage() {
         navigationController?.popViewController(animated: false)
+    }
+    
+    private func showSettingDetailPageWith(title: String, content: String) {
+        let actions = SettingDetailViewModelAction(popCurrentPage: popCurrentPage)
+        let settingDetailViewModel = SettingDetailViewModel(actions: actions)
+        let settingDetailViewController = SettingDetailViewController(
+            title: title,
+            content: content,
+            viewModel: settingDetailViewModel
+        )
+        
+        navigationController?.pushViewController(settingDetailViewController, animated: false)
     }
     
     private func showAppStorePage() {
