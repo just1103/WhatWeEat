@@ -56,15 +56,21 @@ final class DislikedFoodSurveyViewModel {
             let sashimiFood = DislikedFoodCell.DislikedFood(name: "날것", descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
             let seaFood = DislikedFoodCell.DislikedFood(name: "해산물", descriptionImage: seaFoodImage, descriptionText: "해산물")
             let meatFood = DislikedFoodCell.DislikedFood(name: "고기", descriptionImage: meatFoodImage, descriptionText: "고기")
-
             self.dislikedFoods = [chilliFood, intestineFood, sashimiFood, seaFood, meatFood]
+              
+            let realmManager = RealmManager.shared
+            let checkedFoodsFromRealm = realmManager.read()
+            
+            _ = self.dislikedFoods.filter { checkedFoodsFromRealm.contains($0.name) }
+                .map { $0.toggleChecked() }
+            
             return Observable.just(self.dislikedFoods)
         }
     }
     
     private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
         return inputObserver.map { [weak self] indexPath in
-            self?.dislikedFoods[indexPath.row].isChecked.toggle()
+            self?.dislikedFoods[indexPath.row].toggleChecked()
             return indexPath
         }
     }
@@ -73,20 +79,20 @@ final class DislikedFoodSurveyViewModel {
         inputObserver
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                let realm = RealmManager.shared.realm
+                guard let self = self else { return }
+                let checkedFoods = self.dislikedFoods
+                    .filter { $0.isChecked }
                 
-                try! realm.write {
-                    realm.deleteAll()
-                    
-                    _ = self?.dislikedFoods
-                        .filter { $0.isChecked }
-                        .map {
-                            let dislikedFood = DislikedFoodForRealM(name: $0.name)
-                            realm.add(dislikedFood)
-                        }
+                let realmManger = RealmManager.shared
+                realmManger.deleteAndCreate(checkedFoods)
+                
+                if FirstLaunchChecker.isFirstLaunched() {
+                    UserDefaults.standard.set(false, forKey: "isFirstLaunched")
+                    self.actions.showMainTapBarPage()
+                } else {
+                    guard let popCurrentPage = self.actions.popCurrentPage else { return }
+                    popCurrentPage()
                 }
-                
-                self?.actions.showMainTapBarPage()
             })
             .disposed(by: disposeBag)
        }

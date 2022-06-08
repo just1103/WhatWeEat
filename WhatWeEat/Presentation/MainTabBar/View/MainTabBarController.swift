@@ -3,11 +3,13 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
     private var pages: [TabBarContentProtocol]!
+    private var viewModel: MainTabBarViewModel!
     
     // MARK: - Initializers
-    init(pages: [TabBarContentProtocol]) {
+    init(pages: [TabBarContentProtocol], viewModel: MainTabBarViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.pages = pages
+        self.viewModel = viewModel
     }
     
     @available(*, unavailable)
@@ -25,6 +27,7 @@ final class MainTabBarController: UITabBarController {
         // ???: UITabBarController init의 side-effect로 인해 viewDidLoad 대신 해당 위치에 배치함
         configureNavigationBar()
         configureTabBar()
+        bind()
     }
     
     // MARK: - Methods
@@ -63,5 +66,15 @@ extension MainTabBarController: UITabBarControllerDelegate {
         default:
             navigationItem.title = "우리뭐먹지"
         }
+    }
+}
+
+// MARK: - Rx Binding Methods
+extension MainTabBarController {
+    private func bind() {
+        guard let rightBarButtonItem = navigationItem.rightBarButtonItem else { return }
+        let input = MainTabBarViewModel.Input(rightBarButtonItemDidTap: rightBarButtonItem.rx.tap.asObservable())
+        
+        viewModel.transform(input)
     }
 }

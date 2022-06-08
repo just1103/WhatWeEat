@@ -39,7 +39,7 @@ final class FlowCoordinator {
             image: Content.secondPageImage
         )
         
-        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage)
+        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage, popCurrentPage: nil)
         let dislikedFoodSurveyViewModel = DislikedFoodSurveyViewModel(actions: actions)
         let thirdPage = DislikedFoodSurveyViewController(viewModel: dislikedFoodSurveyViewModel)
         
@@ -55,13 +55,16 @@ final class FlowCoordinator {
     private func showMainTabBarPage() {
         let homeViewModel = HomeViewModel()
         let homeViewController = HomeViewController(viewModel: homeViewModel)
-        let actions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
-        let togetherMenuViewModel = TogetherMenuViewModel(actions: actions)
+        let togetherMenuViewModelactions = TogetherMenuViewModelAction(showSharePinNumberPage: showSharePinNumberPage)
+        let togetherMenuViewModel = TogetherMenuViewModel(actions: togetherMenuViewModelactions)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
         let soloMenuViewController = SoloMenuViewController()
-
+        
+        let mainTabBarViewModelAction = MainTabBarViewModelAction(showSettingPage: showSettingPage)
+        let mainTabBarViewModel = MainTabBarViewModel(actions: mainTabBarViewModelAction)
         let mainTabBarController = MainTabBarController(
-            pages: [homeViewController, togetherMenuViewController, soloMenuViewController]
+            pages: [homeViewController, togetherMenuViewController, soloMenuViewController],
+            viewModel: mainTabBarViewModel
         )
         
         navigationController?.pushViewController(mainTabBarController, animated: true)
@@ -72,6 +75,45 @@ final class FlowCoordinator {
         let sharePinNumberPageViewController = SharePinNumberPageViewController(viewModel: sharePinNumberPageViewModel)
         
         navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)
+    }
+    
+    private func showSettingPage() {
+        let settingViewModelAction = SettingViewModelAction(
+            showDislikedFoodSurveyPage: showDislikedFoodSurveyPage,
+            showSettingDetailPage: showSettingDetailPageWith
+        )
+        let settingViewModel = SettingViewModel(actions: settingViewModelAction)
+        let settingViewController = SettingViewController(viewModel: settingViewModel)
+        
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    private func showDislikedFoodSurveyPage() {
+        let actions = DislikedFoodSurveyViewModelAction(showMainTapBarPage: showMainTabBarPage, popCurrentPage: popCurrentPage)
+        let dislikedFoodSurveyViewModel = DislikedFoodSurveyViewModel(actions: actions) // 다시 설정으로 돌아오도록
+        let dislikedFoodSurveyViewController = DislikedFoodSurveyViewController(viewModel: dislikedFoodSurveyViewModel)
+        
+        navigationController?.pushViewController(dislikedFoodSurveyViewController, animated: false)
+    }
+    
+    private func popCurrentPage() {
+        navigationController?.popViewController(animated: false)
+    }
+    
+    private func showSettingDetailPageWith(title: String, content: String) {
+        let actions = SettingDetailViewModelAction(popCurrentPage: popCurrentPage)
+        let settingDetailViewModel = SettingDetailViewModel(actions: actions)
+        let settingDetailViewController = SettingDetailViewController(
+            title: title,
+            content: content,
+            viewModel: settingDetailViewModel
+        )
+        
+        navigationController?.pushViewController(settingDetailViewController, animated: false)
+    }
+    
+    private func showAppStorePage() {
+        // TODO: 링크를 통해 APPStore 앱 연결
     }
 }
 

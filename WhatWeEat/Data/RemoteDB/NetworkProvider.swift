@@ -19,10 +19,10 @@ enum NetworkError: Error, LocalizedError {
 }
 
 struct NetworkProvider {
-    private let session: URLSessionProtocol
+    private let session: URLSession
     private let disposeBag = DisposeBag()
     
-    init(session: URLSessionProtocol = URLSession.shared) {
+    init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     

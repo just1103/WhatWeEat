@@ -40,6 +40,7 @@
 		3636DED62844B00000F04111 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED52844B00000F04111 /* Menu.swift */; };
 		3636DED82844B06C00F04111 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED72844B06C00F04111 /* GameResult.swift */; };
 		3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */; };
+		3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
@@ -49,6 +50,16 @@
 		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
+		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
+		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
+		DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105928476288002D781B /* SettingDetailViewModelAction.swift */; };
+		DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3902845C5DC002697B5 /* SettingViewController.swift */; };
+		DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3922845C6D3002697B5 /* SettingCell.swift */; };
+		DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3942845C6E6002697B5 /* VersionCell.swift */; };
+		DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */; };
+		DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */; };
+		DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */; };
+		DEEBE3A028461DCF002697B5 /* MainTabBarViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +108,7 @@
 		3636DED52844B00000F04111 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		3636DED72844B06C00F04111 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelAction.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +116,16 @@
 		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
+		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
+		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
+		DE86105928476288002D781B /* SettingDetailViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModelAction.swift; sourceTree = "<group>"; };
+		DEEBE3902845C5DC002697B5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		DEEBE3922845C6D3002697B5 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		DEEBE3942845C6E6002697B5 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
+		DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Cell.swift"; sourceTree = "<group>"; };
+		DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModelAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,7 +283,8 @@
 		3636DEA6283E1A3800F04111 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */,
+				DEEBE39B28461CBF002697B5 /* View */,
+				DEEBE39C28461CC9002697B5 /* ViewModel */,
 				3636DEA8283E1AC800F04111 /* Home */,
 				3636DEBC283F75C800F04111 /* SoloMenu */,
 				DE31032B283F7FE3009CA7C3 /* togetherMenu */,
@@ -327,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				3636DECE2844AD8300F04111 /* URLRequest+Initializer.swift */,
+				DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -362,8 +386,9 @@
 			children = (
 				3636DEAD283E302600F04111 /* FlowCoordinator.swift */,
 				3636DE87283B558300F04111 /* Onboarding */,
-				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
 				3636DEA6283E1A3800F04111 /* MainTabBar */,
+				DEEBE38E2845C5A6002697B5 /* Setting */,
+				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -419,6 +444,54 @@
 				DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */,
 				DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */,
 				3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DEEBE38E2845C5A6002697B5 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				DEEBE38F2845C5CD002697B5 /* View */,
+				DEEBE3962845C7B4002697B5 /* ViewModel */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		DEEBE38F2845C5CD002697B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DEEBE3902845C5DC002697B5 /* SettingViewController.swift */,
+				DEEBE3922845C6D3002697B5 /* SettingCell.swift */,
+				DEEBE3942845C6E6002697B5 /* VersionCell.swift */,
+				DE86105528475881002D781B /* SettingDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEEBE3962845C7B4002697B5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */,
+				3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */,
+				DE8610572847625E002D781B /* SettingDetailViewModel.swift */,
+				DE86105928476288002D781B /* SettingDetailViewModelAction.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DEEBE39B28461CBF002697B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEEBE39C28461CC9002697B5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */,
+				DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -560,32 +633,43 @@
 				3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */,
 				DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */,
 				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
+				DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */,
 				3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */,
 				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
+				DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */,
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
 				3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */,
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
+				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
+				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
 				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
+				3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */,
 				3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */,
 				3636DED12844ADFD00F04111 /* JSONParser.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
+				DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */,
 				3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */,
 				3636DECF2844AD8300F04111 /* URLRequest+Initializer.swift in Sources */,
 				3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */,
+				DEEBE3A028461DCF002697B5 /* MainTabBarViewModelAction.swift in Sources */,
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
+				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
+				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
+				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
+				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
@@ -743,7 +827,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FA464JRW3F;
+				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -755,7 +839,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -770,7 +854,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FA464JRW3F;
+				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -782,7 +866,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

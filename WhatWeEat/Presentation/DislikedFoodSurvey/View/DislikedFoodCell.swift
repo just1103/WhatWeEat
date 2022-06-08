@@ -3,11 +3,29 @@ import RealmSwift
 
 final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Nested Types
-    struct DislikedFood: Hashable {
+    class DislikedFood: Hashable {
         var isChecked: Bool = false
         let name: String
         let descriptionImage: UIImage
         let descriptionText: String
+        
+        init(name: String, descriptionImage: UIImage, descriptionText: String) {
+            self.name = name
+            self.descriptionImage = descriptionImage
+            self.descriptionText = descriptionText
+        }
+        
+        func toggleChecked() {
+            self.isChecked.toggle()
+        }
+        
+        static func == (lhs: DislikedFoodCell.DislikedFood, rhs: DislikedFoodCell.DislikedFood) -> Bool {
+            return lhs.name == rhs.name
+        }
+        
+        func hash(into hasher: inout Hasher) {
+           hasher.combine(name)
+        }
     }
     
     // MARK: - Properties
@@ -62,7 +80,10 @@ final class DislikedFoodCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    func apply(descriptionImage: UIImage, descriptionText: String) {
+    func apply(isChecked: Bool, descriptionImage: UIImage, descriptionText: String) {
+        if isChecked {
+            toggleSelectedCellUI()
+        }
         descriptionImageView.image = descriptionImage
         descriptionLabel.text = descriptionText
     }
