@@ -2,7 +2,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    var flowCoordinator: FlowCoordinator?
+    var appCoordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -13,8 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.view.backgroundColor = .white
         window?.rootViewController = navigationController
         
-        let flowCoordinator = FlowCoordinator(navigationController: navigationController)
-        flowCoordinator.start()
+        appCoordinator = AppCoordinator(navigationController: navigationController) // 로컬 변수에 할당하면 scene 메서드가 종료되면서 AppCoordinator 인스턴스도 메모리 해제됨!!!
+        appCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

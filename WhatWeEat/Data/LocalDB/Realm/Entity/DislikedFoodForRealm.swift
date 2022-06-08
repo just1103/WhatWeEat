@@ -2,10 +2,10 @@ import Foundation
 import RealmSwift
 
 class DislikedFoodForRealM: Object {
-    @Persisted var name: String
+    @Persisted var kind: DislikedFood.Kind
     
-    convenience init(name: String) {
+    convenience init(kind: DislikedFood.Kind) {
         self.init()
-        self.name = name
+        self.kind = kind
     }
 }

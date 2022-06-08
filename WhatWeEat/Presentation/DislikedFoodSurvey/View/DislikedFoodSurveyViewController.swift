@@ -48,15 +48,15 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         return button
     }()
     
-    private var viewModel: DislikedFoodSurveyViewModel! 
+    private var viewModel: DislikedFoodSurveyViewModel!
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: DiffableDataSource!
-    private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>!
+    private var snapshot: NSDiffableDataSourceSnapshot<SectionKind, DislikedFood>!
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
-    private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFoodCell.DislikedFood>
-    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFoodCell.DislikedFood>
+    private typealias CellRegistration = UICollectionView.CellRegistration<DislikedFoodCell, DislikedFood>
+    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<SectionKind, DislikedFood>
     
     // MARK: - Initializers
     convenience init(viewModel: DislikedFoodSurveyViewModel) {
@@ -105,6 +105,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
+        collectionView.backgroundColor = .white
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -128,7 +129,11 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     
     private func configureCellRegistrationAndDataSource() {
         let cellRegistration = CellRegistration { cell, _, dislikedFood in
-            cell.apply(isChecked: dislikedFood.isChecked, descriptionImage: dislikedFood.descriptionImage, descriptionText: dislikedFood.descriptionText)
+            cell.apply(
+                isChecked: dislikedFood.isChecked,
+                descriptionImage: dislikedFood.descriptionImage,
+                descriptionText: dislikedFood.descriptionText
+            )
         }
         
         dataSource = DiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, dislikedFood in
@@ -173,7 +178,7 @@ extension DislikedFoodSurveyViewController {
         configureSelectedCell(at: output.selectedFoodIndexPath)
     }
 
-    private func configureItems(with dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>) {
+    private func configureItems(with dislikedFoods: Observable<[DislikedFood]>) {
         dislikedFoods
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dislikedFoods in
@@ -182,8 +187,8 @@ extension DislikedFoodSurveyViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configureInitialSnapshot(with dislikedFood: [DislikedFoodCell.DislikedFood]) {
-        snapshot = NSDiffableDataSourceSnapshot<SectionKind, DislikedFoodCell.DislikedFood>()
+    private func configureInitialSnapshot(with dislikedFood: [DislikedFood]) {
+        snapshot = NSDiffableDataSourceSnapshot<SectionKind, DislikedFood>()
         snapshot.appendSections([.main])
         snapshot.appendItems(dislikedFood)
         dataSource.apply(snapshot, animatingDifferences: true)

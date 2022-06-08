@@ -24,9 +24,8 @@
 		3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */; };
 		3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */; };
 		3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAB283E1B9900F04111 /* HomeViewController.swift */; };
-		3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* FlowCoordinator.swift */; };
+		3636DEAE283E302600F04111 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* AppCoordinator.swift */; };
 		3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */; };
-		3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */; };
 		3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */; };
 		3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */; };
 		3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */; };
@@ -41,6 +40,11 @@
 		3636DED82844B06C00F04111 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED72844B06C00F04111 /* GameResult.swift */; };
 		3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */; };
 		3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */; };
+		363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F412848A8F1000DC665 /* GameAnswer.swift */; };
+		363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F462848B8BE000DC665 /* ResultSubmission.swift */; };
+		363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F4C2848BD32000DC665 /* DislikedFood.swift */; };
+		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
+		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
@@ -92,9 +96,8 @@
 		3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodForRealm.swift; sourceTree = "<group>"; };
 		3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		3636DEAB283E1B9900F04111 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		3636DEAD283E302600F04111 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		3636DEAD283E302600F04111 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentProtocol.swift; sourceTree = "<group>"; };
-		3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModelAction.swift; sourceTree = "<group>"; };
 		3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewController.swift; sourceTree = "<group>"; };
 		3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +112,11 @@
 		3636DED72844B06C00F04111 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelAction.swift; sourceTree = "<group>"; };
+		363D3F412848A8F1000DC665 /* GameAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswer.swift; sourceTree = "<group>"; };
+		363D3F462848B8BE000DC665 /* ResultSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSubmission.swift; sourceTree = "<group>"; };
+		363D3F4C2848BD32000DC665 /* DislikedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFood.swift; sourceTree = "<group>"; };
+		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 			children = (
 				DE095C88283B259300C7E109 /* App */,
 				DE095C89283B259D00C7E109 /* Presentation */,
+				363D3F4B2848BD13000DC665 /* Model */,
 				3636DE9E283E00CA00F04111 /* Data */,
 				3636DE8E283B5D2600F04111 /* Utility */,
 				3636DEAF283E322A00F04111 /* Protocol */,
@@ -194,6 +203,7 @@
 		3636DE87283B558300F04111 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */,
 				3636DE89283B559700F04111 /* View */,
 				3636DE88283B559100F04111 /* ViewModel */,
 			);
@@ -249,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */,
-				3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */,
 				3636DEC92844AD3900F04111 /* BaseURLProtocol.swift */,
 				3636DECB2844AD4B00F04111 /* APIProtocol.swift */,
+				36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -358,8 +368,8 @@
 		3636DED22844AE0D00F04111 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				3636DED52844B00000F04111 /* Menu.swift */,
-				3636DED72844B06C00F04111 /* GameResult.swift */,
+				363D3F442848B229000DC665 /* Request */,
+				363D3F432848B221000DC665 /* Response */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -370,6 +380,32 @@
 				3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		363D3F432848B221000DC665 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				3636DED52844B00000F04111 /* Menu.swift */,
+				3636DED72844B06C00F04111 /* GameResult.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		363D3F442848B229000DC665 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				363D3F412848A8F1000DC665 /* GameAnswer.swift */,
+				363D3F462848B8BE000DC665 /* ResultSubmission.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		363D3F4B2848BD13000DC665 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				363D3F4C2848BD32000DC665 /* DislikedFood.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DE095C88283B259300C7E109 /* App */ = {
@@ -384,11 +420,11 @@
 		DE095C89283B259D00C7E109 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				3636DEAD283E302600F04111 /* FlowCoordinator.swift */,
+				3636DEAD283E302600F04111 /* AppCoordinator.swift */,
 				3636DE87283B558300F04111 /* Onboarding */,
+				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
 				3636DEA6283E1A3800F04111 /* MainTabBar */,
 				DEEBE38E2845C5A6002697B5 /* Setting */,
-				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -635,23 +671,26 @@
 				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
 				DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */,
 				3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */,
-				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
 				DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */,
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
-				3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */,
+				3636DEAE283E302600F04111 /* AppCoordinator.swift in Sources */,
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
+				36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */,
 				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
 				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
+				36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */,
 				3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */,
+				363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */,
 				3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */,
 				3636DED12844ADFD00F04111 /* JSONParser.swift in Sources */,
+				363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
@@ -670,6 +709,7 @@
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
 				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
+				363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
