@@ -27,6 +27,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
         label.numberOfLines = 0

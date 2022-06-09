@@ -22,6 +22,7 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
     }
     
     private func showOnboardingPage() {
+        guard let navigationController = navigationController else { return }
         let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
         onboardingCoordinator.dislikedFoodSurveyCoordinatorDelegate = self
         
@@ -30,6 +31,7 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
     }
     
     func showMainTabBarPage() {
+        guard let navigationController = navigationController else { return }
         let mainTabBarCoordinator = MainTabBarCoordinator(navigationController: navigationController)
         
         childCoordinators.append(mainTabBarCoordinator)

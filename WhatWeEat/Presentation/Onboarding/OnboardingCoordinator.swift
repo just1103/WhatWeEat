@@ -14,7 +14,7 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
     weak var dislikedFoodSurveyCoordinatorDelegate: DislikedFoodSurveyCoordinatorDelegate!
     
     // MARK: - Initializers
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     

@@ -28,4 +28,3 @@ final class MainTabBarViewModel {
             .disposed(by: disposeBag)
     }
 }
-

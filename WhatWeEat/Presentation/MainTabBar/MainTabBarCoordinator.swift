@@ -1,14 +1,14 @@
 import RxSwift
 import UIKit
 
-final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelegate {
+final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelegate, GameCoordinatorDelegate {
     // MARK: - Properties
     var childCoordinators = [CoordinatorProtocol]()
     var navigationController: UINavigationController?
     var type: CoordinatorType = .tab
     
     // MARK: - Initializers
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
@@ -46,7 +46,8 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         let homeViewController = HomeViewController(viewModel: homeViewModel)
         let togetherMenuViewModel = TogetherMenuViewModel(coordinator: self)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
-        let soloMenuViewController = SoloMenuViewController()
+        let soloMenuViewModel = SoloMenuViewModel(coordinator: self)
+        let soloMenuViewController = SoloMenuViewController(viewModel: soloMenuViewModel)
         let mainTabBarViewModel = MainTabBarViewModel(coordinator: self)
         let mainTabBarController = MainTabBarController(
             pages: [homeViewController, togetherMenuViewController, soloMenuViewController],
@@ -54,5 +55,13 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         )
         
         navigationController?.viewControllers = [mainTabBarController]
+    }
+    
+    func showGamePage() {
+        guard let navigationController = navigationController else { return }
+        let gameCoordinator = GameCoordinator(navigationController: navigationController)
+        gameCoordinator.delegate = self
+        childCoordinators.append(gameCoordinator)
+        gameCoordinator.start()
     }
 }

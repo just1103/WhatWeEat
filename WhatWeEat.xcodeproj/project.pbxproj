@@ -42,6 +42,10 @@
 		363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F412848A8F1000DC665 /* GameAnswer.swift */; };
 		363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F462848B8BE000DC665 /* ResultSubmission.swift */; };
 		363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F4C2848BD32000DC665 /* DislikedFood.swift */; };
+		365EC7742851928A0094823A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7732851928A0094823A /* GameViewController.swift */; };
+		365EC7762851D42F0094823A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7752851D42F0094823A /* CardView.swift */; };
+		365EC7792851E0290094823A /* GameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7782851E0290094823A /* GameCoordinator.swift */; };
+		365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC77B2851E1400094823A /* SoloMenuViewModel.swift */; };
 		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
 		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
@@ -114,6 +118,10 @@
 		363D3F412848A8F1000DC665 /* GameAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswer.swift; sourceTree = "<group>"; };
 		363D3F462848B8BE000DC665 /* ResultSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSubmission.swift; sourceTree = "<group>"; };
 		363D3F4C2848BD32000DC665 /* DislikedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFood.swift; sourceTree = "<group>"; };
+		365EC7732851928A0094823A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		365EC7752851D42F0094823A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		365EC7782851E0290094823A /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
+		365EC77B2851E1400094823A /* SoloMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewModel.swift; sourceTree = "<group>"; };
 		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
@@ -336,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				3636DEBD283F75EB00F04111 /* View */,
+				365EC77A2851E1210094823A /* ViewModel */,
 			);
 			path = SoloMenu;
 			sourceTree = "<group>";
@@ -410,6 +419,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		365EC770285192460094823A /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7782851E0290094823A /* GameCoordinator.swift */,
+				365EC771285192580094823A /* View */,
+				365EC7722851925E0094823A /* ViewModel */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		365EC771285192580094823A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7732851928A0094823A /* GameViewController.swift */,
+				365EC7752851D42F0094823A /* CardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		365EC7722851925E0094823A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		365EC77A2851E1210094823A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				365EC77B2851E1400094823A /* SoloMenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DE095C88283B259300C7E109 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +469,7 @@
 				3636DE87283B558300F04111 /* Onboarding */,
 				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
 				3636DEA6283E1A3800F04111 /* MainTabBar */,
+				365EC770285192460094823A /* Game */,
 				DEEBE38E2845C5A6002697B5 /* Setting */,
 			);
 			path = Presentation;
@@ -681,6 +725,7 @@
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
 				36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */,
 				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
+				365EC7792851E0290094823A /* GameCoordinator.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
@@ -703,11 +748,14 @@
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
+				365EC7742851928A0094823A /* GameViewController.swift in Sources */,
 				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
 				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
 				DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */,
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
+				365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
+				365EC7762851D42F0094823A /* CardView.swift in Sources */,
 				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
 				363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
