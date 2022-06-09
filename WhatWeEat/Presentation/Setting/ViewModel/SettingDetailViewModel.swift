@@ -8,12 +8,12 @@ final class SettingDetailViewModel {
     }
     
     // MARK: - Properties
-    private let actions: SettingDetailViewModelAction!
+    private weak var coordinator: SettingCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: SettingDetailViewModelAction) {
-        self.actions = actions
+    init(coordinator: SettingCoordinator) {
+        self.coordinator = coordinator
     }
     
     // MARK: - Methods
@@ -25,7 +25,7 @@ final class SettingDetailViewModel {
         inputObserver
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.actions.popCurrentPage()
+                self?.coordinator.popCurrentPage()
             })
             .disposed(by: disposeBag)
     }

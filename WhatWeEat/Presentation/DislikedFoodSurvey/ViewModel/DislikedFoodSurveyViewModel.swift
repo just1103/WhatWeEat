@@ -16,17 +16,18 @@ final class DislikedFoodSurveyViewModel {
     }
     
     // MARK: - Properties
-    private weak var coordinator: OnboardingCoordinator!  // TODO: settingCoordinator도 주입받을 수 있게 Coordinator 추상화 필요
+    private weak var coordinator: DislikedFoodSurveyPresentable!
     private var dislikedFoods = [DislikedFood]()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: OnboardingCoordinator) {
+    init(coordinator: DislikedFoodSurveyPresentable) {
         self.coordinator = coordinator
     }
     
     deinit {
-        self.coordinator.finish()
+        guard let onboardingCoordinator = coordinator as? OnboardingCoordinator else { return }
+        onboardingCoordinator.finish()
     }
     
     // MARK: - Methods
@@ -90,13 +91,11 @@ final class DislikedFoodSurveyViewModel {
                 realmManger.deleteAndCreate(checkedFoods)
                 
                 if FirstLaunchChecker.isFirstLaunched() {
-                    self.coordinator.delegate.showMainTabBarPage()
+                    self.coordinator.dislikedFoodSurveyCoordinatorDelegate.showMainTabBarPage()
                     UserDefaults.standard.set(false, forKey: "isFirstLaunched")
                 } else {
-                     // TODO: settingCoordinator에 popCurrentPage 메서드 생성
-//                    guard let popCurrentPage = self.actions.popCurrentPage else { return }
-//                    // TODO: Coordinator의 action을 호출하여 AppCoordinator의 childCoordinators에서 SettingCoordinator를 삭제
-//                    self.coordinator.delegate.removeFromChildCoordinators(coordinator: self.coordinator)
+                    guard let settingCoordinator = self.coordinator as? SettingCoordinator else { return }
+                    settingCoordinator.popCurrentPage()
                 }
             })
             .disposed(by: disposeBag)

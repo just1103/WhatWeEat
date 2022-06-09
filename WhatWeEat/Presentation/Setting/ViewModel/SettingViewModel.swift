@@ -33,13 +33,13 @@ final class SettingViewModel {
     }
     
     // MARK: - Properties
-    private var actions: SettingViewModelAction!
+    private weak var coordinator: SettingCoordinator!
     private var settingItems: [SettingItem] = []
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: SettingViewModelAction) {
-        self.actions = actions
+    init(coordinator: SettingCoordinator) {
+        self.coordinator = coordinator
     }
     
     // MARK: - Methods
@@ -153,13 +153,13 @@ final class SettingViewModel {
                 
                 switch sectionKind {
                 case .dislikedFood:
-                    self.actions.showDislikedFoodSurveyPage()
+                    self.coordinator.showDislikedFoodSurveyPage()
                 case .ordinary:
                     guard
                         let ordinarySettingItems = self.settingItems.filter({ $0.sectionKind == .ordinary }) as? [OrdinarySettingItem],
                         let content = ordinarySettingItems[indexPath.row].content
                     else { return }
-                    self.actions.showSettingDetailPage(ordinarySettingItems[indexPath.row].title, content)
+                    self.coordinator.showSettingDetailPageWith(title: ordinarySettingItems[indexPath.row].title, content: content)
                 case .version:
                     return
                 }

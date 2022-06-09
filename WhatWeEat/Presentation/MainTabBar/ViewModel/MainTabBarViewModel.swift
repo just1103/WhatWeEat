@@ -7,14 +7,15 @@ final class MainTabBarViewModel {
     }
     
     // MARK: - Properties
-    private let actions: MainTabBarViewModelAction!
+    private weak var coordinator: MainTabBarCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: MainTabBarViewModelAction) {
-        self.actions = actions
+    init(coordinator: MainTabBarCoordinator) {
+        self.coordinator = coordinator
     }
     
+    // MARK: - Methods
     func transform(_ input: Input) {
         configureRightBarButtonItemDidTap(with: input.rightBarButtonItemDidTap)
     }
@@ -22,7 +23,7 @@ final class MainTabBarViewModel {
     private func configureRightBarButtonItemDidTap(with inputObserver: Observable<Void>) {
         inputObserver
             .subscribe(onNext: { [weak self] _ in
-                self?.actions.showSettingPage()
+                self?.coordinator.showSettingPage()
             })
             .disposed(by: disposeBag)
     }

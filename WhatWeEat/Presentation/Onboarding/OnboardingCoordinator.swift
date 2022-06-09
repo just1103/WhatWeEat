@@ -1,17 +1,17 @@
 import UIKit
 
-protocol OnboardingCoordinatorDelegate: AnyObject {
+protocol DislikedFoodSurveyCoordinatorDelegate: AnyObject {
     func showMainTabBarPage()
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol)
 }
 
-final class OnboardingCoordinator: CoordinatorProtocol {
+final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresentable {
     // MARK: - Properties
     weak var navigationController: UINavigationController?
     var childCoordinators = [CoordinatorProtocol]()
     var type: CoordinatorType = .onboarding
     
-    weak var delegate: OnboardingCoordinatorDelegate!
+    weak var dislikedFoodSurveyCoordinatorDelegate: DislikedFoodSurveyCoordinatorDelegate!
     
     // MARK: - Initializers
     init(navigationController: UINavigationController?) {
@@ -23,7 +23,7 @@ final class OnboardingCoordinator: CoordinatorProtocol {
     }
     
     func finish() {
-        delegate.removeFromChildCoordinators(coordinator: self)
+        dislikedFoodSurveyCoordinatorDelegate.removeFromChildCoordinators(coordinator: self)
     }
     
     private func makeOnboardingPage() {
