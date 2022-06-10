@@ -84,7 +84,7 @@ final class DislikedFoodSurveyViewModel {
         inputObserver
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, _) in
+            .subscribe(onNext: { _ in
                 let checkedFoods = self.dislikedFoods.filter { $0.isChecked }
                 
                 let realmManger = RealmManager.shared

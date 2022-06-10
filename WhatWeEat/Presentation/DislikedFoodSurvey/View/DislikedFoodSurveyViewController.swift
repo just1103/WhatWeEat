@@ -79,8 +79,11 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     // MARK: - Methods
     private func checkIOSVersion() {
         let versionNumbers = UIDevice.current.systemVersion.components(separatedBy: ".")
-        let major = versionNumbers[0]
-        let minor = versionNumbers[1]
+        guard
+            let major = versionNumbers[safe: 0],
+            let minor = versionNumbers[safe: 1]
+        else { return }
+        
         let version = major + "." + minor
         
         guard let systemVersion = Double(version) else { return }

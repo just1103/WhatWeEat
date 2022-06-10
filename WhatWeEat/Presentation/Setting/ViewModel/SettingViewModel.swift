@@ -119,7 +119,7 @@ final class SettingViewModel {
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
             let results = json["reslts"] as? [[String: Any]],
             results.count > 0,
-            let latestAppVersion = results[0]["version"] as? String
+            let latestAppVersion = results[safe: 0]?["version"] as? String
         else {
 //            return "1.0"  // TODO: 테스트코드
             return Content.versionCheckErrorTitle

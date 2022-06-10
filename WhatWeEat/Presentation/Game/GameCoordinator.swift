@@ -22,8 +22,9 @@ final class GameCoordinator: CoordinatorProtocol {
     }
     
     private func makeGamePage() {
-        let gameViewController = GameViewController()
+        let cardGameViewModel = CardGameViewModel()
+        let cardGameViewController = CardGameViewController(viewModel: cardGameViewModel)
         
-        navigationController?.pushViewController(gameViewController, animated: false)
+        navigationController?.pushViewController(cardGameViewController, animated: false)
     }
 }

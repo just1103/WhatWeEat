@@ -42,7 +42,7 @@
 		363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F412848A8F1000DC665 /* GameAnswer.swift */; };
 		363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F462848B8BE000DC665 /* ResultSubmission.swift */; };
 		363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F4C2848BD32000DC665 /* DislikedFood.swift */; };
-		365EC7742851928A0094823A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7732851928A0094823A /* GameViewController.swift */; };
+		365EC7742851928A0094823A /* CardGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7732851928A0094823A /* CardGameViewController.swift */; };
 		365EC7762851D42F0094823A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7752851D42F0094823A /* CardView.swift */; };
 		365EC7792851E0290094823A /* GameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7782851E0290094823A /* GameCoordinator.swift */; };
 		365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC77B2851E1400094823A /* SoloMenuViewModel.swift */; };
@@ -59,6 +59,8 @@
 		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
+		DE814E632852D18D003F5FBC /* Array+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E622852D18D003F5FBC /* Array+Subscript.swift */; };
+		DE814E652852D269003F5FBC /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E642852D269003F5FBC /* CardGameViewModel.swift */; };
 		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
 		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
 		DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105928476288002D781B /* SettingDetailViewModelAction.swift */; };
@@ -118,7 +120,7 @@
 		363D3F412848A8F1000DC665 /* GameAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswer.swift; sourceTree = "<group>"; };
 		363D3F462848B8BE000DC665 /* ResultSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSubmission.swift; sourceTree = "<group>"; };
 		363D3F4C2848BD32000DC665 /* DislikedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFood.swift; sourceTree = "<group>"; };
-		365EC7732851928A0094823A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		365EC7732851928A0094823A /* CardGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewController.swift; sourceTree = "<group>"; };
 		365EC7752851D42F0094823A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		365EC7782851E0290094823A /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
 		365EC77B2851E1400094823A /* SoloMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewModel.swift; sourceTree = "<group>"; };
@@ -133,6 +135,8 @@
 		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
+		DE814E622852D18D003F5FBC /* Array+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Subscript.swift"; sourceTree = "<group>"; };
+		DE814E642852D269003F5FBC /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardGameViewModel.swift; path = WhatWeEat/Presentation/Game/ViewModel/CardGameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
 		DE86105928476288002D781B /* SettingDetailViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModelAction.swift; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 			children = (
 				3636DECE2844AD8300F04111 /* URLRequest+Initializer.swift */,
 				DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */,
+				DE814E622852D18D003F5FBC /* Array+Subscript.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -432,7 +437,7 @@
 		365EC771285192580094823A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				365EC7732851928A0094823A /* GameViewController.swift */,
+				365EC7732851928A0094823A /* CardGameViewController.swift */,
 				365EC7752851D42F0094823A /* CardView.swift */,
 			);
 			path = View;
@@ -441,6 +446,7 @@
 		365EC7722851925E0094823A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DE814E642852D269003F5FBC /* CardGameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
 				365EC7792851E0290094823A /* GameCoordinator.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
+				DE814E652852D269003F5FBC /* CardGameViewModel.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
@@ -738,6 +745,7 @@
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
+				DE814E632852D18D003F5FBC /* Array+Subscript.swift in Sources */,
 				DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */,
 				3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */,
 				3636DECF2844AD8300F04111 /* URLRequest+Initializer.swift in Sources */,
@@ -748,7 +756,7 @@
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
-				365EC7742851928A0094823A /* GameViewController.swift in Sources */,
+				365EC7742851928A0094823A /* CardGameViewController.swift in Sources */,
 				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
 				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
 				DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */,
