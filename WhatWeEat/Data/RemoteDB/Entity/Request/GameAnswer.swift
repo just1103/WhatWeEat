@@ -4,7 +4,7 @@ struct GameAnswer {
     let hangover: Bool?
     let greasy: Bool?
     let health: Bool?
-    let alchol: Bool?
+    let alcohol: Bool?
     let instant: Bool?
     let spicy: Bool?
     let rich: Bool?

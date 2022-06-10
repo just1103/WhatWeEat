@@ -3,6 +3,24 @@ import RxSwift
 import RxCocoa
 
 final class CardGameViewController: UIViewController {
+    // MARK: - Nested Types
+    private enum AnswerKind {
+        case like
+        case hate
+        case skip
+        
+        var nextAnimationCoordinate: (angle: CGFloat, x: CGFloat, y: CGFloat) {
+            switch self {
+            case .like:
+                return (-(.pi / 4), -(UIScreen.main.bounds.width), -(UIScreen.main.bounds.height / 5))
+            case .hate:
+                return (.pi / 4, UIScreen.main.bounds.width, -(UIScreen.main.bounds.height / 5))
+            case .skip:
+                return (.zero, .zero, .zero)
+            }
+        }
+    }
+    
     // MARK: - Properties
     private let previousQuestionButton: UIButton = {
         let button = UIButton()
@@ -14,9 +32,10 @@ final class CardGameViewController: UIViewController {
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .leading
+        button.isHidden = true
         return button
     }()
-    private let pinNumberLabel: UILabel = {
+    private let pinNumberLabel: UILabel = {  // TODO: 탭바버튼 종류에 따라 isHidden 처리
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -77,8 +96,9 @@ final class CardGameViewController: UIViewController {
     }()
     
     private var viewModel: CardGameViewModel!
-    private let disposeBag = DisposeBag()
     private let invokedViewDidLoad = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    
     private let card1 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
     private let card2 = CardView(image: UIImage(named: "cheers"), title: "222")
     private let card3 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
@@ -172,72 +192,10 @@ final class CardGameViewController: UIViewController {
             return .zero
         }
     }
-    
-//    private func bind() {
-//        likeButton.rx.tap.asObservable()
-//            .subscribe(onNext: { [weak self] in
-//                guard let self = self else { return }
-//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-//                    let rotate = CGAffineTransform(rotationAngle: .pi / 4)
-//                    let move = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: -200)
-//                    let combine = rotate.concatenating(move)
-//                    self.cards[0].transform = combine
-//
-//                    self.cards[1].frame = self.cardFrame(for: 0)
-//                    self.cards[2].frame = self.cardFrame(for: 1)
-//                } completion: { _ in
-//                    self.cards[0].removeFromSuperview()
-//                    self.view.insertSubview(self.cards[3], at: 0)
-//                    self.cards[3].frame = self.cardFrame(for: 2)
-//                }
-//            })
-//            .disposed(by: disposeBag)
-//    }
-    
-//    private func setupDeck() {
-//        if let dataSource = dataSource {
-//            countOfCards = dataSource.kolodaNumberOfCards(self)
-//
-//            if countOfCards - currentCardIndex > 0 {
-//                let countOfNeededCards = min(countOfVisibleCards, countOfCards - currentCardIndex)
-//
-//                for index in 0..<countOfNeededCards {
-//                    let actualIndex = index + currentCardIndex
-//                    let nextCardView = createCard(at: actualIndex)
-//                    let isTop = index == 0
-//                    nextCardView.isUserInteractionEnabled = isTop
-//                    nextCardView.alpha = alphaValueOpaque
-//                    if shouldTransparentizeNextCard && !isTop {
-//                        nextCardView.alpha = alphaValueSemiTransparent
-//                    }
-//                    visibleCards.append(nextCardView)
-//                    isTop ? addSubview(nextCardView) : insertSubview(nextCardView, belowSubview: visibleCards[index - 1])
-//                }
-//                self.delegate?.koloda(self, didShowCardAt: currentCardIndex)
-//            }
-//        }
-//    }
 }
 
 // MARK: - Rx Binding Methods
 extension CardGameViewController {
-    private enum AnswerKind {
-        case like
-        case hate
-        case skip
-        
-        var animationCoordinate: (angle: CGFloat, x: CGFloat, y: CGFloat) {
-            switch self {
-            case .like:
-                return (-(.pi / 4), -(UIScreen.main.bounds.width), -(UIScreen.main.bounds.height / 5))
-            case .hate:
-                return (.pi / 4, UIScreen.main.bounds.width, -(UIScreen.main.bounds.height / 5))
-            case .skip:
-                return (.zero, .zero, .zero)
-            }
-        }
-    }
-    
     private func bind() {
         let input = CardGameViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
@@ -247,16 +205,17 @@ extension CardGameViewController {
             previousQuestionButtonDidTap: previousQuestionButton.rx.tap.asObservable()
         )
         
-        let ouput = viewModel.transform(input)
+        let output = viewModel.transform(input)
         
-        configureInitialCardIndicies(with: ouput.initialCardIndicies)
-        configureNextCardIndiciesWhenLike(with: ouput.nextCardIndiciesWhenLike)
-        configureNextCardIndiciesWhenHate(with: ouput.nextCardIndiciesWhenHate)
-        configureNextCardIndiciesWhenSkip(with: ouput.nextCardIndiciesWhenSkip)
+        configureInitialCardIndicies(with: output.initialCardIndicies)
+        configureNextCardIndiciesWhenLike(with: output.nextCardIndiciesWhenLike)
+        configureNextCardIndiciesWhenHate(with: output.nextCardIndiciesWhenHate)
+        configureNextCardIndiciesWhenSkip(with: output.nextCardIndiciesWhenSkip)
+        configurePreviousCardIndiciesAndResultObservable(with: output.previousCardIndiciesAndResult)
     }
     
-    private func configureInitialCardIndicies(with initialCardIndicies: Observable<CardIndicies>) {
-        initialCardIndicies
+    private func configureInitialCardIndicies(with outputObservable: Observable<CardIndicies>) {
+        outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { (self, cardIndicies) in
@@ -274,13 +233,12 @@ extension CardGameViewController {
                 thirdCard.frame = self.cardFrame(for: 2)
                 secondCard.frame = self.cardFrame(for: 1)
                 firstCard.frame = self.cardFrame(for: 0)
-                
             })
             .disposed(by: disposeBag)
     }
     
-    private func configureNextCardIndiciesWhenLike(with nextCardIndiciesWhenLike: Observable<CardIndicies>) {
-        nextCardIndiciesWhenLike
+    private func configureNextCardIndiciesWhenLike(with outputObservable: Observable<CardIndicies>) {
+        outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { (self, cardIndicies) in
@@ -289,56 +247,44 @@ extension CardGameViewController {
             .disposed(by: disposeBag)
     }
     
+    private func configureNextCardIndiciesWhenHate(with outputObservable: Observable<CardIndicies>) {
+        outputObservable
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, cardIndicies) in
+                self.showNextCard(with: cardIndicies, answerKind: .hate)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureNextCardIndiciesWhenSkip(with outputObservable: Observable<CardIndicies>) {
+        outputObservable
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, cardIndicies) in
+                self.showNextCard(with: cardIndicies, answerKind: .skip)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func showNextCard(with cardIndicies: CardIndicies, answerKind: AnswerKind) {
+        previousQuestionButton.isHidden = false
+        
         let (first, second, third) = cardIndicies
         let submittedCardIndex = first - 1
-        let remainCardCount = cards.count - 1 - first
         
-        switch remainCardCount {
-        case 0:
-            guard
-                let firstCard = cards[safe: first],
-                let submittedCard = cards[safe: submittedCardIndex]
-            else { return }
-            
-            nextCardAnimation(
-                firstCard: firstCard,
-                secondCard: nil,
-                thirdCard: nil,
-                submittedCard: submittedCard,
-                animationCoordinate: answerKind.animationCoordinate
-            )
-        case 1:
-            guard
-                let firstCard = cards[safe: first],
-                let secondCard = cards[safe: second],
-                let submittedCard = cards[safe: submittedCardIndex]
-            else { return }
-            
-            nextCardAnimation(
-                firstCard: firstCard,
-                secondCard: secondCard,
-                thirdCard: nil,
-                submittedCard: submittedCard,
-                animationCoordinate: answerKind.animationCoordinate
-            )
-        case (2...):
-            guard
-                let firstCard = cards[safe: first],
-                let secondCard = cards[safe: second],
-                let thirdCard = cards[safe: third],
-                let submittedCard = cards[safe: submittedCardIndex]
-            else { return }
-            
-            nextCardAnimation(
-                firstCard: firstCard,
-                secondCard: secondCard,
-                thirdCard: thirdCard,
-                submittedCard: submittedCard,
-                animationCoordinate: answerKind.animationCoordinate
-            )
-        default: break
-        }
+        guard
+            let firstCard = cards[safe: first],
+            let submittedCard = cards[safe: submittedCardIndex]
+        else { return }
+        
+        nextCardAnimation(
+            firstCard: firstCard,
+            secondCard: cards[safe: second],
+            thirdCard: cards[safe: third],
+            submittedCard: submittedCard,
+            animationCoordinate: answerKind.nextAnimationCoordinate
+        )
     }
     
     private func nextCardAnimation(
@@ -348,43 +294,88 @@ extension CardGameViewController {
         submittedCard: CardView,
         animationCoordinate: (angle: CGFloat, x: CGFloat, y: CGFloat)
     ) {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
+            guard let self = self else { return }
             let rotate = CGAffineTransform(rotationAngle: animationCoordinate.angle)
             let move = CGAffineTransform(
                 translationX: animationCoordinate.x,
-                y: animationCoordinate.y)
+                y: animationCoordinate.y
+            )
             let combine = rotate.concatenating(move)
             submittedCard.transform = combine
             submittedCard.alpha = 0
 
             firstCard.frame = self.cardFrame(for: 0)
             secondCard?.frame = self.cardFrame(for: 1)
-        } completion: { _ in
+        } completion: { [weak self] _ in
+            guard let self = self else { return }
             submittedCard.removeFromSuperview()
+            
             guard let thirdCard = thirdCard else { return }
             self.view.insertSubview(thirdCard, at: 0)
             thirdCard.frame = self.cardFrame(for: 2)
         }
     }
     
-    private func configureNextCardIndiciesWhenHate(with nextCardIndiciesWhenHate: Observable<CardIndicies>) {
-        nextCardIndiciesWhenHate
+    private func configurePreviousCardIndiciesAndResultObservable(with outputObservable: Observable<(CardIndicies, Bool?)>) {
+        outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                self.showNextCard(with: cardIndicies, answerKind: .hate)
+            .subscribe(onNext: { (self, cardIndiciesAndResult) in
+                let (previousCardIndicies, latestAnswer) = cardIndiciesAndResult
+                
+                var answerKind: AnswerKind?
+                switch latestAnswer {
+                case .some(true):
+                    answerKind = .like
+                case .some(false):
+                    answerKind = .hate
+                case .none:
+                    answerKind = .skip
+                }
+                guard let answerKind = answerKind else { return }
+
+                self.showPreviousCard(with: previousCardIndicies, answerKind: answerKind)
             })
             .disposed(by: disposeBag)
     }
+
+    private func showPreviousCard(with cardIndicies: CardIndicies, answerKind: AnswerKind) {
+        let (first, second, third) = cardIndicies
+        let previousThirdCardIndex = third + 1
+        guard let firstCard = self.cards[safe: first] else { return }
+        
+        if first == 0 {
+            previousQuestionButton.isHidden = true
+        }
+        
+        self.view.addSubview(firstCard)
+        previousCardAnimation(
+            firstCard: firstCard,
+            secondCard: self.cards[safe: second],
+            thirdCard: self.cards[safe: third],
+            previousThirdCard: self.cards[safe: previousThirdCardIndex]
+        )
+    }
     
-    private func configureNextCardIndiciesWhenSkip(with nextCardIndiciesWhenSkip: Observable<CardIndicies>) {
-        nextCardIndiciesWhenSkip
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                self.showNextCard(with: cardIndicies, answerKind: .skip)
-            })
-            .disposed(by: disposeBag)
+    private func previousCardAnimation(
+        firstCard: CardView,
+        secondCard: CardView?,
+        thirdCard: CardView?,
+        previousThirdCard: CardView?
+    ) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
+            guard let self = self else { return }
+            let rotate = CGAffineTransform(rotationAngle: .zero)
+            firstCard.transform = rotate
+            firstCard.alpha = 1
+
+            firstCard.frame = self.cardFrame(for: 0)
+            secondCard?.frame = self.cardFrame(for: 1)
+            thirdCard?.frame = self.cardFrame(for: 2)
+            
+            previousThirdCard?.removeFromSuperview()
+        }
     }
 }
 

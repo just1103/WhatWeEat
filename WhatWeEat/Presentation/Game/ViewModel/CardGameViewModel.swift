@@ -16,31 +16,35 @@ final class CardGameViewModel {
         let nextCardIndiciesWhenLike: Observable<CardIndicies>
         let nextCardIndiciesWhenHate: Observable<CardIndicies>
         let nextCardIndiciesWhenSkip: Observable<CardIndicies>
-        let previousCardIndicies: Observable<CardIndicies>
+        let previousCardIndiciesAndResult: Observable<(CardIndicies, Bool?)>
     }
     
     // MARK: - Properties
     private var visibleCardIndices = (first: 0, second: 1, third: 2)
     private var results = [Bool?]()
+    private var isLastQuestion: Bool {
+        return results.count >= 7
+    }
     
     typealias CardIndicies = (Int, Int, Int)
     
-    func transform(_ input: Input) -> Output {
+    // MARK: - Methods
+    func transform(_ input: Input) -> Output { 
         let initialCardIndicies = configureInitialCardIndiciesObservable(with: input.invokedViewDidLoad)
         let nextCardIndiciesWhenLike = configureNextCardIndiciesWhenLikeObservable(with: input.likeButtonDidTap)
         let nextCardIndiciesWhenHate = configureNextCardIndiciesWhenHateObservable(with: input.hateButtonDidTap)
         let nextCardIndiciesWhenSkip = configureNextCardIndiciesWhenSkipObservable(with: input.skipButtonDidTap)
         let previousCardIndicies = configurePreviousCardIndiciesObservable(with: input.previousQuestionButtonDidTap)
         
-        let ouput = Output(
+        let output = Output(
             initialCardIndicies: initialCardIndicies,
             nextCardIndiciesWhenLike: nextCardIndiciesWhenLike,
             nextCardIndiciesWhenHate: nextCardIndiciesWhenHate,
             nextCardIndiciesWhenSkip: nextCardIndiciesWhenSkip,
-            previousCardIndicies: previousCardIndicies
+            previousCardIndiciesAndResult: previousCardIndicies
         )
         
-        return ouput
+        return output
     }
     
     private func configureInitialCardIndiciesObservable(
@@ -62,6 +66,11 @@ final class CardGameViewModel {
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
                 self.results.append(true)
                 
+                if self.isLastQuestion {
+                    // TODO: 다음화면으로 이동
+                    return Observable.just(self.visibleCardIndices)
+                }
+                
                 return Observable.just(self.visibleCardIndices)
             }
     }
@@ -74,7 +83,12 @@ final class CardGameViewModel {
             .flatMap { _ -> Observable<(CardIndicies)> in
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
                 self.results.append(false)
-    
+                
+                if self.isLastQuestion {
+                    // TODO: 다음화면으로 이동
+                    return Observable.just(self.visibleCardIndices)
+                }
+                
                 return Observable.just(self.visibleCardIndices)
             }
     }
@@ -87,7 +101,12 @@ final class CardGameViewModel {
             .flatMap { _ -> Observable<(CardIndicies)> in
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
                 self.results.append(nil)
-
+                
+                if self.isLastQuestion {
+                    // TODO: 다음화면으로 이동
+                    return Observable.just(self.visibleCardIndices)
+                }
+                
                 return Observable.just(self.visibleCardIndices)
             }
     }
@@ -105,16 +124,19 @@ final class CardGameViewModel {
     
     private func configurePreviousCardIndiciesObservable(
         with inputObserver: Observable<Void>
-    ) -> Observable<CardIndicies> {
+    ) -> Observable<(CardIndicies, Bool?)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(CardIndicies)> in
-                self.visibleCardIndices = self.previousVisibleCardIndices(from: self.visibleCardIndices)
-                self.results.removeLast()
-                
-                return Observable.just(self.visibleCardIndices)
+            .flatMap { _ -> Observable<(CardIndicies, Bool?)> in
+                if self.results.isEmpty == false {
+                    self.visibleCardIndices = self.previousVisibleCardIndices(from: self.visibleCardIndices)
+                    let lastestAnswer = self.results.removeLast()
+                    
+                    return Observable.just((self.visibleCardIndices, lastestAnswer))
+                } else {
+                    return Observable.just((self.visibleCardIndices, nil))
+                }
             }
-
     }
     
     private func previousVisibleCardIndices(
