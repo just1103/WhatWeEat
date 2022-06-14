@@ -26,7 +26,7 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("이전 질문", for: .normal)
-        button.setTitleColor(Design.skipAndConfirmButtonTitleColor, for: .normal)
+        button.setTitleColor(Design.previousQuestionButtonTitleColor, for: .normal)
         button.setImage(UIImage(systemName: "arrow.uturn.backward.circle"), for: .normal)
         button.tintColor = .black
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
@@ -66,8 +66,8 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.likeButtonTitle, for: .normal)
-        button.setTitleColor(Design.skipAndConfirmButtonTitleColor, for: .normal)
-        button.titleLabel?.font = Design.skipAndConfirmButtonTitleFont
+        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
@@ -77,8 +77,8 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.hateButtonTitle, for: .normal)
-        button.setTitleColor(Design.skipAndConfirmButtonTitleColor, for: .normal)
-        button.titleLabel?.font = Design.skipAndConfirmButtonTitleFont
+        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
@@ -88,25 +88,28 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("상관 없음", for: .normal)
-        button.setTitleColor(Design.skipAndConfirmButtonTitleColor, for: .normal)
-        button.titleLabel?.font = Design.skipAndConfirmButtonTitleFont
-        button.backgroundColor = Design.skipAndConfirmButtonBackgroundColor
+        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.skipButtonTitleFont
+        button.backgroundColor = Design.skipButtonBackgroundColor
         button.titleEdgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 30, right: 0)
         return button
     }()
     
     private var viewModel: CardGameViewModel!
+    private var viewModelOutput: CardGameViewModel.Output!
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
-    private let card1 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
-    private let card2 = CardView(image: UIImage(named: "cheers"), title: "222")
-    private let card3 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
-    private let card4 = CardView(image: UIImage(named: "cheers"), title: "222")
-    private let card5 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
-    private let card6 = CardView(image: UIImage(named: "cheers"), title: "222")
-    private let card7 = CardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
-    private lazy var cards = [card1, card2, card3, card4, card5, card6, card7]
+    private let card1 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
+    private let card2 = YesOrNoCardView(image: UIImage(named: "cheers"), title: "222")
+    private let card3 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
+    private let card4 = YesOrNoCardView(image: UIImage(named: "cheers"), title: "222")
+    private let card5 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
+    private let card6 = YesOrNoCardView(image: UIImage(named: "cheers"), title: "222")
+    private let card7 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
+    private let card8 = MultipleChoiceCardView(title: "어떤 게 끌리세요?", subtitle: "(중복 선택 가능)")
+    private let card9 = MultipleChoiceCardView(title: "어떤 게 끌리세요?", subtitle: "(중복 선택 가능)")
+    private lazy var cards: [CardViewProtocol] = [card1, card2, card3, card4, card5, card6, card7, card8, card9]
     
     typealias CardIndicies = (Int, Int, Int)
     
@@ -149,7 +152,7 @@ final class CardGameViewController: UIViewController {
 
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             buttonStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            buttonStackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.13),
+            buttonStackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1),
             buttonStackView.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: -30),
             
             skipButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -163,28 +166,28 @@ final class CardGameViewController: UIViewController {
         switch index {
         case 0:
             let originX = UIScreen.main.bounds.width * 0.1
-            let originY = UIScreen.main.bounds.height * 0.2
+            let originY = UIScreen.main.bounds.height * 0.15
             
             let width = UIScreen.main.bounds.width * 0.8
-            let height = UIScreen.main.bounds.height * 0.5
+            let height = UIScreen.main.bounds.height * 0.6
             
             return CGRect(origin: CGPoint(x: originX, y: originY),
                           size: CGSize(width: width, height: height))
         case 1:
             let originX = UIScreen.main.bounds.width * 0.11
-            let originY = UIScreen.main.bounds.height * 0.19
+            let originY = UIScreen.main.bounds.height * 0.14
             
             let width = UIScreen.main.bounds.width * (0.8 - 0.02)
-            let height = UIScreen.main.bounds.height * 0.5
+            let height = UIScreen.main.bounds.height * 0.6
             
             return CGRect(origin: CGPoint(x: originX, y: originY),
                           size: CGSize(width: width, height: height))
         case 2:
             let originX = UIScreen.main.bounds.width * 0.12
-            let originY = UIScreen.main.bounds.height * 0.18
+            let originY = UIScreen.main.bounds.height * 0.13
             
             let width = UIScreen.main.bounds.width * (0.8 - 0.04)
-            let height = UIScreen.main.bounds.height * 0.5
+            let height = UIScreen.main.bounds.height * 0.6
             
             return CGRect(origin: CGPoint(x: originX, y: originY),
                           size: CGSize(width: width, height: height))
@@ -205,13 +208,15 @@ extension CardGameViewController {
             previousQuestionButtonDidTap: previousQuestionButton.rx.tap.asObservable()
         )
         
-        let output = viewModel.transform(input)
+        viewModelOutput = viewModel.transform(input)
         
-        configureInitialCardIndicies(with: output.initialCardIndicies)
-        configureNextCardIndiciesWhenLike(with: output.nextCardIndiciesWhenLike)
-        configureNextCardIndiciesWhenHate(with: output.nextCardIndiciesWhenHate)
-        configureNextCardIndiciesWhenSkip(with: output.nextCardIndiciesWhenSkip)
-        configurePreviousCardIndiciesAndResultObservable(with: output.previousCardIndiciesAndResult)
+        configureInitialCardIndicies(with: viewModelOutput.initialCardIndicies)
+        configureMenuNations(with: viewModelOutput.menuNations)
+        configureMainIngredients(with: viewModelOutput.mainIngredients)
+        configureNextCardIndiciesWhenLike(with: viewModelOutput.nextCardIndiciesWhenLike)
+        configureNextCardIndiciesWhenHate(with: viewModelOutput.nextCardIndiciesWhenHate)
+        configureNextCardIndiciesWhenSkip(with: viewModelOutput.nextCardIndiciesWhenSkip)
+        configurePreviousCardIndiciesAndResultObservable(with: viewModelOutput.previousCardIndiciesAndResult)
     }
     
     private func configureInitialCardIndicies(with outputObservable: Observable<CardIndicies>) {
@@ -234,6 +239,30 @@ extension CardGameViewController {
                 secondCard.frame = self.cardFrame(for: 1)
                 firstCard.frame = self.cardFrame(for: 0)
             })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureMenuNations(with outputObservable: Observable<[MenuNation]>) {
+        outputObservable
+            .bind(to: card8.choiceCollectionView.rx.items(
+                cellIdentifier: String(describing: GameSelectionCell.self),
+                cellType: GameSelectionCell.self
+            )) { [weak self] _, item, cell in
+                self?.card8.changeCollectionViewLayout(for: .menuNation)
+                cell.apply(isChecked: item.isChecked, descriptionText: item.descriptionText)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureMainIngredients(with outputObservable: Observable<[MainIngredient]>) {
+        outputObservable
+            .bind(to: card9.choiceCollectionView.rx.items(
+                cellIdentifier: String(describing: GameSelectionCell.self),
+                cellType: GameSelectionCell.self
+            )) { [weak self] _, item, cell in
+                self?.card9.changeCollectionViewLayout(for: .mainIngredient)
+                cell.apply(isChecked: item.isChecked, descriptionText: item.descriptionText)
+            }
             .disposed(by: disposeBag)
     }
     
@@ -288,10 +317,10 @@ extension CardGameViewController {
     }
     
     private func nextCardAnimation(
-        firstCard: CardView,
-        secondCard: CardView?,
-        thirdCard: CardView?,
-        submittedCard: CardView,
+        firstCard: CardViewProtocol,
+        secondCard: CardViewProtocol?,
+        thirdCard: CardViewProtocol?,
+        submittedCard: CardViewProtocol,
         animationCoordinate: (angle: CGFloat, x: CGFloat, y: CGFloat)
     ) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
@@ -359,10 +388,10 @@ extension CardGameViewController {
     }
     
     private func previousCardAnimation(
-        firstCard: CardView,
-        secondCard: CardView?,
-        thirdCard: CardView?,
-        previousThirdCard: CardView?
+        firstCard: CardViewProtocol,
+        secondCard: CardViewProtocol?,
+        thirdCard: CardViewProtocol?,
+        previousThirdCard: CardViewProtocol?
     ) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
             guard let self = self else { return }
@@ -382,11 +411,10 @@ extension CardGameViewController {
 // MARK: - NameSpaces
 extension CardGameViewController {
     private enum Design {
-        static let pageControlCurrentPageIndicatorTintColor: UIColor = ColorPalette.mainYellow
-        static let pageControlPageIndicatorTintColor: UIColor = .systemGray
-        static let skipAndConfirmButtonBackgroundColor: UIColor = ColorPalette.mainYellow
-        static let skipAndConfirmButtonTitleColor: UIColor = .label
-        static let skipAndConfirmButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+        static let previousQuestionButtonTitleColor: UIColor = .label
+        static let skipButtonBackgroundColor: UIColor = ColorPalette.mainYellow
+        static let skipButtonTitleColor: UIColor = .label
+        static let skipButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
     }
     
     private enum Content {

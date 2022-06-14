@@ -18,13 +18,24 @@ final class GameCoordinator: CoordinatorProtocol {
     
     // MARK: - Methods
     func start() {
-        makeGamePage()
+        makeCardGamePage()
     }
     
-    private func makeGamePage() {
-        let cardGameViewModel = CardGameViewModel()
+    private func makeCardGamePage() {
+        let cardGameViewModel = CardGameViewModel(coordinator: self)
         let cardGameViewController = CardGameViewController(viewModel: cardGameViewModel)
         
         navigationController?.pushViewController(cardGameViewController, animated: false)
+    }
+    
+    func showMultipleChoiceGamePage(with cardGameResult: [Bool?]) {
+        let multipleChoiceGameViewModel = MultipleChoiceGameViewModel(cardGameResults: cardGameResult, coordinator: self)
+        let multipleChoiceGameViewController = MultipleChoiceGameViewController(viewModel: multipleChoiceGameViewModel)
+        
+        navigationController?.pushViewController(multipleChoiceGameViewController, animated: true)
+    }
+    
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: true)
     }
 }

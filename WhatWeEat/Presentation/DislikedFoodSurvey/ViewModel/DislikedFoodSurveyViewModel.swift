@@ -75,7 +75,8 @@ final class DislikedFoodSurveyViewModel {
     
     private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
         return inputObserver.map { [weak self] indexPath in
-            self?.dislikedFoods[indexPath.row].toggleChecked()
+            guard let selectedDislikedFood = self?.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
+            selectedDislikedFood.toggleChecked()
             return indexPath
         }
     }

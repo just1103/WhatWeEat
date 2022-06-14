@@ -1,6 +1,6 @@
 import UIKit
 
-final class CardView: UIImageView {
+final class YesOrNoCardView: UIImageView, CardViewProtocol {
     private let questionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +18,7 @@ final class CardView: UIImageView {
         configureLabel(with: title)
     }
     
-    private func configureUI() {
+    func configureUI() {
         translatesAutoresizingMaskIntoConstraints = true
         layer.cornerRadius = 8
         clipsToBounds = true
@@ -38,7 +38,7 @@ final class CardView: UIImageView {
 }
 
 // MARK: - NameSpaces
-extension CardView {
+extension YesOrNoCardView {
     private enum Design {
         static let questionLabelFont: UIFont = .preferredFont(forTextStyle: .largeTitle)
     }
