@@ -13,16 +13,16 @@ class SettingDetailViewController: UIViewController {
         return textView
     }()
     
+    private var viewModel: SettingDetailViewModel!
     private var settingTitle: String = ""
     private var content: String = ""
-    private var viewModel: SettingDetailViewModel!
     
     // MARK: - Initializers
-    convenience init(title: String, content: String, viewModel: SettingDetailViewModel) {
+    convenience init(viewModel: SettingDetailViewModel, title: String, content: String) {
         self.init()
+        self.viewModel = viewModel
         self.settingTitle = title
         self.content = content
-        self.viewModel = viewModel
     }
     
     // MARK: - Lifecycle Methods

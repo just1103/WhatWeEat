@@ -35,13 +35,13 @@ final class CardGameViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-    private let pinNumberLabel: UILabel = {  // TODO: 탭바버튼 종류에 따라 isHidden 처리
+    private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .black
         label.font = .preferredFont(forTextStyle: .body)
-        label.text = "PIN NUMBER : 1111"
+        label.textColor = ColorPalette.mainOrange
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -84,10 +84,10 @@ final class CardGameViewController: UIViewController {
         button.clipsToBounds = true
         return button
     }()
-    private let skipButton: UIButton = {
+    private let skipAndNextButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("상관 없음", for: .normal)
+        button.setTitle("다음 (상관 없음)", for: .normal)
         button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
         button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = Design.skipButtonBackgroundColor
@@ -96,11 +96,10 @@ final class CardGameViewController: UIViewController {
     }()
     
     private var viewModel: CardGameViewModel!
-    private var viewModelOutput: CardGameViewModel.Output!
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
-    private let card1 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
+    private let card1 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?") // TODO: 카드 내용 반영하여 네이밍 변경
     private let card2 = YesOrNoCardView(image: UIImage(named: "cheers"), title: "222")
     private let card3 = YesOrNoCardView(image: UIImage(named: "spicy"), title: "스트레스 받으셨나요?")
     private let card4 = YesOrNoCardView(image: UIImage(named: "cheers"), title: "222")
@@ -137,7 +136,7 @@ final class CardGameViewController: UIViewController {
         view.addSubview(previousQuestionButton)
         view.addSubview(pinNumberLabel)
         view.addSubview(buttonStackView)
-        view.addSubview(skipButton)
+        view.addSubview(skipAndNextButton)
                 
         buttonStackView.addArrangedSubview(likeButton)
         buttonStackView.addArrangedSubview(hateButton)
@@ -153,12 +152,12 @@ final class CardGameViewController: UIViewController {
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             buttonStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             buttonStackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1),
-            buttonStackView.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: -30),
+            buttonStackView.bottomAnchor.constraint(equalTo: skipAndNextButton.topAnchor, constant: -30),
             
-            skipButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            skipButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            skipButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09),
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            skipAndNextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            skipAndNextButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            skipAndNextButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09),
+            skipAndNextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
@@ -204,27 +203,31 @@ extension CardGameViewController {
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
             likeButtonDidTap: likeButton.rx.tap.asObservable(),
             hateButtonDidTap: hateButton.rx.tap.asObservable(),
-            skipButtonDidTap: skipButton.rx.tap.asObservable(),
-            previousQuestionButtonDidTap: previousQuestionButton.rx.tap.asObservable()
+            skipButtonDidTap: skipAndNextButton.rx.tap.asObservable(),
+            previousQuestionButtonDidTap: previousQuestionButton.rx.tap.asObservable(),
+            menuNationsCellDidSelect: card8.choiceCollectionView.rx.itemSelected.asObservable(),
+            mainIngredientsCellDidSelect: card9.choiceCollectionView.rx.itemSelected.asObservable()
         )
         
-        viewModelOutput = viewModel.transform(input)
+        let output = viewModel.transform(input)
         
-        configureInitialCardIndicies(with: viewModelOutput.initialCardIndicies)
-        configureMenuNations(with: viewModelOutput.menuNations)
-        configureMainIngredients(with: viewModelOutput.mainIngredients)
-        configureNextCardIndiciesWhenLike(with: viewModelOutput.nextCardIndiciesWhenLike)
-        configureNextCardIndiciesWhenHate(with: viewModelOutput.nextCardIndiciesWhenHate)
-        configureNextCardIndiciesWhenSkip(with: viewModelOutput.nextCardIndiciesWhenSkip)
-        configurePreviousCardIndiciesAndResultObservable(with: viewModelOutput.previousCardIndiciesAndResult)
+        configureInitialCardIndiciesAndPinNumber(with: output.initialCardIndiciesAndPinNumber)
+        configureMenuNations(with: output.menuNations)
+        configureMainIngredients(with: output.mainIngredients)
+        configureNextCardIndiciesWhenLike(with: output.nextCardIndiciesWhenLike)
+        configureNextCardIndiciesWhenHate(with: output.nextCardIndiciesWhenHate)
+        configureNextCardIndiciesWhenSkip(with: output.nextCardIndiciesWhenSkip)
+        configurePreviousCardIndiciesAndResult(with: output.previousCardIndiciesAndResult)
+        configureMenuNationsSelectedCellAndSkipButton(with: output.menuNationsSelectedindexPath)
+        configureMainIngredientsSelectedCellAndSkipButton(with: output.mainIngredientsSelectedindexPath)
     }
     
-    private func configureInitialCardIndicies(with outputObservable: Observable<CardIndicies>) {
+    private func configureInitialCardIndiciesAndPinNumber(with outputObservable: Observable<(CardIndicies, String?)>) {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                let (first, second, third) = cardIndicies
+            .subscribe(onNext: { (self, initialCardIndiciesAndPinNumber) in
+                let ((first, second, third), pinNumber) = initialCardIndiciesAndPinNumber
                 guard
                     let firstCard = self.cards[safe: first],
                     let secondCard = self.cards[safe: second],
@@ -238,6 +241,13 @@ extension CardGameViewController {
                 thirdCard.frame = self.cardFrame(for: 2)
                 secondCard.frame = self.cardFrame(for: 1)
                 firstCard.frame = self.cardFrame(for: 0)
+                
+                guard let pinNumber = pinNumber else {
+                    self.pinNumberLabel.isHidden = true
+                    return
+                }
+                self.pinNumberLabel.text = "PIN Number : \(pinNumber)"
+                self.pinNumberLabel.isHidden = false
             })
             .disposed(by: disposeBag)
     }
@@ -302,6 +312,11 @@ extension CardGameViewController {
         let (first, second, third) = cardIndicies
         let submittedCardIndex = first - 1
         
+        let firstIndexOfMultipleChoiceCard = 7
+        if first >= firstIndexOfMultipleChoiceCard {
+            buttonStackView.isHidden = true
+        }
+        
         guard
             let firstCard = cards[safe: first],
             let submittedCard = cards[safe: submittedCardIndex]
@@ -346,7 +361,7 @@ extension CardGameViewController {
         }
     }
     
-    private func configurePreviousCardIndiciesAndResultObservable(with outputObservable: Observable<(CardIndicies, Bool?)>) {
+    private func configurePreviousCardIndiciesAndResult(with outputObservable: Observable<(CardIndicies, Bool?)>) {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -371,11 +386,15 @@ extension CardGameViewController {
 
     private func showPreviousCard(with cardIndicies: CardIndicies, answerKind: AnswerKind) {
         let (first, second, third) = cardIndicies
+        
         let previousThirdCardIndex = third + 1
         guard let firstCard = self.cards[safe: first] else { return }
         
+        let firstIndexOfMultipleChoiceCard = 7
         if first == 0 {
             previousQuestionButton.isHidden = true
+        } else if first <= firstIndexOfMultipleChoiceCard - 1 {
+            buttonStackView.isHidden = false
         }
         
         self.view.addSubview(firstCard)
@@ -405,6 +424,32 @@ extension CardGameViewController {
             
             previousThirdCard?.removeFromSuperview()
         }
+    }
+    
+    private func configureMenuNationsSelectedCellAndSkipButton(with indexPath: Observable<IndexPath>) {
+        indexPath
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, indexPath) in
+                guard
+                    let selectedCell = self.card8.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
+                else { return }
+                selectedCell.toggleSelectedCellUI()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureMainIngredientsSelectedCellAndSkipButton(with indexPath: Observable<IndexPath>) {
+        indexPath
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (self, indexPath) in
+                guard
+                    let selectedCell = self.card9.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
+                else { return }
+                selectedCell.toggleSelectedCellUI()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

@@ -24,7 +24,7 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
     private func showOnboardingPage() {
         guard let navigationController = navigationController else { return }
         let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
-        onboardingCoordinator.dislikedFoodSurveyCoordinatorDelegate = self
+        onboardingCoordinator.dislikedFoodSurveyCoordinatorDelegate = self 
         
         childCoordinators.append(onboardingCoordinator)
         onboardingCoordinator.start()

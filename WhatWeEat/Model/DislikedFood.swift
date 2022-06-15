@@ -2,7 +2,7 @@ import UIKit
 import RealmSwift
 
 class DislikedFood: Hashable {
-    enum Kind: String, PersistableEnum {
+    enum Kind: String, PersistableEnum, Codable {
         case spicy = "SPICY"
         case intestine = "INTESTINE"
         case sashimi = "SASHIMI"

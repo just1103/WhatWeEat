@@ -1,6 +1,6 @@
 import Foundation
 
-struct GameAnswer {
+struct GameAnswer: Codable {
     let hangover: Bool?
     let greasy: Bool?
     let health: Bool?
@@ -15,7 +15,7 @@ struct GameAnswer {
     let nation: [Nation]
 }
 
-enum Nation: String {
+enum Nation: String, Codable {
     case korean = "KOREAN"
     case western = "WESTERN"
     case japanese = "JAPANESE"

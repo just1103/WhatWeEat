@@ -42,6 +42,10 @@ final class SettingViewModel {
         self.coordinator = coordinator
     }
     
+    deinit {
+        coordinator.finish()
+    }
+    
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let tableViewItems = configureTableViewItems(with: input.invokedViewDidLoad)

@@ -21,8 +21,6 @@ struct JSONParser<Item: Codable> {
         }
         
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        decoder.dateDecodingStrategy = .formatted(DateFormatter.serverRequest)
         
         guard let decodedData = try? decoder.decode(Item.self, from: data) else { 
             return nil
@@ -31,19 +29,31 @@ struct JSONParser<Item: Codable> {
         return decodedData
     }
     
-    func encode(from item: Item?) -> Result<Data, JSONParserError> {
+    func encode(from item: Item?) -> Data? {
         guard let item = item else {
-            return .failure(.encodingFail)
+            return nil
         }
         
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-//        encoder.dateEncodingStrategy = .formatted(DateFormatter.serverRequest)
         
         guard let encodedData = try? encoder.encode(item) else {
-            return .failure(.encodingFail)
+            return nil
         }
         
-        return .success(encodedData)
+        return encodedData
     }
+    
+//    func encode(from item: Item?) -> Result<Data, JSONParserError> {
+//        guard let item = item else {
+//            return .failure(.encodingFail)
+//        }
+//
+//        let encoder = JSONEncoder()
+//
+//        guard let encodedData = try? encoder.encode(item) else {
+//            return .failure(.encodingFail)
+//        }
+//
+//        return .success(encodedData)
+//    }
 }

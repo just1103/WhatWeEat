@@ -2,6 +2,7 @@ import Foundation
 import RxSwift
 
 final class MainTabBarViewModel {
+    // MARK: - Nested Types
     struct Input {
         let rightBarButtonItemDidTap: Observable<Void>
     }

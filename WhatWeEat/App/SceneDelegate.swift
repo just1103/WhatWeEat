@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.view.backgroundColor = .white
         window?.rootViewController = navigationController
         
-        appCoordinator = AppCoordinator(navigationController: navigationController) // 로컬 변수에 할당하면 scene 메서드가 종료되면서 AppCoordinator 인스턴스도 메모리 해제됨!!!
+        appCoordinator = AppCoordinator(navigationController: navigationController)
         appCoordinator?.start()
     }
 

@@ -1,6 +1,7 @@
 import UIKit
 
 final class YesOrNoCardView: UIImageView, CardViewProtocol {
+    // MARK: - Properties
     private let questionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -12,16 +13,17 @@ final class YesOrNoCardView: UIImageView, CardViewProtocol {
         return label
     }()
     
+    // MARK: - Initializers
     convenience init(image: UIImage?, title: String) {
         self.init(image: image)
         configureUI()
+        configureLayer()
         configureLabel(with: title)
     }
     
+    // MARK: - Methods
     func configureUI() {
         translatesAutoresizingMaskIntoConstraints = true
-        layer.cornerRadius = 8
-        clipsToBounds = true
         contentMode = .scaleAspectFill
         
         addSubview(questionLabel)
@@ -30,6 +32,11 @@ final class YesOrNoCardView: UIImageView, CardViewProtocol {
             questionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             questionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
+    }
+    
+    private func configureLayer() {
+        layer.cornerRadius = 8
+        clipsToBounds = true
     }
     
     private func configureLabel(with title: String) {

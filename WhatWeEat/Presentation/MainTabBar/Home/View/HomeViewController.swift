@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        configureNavigationBar()
+        configureTabBar()
         configureUI()
         invokedViewDidLoad.onNext(())
     }
@@ -111,7 +111,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
             .disposed(by: disposeBag)
     }
     
-    private func configureNavigationBar() {
+    private func configureTabBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")
         tabBarItem.selectedImage = UIImage(systemName: "house.fill")

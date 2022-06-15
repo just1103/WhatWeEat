@@ -1,15 +1,19 @@
 import UIKit
 
+extension UITabBarController {
+    
+}
+
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
-    private var pages: [TabBarContentProtocol]!
     private var viewModel: MainTabBarViewModel!
+    private var pages: [TabBarContentProtocol]!
     
     // MARK: - Initializers
-    init(pages: [TabBarContentProtocol], viewModel: MainTabBarViewModel) {
+    init(viewModel: MainTabBarViewModel, pages: [TabBarContentProtocol]) {
         super.init(nibName: nil, bundle: nil)
-        self.pages = pages
         self.viewModel = viewModel
+        self.pages = pages
     }
     
     @available(*, unavailable)
@@ -28,9 +32,23 @@ final class MainTabBarController: UITabBarController {
         configureNavigationBar()
         configureTabBar()
         bind()
+        self.hidesBottomBarWhenPushed = false
     }
     
     // MARK: - Methods
+    func showTabBar() {
+//        self.tabBar.isHidden = false
+//        self.hidesBottomBarWhenPushed = false
+        self.tabBar.isTranslucent = false
+        print(type(of: self))
+    }
+    
+    func hideTabBar() {
+//        self.tabBar.isHidden = true
+//        self.hidesBottomBarWhenPushed = true
+//        self.tabBar.isTranslucent = true
+    }
+    
     private func configureNavigationBar() {
         let settingsImage = UIImage(systemName: "gearshape")
         let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: nil)

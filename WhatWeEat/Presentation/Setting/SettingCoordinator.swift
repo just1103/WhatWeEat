@@ -23,6 +23,13 @@ final class SettingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresentab
         settingCoordinatordelegate.removeFromChildCoordinators(coordinator: self)
     }
     
+    private func makeSettingPage() {
+        let settingViewModel = SettingViewModel(coordinator: self)
+        let settingViewController = SettingViewController(viewModel: settingViewModel)
+
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
     func showDislikedFoodSurveyPage() {
         let dislikedFoodSurveyViewModel = DislikedFoodSurveyViewModel(coordinator: self)
         let dislikedFoodSurveyViewController = DislikedFoodSurveyViewController(viewModel: dislikedFoodSurveyViewModel)
@@ -33,9 +40,9 @@ final class SettingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresentab
     func showSettingDetailPageWith(title: String, content: String) {
         let settingDetailViewModel = SettingDetailViewModel(coordinator: self)
         let settingDetailViewController = SettingDetailViewController(
+            viewModel: settingDetailViewModel,
             title: title,
-            content: content,
-            viewModel: settingDetailViewModel
+            content: content
         )
         
         navigationController?.pushViewController(settingDetailViewController, animated: false)
@@ -43,13 +50,6 @@ final class SettingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresentab
     
     func popCurrentPage() {
         navigationController?.popViewController(animated: false)
-    }
-    
-    private func makeSettingPage() {
-        let settingViewModel = SettingViewModel(coordinator: self)
-        let settingViewController = SettingViewController(viewModel: settingViewModel)
-
-        navigationController?.pushViewController(settingViewController, animated: true)
     }
     
     private func showAppStorePage() {

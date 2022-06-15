@@ -1,6 +1,7 @@
 import UIKit
 
 class GameSelectionCell: UICollectionViewCell {
+    // MARK: - Properties
     private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +20,6 @@ class GameSelectionCell: UICollectionViewCell {
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView
     }()
-    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

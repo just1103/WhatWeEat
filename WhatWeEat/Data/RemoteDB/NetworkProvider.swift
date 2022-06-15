@@ -78,7 +78,7 @@ struct NetworkProvider {
                 }
             case is Postable:
                 if let data = data as? T {
-                    emitter.onNext(data)
+                    emitter.onNext(data) 
                 }
             default:
                 return

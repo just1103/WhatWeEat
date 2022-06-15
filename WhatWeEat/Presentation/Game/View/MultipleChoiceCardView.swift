@@ -56,15 +56,17 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
     convenience init(title: String, subtitle: String) {
         self.init(frame: .zero)
         configureUI()
+        configureLayer()
         configureLabelText(title: title, subtitle: subtitle)
         configureCollectionView()
-        
     }
     
     // MARK: - Methods
+    func changeCollectionViewLayout(for questionKind: QuestionKind) {
+        choiceCollectionView.collectionViewLayout = createLayout(for: questionKind)
+    }
+    
     func configureUI() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
         backgroundColor = .darkGray
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleLabel)
@@ -79,8 +81,11 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         ])
     }
     
-    func changeCollectionViewLayout(for questionKind: QuestionKind) {
-        choiceCollectionView.collectionViewLayout = createLayout(for: questionKind)
+    private func configureLayer() {
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = 8
+        clipsToBounds = true
     }
     
     private func configureLabelText(title: String, subtitle: String) {
@@ -100,7 +105,10 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.25)) // TODO: 화면 크기에 따라 변경 
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(0.25)
+            ) // TODO: 화면 크기에 따라 변경 
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: questionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
             
