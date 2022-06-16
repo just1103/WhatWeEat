@@ -8,12 +8,12 @@ final class TogetherMenuViewModel {
     }
     
     // MARK: - Properties
-    private var actions: TogetherMenuViewModelAction!
+    private weak var coordinator: TogetherMenuCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: TogetherMenuViewModelAction) {
-        self.actions = actions
+    init(coordinator: TogetherMenuCoordinator) {
+        self.coordinator = coordinator
     }
     
     // MARK: - Methods
@@ -25,8 +25,8 @@ final class TogetherMenuViewModel {
         inputObserver
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                let pinNumberObservable = NetworkProvider().request(api: CreateGroupAPI())
-                self?.actions.showSharePinNumberPage(pinNumberObservable)
+                let pinNumberObservable = NetworkProvider().request(api: WhatWeEatURL.CreateGroupAPI())
+                self?.coordinator.showSharePinNumberPage(with: pinNumberObservable)
             })
             .disposed(by: disposeBag)
     }

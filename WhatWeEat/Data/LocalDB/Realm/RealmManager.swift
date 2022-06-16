@@ -7,22 +7,22 @@ struct RealmManager {
     
     private init() { }
     
-    func deleteAndCreate(_ checkedFoods: [DislikedFoodCell.DislikedFood]) {
+    func deleteAndCreate(_ checkedFoods: [DislikedFood]) {
         try! realm.write {
             realm.deleteAll()
             
             checkedFoods.forEach {
-                let dislikedFood = DislikedFoodForRealM(name: $0.name)
+                let dislikedFood = DislikedFoodForRealM(kind: $0.kind)
                 realm.add(dislikedFood)
             }
         }
     }
 
-    func read() -> [String] {
-        var checkedDislikedFoods = [String]()
+    func read() -> [DislikedFood.Kind] {
+        var checkedDislikedFoods = [DislikedFood.Kind]()
         let checkedFoodsFromRealm = realm.objects(DislikedFoodForRealM.self)
         checkedFoodsFromRealm.forEach {
-            checkedDislikedFoods.append($0.name)
+            checkedDislikedFoods.append($0.kind)
         }
         
         return checkedDislikedFoods

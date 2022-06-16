@@ -2,29 +2,31 @@ import Foundation
 import RxSwift
 
 final class MainTabBarViewModel {
+    // MARK: - Nested Types
     struct Input {
         let rightBarButtonItemDidTap: Observable<Void>
     }
     
     // MARK: - Properties
-    private let actions: MainTabBarViewModelAction!
+    private weak var coordinator: MainTabBarCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: MainTabBarViewModelAction) {
-        self.actions = actions
+    init(coordinator: MainTabBarCoordinator) {
+        self.coordinator = coordinator
     }
     
+    // MARK: - Methods
     func transform(_ input: Input) {
         configureRightBarButtonItemDidTap(with: input.rightBarButtonItemDidTap)
     }
     
     private func configureRightBarButtonItemDidTap(with inputObserver: Observable<Void>) {
         inputObserver
-            .subscribe(onNext: { [weak self] _ in
-                self?.actions.showSettingPage()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.coordinator.showSettingPage()
             })
             .disposed(by: disposeBag)
     }
 }
-

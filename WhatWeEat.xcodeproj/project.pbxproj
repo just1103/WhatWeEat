@@ -24,9 +24,8 @@
 		3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */; };
 		3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */; };
 		3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAB283E1B9900F04111 /* HomeViewController.swift */; };
-		3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* FlowCoordinator.swift */; };
+		3636DEAE283E302600F04111 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEAD283E302600F04111 /* AppCoordinator.swift */; };
 		3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */; };
-		3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */; };
 		3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */; };
 		3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */; };
 		3636DEC1284452E300F04111 /* SharePinNumberPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */; };
@@ -40,26 +39,47 @@
 		3636DED62844B00000F04111 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED52844B00000F04111 /* Menu.swift */; };
 		3636DED82844B06C00F04111 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DED72844B06C00F04111 /* GameResult.swift */; };
 		3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */; };
-		3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */; };
+		363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F412848A8F1000DC665 /* GameAnswer.swift */; };
+		363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F462848B8BE000DC665 /* ResultSubmission.swift */; };
+		363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D3F4C2848BD32000DC665 /* DislikedFood.swift */; };
+		365EC7742851928A0094823A /* CardGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7732851928A0094823A /* CardGameViewController.swift */; };
+		365EC7762851D42F0094823A /* YesOrNoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7752851D42F0094823A /* YesOrNoCardView.swift */; };
+		365EC7792851E0290094823A /* GameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7782851E0290094823A /* GameCoordinator.swift */; };
+		365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC77B2851E1400094823A /* SoloMenuViewModel.swift */; };
+		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
+		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
 		DE095C87283B241A00C7E109 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C86283B241A00C7E109 /* RxSwift */; };
 		DE31032A283F6446009CA7C3 /* FirstLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */; };
 		DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */; };
 		DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */; };
-		DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */; };
+		DE3C573F2850A69C003F37C8 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3C573E2850A69C003F37C8 /* MainTabBarCoordinator.swift */; };
+		DE3C57472850ACAD003F37C8 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3C57462850ACAD003F37C8 /* SettingCoordinator.swift */; };
+		DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3C57482850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift */; };
 		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
+		DE56950E28571C0D009F3DCE /* SubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */; };
+		DE56951028571E6B009F3DCE /* GameSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56950F28571E6B009F3DCE /* GameSelectionCell.swift */; };
+		DE56951228572612009F3DCE /* SubmissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951128572612009F3DCE /* SubmissionViewModel.swift */; };
+		DE56951428572972009F3DCE /* MenuNation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951328572972009F3DCE /* MenuNation.swift */; };
+		DE56951628573065009F3DCE /* UICollectionView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951528573065009F3DCE /* UICollectionView+Cell.swift */; };
+		DE56951A28582323009F3DCE /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951928582323009F3DCE /* CardViewProtocol.swift */; };
+		DE56951C28582373009F3DCE /* MultipleChoiceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951B28582373009F3DCE /* MultipleChoiceCardView.swift */; };
+		DE56951E28582974009F3DCE /* MainIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951D28582974009F3DCE /* MainIngredient.swift */; };
 		DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */; };
 		DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */; };
+		DE814E632852D18D003F5FBC /* Array+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E622852D18D003F5FBC /* Array+Subscript.swift */; };
+		DE814E652852D269003F5FBC /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E642852D269003F5FBC /* CardGameViewModel.swift */; };
 		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
 		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
-		DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105928476288002D781B /* SettingDetailViewModelAction.swift */; };
+		DEDF03242859D8ED000F7915 /* SoloMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */; };
+		DEDF03262859D8FB000F7915 /* TogetherMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */; };
+		DEDF03282859D90F000F7915 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03272859D90F000F7915 /* HomeCoordinator.swift */; };
 		DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3902845C5DC002697B5 /* SettingViewController.swift */; };
 		DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3922845C6D3002697B5 /* SettingCell.swift */; };
 		DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3942845C6E6002697B5 /* VersionCell.swift */; };
 		DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */; };
 		DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */; };
 		DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */; };
-		DEEBE3A028461DCF002697B5 /* MainTabBarViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,9 +112,8 @@
 		3636DEA4283E068B00F04111 /* DislikedFoodForRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodForRealm.swift; sourceTree = "<group>"; };
 		3636DEA9283E1B2C00F04111 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		3636DEAB283E1B9900F04111 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		3636DEAD283E302600F04111 /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		3636DEAD283E302600F04111 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3636DEB0283E324F00F04111 /* OnboardingContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentProtocol.swift; sourceTree = "<group>"; };
-		3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyViewModelAction.swift; sourceTree = "<group>"; };
 		3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContentProtocol.swift; sourceTree = "<group>"; };
 		3636DEBE283F75F900F04111 /* SoloMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewController.swift; sourceTree = "<group>"; };
 		3636DEC0284452E300F04111 /* SharePinNumberPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberPageViewController.swift; sourceTree = "<group>"; };
@@ -108,24 +127,45 @@
 		3636DED52844B00000F04111 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		3636DED72844B06C00F04111 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelAction.swift; sourceTree = "<group>"; };
+		363D3F412848A8F1000DC665 /* GameAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswer.swift; sourceTree = "<group>"; };
+		363D3F462848B8BE000DC665 /* ResultSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSubmission.swift; sourceTree = "<group>"; };
+		363D3F4C2848BD32000DC665 /* DislikedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFood.swift; sourceTree = "<group>"; };
+		365EC7732851928A0094823A /* CardGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewController.swift; sourceTree = "<group>"; };
+		365EC7752851D42F0094823A /* YesOrNoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNoCardView.swift; sourceTree = "<group>"; };
+		365EC7782851E0290094823A /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
+		365EC77B2851E1400094823A /* SoloMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuViewModel.swift; sourceTree = "<group>"; };
+		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
 		DE31032C283F802E009CA7C3 /* TogetherMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewController.swift; sourceTree = "<group>"; };
 		DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModel.swift; sourceTree = "<group>"; };
-		DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuViewModelAction.swift; sourceTree = "<group>"; };
+		DE3C573E2850A69C003F37C8 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
+		DE3C57462850ACAD003F37C8 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		DE3C57482850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyPresentable.swift; sourceTree = "<group>"; };
 		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
+		DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionViewController.swift; sourceTree = "<group>"; };
+		DE56950F28571E6B009F3DCE /* GameSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectionCell.swift; sourceTree = "<group>"; };
+		DE56951128572612009F3DCE /* SubmissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionViewModel.swift; sourceTree = "<group>"; };
+		DE56951328572972009F3DCE /* MenuNation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNation.swift; sourceTree = "<group>"; };
+		DE56951528573065009F3DCE /* UICollectionView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Cell.swift"; sourceTree = "<group>"; };
+		DE56951928582323009F3DCE /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
+		DE56951B28582373009F3DCE /* MultipleChoiceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceCardView.swift; sourceTree = "<group>"; };
+		DE56951D28582974009F3DCE /* MainIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIngredient.swift; sourceTree = "<group>"; };
 		DE69461A283C6ADC00BAA51D /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		DE69461C283CD1A700BAA51D /* DislikedFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodCell.swift; sourceTree = "<group>"; };
+		DE814E622852D18D003F5FBC /* Array+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Subscript.swift"; sourceTree = "<group>"; };
+		DE814E642852D269003F5FBC /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardGameViewModel.swift; path = WhatWeEat/Presentation/Game/ViewModel/CardGameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
-		DE86105928476288002D781B /* SettingDetailViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModelAction.swift; sourceTree = "<group>"; };
+		DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuCoordinator.swift; sourceTree = "<group>"; };
+		DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuCoordinator.swift; sourceTree = "<group>"; };
+		DEDF03272859D90F000F7915 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DEEBE3902845C5DC002697B5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DEEBE3922845C6D3002697B5 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		DEEBE3942845C6E6002697B5 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Cell.swift"; sourceTree = "<group>"; };
 		DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
-		DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModelAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +213,7 @@
 			children = (
 				DE095C88283B259300C7E109 /* App */,
 				DE095C89283B259D00C7E109 /* Presentation */,
+				363D3F4B2848BD13000DC665 /* Model */,
 				3636DE9E283E00CA00F04111 /* Data */,
 				3636DE8E283B5D2600F04111 /* Utility */,
 				3636DEAF283E322A00F04111 /* Protocol */,
@@ -194,6 +235,7 @@
 		3636DE87283B558300F04111 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */,
 				3636DE89283B559700F04111 /* View */,
 				3636DE88283B559100F04111 /* ViewModel */,
 			);
@@ -249,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				3636DE98283CF98800F04111 /* DislikedFoodSurveyViewModel.swift */,
-				3636DEB2283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -283,6 +324,7 @@
 		3636DEA6283E1A3800F04111 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				DE3C573E2850A69C003F37C8 /* MainTabBarCoordinator.swift */,
 				DEEBE39B28461CBF002697B5 /* View */,
 				DEEBE39C28461CC9002697B5 /* ViewModel */,
 				3636DEA8283E1AC800F04111 /* Home */,
@@ -303,6 +345,7 @@
 		3636DEA8283E1AC800F04111 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DEDF03272859D90F000F7915 /* HomeCoordinator.swift */,
 				3636DEA7283E1A4600F04111 /* View */,
 				3636DED92844CA5F00F04111 /* ViewModel */,
 			);
@@ -316,6 +359,9 @@
 				3636DEB4283F1D5F00F04111 /* TabBarContentProtocol.swift */,
 				3636DEC92844AD3900F04111 /* BaseURLProtocol.swift */,
 				3636DECB2844AD4B00F04111 /* APIProtocol.swift */,
+				36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */,
+				DE3C57482850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift */,
+				DE56951928582323009F3DCE /* CardViewProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -323,7 +369,9 @@
 		3636DEBC283F75C800F04111 /* SoloMenu */ = {
 			isa = PBXGroup;
 			children = (
+				DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */,
 				3636DEBD283F75EB00F04111 /* View */,
+				365EC77A2851E1210094823A /* ViewModel */,
 			);
 			path = SoloMenu;
 			sourceTree = "<group>";
@@ -351,6 +399,8 @@
 			children = (
 				3636DECE2844AD8300F04111 /* URLRequest+Initializer.swift */,
 				DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */,
+				DE56951528573065009F3DCE /* UICollectionView+Cell.swift */,
+				DE814E622852D18D003F5FBC /* Array+Subscript.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -358,8 +408,8 @@
 		3636DED22844AE0D00F04111 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				3636DED52844B00000F04111 /* Menu.swift */,
-				3636DED72844B06C00F04111 /* GameResult.swift */,
+				363D3F442848B229000DC665 /* Request */,
+				363D3F432848B221000DC665 /* Response */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -370,6 +420,96 @@
 				3636DEDA2844CA7D00F04111 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		363D3F432848B221000DC665 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				3636DED52844B00000F04111 /* Menu.swift */,
+				3636DED72844B06C00F04111 /* GameResult.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		363D3F442848B229000DC665 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				363D3F412848A8F1000DC665 /* GameAnswer.swift */,
+				363D3F462848B8BE000DC665 /* ResultSubmission.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		363D3F4B2848BD13000DC665 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				363D3F4C2848BD32000DC665 /* DislikedFood.swift */,
+				DE56951328572972009F3DCE /* MenuNation.swift */,
+				DE56951D28582974009F3DCE /* MainIngredient.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		365EC770285192460094823A /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7782851E0290094823A /* GameCoordinator.swift */,
+				365EC771285192580094823A /* View */,
+				365EC7722851925E0094823A /* ViewModel */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		365EC771285192580094823A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7732851928A0094823A /* CardGameViewController.swift */,
+				365EC7752851D42F0094823A /* YesOrNoCardView.swift */,
+				DE56951B28582373009F3DCE /* MultipleChoiceCardView.swift */,
+				DE56950F28571E6B009F3DCE /* GameSelectionCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		365EC7722851925E0094823A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DE814E642852D269003F5FBC /* CardGameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		365EC77A2851E1210094823A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				365EC77B2851E1400094823A /* SoloMenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		365EC7A428588B6F0094823A /* Submission */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7A628588B820094823A /* View */,
+				365EC7A528588B7B0094823A /* ViewModel */,
+			);
+			path = Submission;
+			sourceTree = "<group>";
+		};
+		365EC7A528588B7B0094823A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DE56951128572612009F3DCE /* SubmissionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		365EC7A628588B820094823A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DE095C88283B259300C7E109 /* App */ = {
@@ -384,11 +524,13 @@
 		DE095C89283B259D00C7E109 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				3636DEAD283E302600F04111 /* FlowCoordinator.swift */,
+				3636DEAD283E302600F04111 /* AppCoordinator.swift */,
 				3636DE87283B558300F04111 /* Onboarding */,
-				3636DEA6283E1A3800F04111 /* MainTabBar */,
-				DEEBE38E2845C5A6002697B5 /* Setting */,
 				3636DE91283C86D900F04111 /* DislikedFoodSurvey */,
+				3636DEA6283E1A3800F04111 /* MainTabBar */,
+				365EC770285192460094823A /* Game */,
+				365EC7A428588B6F0094823A /* Submission */,
+				DEEBE38E2845C5A6002697B5 /* Setting */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -422,6 +564,7 @@
 		DE31032B283F7FE3009CA7C3 /* togetherMenu */ = {
 			isa = PBXGroup;
 			children = (
+				DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */,
 				DE31032E283F8040009CA7C3 /* View */,
 				DE31032F283F84C0009CA7C3 /* ViewModel */,
 			);
@@ -442,7 +585,6 @@
 			isa = PBXGroup;
 			children = (
 				DE310330283F84D4009CA7C3 /* TogetherMenuViewModel.swift */,
-				DE310332283F8673009CA7C3 /* TogetherMenuViewModelAction.swift */,
 				3636DEC228448A7200F04111 /* SharePinNumberPageViewModel.swift */,
 			);
 			path = ViewModel;
@@ -451,6 +593,7 @@
 		DEEBE38E2845C5A6002697B5 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				DE3C57462850ACAD003F37C8 /* SettingCoordinator.swift */,
 				DEEBE38F2845C5CD002697B5 /* View */,
 				DEEBE3962845C7B4002697B5 /* ViewModel */,
 			);
@@ -472,9 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */,
-				3636DEDC284718BB00F04111 /* SettingViewModelAction.swift */,
 				DE8610572847625E002D781B /* SettingDetailViewModel.swift */,
-				DE86105928476288002D781B /* SettingDetailViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -491,7 +632,6 @@
 			isa = PBXGroup;
 			children = (
 				DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */,
-				DEEBE39F28461DCF002697B5 /* MainTabBarViewModelAction.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -635,44 +775,64 @@
 				DE31032D283F802E009CA7C3 /* TogetherMenuViewController.swift in Sources */,
 				DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */,
 				3636DEB5283F1D5F00F04111 /* TabBarContentProtocol.swift in Sources */,
-				3636DEB3283F1B3500F04111 /* DislikedFoodSurveyViewModelAction.swift in Sources */,
 				DEEBE3932845C6D3002697B5 /* SettingCell.swift in Sources */,
+				DE56951428572972009F3DCE /* MenuNation.swift in Sources */,
+				DE3C573F2850A69C003F37C8 /* MainTabBarCoordinator.swift in Sources */,
+				DE56951628573065009F3DCE /* UICollectionView+Cell.swift in Sources */,
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
-				3636DEAE283E302600F04111 /* FlowCoordinator.swift in Sources */,
+				3636DEAE283E302600F04111 /* AppCoordinator.swift in Sources */,
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */,
-				DE86105A28476288002D781B /* SettingDetailViewModelAction.swift in Sources */,
+				36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */,
+				365EC7792851E0290094823A /* GameCoordinator.swift in Sources */,
 				DE310331283F84D4009CA7C3 /* TogetherMenuViewModel.swift in Sources */,
+				DE814E652852D269003F5FBC /* CardGameViewModel.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
-				DE310333283F8673009CA7C3 /* TogetherMenuViewModelAction.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
-				3636DEDD284718BB00F04111 /* SettingViewModelAction.swift in Sources */,
+				36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */,
+				363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */,
 				3636DEDB2844CA7D00F04111 /* HomeViewModel.swift in Sources */,
+				DE56951E28582974009F3DCE /* MainIngredient.swift in Sources */,
 				3636DED12844ADFD00F04111 /* JSONParser.swift in Sources */,
+				363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
+				DE56951C28582373009F3DCE /* MultipleChoiceCardView.swift in Sources */,
+				DE814E632852D18D003F5FBC /* Array+Subscript.swift in Sources */,
 				DEEBE3912845C5DC002697B5 /* SettingViewController.swift in Sources */,
 				3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */,
 				3636DECF2844AD8300F04111 /* URLRequest+Initializer.swift in Sources */,
 				3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */,
-				DEEBE3A028461DCF002697B5 /* MainTabBarViewModelAction.swift in Sources */,
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
+				DEDF03262859D8FB000F7915 /* TogetherMenuCoordinator.swift in Sources */,
+				DEDF03242859D8ED000F7915 /* SoloMenuCoordinator.swift in Sources */,
+				DE3C57472850ACAD003F37C8 /* SettingCoordinator.swift in Sources */,
 				3636DE99283CF98800F04111 /* DislikedFoodSurveyViewModel.swift in Sources */,
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
+				365EC7742851928A0094823A /* CardGameViewController.swift in Sources */,
+				DE56950E28571C0D009F3DCE /* SubmissionViewController.swift in Sources */,
 				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
+				DE56951028571E6B009F3DCE /* GameSelectionCell.swift in Sources */,
 				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
+				DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */,
+				DE56951A28582323009F3DCE /* CardViewProtocol.swift in Sources */,
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
+				365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
+				365EC7762851D42F0094823A /* YesOrNoCardView.swift in Sources */,
 				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
+				363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */,
+				DE56951228572612009F3DCE /* SubmissionViewModel.swift in Sources */,
 				3636DE90283B5D6800F04111 /* ColorPalette.swift in Sources */,
+				DEDF03282859D90F000F7915 /* HomeCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

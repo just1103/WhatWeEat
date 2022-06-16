@@ -108,21 +108,28 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
+        
         guard let onboardingPages = onboardingPages as? [UIViewController],
-              let currentIndex = onboardingPages.firstIndex(of: viewController)
+              let currentIndex = onboardingPages.firstIndex(of: viewController) // -1 해주는것도 가능
         else {
             return nil
         }
         var viewController: UIViewController?
         
+        // 캡쳐가 맞는데 진정한 캡쳐가 아님. VC을 weak 처리해줘야 함 => 캡쳐리스트 내부에서 weak viewController 처리
+        // onError가 발생하면 클로저 내부가 메모리 해제가 안될 수 있음
         viewModelOutput?.previousPageIndex
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] previousIndex in
+            .subscribe(onNext: { [weak self, weak viewController] previousIndex in  // FIXME: 1) subscribe가 여러번 호출되는 문제, 2) 의도하지 않게 VC의 retain count가 올라감 (retain 올리는건 부모가 주입할 때만 가능)
                 guard let previousIndex = previousIndex else {
                     viewController = nil
                     return
                 }
-                viewController = self?.onboardingPages[previousIndex] as? UIViewController
+                
+                // subscript 적용
+                viewController = self?.onboardingPages[previousIndex] as? UIViewController // FIXME: 비동기라서 코드 순서를 보장할 수 없음
+                // semaphore를 쓰면 안됨
+                // subscribe를 밖에서 하고 데이터를 들고 있다가 (과부하이지 않을까 고민이 필요) 메서드에 넣어줌
             })
             .disposed(by: disposeBag)
         

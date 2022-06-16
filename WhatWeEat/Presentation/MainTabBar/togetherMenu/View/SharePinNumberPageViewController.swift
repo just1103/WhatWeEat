@@ -1,4 +1,3 @@
-import LinkPresentation
 import RxCocoa
 import RxSwift
 import UIKit
@@ -65,7 +64,7 @@ final class SharePinNumberPageViewController: UIViewController {
         button.clipsToBounds = true
         return button
     }()
-    private let startGameButton: UIButton = {
+    private let gameStartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("미니게임 시작", for: .normal)
@@ -99,11 +98,15 @@ final class SharePinNumberPageViewController: UIViewController {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("핀넘버 페이지 디이닛!!")
+    }
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
-        hideTabBar()
+//        hideTabBar()
         configureUI()
         bind()
     }
@@ -120,16 +123,21 @@ final class SharePinNumberPageViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .black
     }
     
-    private func hideTabBar() {
-        tabBarController?.hidesBottomBarWhenPushed = true
-    }
+//    private func hideTabBar() {
+////        tabBarController?.hidesBottomBarWhenPushed = true
+//        guard let mainTabBarController = self.tabBarController as? MainTabBarController else {
+//            return
+//        }
+//
+//        mainTabBarController.hideTabBar()
+//    }
     
     private func configureUI() {
         // TODO: 디자인 반영하여 수정
         view.addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleLabel)
         containerStackView.addArrangedSubview(pinNumberStackView)
-        containerStackView.addArrangedSubview(startGameButton)
+        containerStackView.addArrangedSubview(gameStartButton)
         containerStackView.addArrangedSubview(descriptionLabel)
         
         pinNumberStackView.addArrangedSubview(pinNumberLabel)
@@ -151,7 +159,8 @@ extension SharePinNumberPageViewController {
         
         let input = SharePinNumberPageViewModel.Input(
             backButtonDidTap: leftNavigationItem.rx.tap.asObservable(),
-            shareButtonDidTap: shareButton.rx.tap.asObservable()
+            shareButtonDidTap: shareButton.rx.tap.asObservable(),
+            gameStartButtonDidTap: gameStartButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input)
@@ -163,27 +172,30 @@ extension SharePinNumberPageViewController {
     
     private func configurePINNumber(with pinNumber: Observable<String>) {
         pinNumber
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] pinNumberText in
-                self?.pinNumberLabel.text = "PIN 번호 : \(pinNumberText)"
+            .subscribe(onNext: { (self, pinNumberText) in
+                self.pinNumberLabel.text = "PIN 번호 : \(pinNumberText)"
             })
             .disposed(by: disposeBag)
     }
     
     private func configureBackButtonDidTap(with backButtonDidTap: Observable<Void>) {
         backButtonDidTap
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: false) // TODO: ViewModel Action으로 연결 고려
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: false) // TODO: ViewModel Action으로 연결 고려
             })
             .disposed(by: disposeBag)
     }
     
     private func configureShareButtonDidTap(with shareButtonDidTap: Observable<Void>) {
         shareButtonDidTap
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let pinNumber = self?.pinNumberLabel.text else { return }
+            .subscribe(onNext: { _ in
+                guard let pinNumber = self.pinNumberLabel.text else { return }
                 
                 let title = "[우리뭐먹지] 팀원과 PIN 번호를 공유해보세요"
                 let content = """
@@ -194,9 +206,9 @@ extension SharePinNumberPageViewController {
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
                 let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self?.shareButton
+                activityViewController.popoverPresentationController?.sourceView = self.shareButton
                 activityViewController.popoverPresentationController?.permittedArrowDirections = .down
-                self?.present(activityViewController, animated: true)
+                self.present(activityViewController, animated: true)
             })
             .disposed(by: disposeBag)
     }

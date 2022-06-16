@@ -69,13 +69,13 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     convenience init(viewModel: HomeViewModel) {
         self.init()
         self.viewModel = viewModel
+        configureTabBar()
     }
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        configureNavigationBar()
         configureUI()
         invokedViewDidLoad.onNext(())
     }
@@ -111,7 +111,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
             .disposed(by: disposeBag)
     }
     
-    private func configureNavigationBar() {
+    private func configureTabBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")
         tabBarItem.selectedImage = UIImage(systemName: "house.fill")

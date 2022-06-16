@@ -9,10 +9,10 @@ extension URLRequest {
         self.init(url: url)
         self.httpMethod = "\(api.method)"
         
-        if let postableAPI = api as? Postable {
-            self.addValue(postableAPI.identifier ?? "", forHTTPHeaderField: "identifier")
-            self.addValue(postableAPI.contentType ?? "", forHTTPHeaderField: "Content-Type")
+        if let postableAPI = api as? Postable,
+           let contentType = postableAPI.contentType {
             self.httpBody = postableAPI.body
+            self.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
     }
 }

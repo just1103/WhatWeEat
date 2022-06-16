@@ -1,4 +1,5 @@
 import UIKit
+import RxCocoa
 
 final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
@@ -36,7 +37,7 @@ final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
-    private let gameStartButton: UIButton = {  // TODO: ViewModel 추가하고 화면전환 구현
+    private let gameStartButton: UIButton = { 
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("미니게임 시작", for: .normal)
@@ -48,15 +49,13 @@ final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
         return button
     }()
     
-    // MARK: - Initializers
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-        configureTabBar()
-    }
+    private var viewModel: SoloMenuViewModel!
     
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    // MARK: - Initializers
+    convenience init(viewModel: SoloMenuViewModel) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        configureTabBar()
     }
     
     // MARK: - Lifecycle Methods
@@ -64,6 +63,7 @@ final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
         super.viewDidLoad()
         configureTabBar()
         configureUI()
+        bind()
     }
     
     // MARK: - Methods
@@ -92,5 +92,14 @@ final class SoloMenuViewController: UIViewController, TabBarContentProtocol {
             gameStartButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.1),
             gameStartButton.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.6),
         ])
+    }
+}
+
+// MARK: - Rx binding Methods
+extension SoloMenuViewController {
+    private func bind() {
+        let input = SoloMenuViewModel.Input(gameStartButtonDidTap: gameStartButton.rx.tap.asObservable())
+        
+        viewModel.transform(input)
     }
 }

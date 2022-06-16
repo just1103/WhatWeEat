@@ -11,18 +11,23 @@ final class DislikedFoodSurveyViewModel {
     }
 
     struct Output {
-        let dislikedFoods: Observable<[DislikedFoodCell.DislikedFood]>
+        let dislikedFoods: Observable<[DislikedFood]>
         let selectedFoodIndexPath: Observable<IndexPath>
     }
     
     // MARK: - Properties
-    private let actions: DislikedFoodSurveyViewModelAction!
-    private var dislikedFoods = [DislikedFoodCell.DislikedFood]()
+    private weak var coordinator: DislikedFoodSurveyPresentable!
+    private var dislikedFoods = [DislikedFood]()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(actions: DislikedFoodSurveyViewModelAction) {
-        self.actions = actions
+    init(coordinator: DislikedFoodSurveyPresentable) {
+        self.coordinator = coordinator
+    }
+    
+    deinit {
+        guard let onboardingCoordinator = coordinator as? OnboardingCoordinator else { return }
+        onboardingCoordinator.finish()
     }
     
     // MARK: - Methods
@@ -39,8 +44,8 @@ final class DislikedFoodSurveyViewModel {
         return output
     }
 
-    private func configureDislikedFoods(by inputObserver: Observable<Void>) -> Observable<[DislikedFoodCell.DislikedFood]> {
-        inputObserver.flatMap { [weak self] _ -> Observable<[DislikedFoodCell.DislikedFood]> in
+    private func configureDislikedFoods(by inputObserver: Observable<Void>) -> Observable<[DislikedFood]> {
+        inputObserver.flatMap { [weak self] _ -> Observable<[DislikedFood]> in
             guard
                 let self = self,
                 let chilliFoodImage = UIImage(named: "chilli"),
@@ -51,17 +56,17 @@ final class DislikedFoodSurveyViewModel {
             else {
                 return Observable.just([])
             }
-            let chilliFood = DislikedFoodCell.DislikedFood(name: "매움", descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
-            let intestineFood = DislikedFoodCell.DislikedFood(name: "내장", descriptionImage: intestineFoodImage, descriptionText: "내장")
-            let sashimiFood = DislikedFoodCell.DislikedFood(name: "날것", descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
-            let seaFood = DislikedFoodCell.DislikedFood(name: "해산물", descriptionImage: seaFoodImage, descriptionText: "해산물")
-            let meatFood = DislikedFoodCell.DislikedFood(name: "고기", descriptionImage: meatFoodImage, descriptionText: "고기")
+            let chilliFood = DislikedFood(kind: .spicy, descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
+            let intestineFood = DislikedFood(kind: .intestine, descriptionImage: intestineFoodImage, descriptionText: "내장")
+            let sashimiFood = DislikedFood(kind: .sashimi, descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
+            let seaFood = DislikedFood(kind: .seafood, descriptionImage: seaFoodImage, descriptionText: "해산물")
+            let meatFood = DislikedFood(kind: .meat, descriptionImage: meatFoodImage, descriptionText: "고기")
             self.dislikedFoods = [chilliFood, intestineFood, sashimiFood, seaFood, meatFood]
               
             let realmManager = RealmManager.shared
             let checkedFoodsFromRealm = realmManager.read()
             
-            _ = self.dislikedFoods.filter { checkedFoodsFromRealm.contains($0.name) }
+            _ = self.dislikedFoods.filter { checkedFoodsFromRealm.contains($0.kind) }
                 .map { $0.toggleChecked() }
             
             return Observable.just(self.dislikedFoods)
@@ -70,7 +75,8 @@ final class DislikedFoodSurveyViewModel {
     
     private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
         return inputObserver.map { [weak self] indexPath in
-            self?.dislikedFoods[indexPath.row].toggleChecked()
+            guard let selectedDislikedFood = self?.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
+            selectedDislikedFood.toggleChecked()
             return indexPath
         }
     }
@@ -78,22 +84,21 @@ final class DislikedFoodSurveyViewModel {
     private func configureconfirmButtonDidTapObservable(by inputObserver: Observable<Void>) {
         inputObserver
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                let checkedFoods = self.dislikedFoods
-                    .filter { $0.isChecked }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let checkedFoods = self.dislikedFoods.filter { $0.isChecked }
                 
                 let realmManger = RealmManager.shared
                 realmManger.deleteAndCreate(checkedFoods)
                 
                 if FirstLaunchChecker.isFirstLaunched() {
+                    self.coordinator.dislikedFoodSurveyCoordinatorDelegate.showMainTabBarPage()
                     UserDefaults.standard.set(false, forKey: "isFirstLaunched")
-                    self.actions.showMainTapBarPage()
                 } else {
-                    guard let popCurrentPage = self.actions.popCurrentPage else { return }
-                    popCurrentPage()
+                    guard let settingCoordinator = self.coordinator as? SettingCoordinator else { return }
+                    settingCoordinator.popCurrentPage()
                 }
             })
             .disposed(by: disposeBag)
-       }
+    }
 }

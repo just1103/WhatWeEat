@@ -8,7 +8,6 @@ protocol APIProtocol {
 protocol Gettable: APIProtocol { }
 
 protocol Postable: APIProtocol {
-    var identifier: String? { get }
     var contentType: String? { get }
     var body: Data? { get }
 }

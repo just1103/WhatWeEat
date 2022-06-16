@@ -26,7 +26,10 @@ final class HomeViewModel {
     
     private func configureItems(by inputObserver: Observable<Void>) -> Observable<Menu> {
         inputObserver.flatMap { () -> Observable<Menu> in
-            let randomMenuObservable = NetworkProvider().fetchData(api: RandomMenuAPI(), decodingType: Menu.self) 
+            let randomMenuObservable = NetworkProvider().fetchData(
+                api: WhatWeEatURL.RandomMenuAPI(),
+                decodingType: Menu.self
+            ) 
             return randomMenuObservable
         }
     }

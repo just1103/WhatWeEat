@@ -125,7 +125,9 @@ extension SettingViewController: UITableViewDataSource {
         switch sectionKind {
         case .dislikedFood:
             let cell = tableView.dequeueReusableCell(of: SettingCell.self, for: indexPath)
-            guard let dislikedFoodItems = settingItems.filter({ $0.sectionKind == .dislikedFood }) as? [SettingViewModel.OrdinarySettingItem] else {
+            guard
+                let dislikedFoodItems = settingItems.filter({ $0.sectionKind == .dislikedFood }) as? [SettingViewModel.OrdinarySettingItem]
+            else {
                 return UITableViewCell()
             }
             dislikedFoodItems.forEach { dislikedFoodItem in
@@ -135,7 +137,9 @@ extension SettingViewController: UITableViewDataSource {
             return cell
         case .ordinary:
             let cell = tableView.dequeueReusableCell(of: SettingCell.self, for: indexPath)
-            guard let ordinarySettingItems = settingItems.filter({ $0.sectionKind == .ordinary }) as? [SettingViewModel.OrdinarySettingItem] else {
+            guard
+                let ordinarySettingItems = settingItems.filter({ $0.sectionKind == .ordinary }) as? [SettingViewModel.OrdinarySettingItem]
+            else {
                 return UITableViewCell()
             }
             

@@ -2,32 +2,6 @@ import UIKit
 import RealmSwift
 
 final class DislikedFoodCell: UICollectionViewCell {
-    // MARK: - Nested Types
-    class DislikedFood: Hashable {
-        var isChecked: Bool = false
-        let name: String
-        let descriptionImage: UIImage
-        let descriptionText: String
-        
-        init(name: String, descriptionImage: UIImage, descriptionText: String) {
-            self.name = name
-            self.descriptionImage = descriptionImage
-            self.descriptionText = descriptionText
-        }
-        
-        func toggleChecked() {
-            self.isChecked.toggle()
-        }
-        
-        static func == (lhs: DislikedFoodCell.DislikedFood, rhs: DislikedFoodCell.DislikedFood) -> Bool {
-            return lhs.name == rhs.name
-        }
-        
-        func hash(into hasher: inout Hasher) {
-           hasher.combine(name)
-        }
-    }
-    
     // MARK: - Properties
     private let checkBoxImageView: UIImageView = {
         let imageView = UIImageView()
@@ -53,6 +27,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
         label.numberOfLines = 0
@@ -111,7 +86,7 @@ final class DislikedFoodCell: UICollectionViewCell {
             containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            checkBoxImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            checkBoxImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),  // TODO: 상수 Namespaces 처리
             checkBoxImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             checkBoxImageView.heightAnchor.constraint(equalTo: checkBoxImageView.widthAnchor),
             checkBoxImageView.heightAnchor.constraint(equalToConstant: 30),
