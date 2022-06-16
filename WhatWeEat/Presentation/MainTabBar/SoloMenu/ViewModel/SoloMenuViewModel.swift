@@ -8,11 +8,11 @@ final class SoloMenuViewModel {
     }
     
     // MARK: - Properties
-    private weak var coordinator: MainTabBarCoordinator!
+    private weak var coordinator: SoloMenuCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: MainTabBarCoordinator) {
+    init(coordinator: SoloMenuCoordinator) {
         self.coordinator = coordinator
     }
     

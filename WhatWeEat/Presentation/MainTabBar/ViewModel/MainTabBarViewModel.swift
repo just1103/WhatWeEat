@@ -23,8 +23,9 @@ final class MainTabBarViewModel {
     
     private func configureRightBarButtonItemDidTap(with inputObserver: Observable<Void>) {
         inputObserver
-            .subscribe(onNext: { [weak self] _ in
-                self?.coordinator.showSettingPage()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.coordinator.showSettingPage()
             })
             .disposed(by: disposeBag)
     }

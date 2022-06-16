@@ -8,11 +8,11 @@ final class TogetherMenuViewModel {
     }
     
     // MARK: - Properties
-    private weak var coordinator: MainTabBarCoordinator!
+    private weak var coordinator: TogetherMenuCoordinator!
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: MainTabBarCoordinator) {
+    init(coordinator: TogetherMenuCoordinator) {
         self.coordinator = coordinator
     }
     

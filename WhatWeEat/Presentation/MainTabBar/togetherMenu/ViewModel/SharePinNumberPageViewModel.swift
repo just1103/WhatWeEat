@@ -16,25 +16,21 @@ final class SharePinNumberPageViewModel {
     }
     
     // MARK: - Properties
-    private weak var coordinator: MainTabBarCoordinator!
+    private weak var coordinator: TogetherMenuCoordinator!
     private let pinNumberData: Observable<Data>
     private var pinNumber: String = ""
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: MainTabBarCoordinator, pinNumberData: Observable<Data>) {
+    init(coordinator: TogetherMenuCoordinator, pinNumberData: Observable<Data>) {
         self.coordinator = coordinator
         self.pinNumberData = pinNumberData
-//        hideTabBar()
+        hideTabBar()
     }
     
     // MARK: - Methods
     private func hideTabBar() {
-        guard let mainTabBarController = coordinator.navigationController?.viewControllers.first as? MainTabBarController else {
-            return
-        }
-        
-        mainTabBarController.hideTabBar()
+        coordinator.delegate.hideNavigationBarAndTabBar()
     }
     
     func transform(_ input: Input) -> Output {

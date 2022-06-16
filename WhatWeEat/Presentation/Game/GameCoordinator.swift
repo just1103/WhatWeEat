@@ -2,6 +2,9 @@ import UIKit
 
 protocol GameCoordinatorDelegate: AnyObject {
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol)
+    func showTogetherPage()
+    func hideNavigationBarAndTabBar()
+    func showTabBar()
 }
 
 final class GameCoordinator: CoordinatorProtocol {
@@ -20,7 +23,8 @@ final class GameCoordinator: CoordinatorProtocol {
     
     // MARK: - Methods
     func start() {
-        makeCardGamePage(with: pinNumber)  
+        makeCardGamePage(with: pinNumber)
+        delegate.hideNavigationBarAndTabBar()
     }
     
     private func makeCardGamePage(with pinNumber: String?) {
@@ -35,9 +39,14 @@ final class GameCoordinator: CoordinatorProtocol {
         let submissionViewController = SubmissionViewController(viewModel: submissionViewModel)
         
         navigationController?.pushViewController(submissionViewController, animated: false)
+        delegate.showTabBar()
     }
     
     func popCurrentPage() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func showTogetherPage() {
+        delegate.showTogetherPage()
     }
 }

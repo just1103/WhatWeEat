@@ -94,7 +94,7 @@ final class SubmissionViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 // TODO: 화면전환 - 게임결과 화면
-//                self.coordinator
+                self.coordinator.showTogetherPage()
             })
             .disposed(by: disposeBag)
     }
@@ -104,7 +104,7 @@ final class SubmissionViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 // TODO: 화면전환 - 해당 탭 초기화면
-//                self.coordinator
+                self.coordinator.showTogetherPage()
             })
             .disposed(by: disposeBag)
     }

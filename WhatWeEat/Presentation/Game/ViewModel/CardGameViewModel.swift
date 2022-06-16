@@ -224,17 +224,18 @@ final class CardGameViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
                 self.showNextPage()
-            }) 
+            })
+        showNextPage()
     }
     
     private func showNextPage() {
         if let pinNumber = self.pinNumber {
             // TODO: 화면전환 - together 결과대기화면
-            guard
-                let mainTabBarController = self.coordinator.navigationController?.viewControllers.first as? MainTabBarController
-            else { return }
-            
-            mainTabBarController.showTabBar()
+//            guard
+//                let mainTabBarController = self.coordinator.navigationController?.viewControllers.first as? MainTabBarController
+//            else { return }
+//            
+//            mainTabBarController.showTabBar()
             self.coordinator.showSubmissionPage(pinNumber: pinNumber)
         } else {
             // TODO: 화면전환 - Solo 결과확인

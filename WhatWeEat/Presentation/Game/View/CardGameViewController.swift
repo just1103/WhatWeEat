@@ -142,11 +142,11 @@ final class CardGameViewController: UIViewController {
         buttonStackView.addArrangedSubview(hateButton)
         
         NSLayoutConstraint.activate([
-            previousQuestionButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            previousQuestionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             previousQuestionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             previousQuestionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             
-            pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            pinNumberLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
 
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

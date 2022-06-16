@@ -69,13 +69,13 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     convenience init(viewModel: HomeViewModel) {
         self.init()
         self.viewModel = viewModel
+        configureTabBar()
     }
 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        configureTabBar()
         configureUI()
         invokedViewDidLoad.onNext(())
     }

@@ -7,10 +7,10 @@ extension UITabBarController {
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
     private var viewModel: MainTabBarViewModel!
-    private var pages: [TabBarContentProtocol]!
+    private var pages: [UINavigationController]!
     
     // MARK: - Initializers
-    init(viewModel: MainTabBarViewModel, pages: [TabBarContentProtocol]) {
+    init(viewModel: MainTabBarViewModel, pages: [UINavigationController]) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.pages = pages
@@ -32,7 +32,7 @@ final class MainTabBarController: UITabBarController {
         configureNavigationBar()
         configureTabBar()
         bind()
-        self.hidesBottomBarWhenPushed = false
+        self.hidesBottomBarWhenPushed = true
     }
     
     // MARK: - Methods
@@ -44,7 +44,7 @@ final class MainTabBarController: UITabBarController {
     }
     
     func hideTabBar() {
-//        self.tabBar.isHidden = true
+        self.tabBar.isHidden = true
 //        self.hidesBottomBarWhenPushed = true
 //        self.tabBar.isTranslucent = true
     }

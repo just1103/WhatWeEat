@@ -98,6 +98,10 @@ final class SharePinNumberPageViewController: UIViewController {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("핀넘버 페이지 디이닛!!")
+    }
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()

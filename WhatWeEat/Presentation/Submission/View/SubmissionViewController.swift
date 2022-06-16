@@ -123,10 +123,10 @@ class SubmissionViewController: UIViewController {
             pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
             submissionCountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            submissionCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: 150),
+            submissionCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: 100),
             
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: submissionCountLabel.bottomAnchor, constant: 100),
+            descriptionLabel.topAnchor.constraint(equalTo: submissionCountLabel.bottomAnchor, constant: 50),
             
             gameResultCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             gameResultCheckButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
