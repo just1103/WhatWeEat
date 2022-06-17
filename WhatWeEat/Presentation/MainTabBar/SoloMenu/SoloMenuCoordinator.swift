@@ -1,15 +1,9 @@
 import UIKit
 
-protocol MenuCoordinatorDelegate: AnyObject {
-    func hideNavigationBarAndTabBar()
-    func showTabBar()
-    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol)
-}
-
 final class SoloMenuCoordinator: CoordinatorProtocol {
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController?
-    var type: CoordinatorType = .home
+    var type: CoordinatorType = .soloMenu
     weak var delegate: MenuCoordinatorDelegate!
     
     func start() {
@@ -29,8 +23,6 @@ final class SoloMenuCoordinator: CoordinatorProtocol {
     }
     
     func showGamePage(with pinNumber: String? = nil) {
-        hideNavigationBarAndTabBar()
-        
         guard let navigationController = navigationController else { return }
         let gameCoordinator = GameCoordinator(navigationController: navigationController, pinNumber: pinNumber)
         gameCoordinator.delegate = self
@@ -44,8 +36,8 @@ extension SoloMenuCoordinator: GameCoordinatorDelegate {
         delegate.hideNavigationBarAndTabBar()
     }
     
-    func showTabBar() {
-        delegate.showTabBar()
+    func showNavigationBarAndTabBar() {
+        delegate.showNavigationBarAndTabBar()
     }
     
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol) {
@@ -53,11 +45,11 @@ extension SoloMenuCoordinator: GameCoordinatorDelegate {
         childCoordinators = updatedChildCoordinators
     }
     
-    func showTogetherPage() {
-        guard let mainTabBarController = navigationController?.viewControllers.first as? MainTabBarController else {
-            return
-        }
-        mainTabBarController.selectedIndex = 1
-        navigationController?.viewControllers = [mainTabBarController]
+    func showInitialTogetherMenuPage() {  // TODO: Protocol 분리 필요
+//        guard let mainTabBarController = navigationController?.viewControllers.first as? MainTabBarController else {
+//            return
+//        }
+//        mainTabBarController.selectedIndex = 1
+//        navigationController?.viewControllers = [mainTabBarController]
     }
 }

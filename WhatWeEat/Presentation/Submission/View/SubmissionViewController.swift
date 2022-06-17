@@ -4,7 +4,7 @@ import UIKit
 
 class SubmissionViewController: UIViewController {
     // MARK: - Properties
-    private let pinNumberLabel: UILabel = {  // TODO: 탭바버튼 종류에 따라 isHidden 처리
+    private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -84,7 +84,6 @@ class SubmissionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
-        showTabBar()
         configureUI()
         bind()
         invokedViewDidLoad.onNext(())
@@ -93,17 +92,6 @@ class SubmissionViewController: UIViewController {
     // MARK: - Methods
     private func configureNavigationBar() {
         navigationItem.hidesBackButton = true
-    }
-    
-    private func showTabBar() {
-        guard let mainTabBarController = self.navigationController?.viewControllers.first as? MainTabBarController else {
-            return
-        }
-        
-        mainTabBarController.showTabBar()
-        
-//        mainTabBarController.view.isHidde?n = false
-//        tabBarController?.hidesBottomBarWhenPushed = false  // FIXME: 탭바 안보임; 탭바컨드롤러 밖에서 받아와야하나...?
     }
 
     private func configureUI() {
@@ -134,9 +122,9 @@ class SubmissionViewController: UIViewController {
             gameResultCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
             
             gameRestartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-            gameRestartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            gameRestartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             gameRestartButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.07),
-            gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
+            gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.45),
         ])
     }
 }

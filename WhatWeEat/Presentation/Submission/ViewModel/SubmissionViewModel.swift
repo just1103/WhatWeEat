@@ -35,12 +35,12 @@ final class SubmissionViewModel {
         configureGameResultCheckButtonDidTap(with: input.gameResultCheckButtonDidTap)
         configureGameRestartButtonDidTap(with: input.gameRestartButtonDidTap)
 
-        let ouput = Output(
+        let output = Output(
             pinNumberAndSubmissionCount: pinNumberAndSubmissionCount,
             updatedSubmissionCount: updatedSubmissionCount
         )
 
-        return ouput
+        return output
     }
     
     private func configurePinNumberAndSubmissionCount(with inputObserver: Observable<Void>) -> Observable<(String, Int)> {
@@ -94,7 +94,7 @@ final class SubmissionViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 // TODO: 화면전환 - 게임결과 화면
-                self.coordinator.showTogetherPage()
+//                self.coordinator.
             })
             .disposed(by: disposeBag)
     }
@@ -104,7 +104,7 @@ final class SubmissionViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 // TODO: 화면전환 - 해당 탭 초기화면
-                self.coordinator.showTogetherPage()
+                self.coordinator.showInitialTogetherMenuPage()
             })
             .disposed(by: disposeBag)
     }

@@ -1,7 +1,7 @@
 import UIKit
 
 enum CoordinatorType {
-    case app, onboarding, tab, setting, game, home, soloMenu, togetherMenu
+    case app, onboarding, tab, setting, game, home, togetherMenu, soloMenu
 }
 
 protocol CoordinatorProtocol: AnyObject {

@@ -1,10 +1,12 @@
 import UIKit
 
 final class HomeCoordinator: CoordinatorProtocol {
+    // MARK: - Properties
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController? = UINavigationController()
     var type: CoordinatorType = .home
     
+    // MARK: - Methods
     func start() {
     }
     

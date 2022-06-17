@@ -27,22 +27,23 @@ final class CardGameViewModel {
     
     // MARK: - Properties
     private weak var coordinator: GameCoordinator!
+    private let pinNumber: String?
+    private var gameResults = [Bool?]()
     private var visibleCardIndices = (first: 0, second: 1, third: 2)
     private var menuNations = [MenuNation]()
     private var mainIngredients = [MainIngredient]()
-    private var gameResults = [Bool?]()
     private var isLastQuestion: Bool {
         return gameResults.count >= 9
     }
-    private let pinNumber: String?
+    private let disposeBag = DisposeBag()
+    
+    typealias CardIndicies = (Int, Int, Int)
     
     // MARK: - Initializers
     init(coordinator: GameCoordinator, pinNumber: String?) {
         self.coordinator = coordinator
         self.pinNumber = pinNumber
     }
-    
-    typealias CardIndicies = (Int, Int, Int)
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output { 
@@ -222,24 +223,23 @@ final class CardGameViewModel {
         _ = NetworkProvider().request(api: WhatWeEatURL.ResultSubmissionAPI(pinNumber: self.pinNumber, body: encodedData))
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.showNextPage()
+            .subscribe(onNext: { (self, soloGameResult) in
+                if let decodedSoloGameResult = JSONParser<GameResult>().decode(from: soloGameResult) {
+                    self.showNextPage(with: decodedSoloGameResult)
+                } else {
+                    self.showNextPage(with: nil)
+                }
             })
-        showNextPage()
+            .disposed(by: disposeBag)
+        
+        self.showNextPage(with: nil)  // TODO: 서버연결 후 삭제
     }
     
-    private func showNextPage() {
+    private func showNextPage(with soloGameResult: GameResult?) {
         if let pinNumber = self.pinNumber {
-            // TODO: 화면전환 - together 결과대기화면
-//            guard
-//                let mainTabBarController = self.coordinator.navigationController?.viewControllers.first as? MainTabBarController
-//            else { return }
-//            
-//            mainTabBarController.showTabBar()
             self.coordinator.showSubmissionPage(pinNumber: pinNumber)
         } else {
-            // TODO: 화면전환 - Solo 결과확인
-//          self.coordinator
+            self.coordinator.showGameResultPage(with: nil, soloGameResult: soloGameResult)
         }
     }
     

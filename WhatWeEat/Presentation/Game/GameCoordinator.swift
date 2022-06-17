@@ -1,10 +1,11 @@
 import UIKit
+import RxSwift
 
 protocol GameCoordinatorDelegate: AnyObject {
-    func removeFromChildCoordinators(coordinator: CoordinatorProtocol)
-    func showTogetherPage()
     func hideNavigationBarAndTabBar()
-    func showTabBar()
+    func showNavigationBarAndTabBar()
+    func removeFromChildCoordinators(coordinator: CoordinatorProtocol) 
+    func showInitialTogetherMenuPage()
 }
 
 final class GameCoordinator: CoordinatorProtocol {
@@ -27,11 +28,17 @@ final class GameCoordinator: CoordinatorProtocol {
         delegate.hideNavigationBarAndTabBar()
     }
     
-    private func makeCardGamePage(with pinNumber: String?) {
-        let cardGameViewModel = CardGameViewModel(coordinator: self, pinNumber: pinNumber)
-        let cardGameViewController = CardGameViewController(viewModel: cardGameViewModel)
+    // TODO: 게임결과화면에서 다시 시작하기 누르면 finish를 호출
+    func finish() {
+        delegate.removeFromChildCoordinators(coordinator: self)
+    }
+    
+    func showGameResultPage(with pinNumber: String?, soloGameResult: GameResult?) {
+        let gameResultViewModel = GameResultViewModel(coordinator: self, pinNumber: pinNumber, soloGameResult: soloGameResult)
+        let gameResultViewController = GameResultViewController(viewModel: gameResultViewModel)
         
-        navigationController?.pushViewController(cardGameViewController, animated: false)
+        navigationController?.pushViewController(gameResultViewController, animated: false)
+        delegate.showNavigationBarAndTabBar()
     }
     
     func showSubmissionPage(pinNumber: String) {
@@ -39,14 +46,21 @@ final class GameCoordinator: CoordinatorProtocol {
         let submissionViewController = SubmissionViewController(viewModel: submissionViewModel)
         
         navigationController?.pushViewController(submissionViewController, animated: false)
-        delegate.showTabBar()
+        delegate.showNavigationBarAndTabBar()
     }
     
     func popCurrentPage() {
         navigationController?.popViewController(animated: true)
     }
     
-    func showTogetherPage() {
-        delegate.showTogetherPage()
+    func showInitialTogetherMenuPage() {
+        delegate.showInitialTogetherMenuPage()
+    }
+    
+    private func makeCardGamePage(with pinNumber: String?) {
+        let cardGameViewModel = CardGameViewModel(coordinator: self, pinNumber: pinNumber)
+        let cardGameViewController = CardGameViewController(viewModel: cardGameViewModel)
+        
+        navigationController?.pushViewController(cardGameViewController, animated: false)
     }
 }

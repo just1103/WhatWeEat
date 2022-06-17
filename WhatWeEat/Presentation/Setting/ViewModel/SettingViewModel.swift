@@ -51,9 +51,9 @@ final class SettingViewModel {
         let tableViewItems = configureTableViewItems(with: input.invokedViewDidLoad)
         configureSettingItemDidSelectObservable(with: input.settingItemDidSelect)
         
-        let ouput = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
+        let output = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
 
-        return ouput
+        return output
     }
     
     private func configureTableViewItems(with inputObserver: Observable<Void>) -> Observable<[SettingItem]> {

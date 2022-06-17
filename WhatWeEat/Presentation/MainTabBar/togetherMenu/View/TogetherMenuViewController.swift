@@ -21,7 +21,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
     private let makeGroupButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("그룹 만들기", for: .normal)
+        button.setTitle("팀원들과 미니게임을 시작하려면\n그룹 만들기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = ColorPalette.mainYellow
         button.titleLabel?.font = .preferredFont(forTextStyle: .largeTitle)
@@ -32,7 +32,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
     private let pinNumberButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("PIN으로 입장하기", for: .normal)
+        button.setTitle("초대받은 그룹이 있다면\nPIN으로 입장하기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = ColorPalette.mainYellow
         button.titleLabel?.font = .preferredFont(forTextStyle: .largeTitle)

@@ -23,10 +23,11 @@ final class TogetherMenuViewModel {
     
     private func configureMakeGroupButtonDidTapObservable(_ inputObserver: Observable<Void>) {
         inputObserver
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { _ in
                 let pinNumberObservable = NetworkProvider().request(api: WhatWeEatURL.CreateGroupAPI())
-                self?.coordinator.showSharePinNumberPage(with: pinNumberObservable)
+                self.coordinator.showSharePinNumberPage(with: pinNumberObservable)
             })
             .disposed(by: disposeBag)
     }

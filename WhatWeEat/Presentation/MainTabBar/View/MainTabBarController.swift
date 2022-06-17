@@ -1,9 +1,5 @@
 import UIKit
 
-extension UITabBarController {
-    
-}
-
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
     private var viewModel: MainTabBarViewModel!
@@ -22,33 +18,15 @@ final class MainTabBarController: UITabBarController {
     }
     
     // MARK: - Lifecycle Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // ???: UITabBarController init의 side-effect로 인해 viewDidLoad 대신 해당 위치에 배치함
         configureNavigationBar()
         configureTabBar()
         bind()
-        self.hidesBottomBarWhenPushed = true
     }
     
     // MARK: - Methods
-    func showTabBar() {
-//        self.tabBar.isHidden = false
-//        self.hidesBottomBarWhenPushed = false
-        self.tabBar.isTranslucent = false
-        print(type(of: self))
-    }
-    
-    func hideTabBar() {
-        self.tabBar.isHidden = true
-//        self.hidesBottomBarWhenPushed = true
-//        self.tabBar.isTranslucent = true
-    }
-    
     private func configureNavigationBar() {
         let settingsImage = UIImage(systemName: "gearshape")
         let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: nil)
@@ -66,7 +44,7 @@ final class MainTabBarController: UITabBarController {
         self.tabBar.unselectedItemTintColor = .systemGray
         tabBar.backgroundColor = .systemGray6
         
-        viewControllers = pages as? [UIViewController]
+        viewControllers = pages
     }
 }
 

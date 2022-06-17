@@ -121,17 +121,12 @@ final class CardGameViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideNavigationBar()
         configureUI()
         bind()
         invokedViewDidLoad.onNext(())
     }
     
     // MARK: - Methods
-    private func hideNavigationBar() {
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     private func configureUI() {
         view.addSubview(previousQuestionButton)
         view.addSubview(pinNumberLabel)

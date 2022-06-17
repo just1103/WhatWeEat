@@ -25,6 +25,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .largeTitle)
+//        label.textColor = .white
         label.text = "안녕하세요."
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -35,9 +36,23 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .title3)
+//        label.textColor = .white
         label.text = """
         랜덤으로 골라봤어요.
-        오늘 점심은 000 어떠세요?
+        오늘 점심은
+        """
+        label.numberOfLines = 0
+        label.lineBreakStrategy = .hangulWordPriority
+        return label
+    }()
+    private let menuNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.textColor = ColorPalette.mainOrange
+        label.text = """
+        000 어떠세요?
         """
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -93,7 +108,8 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         randomMenu
             .subscribe(onNext: { [weak self] menu in
                 DispatchQueue.global().async {
-                    guard let imageURL = URL(string: menu.imageURL),
+                    guard let menuImageURL = menu.imageURL,
+                          let imageURL = URL(string: menuImageURL),
                           let imageData = try? Data(contentsOf: imageURL),
                           let loadedImage = UIImage(data: imageData) else {
                         return

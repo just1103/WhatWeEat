@@ -123,15 +123,6 @@ final class SharePinNumberPageViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .black
     }
     
-//    private func hideTabBar() {
-////        tabBarController?.hidesBottomBarWhenPushed = true
-//        guard let mainTabBarController = self.tabBarController as? MainTabBarController else {
-//            return
-//        }
-//
-//        mainTabBarController.hideTabBar()
-//    }
-    
     private func configureUI() {
         // TODO: 디자인 반영하여 수정
         view.addSubview(containerStackView)

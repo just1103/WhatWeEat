@@ -7,9 +7,6 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
     var navigationController: UINavigationController?
     var type: CoordinatorType = .tab
     
-    private let homeCoordinator = HomeCoordinator()
-    private weak var soloMenuCoordinator: SoloMenuCoordinator!
-    private weak var togetherMenuCoordinator: TogetherMenuCoordinator!
     private var mainTabBarController: MainTabBarController!
     
     // MARK: - Initializers
@@ -30,8 +27,18 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         settingCoordinator.start()
     }
     
-    func popCurrentPage() {
-        navigationController?.popViewController(animated: false)
+//    func popCurrentPage() {
+//        navigationController?.popViewController(animated: false)
+//    }
+    
+    func hideNavigationBarAndTabBar() {
+        navigationController?.navigationBar.isHidden = true
+        mainTabBarController.tabBar.isHidden = true
+    }
+    
+    func showNavigationBarAndTabBar() {
+        navigationController?.navigationBar.isHidden = false
+        mainTabBarController.tabBar.isHidden = false
     }
     
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol) {
@@ -39,45 +46,36 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         childCoordinators = updatedChildCoordinators
     }
     
-    func hideNavigationBarAndTabBar() {
-        navigationController?.navigationBar.isHidden = true
-        mainTabBarController.tabBar.isHidden = true
-    }
-    
-    func showTabBar() {
-        navigationController?.navigationBar.isHidden = false
-        mainTabBarController.tabBar.isHidden = false
-    }
-    
     func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol) {
-        let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
-        childCoordinators = updatedChildCoordinators
-        var newCoordinator: CoordinatorProtocol?
-        
-        switch coordinator {
-        case is TogetherMenuCoordinator:
-            newCoordinator = TogetherMenuCoordinator()
-        case is SoloMenuCoordinator:
-            newCoordinator = SoloMenuCoordinator()
-        case is HomeCoordinator:
-            newCoordinator = HomeCoordinator()
-        default:
-            break
-        }
-        
-        guard let newCoordinator = newCoordinator else { return }
-
-        childCoordinators.append(newCoordinator)
+        // ???: 아래를 해줘야할 것 같지만 없어도 정상작동한다...
+//        let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
+//        childCoordinators = updatedChildCoordinators
+//        var newCoordinator: CoordinatorProtocol?
+//        
+//        switch coordinator {
+//        case is TogetherMenuCoordinator:
+//            newCoordinator = TogetherMenuCoordinator()
+//        case is SoloMenuCoordinator:
+//            newCoordinator = SoloMenuCoordinator()
+//        case is HomeCoordinator:
+//            newCoordinator = HomeCoordinator()
+//        default:
+//            break
+//        }
+//        
+//        guard let newCoordinator = newCoordinator else { return }
+//
+//        childCoordinators.append(newCoordinator)
     }
     
     private func makeMainTabBarPage() {
         let homeCoordinator = HomeCoordinator()
-        let soloMenuCoordinator = SoloMenuCoordinator()
         let togetherMenuCoordinator = TogetherMenuCoordinator()
+        let soloMenuCoordinator = SoloMenuCoordinator()
         
         childCoordinators.append(homeCoordinator)
-        childCoordinators.append(soloMenuCoordinator)
         childCoordinators.append(togetherMenuCoordinator)
+        childCoordinators.append(soloMenuCoordinator)
         
         soloMenuCoordinator.delegate = self
         togetherMenuCoordinator.delegate = self

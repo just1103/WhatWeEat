@@ -1,10 +1,16 @@
 import RxSwift
 import UIKit
 
+protocol MenuCoordinatorDelegate: AnyObject {
+    func hideNavigationBarAndTabBar()
+    func showNavigationBarAndTabBar()
+    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol)
+}
+
 final class TogetherMenuCoordinator: CoordinatorProtocol {
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController?
-    var type: CoordinatorType = .home
+    var type: CoordinatorType = .togetherMenu
     weak var delegate: MenuCoordinatorDelegate!
     
     func start() {
@@ -37,13 +43,6 @@ final class TogetherMenuCoordinator: CoordinatorProtocol {
         childCoordinators.append(gameCoordinator)
         gameCoordinator.start()
     }
-    
-    private func showInitialTogetherPage() {
-        let togetherMenuViewModel = TogetherMenuViewModel(coordinator: self)
-        let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
-        
-        navigationController?.viewControllers = [togetherMenuViewController] 
-    }
 }
 
 extension TogetherMenuCoordinator: GameCoordinatorDelegate {
@@ -51,22 +50,25 @@ extension TogetherMenuCoordinator: GameCoordinatorDelegate {
         delegate.hideNavigationBarAndTabBar()
     }
     
-    func showTabBar() {
-        delegate.showTabBar()
+    func showNavigationBarAndTabBar() {
+        delegate.showNavigationBarAndTabBar()
     }
     
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol) {
         let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
         childCoordinators = updatedChildCoordinators
     }
-    
-    func showTogetherPage() {
+
+    // 게임 재시작 버튼
+    // TODO: together-C는 유지한 채로
+    // 초기화면으로 돌아가게만 해주면 되려나?
+    func showInitialTogetherMenuPage() {
         delegate.removeFromChildCoordinatorsAndRestart(coordinator: self)
-        showInitialTogetherPage()
-//        guard let mainTabBarController = navigationController?.viewControllers.first as? MainTabBarController else {
-//            return
-//        }
-//        mainTabBarController.selectedIndex = 1
-//        navigationController?.viewControllers = [mainTabBarController]
+        
+        let togetherMenuViewModel = TogetherMenuViewModel(coordinator: self)
+        let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
+        
+        // FIXME: 화면에서 사라진 SharePinNumberPage를 navigationController.viewControllers에서 빼줬는데 메모리에 살아있음
+        navigationController?.viewControllers = [togetherMenuViewController]
     }
 }

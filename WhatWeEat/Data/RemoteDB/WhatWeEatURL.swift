@@ -45,9 +45,10 @@ struct WhatWeEatURL {
             self.body = body
             
             if let pinNumber = pinNumber {
+                // response로 nil을 전달
                 self.url = URL(string: "\(baseURL)group/\(pinNumber)")
             } else {
-                // TODO: solo 결과보내는 URL 별도로 필요함
+                // 혼자메뉴결정은 POST의 response로 게임결과 (Data 타입)를 바로 받아오도록 처리
                 self.url = URL(string: "\(baseURL)group/solo")
             }
         }
@@ -66,8 +67,13 @@ struct WhatWeEatURL {
         var url: URL?
         var method: HttpMethod = .get
         
-        init(pinNumber: String, baseURL: String = baseURL) {
-            self.url = URL(string: "\(baseURL)group/\(pinNumber)/gameresult")
+        init(pinNumber: String?, baseURL: String = baseURL) {
+            if let pinNumber = pinNumber {
+                self.url = URL(string: "\(baseURL)group/\(pinNumber)/gameresult")
+            } else {
+                // TODO: solo 결과받는 URL 별도로 필요함
+                self.url = URL(string: "\(baseURL)group/solo/gameresult")
+            }
         }
     }
 }

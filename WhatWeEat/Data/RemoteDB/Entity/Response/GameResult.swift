@@ -1,6 +1,6 @@
 import Foundation
 
-struct GameResult {
+struct GameResult: Codable {
     let menus: [Menu]
     let playerCount: Int
 }
