@@ -73,6 +73,7 @@
 		DE814E652852D269003F5FBC /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E642852D269003F5FBC /* CardGameViewModel.swift */; };
 		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
 		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
+		DEC0466E2863160100B01840 /* TogetherGameSubmittedChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC0466D2863160100B01840 /* TogetherGameSubmittedChecker.swift */; };
 		DEDF03242859D8ED000F7915 /* SoloMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */; };
 		DEDF03262859D8FB000F7915 /* TogetherMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */; };
 		DEDF03282859D90F000F7915 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03272859D90F000F7915 /* HomeCoordinator.swift */; };
@@ -161,6 +162,7 @@
 		DE814E642852D269003F5FBC /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardGameViewModel.swift; path = WhatWeEat/Presentation/Game/ViewModel/CardGameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
+		DEC0466D2863160100B01840 /* TogetherGameSubmittedChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGameSubmittedChecker.swift; sourceTree = "<group>"; };
 		DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuCoordinator.swift; sourceTree = "<group>"; };
 		DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuCoordinator.swift; sourceTree = "<group>"; };
 		DEDF03272859D90F000F7915 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */,
+				DEC0466D2863160100B01840 /* TogetherGameSubmittedChecker.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				3636DED12844ADFD00F04111 /* JSONParser.swift in Sources */,
 				363D3F422848A8F1000DC665 /* GameAnswer.swift in Sources */,
 				3636DEAC283E1B9900F04111 /* HomeViewController.swift in Sources */,
+				DEC0466E2863160100B01840 /* TogetherGameSubmittedChecker.swift in Sources */,
 				DE69461D283CD1A700BAA51D /* DislikedFoodCell.swift in Sources */,
 				3636DE55283B225100F04111 /* AppDelegate.swift in Sources */,
 				DE56951C28582373009F3DCE /* MultipleChoiceCardView.swift in Sources */,

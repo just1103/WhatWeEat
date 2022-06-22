@@ -7,14 +7,22 @@ protocol APIProtocol {
 
 protocol Gettable: APIProtocol { }
 
-protocol Postable: APIProtocol {
+protocol Postable: Requestable {
     var contentType: String? { get }
     var body: Data? { get }
 }
 
+protocol Deletable: Requestable { }
+
+protocol Puttable: Requestable { }
+
+protocol Requestable: APIProtocol { }
+
 enum HttpMethod {
     case get
     case post
+    case delete
+    case put
     
     var description: String {
         switch self {
@@ -22,6 +30,10 @@ enum HttpMethod {
             return "GET"
         case .post:
             return "POST"
+        case .delete:
+            return "DELETE"
+        case .put:
+            return "PUT"
         }
     }
 }

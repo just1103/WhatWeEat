@@ -43,6 +43,14 @@ final class TogetherMenuCoordinator: CoordinatorProtocol {
         childCoordinators.append(gameCoordinator)
         gameCoordinator.start()
     }
+    
+    func showLatestSubmissionPage(pinNumber: String, token: String) {
+        guard let navigationController = navigationController else { return }
+        let gameCoordinator = GameCoordinator(navigationController: navigationController, pinNumber: pinNumber)
+        gameCoordinator.delegate = self
+        childCoordinators.append(gameCoordinator)
+        gameCoordinator.showSubmissionPage(pinNumber: pinNumber, token: token)
+    }
 }
 
 extension TogetherMenuCoordinator: GameCoordinatorDelegate {

@@ -11,7 +11,7 @@ import Foundation
 //게임종료 (DELETE) : group/1111
 
 struct WhatWeEatURL {
-    static let baseURL: String = "http://3.38.82.165:8080/"  // TODO: 추가
+    static let baseURL: String = "http://3.39.155.132:8080/"  // TODO: 추가
 //    static let baseURL: String = "http://localhost:8080/"  // 참고 - 로컬 서버
 
     struct RandomMenuAPI: Gettable {
@@ -74,6 +74,26 @@ struct WhatWeEatURL {
                 // TODO: solo 결과받는 URL 별도로 필요함
                 self.url = URL(string: "\(baseURL)group/solo/gameresult")
             }
+        }
+    }
+    
+    // group/1111
+    struct DeleteGroupAPI: Deletable {
+        var url: URL?
+        var method: HttpMethod = .delete
+        
+        init(pinNumber: String, baseURL: String = baseURL) {
+            self.url = URL(string: "\(baseURL)group/\(pinNumber)")
+        }
+    }
+    
+    // group/1111?userToken=1234
+    struct CancelSubmissionAPI: Puttable {
+        var url: URL?
+        var method: HttpMethod = .put
+        
+        init(pinNumber: String, token: String, baseURL: String = baseURL) {
+            self.url = URL(string: "\(baseURL)group/\(pinNumber)?userToken=\(token)")
         }
     }
 }

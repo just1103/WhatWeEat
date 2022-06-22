@@ -228,11 +228,10 @@ final class CardGameViewModel {
                     self.showNextPage(with: decodedSoloGameResult)
                 } else {
                     self.showNextPage(with: nil)
+                    UserDefaults.standard.set(true, forKey: "isTogetherGameSubmitted")
                 }
             })
             .disposed(by: disposeBag)
-        
-        self.showNextPage(with: nil)  // TODO: 서버연결 후 삭제
     }
     
     private func showNextPage(with soloGameResult: GameResult?) {

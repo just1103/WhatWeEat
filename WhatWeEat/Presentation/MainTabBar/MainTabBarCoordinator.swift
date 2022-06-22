@@ -12,11 +12,21 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
     // MARK: - Initializers
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        navigationController.navigationBar.isTranslucent = true
     }
     
     // MARK: - Methods
     func start() {
         makeMainTabBarPage()
+        
+        if TogetherGameSubmittedChecker.isSubmitted {
+            mainTabBarController.selectedIndex = 1
+            guard let togetherCoordinator = childCoordinators.filter { $0.type == .togetherMenu }.first as? TogetherMenuCoordinator else {
+                return
+            }
+            
+            togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber, token: "")
+        }
     }
     
     func showSettingPage() {

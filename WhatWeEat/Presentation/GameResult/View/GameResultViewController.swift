@@ -85,18 +85,19 @@ class GameResultViewController: UIViewController {
         imageView.clipsToBounds = true
         return imageView
     }()
-    private let restaurantCheckButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("주변 식당 보기", for: .normal)
-        button.setTitleColor(ColorPalette.mainOrange, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
-        button.backgroundColor = .white
-        button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = 8
-        button.clipsToBounds = true
-        return button
-    }()
+    // TODO: 지도 SDK 추가 후 추가
+//    private let restaurantCheckButton: UIButton = {
+//        let button = UIButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("주변 식당 보기", for: .normal)
+//        button.setTitleColor(ColorPalette.mainOrange, for: .normal)
+//        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+//        button.backgroundColor = .white
+//        button.contentHorizontalAlignment = .center
+//        button.layer.cornerRadius = 8
+//        button.clipsToBounds = true
+//        return button
+//    }()
     private let nextMenuCheckButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -173,13 +174,13 @@ class GameResultViewController: UIViewController {
 
         view.addSubview(pinNumberLabel)
         view.addSubview(playerCountLabel)
-        view.addSubview(            playerCountDescriptionLabel)
+        view.addSubview(playerCountDescriptionLabel)
         view.addSubview(keywordLabel)
         view.addSubview(menuNameLabel)
         view.addSubview(menuNameUnderline)
         view.addSubview(menuNameDescriptionLabel)
         view.addSubview(menuImageView)
-        view.addSubview(restaurantCheckButton)
+//        view.addSubview(restaurantCheckButton)
         view.addSubview(nextMenuCheckButton)
         view.addSubview(shareButton)
         view.addSubview(gameRestartButton)
@@ -218,10 +219,10 @@ class GameResultViewController: UIViewController {
             menuImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             menuImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
             
-            restaurantCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            restaurantCheckButton.bottomAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: -15),
-            restaurantCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            restaurantCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
+//            restaurantCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            restaurantCheckButton.bottomAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: -15),
+//            restaurantCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
+//            restaurantCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
             
             nextMenuCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextMenuCheckButton.topAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: 15),
@@ -246,7 +247,7 @@ extension GameResultViewController {
     private func bind() {
         let input = GameResultViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
-            restaurantCheckButtonDidTap: restaurantCheckButton.rx.tap.asObservable(),
+//            restaurantCheckButtonDidTap: restaurantCheckButton.rx.tap.asObservable(),
             nextMenuCheckButtonDidTap: nextMenuCheckButton.rx.tap.asObservable(),
             shareButtonDidTap: shareButton.rx.tap.asObservable(),
             gameRestartButtonDidTap: gameRestartButton.rx.tap.asObservable()

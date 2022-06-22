@@ -5,7 +5,7 @@ final class GameResultViewModel {
     // MARK: - Nested Types
     struct Input {
         let invokedViewDidLoad: Observable<Void>
-        let restaurantCheckButtonDidTap: Observable<Void>
+//        let restaurantCheckButtonDidTap: Observable<Void>
         let nextMenuCheckButtonDidTap: Observable<Void>
         let shareButtonDidTap: Observable<Void>
         let gameRestartButtonDidTap: Observable<Void>
@@ -39,7 +39,7 @@ final class GameResultViewModel {
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
         let firstMenuAndPlayerCountAndPinNumber = configureFirstMenuAndPlayerCountAndPinNumber(with: input.invokedViewDidLoad)
-        configureRestaurantCheckButtonDidTap(with: input.restaurantCheckButtonDidTap)
+//        configureRestaurantCheckButtonDidTap(with: input.restaurantCheckButtonDidTap)
         let nextMenu = configureNextMenuCheckButtonDidTap(with: input.nextMenuCheckButtonDidTap)
         configureGameRestartButtonDidTap(with: input.gameRestartButtonDidTap)
 
@@ -107,6 +107,20 @@ final class GameResultViewModel {
     }
 
     private func configureGameRestartButtonDidTap(with inputObserver: Observable<Void>) {
-        // TODO: 화면전환 - 해당 탭 초기화면
+        if pinNumber == nil {
+            
+        } else {
+            
+        }
+    }
+    
+    private func deleteGroup(pinNumber: String) -> Observable<Data> {
+        return NetworkProvider().request(api: WhatWeEatURL.DeleteGroupAPI(pinNumber: pinNumber))
+//            .withUnretained(self)
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { _ in
+//                self.coordinator.showInitialTogetherMenuPage()
+//            })
+//            .disposed(by: disposeBag)
     }
 }

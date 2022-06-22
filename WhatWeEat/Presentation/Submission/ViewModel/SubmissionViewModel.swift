@@ -18,12 +18,14 @@ final class SubmissionViewModel {
     private weak var coordinator: GameCoordinator!
     private let pinNumber: String
     private var latestSubmissionCount: Int!
+    private var token: String?
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: GameCoordinator, pinNumber: String) {
+    init(coordinator: GameCoordinator, pinNumber: String, token: String?) {
         self.coordinator = coordinator
         self.pinNumber = pinNumber
+        self.token = token
     }
     
     // MARK: - Methods
@@ -93,8 +95,9 @@ final class SubmissionViewModel {
         inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                // TODO: 화면전환 - 게임결과 화면
-//                self.coordinator.
+                self.coordinator.showGameResultPage(with: self.pinNumber, soloGameResult: nil)
+                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
+                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
             })
             .disposed(by: disposeBag)
     }
@@ -104,8 +107,21 @@ final class SubmissionViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 // TODO: 화면전환 - 해당 탭 초기화면
-                self.coordinator.showInitialTogetherMenuPage()
+                self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: "")
+                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func requestGameSubmissionCancel(pinNumber: String, token: String) {
+        NetworkProvider().request(
+            api: WhatWeEatURL.CancelSubmissionAPI(pinNumber: pinNumber, token: token) // TODO: token 처리 필요
+        )
+        .withUnretained(self)
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { _ in
+            self.coordinator.showInitialTogetherMenuPage()
+        })
+        .disposed(by: disposeBag)
     }
 }

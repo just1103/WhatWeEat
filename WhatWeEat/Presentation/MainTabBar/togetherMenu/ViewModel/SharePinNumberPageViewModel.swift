@@ -25,14 +25,9 @@ final class SharePinNumberPageViewModel {
     init(coordinator: TogetherMenuCoordinator, pinNumberData: Observable<Data>) {
         self.coordinator = coordinator
         self.pinNumberData = pinNumberData
-        hideTabBar()
     }
     
     // MARK: - Methods
-    private func hideTabBar() {
-        coordinator.delegate.hideNavigationBarAndTabBar()
-    }
-    
     func transform(_ input: Input) -> Output {
         let pinNumber = configurePINNumber()
         configureletGameStartButtonDidTap(by: input.gameStartButtonDidTap)
@@ -63,6 +58,8 @@ final class SharePinNumberPageViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.coordinator.showGamePage(with: self.pinNumber)
+                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
+                UserDefaults.standard.set(self.pinNumber, forKey: "latestPinNumber")
         })
         .disposed(by: disposeBag)
     }

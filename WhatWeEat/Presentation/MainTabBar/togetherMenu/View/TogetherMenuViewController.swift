@@ -32,7 +32,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
     private let pinNumberButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("초대받은 그룹이 있다면\nPIN으로 입장하기", for: .normal)
+        button.setTitle("이미 생성된 그룹이 있다면\nPIN으로 입장하기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = ColorPalette.mainYellow
         button.titleLabel?.font = .preferredFont(forTextStyle: .largeTitle)
