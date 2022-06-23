@@ -35,4 +35,16 @@ extension UIView {
         self.layer.shadowOpacity = opacity
         self.layer.shadowRadius = radius
     }
+    
+    func applyGradation(width: CGFloat, height: CGFloat, radius: CGFloat = 0) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(
+            origin: self.bounds.origin,
+            size: CGSize(width: width, height: height)
+        )
+        gradientLayer.locations = [0.15]
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradientLayer.cornerRadius = radius
+        self.layer.addSublayer(gradientLayer)
+    }
 }

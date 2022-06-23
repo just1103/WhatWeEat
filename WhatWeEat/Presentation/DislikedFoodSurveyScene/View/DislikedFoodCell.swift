@@ -66,7 +66,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     func toggleSelectedCellUI() {
         if checkBoxImageView.image == Content.uncheckedImage {
             checkBoxImageView.image = Content.checkedImage
-            self.backgroundColor = .mainYellow
+            self.backgroundColor = .mainOrange
         } else {
             checkBoxImageView.image = Content.uncheckedImage
             self.backgroundColor = .subYellow
@@ -75,6 +75,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     
     private func configureUI() {
         self.backgroundColor = .subYellow
+        self.applyShadow(direction: .bottom)
         
         addSubview(checkBoxImageView)
         addSubview(containerStackView)

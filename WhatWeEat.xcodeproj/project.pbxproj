@@ -51,7 +51,7 @@
 		365EC7D6286320280094823A /* EnterWithPinNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7D5286320280094823A /* EnterWithPinNumberViewController.swift */; };
 		365EC7D8286320580094823A /* EnterWithPinNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7D7286320580094823A /* EnterWithPinNumberViewModel.swift */; };
 		365EC7DA286348CD0094823A /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */; };
-		365EC7DC28634A7C0094823A /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DB28634A7C0094823A /* UIView+Shadow.swift */; };
+		365EC7DC28634A7C0094823A /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DB28634A7C0094823A /* UIView+Effects.swift */; };
 		365EC7DE28634C610094823A /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DD28634C610094823A /* CardGameViewModel.swift */; };
 		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
 		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
@@ -146,7 +146,7 @@
 		365EC7D5286320280094823A /* EnterWithPinNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithPinNumberViewController.swift; sourceTree = "<group>"; };
 		365EC7D7286320580094823A /* EnterWithPinNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithPinNumberViewModel.swift; sourceTree = "<group>"; };
 		365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
-		365EC7DB28634A7C0094823A /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		365EC7DB28634A7C0094823A /* UIView+Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
 		365EC7DD28634C610094823A /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewModel.swift; sourceTree = "<group>"; };
 		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
@@ -416,7 +416,7 @@
 				DE56951528573065009F3DCE /* UICollectionView+Cell.swift */,
 				DE814E622852D18D003F5FBC /* Array+Subscript.swift */,
 				365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */,
-				365EC7DB28634A7C0094823A /* UIView+Shadow.swift */,
+				365EC7DB28634A7C0094823A /* UIView+Effects.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -839,7 +839,7 @@
 				365EC7D6286320280094823A /* EnterWithPinNumberViewController.swift in Sources */,
 				DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */,
 				3636DECA2844AD3900F04111 /* BaseURLProtocol.swift in Sources */,
-				365EC7DC28634A7C0094823A /* UIView+Shadow.swift in Sources */,
+				365EC7DC28634A7C0094823A /* UIView+Effects.swift in Sources */,
 				3636DED42844AE3600F04111 /* WhatWeEatURL.swift in Sources */,
 				36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */,
 				363D3F4D2848BD32000DC665 /* DislikedFood.swift in Sources */,

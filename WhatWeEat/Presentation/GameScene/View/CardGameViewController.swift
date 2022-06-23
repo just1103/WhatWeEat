@@ -231,6 +231,19 @@ extension CardGameViewController {
                     let thirdCard = self.cards[safe: third]
                 else { return }
                 
+//                firstCard.applyGradation(
+//                    width: UIScreen.main.bounds.width * 0.8,
+//                    height: UIScreen.main.bounds.width * 0.6
+//                )
+//                secondCard.applyGradation(
+//                    width: UIScreen.main.bounds.width * (0.8 - 0.02),
+//                    height: UIScreen.main.bounds.width * 0.6
+//                )
+//                thirdCard.applyGradation(
+//                    width: UIScreen.main.bounds.width * (0.8 - 0.04),
+//                    height: UIScreen.main.bounds.width * 0.6
+//                )
+                
                 self.view.addSubview(thirdCard)
                 self.view.addSubview(secondCard)
                 self.view.addSubview(firstCard)
@@ -348,6 +361,19 @@ extension CardGameViewController {
 
             firstCard.frame = self.cardFrame(for: 0)
             secondCard?.frame = self.cardFrame(for: 1)
+//
+//            firstCard.applyGradation(
+//                width: UIScreen.main.bounds.width * 0.8,
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
+//            secondCard?.applyGradation(
+//                width: UIScreen.main.bounds.width * (0.8 - 0.02),
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
+//            thirdCard?.applyGradation(
+//                width: UIScreen.main.bounds.width * (0.8 - 0.04),
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
         } completion: { [weak self] _ in
             guard let self = self else { return }
             submittedCard.removeFromSuperview()
@@ -411,6 +437,19 @@ extension CardGameViewController {
     ) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
             guard let self = self else { return }
+//            firstCard.applyGradation(
+//                width: UIScreen.main.bounds.width * 0.8,
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
+//            secondCard?.applyGradation(
+//                width: UIScreen.main.bounds.width * (0.8 - 0.02),
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
+//            thirdCard?.applyGradation(
+//                width: UIScreen.main.bounds.width * (0.8 - 0.04),
+//                height: UIScreen.main.bounds.width * 0.6
+//            )
+//            
             let rotate = CGAffineTransform(rotationAngle: .zero)
             firstCard.transform = rotate
             firstCard.alpha = 1

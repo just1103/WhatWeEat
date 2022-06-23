@@ -20,9 +20,11 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 20
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private let titleLabel: UILabel = {
@@ -31,8 +33,17 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.text = "못먹는 음식을 알려주세요"
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .largeTitle)
+        return label
+    }()
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "메뉴에서 제외하고 추천드려요"
+        label.lineBreakStrategy = .hangulWordPriority
+        label.textAlignment = .left
+        label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
     private let confirmButton: UIButton = {
@@ -41,10 +52,8 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         button.setTitle("확인", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .mainYellow
+        button.backgroundColor = .mainOrange
         button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
-        button.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
-        button.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09).isActive = true
         return button
     }()
     
@@ -152,16 +161,19 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     
     private func configureStackView() {
         view.addSubview(containerStackView)
+        view.addSubview(confirmButton)
         containerStackView.addArrangedSubview(titleLabel)
+        containerStackView.addArrangedSubview(descriptionLabel)
         containerStackView.addArrangedSubview(collectionView)
-        containerStackView.addArrangedSubview(confirmButton)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.9)
+            containerStackView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 10),
+            confirmButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            confirmButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09),
+            confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }

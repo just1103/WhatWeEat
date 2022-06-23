@@ -72,7 +72,7 @@ class GameStartWaitingViewController: UIViewController {
 //    }
     
     func configureUI() {
-        view.backgroundColor = .mainOrange
+        view.backgroundColor = .systemGray6
         view.addSubview(containerStackView)
         containerStackView.addArrangedSubview(descriptionLabel)
         containerStackView.addArrangedSubview(gameStartButton)

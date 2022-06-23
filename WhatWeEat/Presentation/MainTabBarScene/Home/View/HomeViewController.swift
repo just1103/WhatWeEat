@@ -3,29 +3,45 @@ import RxSwift
 
 final class HomeViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
-    private let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.backgroundColor = .white
-        stackView.spacing = 20
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: 40,
-            leading: 40,
-            bottom: UIScreen.main.bounds.height * 0.25,
-            trailing: 40
-        )
-        stackView.isLayoutMarginsRelativeArrangement = true
-        return stackView
+//    private let containerStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .vertical
+//        stackView.alignment = .fill
+//        stackView.distribution = .fill
+//        stackView.backgroundColor = .white
+//        stackView.spacing = 20
+//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
+//            top: 40,
+//            leading: 40,
+//            bottom: UIScreen.main.bounds.height * 0.25,
+//            trailing: 40
+//        )
+//        stackView.isLayoutMarginsRelativeArrangement = true
+//        return stackView
+//    }()
+    private let randomMenuImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "cheers")
+        return imageView
     }()
-    private let titleLabel: UILabel = {
+    private let gradationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.applyGradation(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height
+        )
+        return view
+    }()
+    private let helloLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .largeTitle)
-//        label.textColor = .white
+        label.textColor = .white
         label.text = "안녕하세요."
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -35,8 +51,8 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title3)
-//        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.textColor = .white
         label.text = """
         랜덤으로 골라봤어요.
         오늘 점심은
@@ -51,30 +67,37 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.textColor = .mainOrange
-        label.text = """
-        000 어떠세요?
-        """
+        label.text = "000"
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    private let descriptionImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 5
-        imageView.clipsToBounds = true
-        imageView.setContentHuggingPriority(.init(rawValue: 100), for: .vertical)
-        return imageView
+    private let menuNameUnderline: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .mainOrange
+        return view
     }()
-    private let restaurantLocationButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("식당 위치 보기", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.contentHorizontalAlignment = .right
-        return button
+    private let menuNameDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.textColor = .white
+        label.text = "어떠세요?"
+        label.numberOfLines = 0
+        label.lineBreakStrategy = .hangulWordPriority
+        return label
     }()
+    // TODO: 다음 업데이트 때 추가 예정
+//    private let restaurantLocationButton: UIButton = {
+//        let button = UIButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("식당 위치 보기", for: .normal)
+//        button.setTitleColor(.black, for: .normal)
+//        button.contentHorizontalAlignment = .right
+//        return button
+//    }()
     
     private var viewModel: HomeViewModel!
     private let invokedViewDidLoad = PublishSubject<Void>()
@@ -116,7 +139,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
                     }
                     
                     DispatchQueue.main.async {
-                        self?.descriptionImageView.image = loadedImage
+                        self?.randomMenuImageView.image = loadedImage
                         self?.descriptionLabel.text = """
                         랜덤으로 골라봤어요.
                         오늘 점심은 \(menu.name) 어떠세요?
@@ -134,23 +157,48 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     }
     
     private func configureUI() {
-        view.backgroundColor = .mainOrange
-        view.addSubview(containerStackView)
-        containerStackView.addArrangedSubview(titleLabel)
-        containerStackView.addArrangedSubview(descriptionLabel)
-        containerStackView.addArrangedSubview(descriptionImageView)
-        containerStackView.addArrangedSubview(restaurantLocationButton)
+        view.backgroundColor = .systemGray6
+        view.addSubview(randomMenuImageView)
+        view.addSubview(gradationView)
+        view.addSubview(helloLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(menuNameLabel)
+        view.addSubview(menuNameUnderline)
+        view.addSubview(menuNameDescriptionLabel)
+//        view.addSubview(containerStackView)
+//        containerStackView.addArrangedSubview(titleLabel)
+//        containerStackView.addArrangedSubview(descriptionLabel)
+//        containerStackView.addArrangedSubview(descriptionImageView)
+//        containerStackView.addArrangedSubview(restaurantLocationButton)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            randomMenuImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            randomMenuImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            randomMenuImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            randomMenuImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            gradationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            gradationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            gradationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            gradationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            titleLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
-            descriptionLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.1),
-            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualTo: containerStackView.heightAnchor, multiplier: 0.2),
-            restaurantLocationButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
+            helloLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.1),
+            helloLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            descriptionLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 15),
+            descriptionLabel.leadingAnchor.constraint(equalTo: helloLabel.leadingAnchor),
+            menuNameLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5),
+            menuNameLabel.leadingAnchor.constraint(equalTo: helloLabel.leadingAnchor),
+            menuNameUnderline.widthAnchor.constraint(equalTo: menuNameLabel.widthAnchor),
+            menuNameUnderline.heightAnchor.constraint(equalToConstant: 2),
+            menuNameUnderline.leadingAnchor.constraint(equalTo: menuNameLabel.leadingAnchor),
+            menuNameUnderline.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor),
+            menuNameDescriptionLabel.leadingAnchor.constraint(equalTo: menuNameLabel.trailingAnchor, constant: 10),
+            menuNameDescriptionLabel.bottomAnchor.constraint(equalTo: menuNameLabel.bottomAnchor)
+//
+//            titleLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
+//            descriptionLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.1),
+//            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualTo: containerStackView.heightAnchor, multiplier: 0.2),
+//            restaurantLocationButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
         ])
     }
+    
 }

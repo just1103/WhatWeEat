@@ -2,6 +2,14 @@ import UIKit
 
 final class YesOrNoCardView: UIView, CardViewProtocol {
     // MARK: - Properties
+    private let filterView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,9 +43,15 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         self.applyShadow(direction: .top, radius: 8)
         
         addSubview(imageView)
+        addSubview(filterView)
         addSubview(questionLabel)
         
         NSLayoutConstraint.activate([
+            filterView.topAnchor.constraint(equalTo: self.topAnchor),
+            filterView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            filterView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            filterView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
