@@ -61,16 +61,12 @@ final class GameCoordinator: CoordinatorProtocol {
     }
     
     func showInitialTogetherMenuPage() {
-        guard let togetherGameCoordinatorDelegate = delegate as? TogetherGameCoordinatorDelegate else {
-            return
-        }
+        guard let togetherGameCoordinatorDelegate = delegate as? TogetherGameCoordinatorDelegate else { return }
         togetherGameCoordinatorDelegate.showInitialTogetherMenuPage()
     }
     
     func showInitialSoloMenuPage() {
-        guard let soloGameCoordinatorDelegate = delegate as? SoloGameCoordinatorDelegate else {
-            return
-        }
+        guard let soloGameCoordinatorDelegate = delegate as? SoloGameCoordinatorDelegate else { return }
         soloGameCoordinatorDelegate.showInitialSoloMenuPage()
     }
     

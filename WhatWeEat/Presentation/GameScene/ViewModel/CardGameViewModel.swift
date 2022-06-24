@@ -28,12 +28,12 @@ final class CardGameViewModel {
     // MARK: - Properties
     private weak var coordinator: GameCoordinator!
     private let pinNumber: String?
-    private var gameResults = [Bool?]()
+    private var gameAnswers = [Bool?]()
     private var visibleCardIndices = (first: 0, second: 1, third: 2)
     private var menuNations = [MenuNation]()
     private var mainIngredients = [MainIngredient]()
     private var isLastQuestion: Bool {
-        return gameResults.count >= 9
+        return gameAnswers.count >= 9
     }
     private let disposeBag = DisposeBag()
     
@@ -132,7 +132,7 @@ final class CardGameViewModel {
             .withUnretained(self)
             .flatMap { _ -> Observable<CardIndicies> in
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameResults.append(true)
+                self.gameAnswers.append(true)
                 
                 return Observable.just(self.visibleCardIndices)
             }
@@ -145,7 +145,7 @@ final class CardGameViewModel {
             .withUnretained(self)
             .flatMap { _ -> Observable<(CardIndicies)> in
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameResults.append(false)
+                self.gameAnswers.append(false)
                 
                 return Observable.just(self.visibleCardIndices)
             }
@@ -158,7 +158,7 @@ final class CardGameViewModel {
             .withUnretained(self)
             .flatMap { _ -> Observable<(CardIndicies)> in
                 self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameResults.append(nil)
+                self.gameAnswers.append(nil)
                 
                 if self.isLastQuestion {
                     self.submitResult()
@@ -168,48 +168,11 @@ final class CardGameViewModel {
             }
     }
     
-    // TODO: GameAnswerFactory 타입 추가하여 역할 분리
     private func submitResult() {
-        let selectedNations = self.menuNations.filter { $0.isChecked }
-            .map { $0.kind }
-        let selectedMainIngredient = self.mainIngredients.filter { $0.isChecked }
-            .map { $0.kind }
-        
-        // 서버에서 로직 처리 (좋아=true, 싫어=false, 상관없음=nil)
-        // 향후 "면 싫어 Cell" 등이 추가될 수 있음
-        var isRiceChecked = selectedMainIngredient.contains(.rice) ? true : nil
-        var isNoodleChecked = selectedMainIngredient.contains(.noodle) ? true : nil
-        var isSoupChecked = selectedMainIngredient.contains(.soup) ? true : nil
-        let isAllHateChecked = selectedMainIngredient.contains(.hateAll)
-        
-        if isAllHateChecked {
-            isRiceChecked = false
-            isNoodleChecked = false
-            isSoupChecked = false
-        }
-        
-        guard
-            let hangoverGameAnswer = self.gameResults[safe: 0],
-            let greasyGameAnswer = self.gameResults[safe: 1],
-            let healthGameAnswer = self.gameResults[safe: 2],
-            let alcoholGameAnswer = self.gameResults[safe: 3],
-            let instantGameAnswer = self.gameResults[safe: 4],
-            let spicyGameAnswer = self.gameResults[safe: 5],
-            let richGameAnswer = self.gameResults[safe: 6]
-        else { return }
-        
-        let gameAnswer = GameAnswer(
-            hangover: hangoverGameAnswer,
-            greasy: greasyGameAnswer,
-            health: healthGameAnswer,
-            alcohol: alcoholGameAnswer,
-            instant: instantGameAnswer,
-            spicy: spicyGameAnswer,
-            rich: richGameAnswer,
-            rice: isRiceChecked,
-            noodle: isNoodleChecked,
-            soup: isSoupChecked,
-            nation: selectedNations
+        let gameAnswer = GameAnswerFactory().createFinalGameAnswerWith(
+            gameAnswers: self.gameAnswers,
+            mainIngredients: self.mainIngredients,
+            menuNations: self.menuNations
         )
 
         let selectedDislikedFoods = RealmManager.shared.read()
@@ -217,7 +180,7 @@ final class CardGameViewModel {
             gameAnswer: gameAnswer,
             dislikedFoods: selectedDislikedFoods,
             pinNumber: self.pinNumber,
-            token: "111"  // TODO: token 연결
+            token: "1111"  // TODO: token 연결
         )
         let encodedData = JSONParser().encode(from: resultSubmission)
         
@@ -260,9 +223,9 @@ final class CardGameViewModel {
         inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<(CardIndicies, Bool?)> in
-                if self.gameResults.isEmpty == false {
+                if self.gameAnswers.isEmpty == false {
                     self.visibleCardIndices = self.previousVisibleCardIndices(from: self.visibleCardIndices)
-                    let lastestAnswer = self.gameResults.removeLast()
+                    let lastestAnswer = self.gameAnswers.removeLast()
                     
                     return Observable.just((self.visibleCardIndices, lastestAnswer))
                 } else {

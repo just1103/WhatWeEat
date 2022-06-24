@@ -4,6 +4,12 @@ import UIKit
 
 class SubmissionViewController: UIViewController {
     // MARK: - Properties
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .mainOrange
+        return view
+    }()
     private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +56,7 @@ class SubmissionViewController: UIViewController {
         button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
         button.backgroundColor = .white
         button.clipsToBounds = true
-        button.isHidden = false  // TODO: default는 true, Host가 맞으면 false로 변경
+        button.isHidden = true  // TODO: default는 true, 사용자가 Host이거나 Host가 결과확인버튼을 탭한 이후 false로 변경
         return button
     }()
     private let gameRestartButton: UIButton = {
@@ -95,8 +101,9 @@ class SubmissionViewController: UIViewController {
     }
 
     private func configureUI() {
-        view.backgroundColor = .mainOrange
+        view.backgroundColor = .systemGray6
 
+        view.addSubview(backgroundView)
         view.addSubview(pinNumberLabel)
         view.addSubview(submissionCountLabel)
         view.addSubview(descriptionLabel)
@@ -107,6 +114,11 @@ class SubmissionViewController: UIViewController {
         gameRestartButton.layer.cornerRadius = view.bounds.height * 0.07 * 0.5
 
         NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
             pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
@@ -140,19 +152,26 @@ extension SubmissionViewController {
         
         let output = viewModel.transform(input)
 
-        configurePinNumberAndSubmissionCount(with: output.pinNumberAndSubmissionCount)
+        configurePinNumberAndResultWaitingInformation(with: output.pinNumberAndResultWaitingInformation)
         configureUpdatedSubmissionCount(with: output.updatedSubmissionCount)
+        configureUpdatedIsGameClosed(with: output.updatedIsGameClosed)
     }
 
-    private func configurePinNumberAndSubmissionCount(with inputObservable: Observable<(String, Int)>) {
+    private func configurePinNumberAndResultWaitingInformation(
+        with inputObservable: Observable<(String, Int, Bool, Bool)>
+    ) {
         inputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, pinNumberAndSubmissionCount) in
-                let (pinNumber, submissionCount) = pinNumberAndSubmissionCount
+            .subscribe(onNext: { (self, pinNumberAndResultWaitingInformation) in
+                let (pinNumber, submissionCount, isHost, isGameClosed) = pinNumberAndResultWaitingInformation
                 
                 self.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
                 self.submissionCountLabel.text = "\(submissionCount)명\n제출완료"
+                
+                if isHost || isGameClosed {
+                    self.gameResultCheckButton.isHidden = false
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -163,6 +182,18 @@ extension SubmissionViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, updatedSubmissionCount) in
                 self.submissionCountLabel.text = "\(updatedSubmissionCount)명\n제출완료"
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureUpdatedIsGameClosed(with inputObservable: Observable<Bool>) {
+        inputObservable
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { (self, isGameClosed) in
+                if isGameClosed {
+                    self.gameResultCheckButton.isHidden = false
+                }
             })
             .disposed(by: disposeBag)
     }

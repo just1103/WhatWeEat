@@ -170,7 +170,7 @@ class GameResultViewController: UIViewController {
     }
 
     private func configureUI() {
-//        view.backgroundColor = .mainOrange
+        view.backgroundColor = .systemGray6
 
         view.addSubview(pinNumberLabel)
         view.addSubview(playerCountLabel)
@@ -312,15 +312,20 @@ extension GameResultViewController {
         }
     }
     
-    private func configureNextMenuContents(with inputObservable: Observable<Menu?>) {
+    private func configureNextMenuContents(with inputObservable: Observable<(Menu?, Int)>) {
         inputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, nextMenu) in
+            .subscribe(onNext: { (self, nextMenuAndIndex) in
+                let (nextMenu, indexOfMenu) = nextMenuAndIndex
                 guard let nextMenu = nextMenu else { return }
                 
-                self.configureNextMenuLabels(menu: nextMenu)
-                self.configureImage(menu: nextMenu)
+                if indexOfMenu < 3 {
+                    self.configureNextMenuLabels(menu: nextMenu)
+                    self.configureImage(menu: nextMenu)
+                    
+                    self.nextMenuCheckButton.setTitle("다음 순위 메뉴 확인 (\(indexOfMenu + 1)/3)", for: .normal)
+                }
             })
             .disposed(by: disposeBag)
     }

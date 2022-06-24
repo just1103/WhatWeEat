@@ -36,7 +36,10 @@ final class MainTabBarController: UITabBarController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black,
                                                                    .font: UIFont.preferredFont(forTextStyle: .title1)]
         navigationItem.title = "우리뭐먹지"
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, .font: UIFont.preferredFont(forTextStyle: .title1)]
+        let textAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            .font: UIFont.preferredFont(forTextStyle: .title1)
+        ]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationItem.hidesBackButton = true
     }

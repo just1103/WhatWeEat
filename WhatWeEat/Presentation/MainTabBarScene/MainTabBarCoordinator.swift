@@ -25,7 +25,7 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
                 return
             }
             
-            togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber, token: "")
+            togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber, token: "1111")  // TODO: 토큰 지정
         }
     }
     

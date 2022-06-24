@@ -13,13 +13,13 @@ extension UIView {
     ) {
         switch direction {
         case .top:
-            applyShadow(offset: CGSize(width: 0, height: -5), color: color, opacity: opacity, radius: radius)
+            applyShadow(offset: CGSize(width: 0, height: -4), color: color, opacity: opacity, radius: radius)
         case .left:
-            applyShadow(offset: CGSize(width: -5, height: 0), color: color, opacity: opacity, radius: radius)
+            applyShadow(offset: CGSize(width: -4, height: 0), color: color, opacity: opacity, radius: radius)
         case .right:
-            applyShadow(offset: CGSize(width: 5, height: 0), color: color, opacity: opacity, radius: radius)
+            applyShadow(offset: CGSize(width: 4, height: 0), color: color, opacity: opacity, radius: radius)
         case .bottom:
-            applyShadow(offset: CGSize(width: 0, height: 5), color: color, opacity: opacity, radius: radius)
+            applyShadow(offset: CGSize(width: 0, height: 4), color: color, opacity: opacity, radius: radius)
         }
     }
 

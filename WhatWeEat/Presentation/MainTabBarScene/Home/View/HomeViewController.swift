@@ -3,23 +3,6 @@ import RxSwift
 
 final class HomeViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
-//    private let containerStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.axis = .vertical
-//        stackView.alignment = .fill
-//        stackView.distribution = .fill
-//        stackView.backgroundColor = .white
-//        stackView.spacing = 20
-//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-//            top: 40,
-//            leading: 40,
-//            bottom: UIScreen.main.bounds.height * 0.25,
-//            trailing: 40
-//        )
-//        stackView.isLayoutMarginsRelativeArrangement = true
-//        return stackView
-//    }()
     private let randomMenuImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -118,38 +101,23 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         invokedViewDidLoad.onNext(())
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let networkConnectionManager = NetworkConnectionManager.shared
+        if networkConnectionManager.isCurrentlyConnected == false {
+            netWorkNotConnectedAlert()
+        }
+    }
+    
+    func netWorkNotConnectedAlert() {
+        let alert = UIAlertController(title: "인터넷 연결이 원활하지 않습니다.", message: "Wifi 또는 셀룰러를 활성화 해주세요.", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        
+        self.present(alert, animated: true)
+    }
+    
     // MARK: - Methods
-    private func bind() {
-        let input = HomeViewModel.Input(invokedViewDidLoad: invokedViewDidLoad.asObservable())
-        
-        let output = viewModel.transform(input)
-        
-        configureRandomMenu(with: output.randomMenu)
-    }
-    
-    private func configureRandomMenu(with randomMenu: Observable<Menu>) {
-        randomMenu
-            .subscribe(onNext: { [weak self] menu in
-                DispatchQueue.global().async {
-                    guard let menuImageURL = menu.imageURL,
-                          let imageURL = URL(string: menuImageURL),
-                          let imageData = try? Data(contentsOf: imageURL),
-                          let loadedImage = UIImage(data: imageData) else {
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self?.randomMenuImageView.image = loadedImage
-                        self?.descriptionLabel.text = """
-                        랜덤으로 골라봤어요.
-                        오늘 점심은 \(menu.name) 어떠세요?
-                        """
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
     private func configureTabBar() {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")
@@ -200,5 +168,34 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
 //            restaurantLocationButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
         ])
     }
+}
+
+// MARK: - Rx Binding Methods
+extension HomeViewController {
+    private func bind() {
+        let input = HomeViewModel.Input(invokedViewDidLoad: invokedViewDidLoad.asObservable())
+        
+        let output = viewModel.transform(input)
+        
+        configureRandomMenu(with: output.randomMenu)
+    }
     
+    private func configureRandomMenu(with randomMenu: Observable<Menu>) {
+        randomMenu
+            .subscribe(onNext: { [weak self] menu in
+                DispatchQueue.global().async {
+                    guard let menuImageURL = menu.imageURL,
+                          let imageURL = URL(string: menuImageURL),
+                          let imageData = try? Data(contentsOf: imageURL),
+                          let loadedImage = UIImage(data: imageData)
+                    else { return }
+                    
+                    DispatchQueue.main.async {
+                        self?.randomMenuImageView.image = loadedImage
+                        self?.menuNameLabel.text = menu.name
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
 }

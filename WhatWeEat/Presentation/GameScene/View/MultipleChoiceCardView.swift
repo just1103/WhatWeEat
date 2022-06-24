@@ -14,6 +14,15 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
                 return 1
             }
         }
+        
+        var backgroundColor: UIColor {  // TODO: 무난한색깔 2개로 변경
+            switch self {
+            case .menuNation:
+                return .darkGray
+            case .mainIngredient:
+                return .black
+            }
+        }
     }
     
     // MARK: - Properties
@@ -64,14 +73,37 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
     }
     
     // MARK: - Methods
-    func changeCollectionViewLayout(for questionKind: QuestionKind) {
+    func changeCollectionViewUI(for questionKind: QuestionKind) {
         choiceCollectionView.collectionViewLayout = createLayout(for: questionKind)
+        changeBackgroundColor(for: questionKind)
     }
     
-    // TODO: 백그라운드에 그라데이션 적용
+    private func createLayout(for questionKind: QuestionKind) -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(0.25)
+            ) // TODO: 화면 크기에 따라 변경
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: questionKind.columnCount)
+            let section = NSCollectionLayoutSection(group: group)
+            
+            return section
+        }
+        
+        return layout
+    }
+    
+    private func changeBackgroundColor(for questionKind: QuestionKind) {
+        choiceCollectionView.backgroundColor = questionKind.backgroundColor
+        containerStackView.backgroundColor = questionKind.backgroundColor
+    }
+    
     func configureUI() {
         self.backgroundColor = UIColor.clear
-        self.applyShadow(direction: .top, radius: 8)
+//        self.applyShadow(direction: .top, radius: 8)
         
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleLabel)
@@ -96,23 +128,5 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         choiceCollectionView.translatesAutoresizingMaskIntoConstraints = false
         choiceCollectionView.backgroundColor = .black
         choiceCollectionView.register(cellType: GameSelectionCell.self)
-    }
-    
-    private func createLayout(for questionKind: QuestionKind) -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.25)
-            ) // TODO: 화면 크기에 따라 변경 
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: questionKind.columnCount)
-            let section = NSCollectionLayoutSection(group: group)
-            
-            return section
-        }
-        
-        return layout
     }
 }

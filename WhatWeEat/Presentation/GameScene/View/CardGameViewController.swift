@@ -268,7 +268,7 @@ extension CardGameViewController {
                 cellIdentifier: String(describing: GameSelectionCell.self),
                 cellType: GameSelectionCell.self
             )) { [weak self] _, item, cell in
-                self?.mainIngredientCard.changeCollectionViewLayout(for: .menuNation)
+                self?.mainIngredientCard.changeCollectionViewUI(for: .menuNation)
                 cell.apply(isChecked: item.isChecked, descriptionText: item.descriptionText)
             }
             .disposed(by: disposeBag)
@@ -280,7 +280,7 @@ extension CardGameViewController {
                 cellIdentifier: String(describing: GameSelectionCell.self),
                 cellType: GameSelectionCell.self
             )) { [weak self] _, item, cell in
-                self?.nationCard.changeCollectionViewLayout(for: .mainIngredient)
+                self?.nationCard.changeCollectionViewUI(for: .mainIngredient)
                 cell.apply(isChecked: item.isChecked, descriptionText: item.descriptionText)
             }
             .disposed(by: disposeBag)

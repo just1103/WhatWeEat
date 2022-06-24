@@ -13,7 +13,7 @@ final class GameResultViewModel {
     
     struct Output {
         let firstMenuAndPlayerCountAndPinNumber: Observable<(Menu, Int, String?)>
-        let nextMenu: Observable<Menu?>
+        let nextMenu: Observable<(Menu?, Int)>
         let shareButtonDidTap: Observable<Void>
     }
     
@@ -92,38 +92,34 @@ final class GameResultViewModel {
         return menusAndPlayerCount
     }
     
-    private func configureNextMenuCheckButtonDidTap(with inputObserver: Observable<Void>) -> Observable<Menu?> {
+    private func configureNextMenuCheckButtonDidTap(with inputObserver: Observable<Void>) -> Observable<(Menu?, Int)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<Menu?> in
+            .flatMap { _ -> Observable<(Menu?, Int)> in
                 self.currentMenuIndex += 1
                 
-                return Observable.just(self.menus[safe: self.currentMenuIndex])
+                return Observable.just((self.menus[safe: self.currentMenuIndex], self.currentMenuIndex))
             }
     }
 
     private func configureGameRestartButtonDidTap(with inputObserver: Observable<Void>) {
-        if pinNumber == nil {
-            // TODO: 화면 전환 - 함께메뉴 초기화면, GameCoordinator 메모리 해제
-            // 그룹 정보 삭제는 서버에서 처리 (1일 후 삭제)
-            coordinator.showInitialTogetherMenuPage()
-            coordinator.finish()
-        } else {
-            // TODO: 화면 전환 - 혼밥메뉴 초기화면, GameCoordinator 메모리 해제
-            coordinator.showInitialSoloMenuPage()
-            coordinator.finish()
-        }
+        inputObserver
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                if self.pinNumber == nil {
+                    // TODO: 화면 전환 - 혼밥메뉴 초기화면, GameCoordinator 메모리 해제
+                    self.coordinator.showInitialSoloMenuPage()
+                    self.coordinator.finish()  // TODO: 여기서 할지, ViewModel deinit에서 할지 판단
+                } else {
+                    // TODO: 화면 전환 - 함께메뉴 초기화면, GameCoordinator 메모리 해제
+                    // 그룹 정보 삭제는 서버에서 처리 (1일 후 삭제)
+                    self.coordinator.showInitialTogetherMenuPage()
+                    self.coordinator.finish()
+                }
+            })
+            .disposed(by: disposeBag)
     }
-    
-//    private func deleteGroup(pinNumber: String) -> Observable<Data> {
-//        return NetworkProvider().request(api: WhatWeEatURL.DeleteGroupAPI(pinNumber: pinNumber))
-//            .withUnretained(self)
-//            .observe(on: MainScheduler.instance)
-//            .subscribe(onNext: { _ in
-//                self.coordinator.showInitialTogetherMenuPage()
-//            })
-//            .disposed(by: disposeBag)
-//    }
     
     // TODO: 화면전환 - 식당 (다음 배포버전에서 추가할 예정)
 //    private func configureRestaurantCheckButtonDidTap(with inputObserver: Observable<Void>) {

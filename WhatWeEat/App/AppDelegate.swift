@@ -3,7 +3,18 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let networkConnectionManager = NetworkConnectionManager.shared
+        networkConnectionManager.startMonitoring()
+        
+//        networkConnectionManager.monitor.pathUpdateHandler = { path in
+//            if path.status == .satisfied {
+//                print("connected")
+//            } else {
+//                print("not connected")
+//            }
+//        }
+        
         return true
     }
     

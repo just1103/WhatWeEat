@@ -28,7 +28,7 @@ final class TogetherMenuViewModel {
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
-                let pinNumberObservable = NetworkProvider().request(api: WhatWeEatURL.CreateGroupAPI())
+                let pinNumberObservable = NetworkProvider().request(api: WhatWeEatURL.CreateGroupAPI(token: "1111"))  // TODO: 토큰 입력
                 self.coordinator.showSharePinNumberPage(with: pinNumberObservable)
             })
             .disposed(by: disposeBag)

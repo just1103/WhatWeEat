@@ -70,12 +70,12 @@ final class SettingViewModel {
                 )
                 let privacyPolicies = OrdinarySettingItem(
                     title: Content.privacyPoliciesTitle,
-                    content: Content.privacyPoliciesContent,
+                    content: FilePath.termsOfPrivacyContent,
                     sectionKind: .ordinary
                 )
                 let openSourceLicense = OrdinarySettingItem(
                     title: Content.openSourceLicenseTitle,
-                    content: Content.openSourceLicenseContent,
+                    content: FilePath.openSourceLicenseContent,
                     sectionKind: .ordinary
                 )
                 let feedBackToDeveloper = OrdinarySettingItem(
@@ -174,55 +174,16 @@ final class SettingViewModel {
 
 // MARK: - NameSpaces
 extension SettingViewModel {
+    enum FilePath {  // TODO: 정리, 네이밍 수정? (TextByFilePath)
+        static let termsOfPrivacyContent = Bundle.main.path(forResource: "TermsOfPrivacy", ofType: "txt") ?? ""
+        static let openSourceLicenseContent = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
+    }
+    
     enum Content {
         static let editDislikedFoodsTitle = "못먹는 음식 수정하기"
         static let editDislikedFoodsContent = ""
         static let privacyPoliciesTitle = "개인정보 처리방침"
-        static let privacyPoliciesContent = """
-        개인정보 처리방침입니다.
-        """
         static let openSourceLicenseTitle = "오픈소스 라이센스"
-        static let openSourceLicenseContent = """
-        Rx for iOS
-        https://github.com/ReactiveX/RxSwift
-        Apache License Version 6.5.0
-
-        Realm Swift
-        https://github.com/realm/realm-swift
-        Apache License Version 10.26.0
-        
-        Rx for iOS
-        https://github.com/ReactiveX/RxSwift
-        Apache License Version 6.5.0
-
-        Realm Swift
-        https://github.com/realm/realm-swift
-        Apache License Version 10.26.0
-        
-        Rx for iOS
-        https://github.com/ReactiveX/RxSwift
-        Apache License Version 6.5.0
-
-        Realm Swift
-        https://github.com/realm/realm-swift
-        Apache License Version 10.26.0
-
-        Rx for iOS
-        https://github.com/ReactiveX/RxSwift
-        Apache License Version 6.5.0
-
-        Realm Swift
-        https://github.com/realm/realm-swift
-        Apache License Version 10.26.0
-
-        Rx for iOS
-        https://github.com/ReactiveX/RxSwift
-        Apache License Version 6.5.0
-
-        Realm Swift
-        https://github.com/realm/realm-swift
-        Apache License Version 10.26.0
-        """
         static let feedBackToDeveloperTitle = "개발자에게 피드백하기"
         static let feedBackToDeveloperContent = """
         개발자 이메일: aaaa@gmail.com

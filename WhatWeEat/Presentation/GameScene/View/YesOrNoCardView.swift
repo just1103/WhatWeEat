@@ -40,7 +40,7 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
     // MARK: - Methods
     func configureUI() {
         self.backgroundColor = UIColor.clear
-        self.applyShadow(direction: .top, radius: 8)
+//        self.applyShadow(direction: .top, radius: 8)
         
         addSubview(imageView)
         addSubview(filterView)

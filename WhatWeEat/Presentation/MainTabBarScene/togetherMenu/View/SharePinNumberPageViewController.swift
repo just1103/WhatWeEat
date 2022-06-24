@@ -84,7 +84,7 @@ final class SharePinNumberPageViewController: UIViewController {
         label.textColor = .white
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.text = "1111"
+        label.text = " "  // 빈문자열로 할당하면 View에서 위치를 못잡음
         return label
     }()
     private let shareButton: UIButton = {
@@ -205,11 +205,11 @@ extension SharePinNumberPageViewController {
         
         let output = viewModel.transform(input)
         
-        configurePINNumber(with: output.pinNumber)
+        configurePinNumber(with: output.pinNumber)
         configureShareButtonDidTap(with: output.shareButtonDidTap)
     }
     
-    private func configurePINNumber(with pinNumber: Observable<String>) {
+    private func configurePinNumber(with pinNumber: Observable<String>) {
         pinNumber
             .withUnretained(self)
             .observe(on: MainScheduler.instance)

@@ -10,7 +10,8 @@ final class HomeCoordinator: CoordinatorProtocol {
     func start() {
     }
     
-    func createHomeViewcontroller() -> UINavigationController {
+    func createHomeViewcontroller() -> UINavigationController {     
+        
         let homeViewModel = HomeViewModel()
         let homeViewController = HomeViewController(viewModel: homeViewModel)
         navigationController = UINavigationController(rootViewController: homeViewController)

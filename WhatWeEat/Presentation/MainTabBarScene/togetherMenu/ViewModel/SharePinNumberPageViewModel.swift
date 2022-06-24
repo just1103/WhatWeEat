@@ -28,7 +28,7 @@ final class SharePinNumberPageViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let pinNumber = configurePINNumber()
+        let pinNumber = configurePinNumber()
         configureBackButtonDidTap(by: input.backButtonDidTap)
         configureGameStartButtonDidTap(by: input.gameStartButtonDidTap)
         
@@ -40,7 +40,7 @@ final class SharePinNumberPageViewModel {
         return output
     }
     
-    private func configurePINNumber() -> Observable<String> {
+    private func configurePinNumber() -> Observable<String> {
         pinNumberData.map { [weak self] in
             guard let pinNumberText = String(data: $0, encoding: .utf8) else {
                 return ""

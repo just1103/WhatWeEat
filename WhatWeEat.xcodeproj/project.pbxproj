@@ -53,6 +53,11 @@
 		365EC7DA286348CD0094823A /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */; };
 		365EC7DC28634A7C0094823A /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DB28634A7C0094823A /* UIView+Effects.swift */; };
 		365EC7DE28634C610094823A /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DD28634C610094823A /* CardGameViewModel.swift */; };
+		365EC7E02864889F0094823A /* GameAnswerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DF2864889F0094823A /* GameAnswerFactory.swift */; };
+		365EC7E3286543CD0094823A /* TermsOfPrivacy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */; };
+		365EC7E5286546400094823A /* OpenSourceLicense in Resources */ = {isa = PBXBuildFile; fileRef = 365EC7E4286546400094823A /* OpenSourceLicense */; };
+		36A5E3AF286552FB0057A556 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */; };
+		36A5E3B1286589970057A556 /* ResultWaiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3B0286589970057A556 /* ResultWaiting.swift */; };
 		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
 		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
@@ -148,6 +153,11 @@
 		365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		365EC7DB28634A7C0094823A /* UIView+Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
 		365EC7DD28634C610094823A /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewModel.swift; sourceTree = "<group>"; };
+		365EC7DF2864889F0094823A /* GameAnswerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswerFactory.swift; sourceTree = "<group>"; };
+		365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TermsOfPrivacy.txt; sourceTree = "<group>"; };
+		365EC7E4286546400094823A /* OpenSourceLicense */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenSourceLicense; sourceTree = "<group>"; };
+		36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
+		36A5E3B0286589970057A556 /* ResultWaiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWaiting.swift; sourceTree = "<group>"; };
 		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
@@ -278,6 +288,8 @@
 			children = (
 				3636DED02844ADFD00F04111 /* JSONParser.swift */,
 				3636DE95283CCFD000F04111 /* AlertFactory.swift */,
+				365EC7DF2864889F0094823A /* GameAnswerFactory.swift */,
+				36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -443,6 +455,7 @@
 			children = (
 				3636DED52844B00000F04111 /* Menu.swift */,
 				3636DED72844B06C00F04111 /* GameResult.swift */,
+				36A5E3B0286589970057A556 /* ResultWaiting.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -553,6 +566,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		365EC7E12865438F0094823A /* Term */ = {
+			isa = PBXGroup;
+			children = (
+				365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */,
+				365EC7E4286546400094823A /* OpenSourceLicense */,
+			);
+			path = Term;
+			sourceTree = "<group>";
+		};
 		DE095C88283B259300C7E109 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +602,7 @@
 		DE095C8A283B25AD00C7E109 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				365EC7E12865438F0094823A /* Term */,
 				3636DE5F283B225200F04111 /* LaunchScreen.storyboard */,
 				3636DE5D283B225200F04111 /* Assets.xcassets */,
 			);
@@ -774,7 +797,9 @@
 			files = (
 				3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */,
 				3636DE61283B225200F04111 /* LaunchScreen.storyboard in Resources */,
+				365EC7E3286543CD0094823A /* TermsOfPrivacy.txt in Resources */,
 				3636DE5E283B225200F04111 /* Assets.xcassets in Resources */,
+				365EC7E5286546400094823A /* OpenSourceLicense in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +853,7 @@
 				3636DEBF283F75F900F04111 /* SoloMenuViewController.swift in Sources */,
 				DE69461B283C6ADC00BAA51D /* OnboardingViewModel.swift in Sources */,
 				3636DEAE283E302600F04111 /* AppCoordinator.swift in Sources */,
+				36A5E3B1286589970057A556 /* ResultWaiting.swift in Sources */,
 				3636DEA5283E068B00F04111 /* DislikedFoodForRealm.swift in Sources */,
 				3636DEA2283E00FE00F04111 /* RealmManager.swift in Sources */,
 				365EC7DA286348CD0094823A /* UIColor+CustomColor.swift in Sources */,
@@ -869,8 +895,10 @@
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
 				365EC7742851928A0094823A /* CardGameViewController.swift in Sources */,
 				DE56950E28571C0D009F3DCE /* SubmissionViewController.swift in Sources */,
+				36A5E3AF286552FB0057A556 /* NetworkConnectionManager.swift in Sources */,
 				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
 				DE56951028571E6B009F3DCE /* GameSelectionCell.swift in Sources */,
+				365EC7E02864889F0094823A /* GameAnswerFactory.swift in Sources */,
 				DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */,
 				DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */,
 				DE56951A28582323009F3DCE /* CardViewProtocol.swift in Sources */,
