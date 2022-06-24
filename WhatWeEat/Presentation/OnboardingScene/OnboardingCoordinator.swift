@@ -26,6 +26,10 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
         dislikedFoodSurveyCoordinatorDelegate.removeFromChildCoordinators(coordinator: self)
     }
     
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func makeOnboardingPage() {
         let firstPage = OnboardingContentViewController(
             titleLabelText: Content.firstPageTitleLabelText,

@@ -25,7 +25,7 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
                 return
             }
             
-            togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber, token: "1111")  // TODO: 토큰 지정
+            togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber)
         }
     }
     
@@ -37,9 +37,9 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         settingCoordinator.start()
     }
     
-//    func popCurrentPage() {
-//        navigationController?.popViewController(animated: false)
-//    }
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: false)
+    }
     
     func hideNavigationBarAndTabBar() {
         navigationController?.navigationBar.isHidden = true
@@ -90,8 +90,8 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         soloMenuCoordinator.delegate = self
         togetherMenuCoordinator.delegate = self
         
-        let homeViewController = homeCoordinator.createHomeViewcontroller()
-        let soloMenuViewController = soloMenuCoordinator.createSoloMenuViewcontroller()
+        let homeViewController = homeCoordinator.createHomeViewController()
+        let soloMenuViewController = soloMenuCoordinator.createSoloMenuViewController()
         let togetherMenuViewController = togetherMenuCoordinator.createTogetherMenuViewController()
         let mainTabBarViewModel = MainTabBarViewModel(coordinator: self)
         mainTabBarController = MainTabBarController(

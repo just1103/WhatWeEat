@@ -19,14 +19,12 @@ final class SubmissionViewModel {
     private weak var coordinator: GameCoordinator!
     private let pinNumber: String
     private var latestSubmissionCount: Int!
-    private var token: String?
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
-    init(coordinator: GameCoordinator, pinNumber: String, token: String?) {
+    init(coordinator: GameCoordinator, pinNumber: String) {
         self.coordinator = coordinator
         self.pinNumber = pinNumber
-        self.token = token
     }
     
     // MARK: - Methods
@@ -72,7 +70,7 @@ final class SubmissionViewModel {
     private func fetchResultWaitingInformation(with pinNumber: String) -> Observable<ResultWaiting> {
         let networkProvider = NetworkProvider()
         let observable = networkProvider.fetchData( // TODO: 토큰 입력
-            api: WhatWeEatURL.GameResultWaitingAPI(pinNumber: pinNumber, token: "1111"),
+            api: WhatWeEatURL.GameResultWaitingAPI(pinNumber: pinNumber, token: AppDelegate.token),
             decodingType: ResultWaiting.self
         )
         return observable
@@ -145,7 +143,7 @@ final class SubmissionViewModel {
         return inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: "1111") // TODO: token 처리 필요
+                self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: AppDelegate.token)
                 UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
                 UserDefaults.standard.set(nil, forKey: "latestPinNumber")
             })

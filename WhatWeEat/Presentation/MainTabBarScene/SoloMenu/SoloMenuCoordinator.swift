@@ -9,7 +9,7 @@ final class SoloMenuCoordinator: CoordinatorProtocol {
     func start() {
     }
     
-    func createSoloMenuViewcontroller() -> UINavigationController {
+    func createSoloMenuViewController() -> UINavigationController {
         let soloMenuViewModel = SoloMenuViewModel(coordinator: self)
         let soloMenuViewController = SoloMenuViewController(viewModel: soloMenuViewModel)
         navigationController = UINavigationController(rootViewController: soloMenuViewController)
@@ -28,6 +28,10 @@ final class SoloMenuCoordinator: CoordinatorProtocol {
         gameCoordinator.delegate = self
         childCoordinators.append(gameCoordinator)
         gameCoordinator.start()
+    }
+    
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

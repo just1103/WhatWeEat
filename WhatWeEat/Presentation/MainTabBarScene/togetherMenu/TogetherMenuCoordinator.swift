@@ -36,8 +36,8 @@ final class TogetherMenuCoordinator: CoordinatorProtocol {
         navigationController?.pushViewController(sharePinNumberPageViewController, animated: false)
     }
     
-    func showEnterWithPinNumberPage() {
-        let enterWithPinNumberViewModel = EnterWithPinNumberViewModel(coordinator: self)
+    func showEnterWithPinNumberPage(pinNumber: String) {
+        let enterWithPinNumberViewModel = EnterWithPinNumberViewModel(coordinator: self, pinNumber: pinNumber)
         let enterWithPinNumberViewController = EnterWithPinNumberViewController(viewModel: enterWithPinNumberViewModel)
         
         navigationController?.pushViewController(enterWithPinNumberViewController, animated: false)
@@ -51,12 +51,12 @@ final class TogetherMenuCoordinator: CoordinatorProtocol {
         gameCoordinator.start()
     }
     
-    func showLatestSubmissionPage(pinNumber: String, token: String) {
+    func showLatestSubmissionPage(pinNumber: String) {
         guard let navigationController = navigationController else { return }
         let gameCoordinator = GameCoordinator(navigationController: navigationController, pinNumber: pinNumber)
         gameCoordinator.delegate = self
         childCoordinators.append(gameCoordinator)
-        gameCoordinator.showSubmissionPage(pinNumber: pinNumber, token: token)
+        gameCoordinator.showSubmissionPage(pinNumber: pinNumber)
     }
     
     func popCurrentPage() {

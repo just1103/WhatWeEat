@@ -1,6 +1,6 @@
 import UIKit
 
-final class HomeCoordinator: CoordinatorProtocol {
+final class HomeCoordinator: CoordinatorProtocol {    
     // MARK: - Properties
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController? = UINavigationController()
@@ -10,9 +10,8 @@ final class HomeCoordinator: CoordinatorProtocol {
     func start() {
     }
     
-    func createHomeViewcontroller() -> UINavigationController {     
-        
-        let homeViewModel = HomeViewModel()
+    func createHomeViewController() -> UINavigationController {
+        let homeViewModel = HomeViewModel(coordinator: self)
         let homeViewController = HomeViewController(viewModel: homeViewModel)
         navigationController = UINavigationController(rootViewController: homeViewController)
         navigationController?.navigationBar.isHidden = true
@@ -22,5 +21,16 @@ final class HomeCoordinator: CoordinatorProtocol {
         }
 
         return navigationController
+    }
+    
+    func showNetworkErrorPage() {
+        let networkErrorViewModel = NetworkErrorViewModel(coordinator: self)
+        let networkErrorViewController = NetworkErrorViewController(viewModel: networkErrorViewModel)
+        
+        navigationController?.pushViewController(networkErrorViewController, animated: false)
+    }
+    
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: true)
     }
 }

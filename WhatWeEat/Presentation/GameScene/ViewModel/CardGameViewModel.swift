@@ -180,7 +180,7 @@ final class CardGameViewModel {
             gameAnswer: gameAnswer,
             dislikedFoods: selectedDislikedFoods,
             pinNumber: self.pinNumber,
-            token: "1111"  // TODO: token 연결
+            token: AppDelegate.token
         )
         let encodedData = JSONParser().encode(from: resultSubmission)
         

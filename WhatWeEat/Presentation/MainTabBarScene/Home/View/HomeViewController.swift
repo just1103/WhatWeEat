@@ -84,6 +84,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     
     private var viewModel: HomeViewModel!
     private let invokedViewDidLoad = PublishSubject<Void>()
+    private let invokedViewWillAppear = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -103,18 +104,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let networkConnectionManager = NetworkConnectionManager.shared
-        if networkConnectionManager.isCurrentlyConnected == false {
-            netWorkNotConnectedAlert()
-        }
-    }
-    
-    func netWorkNotConnectedAlert() {
-        let alert = UIAlertController(title: "인터넷 연결이 원활하지 않습니다.", message: "Wifi 또는 셀룰러를 활성화 해주세요.", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alert.addAction(confirm)
-        
-        self.present(alert, animated: true)
+        invokedViewWillAppear.onNext(())
     }
     
     // MARK: - Methods
@@ -173,7 +163,10 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
 // MARK: - Rx Binding Methods
 extension HomeViewController {
     private func bind() {
-        let input = HomeViewModel.Input(invokedViewDidLoad: invokedViewDidLoad.asObservable())
+        let input = HomeViewModel.Input(
+            invokedViewDidLoad: invokedViewDidLoad.asObservable(),
+            invokedViewWillAppear: invokedViewWillAppear.asObservable()
+        )
         
         let output = viewModel.transform(input)
         

@@ -43,6 +43,10 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
         let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
         childCoordinators = updatedChildCoordinators
     }
+    
+    func popCurrentPage() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - NameSpaces

@@ -48,8 +48,8 @@ final class GameCoordinator: CoordinatorProtocol {
         delegate.showNavigationBarAndTabBar()
     }
     
-    func showSubmissionPage(pinNumber: String, token: String? = nil) {
-        let submissionViewModel = SubmissionViewModel(coordinator: self, pinNumber: pinNumber, token: token)
+    func showSubmissionPage(pinNumber: String) {
+        let submissionViewModel = SubmissionViewModel(coordinator: self, pinNumber: pinNumber)
         let submissionViewController = SubmissionViewController(viewModel: submissionViewModel)
         
         navigationController?.pushViewController(submissionViewController, animated: false)

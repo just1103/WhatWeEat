@@ -33,6 +33,15 @@ struct WhatWeEatURL {
         }
     }
     
+    struct GroupValidationCheckAPI: Gettable {
+        var url: URL?
+        var method: HttpMethod = .get
+        
+        init(pinNumber: String, baseURL: String = baseURL) {
+            self.url = URL(string: "\(baseURL)group/\(pinNumber)")
+        }
+    }
+    
     // TODO: 못먹는음식,게임답변,PIN번호,사용자토큰 : group/1111 (여기까지가 URL), (나머지는 JSON으로 보낸다)
     struct ResultSubmissionAPI: Postable {
         var url: URL?

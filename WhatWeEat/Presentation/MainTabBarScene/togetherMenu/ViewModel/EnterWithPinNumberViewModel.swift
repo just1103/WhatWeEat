@@ -10,10 +10,12 @@ final class EnterWithPinNumberViewModel: GameStartWaitingViewModel {
     // MARK: - Properties
     private weak var coordinator: TogetherMenuCoordinator!
     private let disposeBag = DisposeBag()
+    private let pinNumber: String
     
     // MARK: - Initializers
-    init(coordinator: TogetherMenuCoordinator) {
+    init(coordinator: TogetherMenuCoordinator, pinNumber: String) {
         self.coordinator = coordinator
+        self.pinNumber = pinNumber
     }
     
     // MARK: - Methods
@@ -23,7 +25,7 @@ final class EnterWithPinNumberViewModel: GameStartWaitingViewModel {
     
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver.subscribe(onNext: { [weak self] _ in
-            self?.coordinator.showGamePage()
+            self?.coordinator.showGamePage(with: self?.pinNumber)
         })
         .disposed(by: disposeBag)
     }

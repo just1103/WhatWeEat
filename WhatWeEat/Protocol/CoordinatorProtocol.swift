@@ -11,4 +11,5 @@ protocol CoordinatorProtocol: AnyObject {
     var type: CoordinatorType { get }
     
     func start()
+    func popCurrentPage()
 }

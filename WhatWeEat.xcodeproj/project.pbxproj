@@ -92,6 +92,12 @@
 		DEEBE3982845C7CE002697B5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */; };
 		DEEBE39A28460A0B002697B5 /* UITableView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */; };
 		DEEBE39E28461CEF002697B5 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */; };
+		DEF9D8E52865AD0C00336C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEF9D8E42865AD0C00336C38 /* GoogleService-Info.plist */; };
+		DEF9D8EB2865B15900336C38 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DEF9D8EA2865B15900336C38 /* FirebaseAnalytics */; };
+		DEF9D8ED2865B15900336C38 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DEF9D8EC2865B15900336C38 /* FirebaseDatabase */; };
+		DEF9D8EF2865B15900336C38 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DEF9D8EE2865B15900336C38 /* FirebaseMessaging */; };
+		DEF9D8F22865B6B100336C38 /* NetworkErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9D8F12865B6B100336C38 /* NetworkErrorViewController.swift */; };
+		DEF9D8F62865B97B00336C38 /* NetworkErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9D8F52865B97B00336C38 /* NetworkErrorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +196,9 @@
 		DEEBE3972845C7CE002697B5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Cell.swift"; sourceTree = "<group>"; };
 		DEEBE39D28461CEF002697B5 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		DEF9D8E42865AD0C00336C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DEF9D8F12865B6B100336C38 /* NetworkErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorViewController.swift; sourceTree = "<group>"; };
+		DEF9D8F52865B97B00336C38 /* NetworkErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +206,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF9D8EF2865B15900336C38 /* FirebaseMessaging in Frameworks */,
+				DEF9D8ED2865B15900336C38 /* FirebaseDatabase in Frameworks */,
 				3636DE9C283DFE2300F04111 /* RealmSwift in Frameworks */,
 				DE095C87283B241A00C7E109 /* RxSwift in Frameworks */,
+				DEF9D8EB2865B15900336C38 /* FirebaseAnalytics in Frameworks */,
 				DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +256,7 @@
 				3636DECD2844AD6100F04111 /* Extension */,
 				DE095C8A283B25AD00C7E109 /* Resource */,
 				3636DE62283B225200F04111 /* Info.plist */,
+				DEF9D8E42865AD0C00336C38 /* GoogleService-Info.plist */,
 			);
 			path = WhatWeEat;
 			sourceTree = "<group>";
@@ -595,6 +608,7 @@
 				365EC7A428588B6F0094823A /* SubmissionScene */,
 				365EC7CC285B61B70094823A /* GameResultScene */,
 				DEEBE38E2845C5A6002697B5 /* SettingScene */,
+				DEF9D8F02865B48800336C38 /* NetworkErrorScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -704,6 +718,31 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DEF9D8F02865B48800336C38 /* NetworkErrorScene */ = {
+			isa = PBXGroup;
+			children = (
+				DEF9D8F32865B95C00336C38 /* View */,
+				DEF9D8F42865B96200336C38 /* ViewModel */,
+			);
+			path = NetworkErrorScene;
+			sourceTree = "<group>";
+		};
+		DEF9D8F32865B95C00336C38 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DEF9D8F12865B6B100336C38 /* NetworkErrorViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEF9D8F42865B96200336C38 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEF9D8F52865B97B00336C38 /* NetworkErrorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -725,6 +764,9 @@
 				DE095C84283B241A00C7E109 /* RxCocoa */,
 				DE095C86283B241A00C7E109 /* RxSwift */,
 				3636DE9B283DFE2300F04111 /* RealmSwift */,
+				DEF9D8EA2865B15900336C38 /* FirebaseAnalytics */,
+				DEF9D8EC2865B15900336C38 /* FirebaseDatabase */,
+				DEF9D8EE2865B15900336C38 /* FirebaseMessaging */,
 			);
 			productName = WhatWeEat;
 			productReference = 3636DE51283B225100F04111 /* WhatWeEat.app */;
@@ -779,6 +821,7 @@
 			packageReferences = (
 				DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				3636DE9A283DFE2300F04111 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3636DE52283B225100F04111 /* Products */;
 			projectDirPath = "";
@@ -796,6 +839,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */,
+				DEF9D8E52865AD0C00336C38 /* GoogleService-Info.plist in Resources */,
 				3636DE61283B225200F04111 /* LaunchScreen.storyboard in Resources */,
 				365EC7E3286543CD0094823A /* TermsOfPrivacy.txt in Resources */,
 				3636DE5E283B225200F04111 /* Assets.xcassets in Resources */,
@@ -885,6 +929,7 @@
 				3636DEAA283E1B2C00F04111 /* MainTabBarController.swift in Sources */,
 				3636DECF2844AD8300F04111 /* URLRequest+Initializer.swift in Sources */,
 				3636DEB1283E324F00F04111 /* OnboardingContentProtocol.swift in Sources */,
+				DEF9D8F62865B97B00336C38 /* NetworkErrorViewModel.swift in Sources */,
 				3636DE94283C870800F04111 /* DislikedFoodSurveyViewController.swift in Sources */,
 				3636DE96283CCFD000F04111 /* AlertFactory.swift in Sources */,
 				DEDF03262859D8FB000F7915 /* TogetherMenuCoordinator.swift in Sources */,
@@ -904,6 +949,7 @@
 				DE56951A28582323009F3DCE /* CardViewProtocol.swift in Sources */,
 				DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */,
 				365EC77C2851E1400094823A /* SoloMenuViewModel.swift in Sources */,
+				DEF9D8F22865B6B100336C38 /* NetworkErrorViewController.swift in Sources */,
 				3636DED62844B00000F04111 /* Menu.swift in Sources */,
 				365EC7762851D42F0094823A /* YesOrNoCardView.swift in Sources */,
 				DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */,
@@ -1079,6 +1125,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1106,6 +1153,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1203,6 +1251,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1220,6 +1276,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		DEF9D8EA2865B15900336C38 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DEF9D8EC2865B15900336C38 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		DEF9D8EE2865B15900336C38 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
