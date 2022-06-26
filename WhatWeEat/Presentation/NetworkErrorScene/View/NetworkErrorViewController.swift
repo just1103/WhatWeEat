@@ -49,6 +49,7 @@ class NetworkErrorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bind()
     }
     
     private func configureUI() {

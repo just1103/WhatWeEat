@@ -4,8 +4,7 @@ struct NetworkConnectionManager {
     static let shared = NetworkConnectionManager()
     let monitor = NWPathMonitor()
     var isCurrentlyConnected: Bool {
-//        return monitor.currentPath.status == .satisfied
-        return false
+        return monitor.currentPath.status == .satisfied
     }
     
     private init() { }

@@ -48,7 +48,8 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+//        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .black, size: 60)
         label.textColor = .mainOrange
         label.text = "000"
         label.numberOfLines = 0
