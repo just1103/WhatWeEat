@@ -2,6 +2,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// 네비게이션바 레이블의 높이 = 설정 아이콘 높이 맞추기
+// 홈메뉴의 네비게이션바 색상만 블랙으로 or 나머지는 화이트로 / 세 탭바 모두 그레이로 통일
+
 final class CardGameViewController: UIViewController {
     // MARK: - Nested Types
     private enum AnswerKind {
@@ -55,9 +58,9 @@ final class CardGameViewController: UIViewController {
         stackView.spacing = 50
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
             top: 0,
-            leading: 20,
+            leading: UIScreen.main.bounds.width * 0.1,
             bottom: 0,
-            trailing: 20
+            trailing: UIScreen.main.bounds.width * 0.1
         )
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
@@ -66,10 +69,10 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.likeButtonTitle, for: .normal)
-        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
+//        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
         button.titleLabel?.font = Design.skipButtonTitleFont
-        button.backgroundColor = .systemRed
-        button.layer.cornerRadius = 8
+        button.backgroundColor = .mainOrange
+        button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         return button
     }()
@@ -77,10 +80,12 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.hateButtonTitle, for: .normal)
-        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
-        button.titleLabel?.font = Design.skipButtonTitleFont
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 8
+//        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
+//        button.titleLabel?.font = Design.skipButtonTitleFont
+        button.backgroundColor = .white
+        button.setTitleColor(.mainOrange, for: .normal)
+        button.layer.borderColor = UIColor.mainOrange.cgColor
+        button.layer.borderWidth = 2
         button.clipsToBounds = true
         return button
     }()
@@ -138,8 +143,11 @@ final class CardGameViewController: UIViewController {
         buttonStackView.addArrangedSubview(likeButton)
         buttonStackView.addArrangedSubview(hateButton)
         
+        likeButton.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
+        hateButton.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
+        
         NSLayoutConstraint.activate([
-            previousQuestionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            previousQuestionButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             previousQuestionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             previousQuestionButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             

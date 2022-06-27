@@ -31,7 +31,7 @@ final class SharePinNumberPageViewController: UIViewController {
     private let togetherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "person.3")
+        imageView.image = UIImage(systemName: "person.3.fill")
         imageView.tintColor = .white
         imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
         return imageView

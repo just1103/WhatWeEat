@@ -33,14 +33,12 @@ final class MainTabBarController: UITabBarController {
         navigationItem.rightBarButtonItem = settingsButton
         navigationItem.rightBarButtonItem?.tintColor = .black
         
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black,
-                                                                   .font: UIFont.preferredFont(forTextStyle: .title1)]
         navigationItem.title = "우리뭐먹지"
-        let textAttributes = [
+        navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.black,
-            .font: UIFont.preferredFont(forTextStyle: .title1)
+            .font: UIFont.pretendard(family: .medium, size: 25),
         ]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         navigationItem.hidesBackButton = true
     }
 

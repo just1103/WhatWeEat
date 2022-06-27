@@ -25,6 +25,7 @@ final class SoloMenuViewController: GameStartWaitingViewController, TabBarConten
         tabBarItem.title = "혼밥 메뉴 결정"
         tabBarItem.image = UIImage(systemName: "person")
         tabBarItem.selectedImage = UIImage(systemName: "person.fill")
+        tabBarItem.setTitleTextAttributes([.font: UIFont.pretendard(family: .medium, size: 12)], for: .normal)
     }
 }
 

@@ -32,4 +32,3 @@ final class NetworkErrorViewModel {
             .disposed(by: disposeBag)
     }
 }
-

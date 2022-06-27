@@ -2,6 +2,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// TODO: Cell을 타일 형태로 변경 (행끼리 붙어있게)
 final class DislikedFoodSurveyViewController: UIViewController, OnboardingContentProtocol {
     // MARK: - Nested Types
     private enum SectionKind: Int {
@@ -16,25 +17,24 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     }
     
     // MARK: - Properties
-    private let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 20
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        return stackView
-    }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "못먹는 음식을 알려주세요"
+        label.text = "못먹는 음식"
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .bold, size: 45)
+        return label
+    }()
+    private let titleDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "을 알려주세요"
+        label.numberOfLines = 0
+        label.lineBreakStrategy = .hangulWordPriority
+        label.textAlignment = .left
+        label.font = .pretendard(family: .bold, size: 30)
         return label
     }()
     private let descriptionLabel: UILabel = {
@@ -43,14 +43,14 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.text = "메뉴에서 제외하고 추천드려요"
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .pretendard(family: .medium, size: 25)
         return label
     }()
     private let confirmButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("확인", for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 25)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .mainOrange
         button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
@@ -128,8 +128,8 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
             }
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
+            item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.4))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
 
@@ -160,17 +160,30 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     }
     
     private func configureStackView() {
-        view.addSubview(containerStackView)
+        view.addSubview(titleLabel)
+        view.addSubview(titleDescriptionLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(collectionView)
         view.addSubview(confirmButton)
-        containerStackView.addArrangedSubview(titleLabel)
-        containerStackView.addArrangedSubview(descriptionLabel)
-        containerStackView.addArrangedSubview(collectionView)
-        
+
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+//            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20),
+            
+            titleDescriptionLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            titleDescriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 2),
+            titleDescriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20),
+            
+            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -30),
+            
             confirmButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             confirmButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09),
             confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),

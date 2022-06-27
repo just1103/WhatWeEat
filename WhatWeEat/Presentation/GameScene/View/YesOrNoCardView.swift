@@ -6,7 +6,8 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black.withAlphaComponent(0.5)
-        view.layer.cornerRadius = 8
+//        view.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
+        view.layer.cornerRadius = 30
         view.clipsToBounds = true
         return view
     }()
@@ -14,7 +15,8 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
+//        imageView.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
+        imageView.layer.cornerRadius = 30
         imageView.clipsToBounds = true
         return imageView
     }()

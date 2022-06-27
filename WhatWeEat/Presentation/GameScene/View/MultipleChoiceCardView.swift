@@ -1,5 +1,10 @@
 import UIKit
 
+// TODO: Cell 간에 내부 여백주기 (가로, 세로 줄이고)
+// 체크박스 크기 작게 (텍스트 크기만큼)
+
+// 진행상태 bar를 주는게 낫겠다
+// Cell 위에 체크박스 있는 것보다 없는게 나을듯, 색깔만 들어가도 사용자가 선택됨을 알수있음
 final class MultipleChoiceCardView: UIView, CardViewProtocol {
     // MARK: - Nested Types
     enum QuestionKind {
@@ -20,7 +25,16 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
             case .menuNation:
                 return .darkGray
             case .mainIngredient:
-                return .black
+                return .systemGray
+            }
+        }
+        
+        var sectionInset: NSDirectionalEdgeInsets {
+            switch self {
+            case .menuNation:
+                return NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+            case .mainIngredient:
+                return NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
             }
         }
     }
@@ -32,11 +46,11 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 15, leading: 5, bottom: 10, trailing: 5)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.spacing = 10
         stackView.backgroundColor = .black
-        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
         stackView.clipsToBounds = true
         return stackView
     }()
@@ -80,15 +94,19 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
     
     private func createLayout(for questionKind: QuestionKind) -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.8),
+                heightDimension: .fractionalHeight(1.0)
+            )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.25)
+                heightDimension: .fractionalHeight(0.22)
             ) // TODO: 화면 크기에 따라 변경
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: questionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = questionKind.sectionInset
             
             return section
         }

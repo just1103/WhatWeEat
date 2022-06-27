@@ -2,6 +2,9 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+// TODO: 텍스트 위아래 여백+
+// 설정 네비게이션바 색깔을 그레이로, 네비게이션 타이틀 텍스트컬러를 오렌지로 바꿔보기
+
 final class SettingViewController: UIViewController {
     // MARK: - Nested Types
     enum SectionKind: Int, CaseIterable {
@@ -42,15 +45,22 @@ final class SettingViewController: UIViewController {
             target: self,
             action: nil
         )
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = .mainOrange
+        
         navigationItem.title = "설정"
+        let textAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.mainOrange,
+            .font: UIFont.pretendard(family: .medium, size: 25),
+        ]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     private func configureTableView() {
-        self.view.backgroundColor = .mainYellow
+        self.view.backgroundColor = .systemGray6
         self.view.addSubview(tableView)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemGray6
+        tableView.backgroundColor = .systemGray6  // TODO: 더 밝은 회색으로, 화이트에 가까운 색으로 (같은 색이라도 면적이 넓으면 색깔이 더 어두워보임)
         tableView.register(cellType: VersionCell.self)
         tableView.register(cellType: SettingCell.self)
         tableView.dataSource = self

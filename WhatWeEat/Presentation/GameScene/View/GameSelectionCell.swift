@@ -2,24 +2,24 @@ import UIKit
 
 class GameSelectionCell: UICollectionViewCell {
     // MARK: - Properties
-    private let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        return stackView
-    }()
-    private let checkBoxImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = Content.uncheckedImage
-        imageView.tintColor = .black
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        return imageView
-    }()
+//    private let containerStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .horizontal
+//        stackView.alignment = .center
+//        stackView.distribution = .fill
+//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
+//        stackView.isLayoutMarginsRelativeArrangement = true
+//        return stackView
+//    }()
+//    private let checkBoxImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.image = Content.uncheckedImage
+//        imageView.tintColor = .black
+//        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+//        return imageView
+//    }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class GameSelectionCell: UICollectionViewCell {
     // MARK: - Lifecycle Methods
     override func prepareForReuse() {
         super.prepareForReuse()
-        checkBoxImageView.image = nil
+//        checkBoxImageView.image = nil
         descriptionLabel.text = nil
     }
     
@@ -57,11 +57,9 @@ class GameSelectionCell: UICollectionViewCell {
     }
     
     func toggleSelectedCellUI() {
-        if checkBoxImageView.image == Content.uncheckedImage {
-            checkBoxImageView.image = Content.checkedImage
+        if self.backgroundColor == .subYellow {
             self.backgroundColor = .mainYellow
         } else {
-            checkBoxImageView.image = Content.uncheckedImage
             self.backgroundColor = .subYellow
         }
     }
@@ -71,18 +69,22 @@ class GameSelectionCell: UICollectionViewCell {
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
-        addSubview(containerStackView)
-        containerStackView.addArrangedSubview(checkBoxImageView)
-        containerStackView.addArrangedSubview(descriptionLabel)
+        addSubview(descriptionLabel)
+//        addSubview(containerStackView)
+//        containerStackView.addArrangedSubview(checkBoxImageView)
+//        containerStackView.addArrangedSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            descriptionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            checkBoxImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.2),
-            checkBoxImageView.heightAnchor.constraint(equalTo: checkBoxImageView.widthAnchor),
+//            containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
+//            containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+//            containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+//            containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+//            checkBoxImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.1),
+//            checkBoxImageView.heightAnchor.constraint(equalTo: checkBoxImageView.widthAnchor),
         ])
     }
 }
@@ -90,7 +92,7 @@ class GameSelectionCell: UICollectionViewCell {
 // MARK: - NameSpaces
 extension GameSelectionCell {
     private enum Design {
-        static let descriptionLabelFont: UIFont = .preferredFont(forTextStyle: .headline)
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 20)
     }
     
     private enum Content {

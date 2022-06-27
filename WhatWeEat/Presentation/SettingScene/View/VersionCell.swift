@@ -1,6 +1,9 @@
 import UIKit
 import SwiftUI
 
+// TODO: 업데이트 버튼 radius +, 동그란 느낌으로
+// 위 아래 여백 주기 15씩
+
 class VersionCell: UITableViewCell {
     // MARK: - Properties
     private let containerStackView: UIStackView = {

@@ -86,5 +86,7 @@ class NetworkErrorViewController: UIViewController {
 extension NetworkErrorViewController {
     private func bind() {
         let input = NetworkErrorViewModel.Input(retryButtonDidTap: retryButton.rx.tap.asObservable())
+        
+        viewModel.transform(input)
     }
 }

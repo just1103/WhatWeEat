@@ -3,21 +3,20 @@ import RealmSwift
 
 final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Properties
-    private let checkBoxImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = Content.uncheckedImage
-        imageView.tintColor = .black
-        return imageView
-    }()
     private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 15, bottom: 15, trailing: 15)
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
+            top: 20,
+            leading: 10,
+            bottom: 20,
+            trailing: 10
+        )
         stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.spacing = 10
         return stackView
     }()
     private let descriptionImageView: UIImageView = {
@@ -32,6 +31,8 @@ final class DislikedFoodCell: UICollectionViewCell {
         label.font = Design.descriptionLabelFont
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -49,7 +50,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Lifecycle Methods
     override func prepareForReuse() {
         super.prepareForReuse()
-        checkBoxImageView.image = nil
+//        checkBoxImageView.image = nil
         descriptionImageView.image = nil
         descriptionLabel.text = nil
     }
@@ -64,11 +65,9 @@ final class DislikedFoodCell: UICollectionViewCell {
     }
     
     func toggleSelectedCellUI() {
-        if checkBoxImageView.image == Content.uncheckedImage {
-            checkBoxImageView.image = Content.checkedImage
-            self.backgroundColor = .mainOrange
+        if self.backgroundColor == .subYellow {
+            self.backgroundColor = .mainOrange.withAlphaComponent(0.62)
         } else {
-            checkBoxImageView.image = Content.uncheckedImage
             self.backgroundColor = .subYellow
         }
     }
@@ -77,22 +76,18 @@ final class DislikedFoodCell: UICollectionViewCell {
         self.backgroundColor = .subYellow
         self.applyShadow(direction: .bottom)
         
-        addSubview(checkBoxImageView)
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(descriptionImageView)
         containerStackView.addArrangedSubview(descriptionLabel)
 
-        NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([  // TODO: 상수 Namespaces 처리
             containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            checkBoxImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),  // TODO: 상수 Namespaces 처리
-            checkBoxImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            checkBoxImageView.heightAnchor.constraint(equalTo: checkBoxImageView.widthAnchor),
-            checkBoxImageView.heightAnchor.constraint(equalToConstant: 30),
+            
+            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualTo: self.heightAnchor, multiplier: 0.4),
             descriptionImageView.heightAnchor.constraint(equalTo: descriptionImageView.widthAnchor),
-            descriptionImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5)
         ])
     }
 }
@@ -100,7 +95,7 @@ final class DislikedFoodCell: UICollectionViewCell {
 // MARK: - NameSpaces
 extension DislikedFoodCell {
     private enum Design {
-        static let descriptionLabelFont: UIFont = .preferredFont(forTextStyle: .title3)
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 18)
     }
     
     private enum Content {

@@ -18,14 +18,13 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
             trailing: 20
         )
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.spacing = 10
         return stackView
     }()
     private let makeGroupButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .mainOrange
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 20
         button.clipsToBounds = true
         return button
     }()
@@ -41,7 +40,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "팀원들과 미니게임을 시작하려면"
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .pretendard(family: .regular, size: 25)
         label.textColor = .white
         return label
     }()
@@ -49,7 +48,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "그룹 만들기"
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .bold, size: 40)
         label.textColor = .white
         return label
     }()
@@ -63,7 +62,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemGray6
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 20
         button.clipsToBounds = true
         return button
     }()
@@ -79,7 +78,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "이미 생성된 그룹이 있다면"
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .pretendard(family: .regular, size: 25)
         label.textColor = .black
         return label
     }()
@@ -87,7 +86,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "PIN으로 입장하기"
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .bold, size: 40)
         label.textColor = .black
         return label
     }()
@@ -114,6 +113,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         tabBarItem.title = "함께 메뉴 결정"
         tabBarItem.image = UIImage(systemName: "person.3")
         tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
+        tabBarItem.setTitleTextAttributes([.font: UIFont.pretendard(family: .medium, size: 12)], for: .normal)
     }
     
     private func configureUI() {
@@ -137,30 +137,30 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
             
             makeGroupButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.5),
 
-            makeGroupTitleLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.2),
-            makeGroupTitleLabel.bottomAnchor.constraint(equalTo: makeGroupButton.bottomAnchor, constant: -5),
-            makeGroupTitleLabel.trailingAnchor.constraint(equalTo: makeGroupButton.trailingAnchor, constant: -5),
-            makeGroupDescriptionLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.1),
-            makeGroupDescriptionLabel.bottomAnchor.constraint(equalTo: makeGroupTitleLabel.topAnchor, constant: 5),
+//            makeGroupTitleLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.2),
+            makeGroupTitleLabel.bottomAnchor.constraint(equalTo: makeGroupButton.bottomAnchor, constant: -10),
+            makeGroupTitleLabel.trailingAnchor.constraint(equalTo: makeGroupButton.trailingAnchor, constant: -10),
+//            makeGroupDescriptionLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.1),
+            makeGroupDescriptionLabel.bottomAnchor.constraint(equalTo: makeGroupTitleLabel.topAnchor, constant: -8),
             makeGroupDescriptionLabel.trailingAnchor.constraint(equalTo: makeGroupTitleLabel.trailingAnchor),
             makeGroupImageView.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.5),
             makeGroupImageView.widthAnchor.constraint(equalTo: makeGroupImageView.heightAnchor),
             makeGroupImageView.bottomAnchor.constraint(equalTo: makeGroupDescriptionLabel.topAnchor, constant: 10),
-            makeGroupImageView.trailingAnchor.constraint(equalTo: makeGroupDescriptionLabel.trailingAnchor),
+            makeGroupImageView.trailingAnchor.constraint(equalTo: makeGroupTitleLabel.trailingAnchor),
             
             separatorLineView.heightAnchor.constraint(equalToConstant: 1),
             
             pinNumberButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.3),
 
-            pinNumberTitleLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
+//            pinNumberTitleLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
             pinNumberTitleLabel.bottomAnchor.constraint(equalTo: pinNumberButton.bottomAnchor, constant: -10),
             pinNumberTitleLabel.leadingAnchor.constraint(equalTo: pinNumberButton.leadingAnchor, constant: 10),
-            pinNumberDescriptionLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.1),
-            pinNumberDescriptionLabel.bottomAnchor.constraint(equalTo: pinNumberTitleLabel.topAnchor, constant: 5),
+//            pinNumberDescriptionLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.1),
+            pinNumberDescriptionLabel.bottomAnchor.constraint(equalTo: pinNumberTitleLabel.topAnchor, constant: -8),
             pinNumberDescriptionLabel.leadingAnchor.constraint(equalTo: pinNumberTitleLabel.leadingAnchor),
             pinNumberImageView.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
             pinNumberImageView.widthAnchor.constraint(equalTo: pinNumberImageView.heightAnchor),
-            pinNumberImageView.trailingAnchor.constraint(equalTo: pinNumberButton.trailingAnchor, constant: -5),
+            pinNumberImageView.trailingAnchor.constraint(equalTo: pinNumberButton.trailingAnchor, constant: -10),
             pinNumberImageView.bottomAnchor.constraint(equalTo: pinNumberButton.bottomAnchor, constant: -30),
         ])
     }

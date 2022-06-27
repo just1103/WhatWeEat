@@ -19,27 +19,24 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         )
         return view
     }()
-    private let helloLabel: UILabel = {
+    private let randomDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .light, size: 35)
         label.textColor = .white
-        label.text = "안녕하세요."
+        label.text = "랜덤으로 골라봤어요"
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    private let descriptionLabel: UILabel = {
+    private let todayLunchDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .bold, size: 40)
         label.textColor = .white
-        label.text = """
-        랜덤으로 골라봤어요.
-        오늘 점심은
-        """
+        label.text = "오늘 식사는"
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -48,8 +45,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-//        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.font = .pretendard(family: .black, size: 60)
+        label.font = .pretendard(family: .bold, size: 53)
         label.textColor = .mainOrange
         label.text = "000"
         label.numberOfLines = 0
@@ -66,7 +62,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .bold, size: 40)
         label.textColor = .white
         label.text = "어떠세요?"
         label.numberOfLines = 0
@@ -113,23 +109,19 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         tabBarItem.title = "Home"
         tabBarItem.image = UIImage(systemName: "house")
         tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        tabBarItem.setTitleTextAttributes([.font: UIFont.pretendard(family: .medium, size: 12)], for: .normal)
     }
     
     private func configureUI() {
         view.backgroundColor = .systemGray6
         view.addSubview(randomMenuImageView)
         view.addSubview(gradationView)
-        view.addSubview(helloLabel)
-        view.addSubview(descriptionLabel)
+        view.addSubview(randomDescriptionLabel)
+        view.addSubview(todayLunchDescriptionLabel)
         view.addSubview(menuNameLabel)
         view.addSubview(menuNameUnderline)
         view.addSubview(menuNameDescriptionLabel)
-//        view.addSubview(containerStackView)
-//        containerStackView.addArrangedSubview(titleLabel)
-//        containerStackView.addArrangedSubview(descriptionLabel)
-//        containerStackView.addArrangedSubview(descriptionImageView)
-//        containerStackView.addArrangedSubview(restaurantLocationButton)
-        
+
         NSLayoutConstraint.activate([
             randomMenuImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             randomMenuImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -140,23 +132,20 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
             gradationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             gradationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            helloLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.1),
-            helloLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            descriptionLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 15),
-            descriptionLabel.leadingAnchor.constraint(equalTo: helloLabel.leadingAnchor),
-            menuNameLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 5),
-            menuNameLabel.leadingAnchor.constraint(equalTo: helloLabel.leadingAnchor),
+            randomDescriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.1),
+            randomDescriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            todayLunchDescriptionLabel.topAnchor.constraint(equalTo: randomDescriptionLabel.bottomAnchor, constant: 30),
+            todayLunchDescriptionLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
+            menuNameLabel.topAnchor.constraint(equalTo: todayLunchDescriptionLabel.bottomAnchor, constant: 5),
+            menuNameLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
             menuNameUnderline.widthAnchor.constraint(equalTo: menuNameLabel.widthAnchor),
             menuNameUnderline.heightAnchor.constraint(equalToConstant: 2),
             menuNameUnderline.leadingAnchor.constraint(equalTo: menuNameLabel.leadingAnchor),
             menuNameUnderline.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor),
             menuNameDescriptionLabel.leadingAnchor.constraint(equalTo: menuNameLabel.trailingAnchor, constant: 10),
             menuNameDescriptionLabel.bottomAnchor.constraint(equalTo: menuNameLabel.bottomAnchor)
-//
-//            titleLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
-//            descriptionLabel.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.1),
-//            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualTo: containerStackView.heightAnchor, multiplier: 0.2),
-//            restaurantLocationButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.05),
+
+//            restaurantLocationButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
         ])
     }
 }

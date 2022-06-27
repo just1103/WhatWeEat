@@ -48,7 +48,7 @@ final class DislikedFoodSurveyViewModel {
         inputObserver.flatMap { [weak self] _ -> Observable<[DislikedFood]> in
             guard
                 let self = self,
-                let chilliFoodImage = UIImage(named: "chilli"),
+//                let chilliFoodImage = UIImage(named: "chilli"),
                 let intestineFoodImage = UIImage(named: "intestine"),
                 let sashimiFoodImage = UIImage(named: "sashimi"),
                 let seaFoodImage = UIImage(named: "fish"),
@@ -56,12 +56,12 @@ final class DislikedFoodSurveyViewModel {
             else {
                 return Observable.just([])
             }
-            let chilliFood = DislikedFood(kind: .spicy, descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
+//            let chilliFood = DislikedFood(kind: .spicy, descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
             let intestineFood = DislikedFood(kind: .intestine, descriptionImage: intestineFoodImage, descriptionText: "내장")
             let sashimiFood = DislikedFood(kind: .sashimi, descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
             let seaFood = DislikedFood(kind: .seafood, descriptionImage: seaFoodImage, descriptionText: "해산물")
             let meatFood = DislikedFood(kind: .meat, descriptionImage: meatFoodImage, descriptionText: "고기")
-            self.dislikedFoods = [chilliFood, intestineFood, sashimiFood, seaFood, meatFood]
+            self.dislikedFoods = [intestineFood, sashimiFood, seaFood, meatFood]
               
             let realmManager = RealmManager.shared
             let checkedFoodsFromRealm = realmManager.read()
