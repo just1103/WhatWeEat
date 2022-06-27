@@ -1,0 +1,39 @@
+Rx for iOS
+https://github.com/ReactiveX/RxSwift
+Apache License Version 6.5.0
+
+Realm Swift
+https://github.com/realm/realm-swift
+Apache License Version 10.26.0
+
+Rx for iOS
+https://github.com/ReactiveX/RxSwift
+Apache License Version 6.5.0
+
+Realm Swift
+https://github.com/realm/realm-swift
+Apache License Version 10.26.0
+
+Rx for iOS
+https://github.com/ReactiveX/RxSwift
+Apache License Version 6.5.0
+
+Realm Swift
+https://github.com/realm/realm-swift
+Apache License Version 10.26.0
+
+Rx for iOS
+https://github.com/ReactiveX/RxSwift
+Apache License Version 6.5.0
+
+Realm Swift
+https://github.com/realm/realm-swift
+Apache License Version 10.26.0
+
+Rx for iOS
+https://github.com/ReactiveX/RxSwift
+Apache License Version 6.5.0
+
+Realm Swift
+https://github.com/realm/realm-swift
+Apache License Version 10.26.0

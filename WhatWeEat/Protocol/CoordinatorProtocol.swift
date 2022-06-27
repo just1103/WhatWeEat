@@ -1,7 +1,8 @@
 import UIKit
 
 enum CoordinatorType {
-    case app, onboarding, tab, setting, game, home, soloMenu, togetherMenu
+    case app, onboarding, tab
+    case setting, home, togetherMenu, soloMenu, game
 }
 
 protocol CoordinatorProtocol: AnyObject {
@@ -10,4 +11,5 @@ protocol CoordinatorProtocol: AnyObject {
     var type: CoordinatorType { get }
     
     func start()
+    func popCurrentPage()
 }

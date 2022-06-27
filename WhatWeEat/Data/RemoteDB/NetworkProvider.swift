@@ -39,7 +39,7 @@ struct NetworkProvider {
         }
     }
     
-    func request(api: Postable) -> Observable<Data> {
+    func request(api: Requestable) -> Observable<Data> {
         return Observable.create { emitter in
             guard let task = dataTask(api: api, emitter: emitter) else {
                 return Disposables.create()
@@ -76,7 +76,7 @@ struct NetworkProvider {
                     
                     emitter.onNext(decodedData)
                 }
-            case is Postable:
+            case is Requestable:
                 if let data = data as? T {
                     emitter.onNext(data) 
                 }
