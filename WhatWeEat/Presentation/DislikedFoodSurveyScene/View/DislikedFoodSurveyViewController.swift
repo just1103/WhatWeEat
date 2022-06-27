@@ -24,7 +24,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 45)
+        label.font = .pretendard(family: .bold, size: 40)
         return label
     }()
     private let titleDescriptionLabel: UILabel = {
@@ -34,7 +34,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 30)
+        label.font = .pretendard(family: .bold, size: 25)
         return label
     }()
     private let descriptionLabel: UILabel = {
@@ -43,7 +43,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.text = "메뉴에서 제외하고 추천드려요"
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .medium, size: 25)
+        label.font = .pretendard(family: .medium, size: 22)
         return label
     }()
     private let confirmButton: UIButton = {
@@ -52,7 +52,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         button.setTitle("확인", for: .normal)
         button.titleLabel?.font = .pretendard(family: .medium, size: 25)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .mainOrange
+        button.backgroundColor = .mainYellow
         button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
         return button
     }()

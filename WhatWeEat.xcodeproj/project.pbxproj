@@ -55,7 +55,7 @@
 		365EC7DE28634C610094823A /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DD28634C610094823A /* CardGameViewModel.swift */; };
 		365EC7E02864889F0094823A /* GameAnswerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365EC7DF2864889F0094823A /* GameAnswerFactory.swift */; };
 		365EC7E3286543CD0094823A /* TermsOfPrivacy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */; };
-		365EC7E5286546400094823A /* OpenSourceLicense in Resources */ = {isa = PBXBuildFile; fileRef = 365EC7E4286546400094823A /* OpenSourceLicense */; };
+		365EC7E5286546400094823A /* OpenSourceLicense.txt in Resources */ = {isa = PBXBuildFile; fileRef = 365EC7E4286546400094823A /* OpenSourceLicense.txt */; };
 		36A5E3AF286552FB0057A556 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */; };
 		36A5E3B1286589970057A556 /* ResultWaiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3B0286589970057A556 /* ResultWaiting.swift */; };
 		36A5E3C52867E4B60057A556 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36A5E3BC2867E4B60057A556 /* Pretendard-ExtraLight.otf */; };
@@ -79,9 +79,9 @@
 		DE3C57472850ACAD003F37C8 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3C57462850ACAD003F37C8 /* SettingCoordinator.swift */; };
 		DE3C57492850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3C57482850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift */; };
 		DE51DC0A2844984C000FE0CB /* SharePinNumberActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */; };
-		DE56950E28571C0D009F3DCE /* SubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */; };
+		DE56950E28571C0D009F3DCE /* ResultWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56950D28571C0D009F3DCE /* ResultWaitingViewController.swift */; };
 		DE56951028571E6B009F3DCE /* GameSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56950F28571E6B009F3DCE /* GameSelectionCell.swift */; };
-		DE56951228572612009F3DCE /* SubmissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951128572612009F3DCE /* SubmissionViewModel.swift */; };
+		DE56951228572612009F3DCE /* ResultWaitingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951128572612009F3DCE /* ResultWaitingViewModel.swift */; };
 		DE56951428572972009F3DCE /* MenuNation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951328572972009F3DCE /* MenuNation.swift */; };
 		DE56951628573065009F3DCE /* UICollectionView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951528573065009F3DCE /* UICollectionView+Cell.swift */; };
 		DE56951A28582323009F3DCE /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56951928582323009F3DCE /* CardViewProtocol.swift */; };
@@ -108,6 +108,7 @@
 		DEF9D8EF2865B15900336C38 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DEF9D8EE2865B15900336C38 /* FirebaseMessaging */; };
 		DEF9D8F22865B6B100336C38 /* NetworkErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9D8F12865B6B100336C38 /* NetworkErrorViewController.swift */; };
 		DEF9D8F62865B97B00336C38 /* NetworkErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9D8F52865B97B00336C38 /* NetworkErrorViewModel.swift */; };
+		DEF9D8F928697EEB00336C38 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DEF9D8F828697EEB00336C38 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,7 +172,7 @@
 		365EC7DD28634C610094823A /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewModel.swift; sourceTree = "<group>"; };
 		365EC7DF2864889F0094823A /* GameAnswerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnswerFactory.swift; sourceTree = "<group>"; };
 		365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TermsOfPrivacy.txt; sourceTree = "<group>"; };
-		365EC7E4286546400094823A /* OpenSourceLicense */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenSourceLicense; sourceTree = "<group>"; };
+		365EC7E4286546400094823A /* OpenSourceLicense.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenSourceLicense.txt; sourceTree = "<group>"; };
 		36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		36A5E3B0286589970057A556 /* ResultWaiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWaiting.swift; sourceTree = "<group>"; };
 		36A5E3BC2867E4B60057A556 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -193,9 +194,9 @@
 		DE3C57462850ACAD003F37C8 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DE3C57482850AE42003F37C8 /* DislikedFoodSurveyPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikedFoodSurveyPresentable.swift; sourceTree = "<group>"; };
 		DE51DC092844984C000FE0CB /* SharePinNumberActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePinNumberActivityItemSource.swift; sourceTree = "<group>"; };
-		DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionViewController.swift; sourceTree = "<group>"; };
+		DE56950D28571C0D009F3DCE /* ResultWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWaitingViewController.swift; sourceTree = "<group>"; };
 		DE56950F28571E6B009F3DCE /* GameSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectionCell.swift; sourceTree = "<group>"; };
-		DE56951128572612009F3DCE /* SubmissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionViewModel.swift; sourceTree = "<group>"; };
+		DE56951128572612009F3DCE /* ResultWaitingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWaitingViewModel.swift; sourceTree = "<group>"; };
 		DE56951328572972009F3DCE /* MenuNation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNation.swift; sourceTree = "<group>"; };
 		DE56951528573065009F3DCE /* UICollectionView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Cell.swift"; sourceTree = "<group>"; };
 		DE56951928582323009F3DCE /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
@@ -227,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEF9D8EF2865B15900336C38 /* FirebaseMessaging in Frameworks */,
+				DEF9D8F928697EEB00336C38 /* Lottie in Frameworks */,
 				DEF9D8ED2865B15900336C38 /* FirebaseDatabase in Frameworks */,
 				3636DE9C283DFE2300F04111 /* RealmSwift in Frameworks */,
 				DE095C87283B241A00C7E109 /* RxSwift in Frameworks */,
@@ -550,19 +552,19 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		365EC7A428588B6F0094823A /* SubmissionScene */ = {
+		365EC7A428588B6F0094823A /* ResultWaitingScene */ = {
 			isa = PBXGroup;
 			children = (
 				365EC7A628588B820094823A /* View */,
 				365EC7A528588B7B0094823A /* ViewModel */,
 			);
-			path = SubmissionScene;
+			path = ResultWaitingScene;
 			sourceTree = "<group>";
 		};
 		365EC7A528588B7B0094823A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DE56951128572612009F3DCE /* SubmissionViewModel.swift */,
+				DE56951128572612009F3DCE /* ResultWaitingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -570,7 +572,7 @@
 		365EC7A628588B820094823A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DE56950D28571C0D009F3DCE /* SubmissionViewController.swift */,
+				DE56950D28571C0D009F3DCE /* ResultWaitingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -604,7 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */,
-				365EC7E4286546400094823A /* OpenSourceLicense */,
+				365EC7E4286546400094823A /* OpenSourceLicense.txt */,
 			);
 			path = Term;
 			sourceTree = "<group>";
@@ -642,7 +644,7 @@
 				3636DE91283C86D900F04111 /* DislikedFoodSurveyScene */,
 				3636DEA6283E1A3800F04111 /* MainTabBarScene */,
 				365EC770285192460094823A /* GameScene */,
-				365EC7A428588B6F0094823A /* SubmissionScene */,
+				365EC7A428588B6F0094823A /* ResultWaitingScene */,
 				365EC7CC285B61B70094823A /* GameResultScene */,
 				DEEBE38E2845C5A6002697B5 /* SettingScene */,
 				DEF9D8F02865B48800336C38 /* NetworkErrorScene */,
@@ -805,6 +807,7 @@
 				DEF9D8EA2865B15900336C38 /* FirebaseAnalytics */,
 				DEF9D8EC2865B15900336C38 /* FirebaseDatabase */,
 				DEF9D8EE2865B15900336C38 /* FirebaseMessaging */,
+				DEF9D8F828697EEB00336C38 /* Lottie */,
 			);
 			productName = WhatWeEat;
 			productReference = 3636DE51283B225100F04111 /* WhatWeEat.app */;
@@ -860,6 +863,7 @@
 				DE095C83283B241A00C7E109 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				3636DE9A283DFE2300F04111 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DEF9D8F728697EEB00336C38 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 3636DE52283B225100F04111 /* Products */;
 			projectDirPath = "";
@@ -878,7 +882,7 @@
 			files = (
 				3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */,
 				365EC7E3286543CD0094823A /* TermsOfPrivacy.txt in Resources */,
-				365EC7E5286546400094823A /* OpenSourceLicense in Resources */,
+				365EC7E5286546400094823A /* OpenSourceLicense.txt in Resources */,
 				DEF9D8E52865AD0C00336C38 /* GoogleService-Info.plist in Resources */,
 				3636DE5E283B225200F04111 /* Assets.xcassets in Resources */,
 				3636DE61283B225200F04111 /* LaunchScreen.storyboard in Resources */,
@@ -987,7 +991,7 @@
 				3636DED82844B06C00F04111 /* GameResult.swift in Sources */,
 				DEEBE3952845C6E6002697B5 /* VersionCell.swift in Sources */,
 				365EC7742851928A0094823A /* CardGameViewController.swift in Sources */,
-				DE56950E28571C0D009F3DCE /* SubmissionViewController.swift in Sources */,
+				DE56950E28571C0D009F3DCE /* ResultWaitingViewController.swift in Sources */,
 				36A5E3AF286552FB0057A556 /* NetworkConnectionManager.swift in Sources */,
 				DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */,
 				DE56951028571E6B009F3DCE /* GameSelectionCell.swift in Sources */,
@@ -1005,7 +1009,7 @@
 				363D3F472848B8BE000DC665 /* ResultSubmission.swift in Sources */,
 				3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */,
 				3636DECC2844AD4B00F04111 /* APIProtocol.swift in Sources */,
-				DE56951228572612009F3DCE /* SubmissionViewModel.swift in Sources */,
+				DE56951228572612009F3DCE /* ResultWaitingViewModel.swift in Sources */,
 				DEDF03282859D90F000F7915 /* HomeCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,6 +1311,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		DEF9D8F728697EEB00336C38 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1339,6 +1351,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DEF9D8E92865B15900336C38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		DEF9D8F828697EEB00336C38 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEF9D8F728697EEB00336C38 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

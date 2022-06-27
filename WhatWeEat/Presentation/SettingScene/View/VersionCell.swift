@@ -1,8 +1,4 @@
 import UIKit
-import SwiftUI
-
-// TODO: 업데이트 버튼 radius +, 동그란 느낌으로
-// 위 아래 여백 주기 15씩
 
 class VersionCell: UITableViewCell {
     // MARK: - Properties
@@ -38,13 +34,13 @@ class VersionCell: UITableViewCell {
         label.font = Design.subtitleLabelFont
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.textColor = Design.subtilteLabelTextColor
+        label.textColor = Design.subtitleLabelTextColor
         return label
     }()
     private let versionStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 28
         button.titleLabel?.font = Design.versionStatusButtonTitleFont
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -99,12 +95,12 @@ class VersionCell: UITableViewCell {
         titleStackView.addArrangedSubview(subtitleLabel)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
+            containerStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
             containerStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             containerStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            containerStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            containerStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -15),
             
-            versionStatusButton.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.2)
+            versionStatusButton.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25)
         ])
     }
 }
@@ -112,12 +108,12 @@ class VersionCell: UITableViewCell {
 // MARK: - NameSpaces
 extension VersionCell {
     private enum Design {
-        static let titleLabelFont: UIFont = .preferredFont(forTextStyle: .title3)
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
         
-        static let subtitleLabelFont: UIFont = .preferredFont(forTextStyle: .body)
-        static let subtilteLabelTextColor: UIColor = .systemGray
+        static let subtitleLabelFont: UIFont = .pretendard(family: .regular, size: 15)
+        static let subtitleLabelTextColor: UIColor = .systemGray
         
-        static let versionStatusButtonTitleFont: UIFont = .preferredFont(forTextStyle: .body)
+        static let versionStatusButtonTitleFont: UIFont = .pretendard(family: .regular, size: 15)
         static let versionStatusButtonUpdateTitleColor: UIColor = .black
         static let versionStatusButtonLatestTitleColor: UIColor = .systemGray
         static let versionStatusButtonUpdateBackgroundColor: UIColor = .mainYellow

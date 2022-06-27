@@ -24,6 +24,7 @@ final class MainTabBarController: UITabBarController {
         configureNavigationBar()
         configureTabBar()
         bind()
+        changeNavigationTitle(selectedIndex: selectedIndex)
     }
     
     // MARK: - Methods
@@ -49,12 +50,8 @@ final class MainTabBarController: UITabBarController {
         
         viewControllers = pages
     }
-}
-
-// MARK: - TabBarController Delegate
-extension MainTabBarController: UITabBarControllerDelegate {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let selectedIndex = tabBar.items?.firstIndex(of: item) else { return }
+    
+    private func changeNavigationTitle(selectedIndex: Int) {
         switch selectedIndex {
         case 0:
             navigationItem.title = "우리뭐먹지"
@@ -65,6 +62,14 @@ extension MainTabBarController: UITabBarControllerDelegate {
         default:
             navigationItem.title = "우리뭐먹지"
         }
+    }
+}
+
+// MARK: - TabBarController Delegate
+extension MainTabBarController: UITabBarControllerDelegate {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let selectedIndex = tabBar.items?.firstIndex(of: item) else { return }
+        changeNavigationTitle(selectedIndex: selectedIndex)
     }
 }
 

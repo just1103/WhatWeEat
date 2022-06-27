@@ -5,7 +5,7 @@ class SettingDetailViewController: UIViewController {
     private let textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .preferredFont(forTextStyle: .body)
+        textView.font = .pretendard(family: .medium, size: 15)
         textView.textContainer.lineBreakMode = .byWordWrapping
         textView.dataDetectorTypes = .all
         textView.textContainerInset = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
@@ -48,8 +48,10 @@ class SettingDetailViewController: UIViewController {
     
     private func configureUI() {
         view.addSubview(textView)
-        view.backgroundColor = .mainYellow
+        view.backgroundColor = .systemGray6
         textView.text = content
+        textView.setContentOffset(.zero, animated: false)
+        textView.layoutIfNeeded()
         
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

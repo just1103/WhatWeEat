@@ -32,7 +32,7 @@ final class CardGameViewController: UIViewController {
         button.setTitleColor(Design.previousQuestionButtonTitleColor, for: .normal)
         button.setImage(UIImage(systemName: "arrow.uturn.backward.circle"), for: .normal)
         button.tintColor = .black
-        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.font = .pretendard(family: .regular, size: 15)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .leading
         button.isHidden = true
@@ -43,7 +43,7 @@ final class CardGameViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .black
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .pretendard(family: .regular, size: 15)
         label.textColor = .mainOrange
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -69,7 +69,6 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.likeButtonTitle, for: .normal)
-//        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
         button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = .mainOrange
         button.setTitleColor(.white, for: .normal)
@@ -80,8 +79,7 @@ final class CardGameViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Content.hateButtonTitle, for: .normal)
-//        button.setTitleColor(Design.skipButtonTitleColor, for: .normal)
-//        button.titleLabel?.font = Design.skipButtonTitleFont
+        button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = .white
         button.setTitleColor(.mainOrange, for: .normal)
         button.layer.borderColor = UIColor.mainOrange.cgColor
@@ -503,7 +501,7 @@ extension CardGameViewController {
         static let previousQuestionButtonTitleColor: UIColor = .label
         static let skipButtonBackgroundColor: UIColor = .mainYellow
         static let skipButtonTitleColor: UIColor = .label
-        static let skipButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+        static let skipButtonTitleFont: UIFont = .pretendard(family: .regular, size: 20)
     }
     
     private enum Content {

@@ -78,6 +78,6 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
 // MARK: - NameSpaces
 extension YesOrNoCardView {
     private enum Design {
-        static let questionLabelFont: UIFont = .preferredFont(forTextStyle: .largeTitle)
+        static let questionLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
     }
 }

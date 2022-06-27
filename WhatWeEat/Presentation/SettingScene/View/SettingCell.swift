@@ -6,8 +6,7 @@ class SettingCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-//        label.font = Design.titleLabelFont  // 얇은체
-        label.font = .pretendard(family: .regular, size: 22)
+        label.font = Design.titleLabelFont
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -52,6 +51,6 @@ class SettingCell: UITableViewCell {
 // MARK: - NameSpaces
 extension SettingCell {
     private enum Design {
-        static let titleLabelFont: UIFont = .preferredFont(forTextStyle: .title3)
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
     }
 }

@@ -20,7 +20,6 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         makeMainTabBarPage()
         
         if TogetherGameSubmittedChecker.isSubmitted {
-            mainTabBarController.selectedIndex = 1  // FIXME: 자동 선택 안되는듯
             guard let togetherCoordinator = childCoordinators.filter { $0.type == .togetherMenu }.first as? TogetherMenuCoordinator else {
                 return
             }

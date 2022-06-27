@@ -1,7 +1,7 @@
 import Foundation
 import RxSwift
 
-final class SubmissionViewModel {
+final class ResultWaitingViewModel {
     // MARK: - Nested Types
     struct Input {
         let invokedViewDidLoad: Observable<Void>

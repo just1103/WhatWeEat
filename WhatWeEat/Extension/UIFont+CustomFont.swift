@@ -38,15 +38,15 @@ extension UIFont {
             case .regular:
                 return 10
             case .medium:
-                return 12
+                return 25
             case .semiBold:
-                return 20
-            case .bold:
                 return 30
-            case .extraBold:
-                return 35
-            case .black:
+            case .bold:
                 return 40
+            case .extraBold:
+                return 45
+            case .black:
+                return 50
             }
         }
     }

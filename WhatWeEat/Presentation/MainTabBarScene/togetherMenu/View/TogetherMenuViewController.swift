@@ -40,7 +40,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "팀원들과 미니게임을 시작하려면"
-        label.font = .pretendard(family: .regular, size: 25)
+        label.font = .pretendard(family: .regular, size: 20)
         label.textColor = .white
         return label
     }()
@@ -48,7 +48,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "그룹 만들기"
-        label.font = .pretendard(family: .bold, size: 40)
+        label.font = .pretendard(family: .bold, size: 35)
         label.textColor = .white
         return label
     }()
@@ -78,7 +78,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "이미 생성된 그룹이 있다면"
-        label.font = .pretendard(family: .regular, size: 25)
+        label.font = .pretendard(family: .regular, size: 20)
         label.textColor = .black
         return label
     }()
@@ -86,7 +86,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "PIN으로 입장하기"
-        label.font = .pretendard(family: .bold, size: 40)
+        label.font = .pretendard(family: .bold, size: 35)
         label.textColor = .black
         return label
     }()

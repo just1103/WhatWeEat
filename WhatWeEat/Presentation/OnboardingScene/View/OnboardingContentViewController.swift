@@ -6,7 +6,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 20
         return stackView
@@ -22,7 +22,6 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
         label.font = Design.titleLabelFont
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -33,7 +32,6 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
         label.font = Design.descriptionLabelFont
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.numberOfLines = 0
@@ -74,8 +72,8 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.15),
-            containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             descriptionImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.height * 0.25),
             descriptionImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
         ])
@@ -85,8 +83,8 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
 // MARK: - NameSpaces
 extension OnboardingContentViewController {
     private enum Design {
-        static let titleLabelFont: UIFont = .preferredFont(forTextStyle: .largeTitle)
-        static let descriptionLabelFont: UIFont = .preferredFont(forTextStyle: .title3)
+        static let titleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let descriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
         static let imageCornerRadius: CGFloat = 5
     }
 }

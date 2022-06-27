@@ -45,11 +45,11 @@ final class SettingViewController: UIViewController {
             target: self,
             action: nil
         )
-        navigationItem.leftBarButtonItem?.tintColor = .mainOrange
+        navigationItem.leftBarButtonItem?.tintColor = .black
         
         navigationItem.title = "설정"
         let textAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.mainOrange,
+            NSAttributedString.Key.foregroundColor: UIColor.black,
             .font: UIFont.pretendard(family: .medium, size: 25),
         ]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -60,7 +60,7 @@ final class SettingViewController: UIViewController {
         self.view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemGray6  // TODO: 더 밝은 회색으로, 화이트에 가까운 색으로 (같은 색이라도 면적이 넓으면 색깔이 더 어두워보임)
+        tableView.backgroundColor = .backgroundGray
         tableView.register(cellType: VersionCell.self)
         tableView.register(cellType: SettingCell.self)
         tableView.dataSource = self

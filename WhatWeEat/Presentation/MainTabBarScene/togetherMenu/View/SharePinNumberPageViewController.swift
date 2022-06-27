@@ -8,7 +8,11 @@ final class SharePinNumberPageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        button.tintColor = .black
+        button.setTitle("다른 방법으로 게임하기", for: .normal)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 15)
+        button.tintColor = .white
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        button.contentHorizontalAlignment = .leading
         return button
     }()
     private let containerStackView: UIStackView = {
@@ -18,7 +22,7 @@ final class SharePinNumberPageViewController: UIViewController {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.backgroundColor = .mainOrange
-        stackView.spacing = 15
+        stackView.spacing = 40
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
             top: UIScreen.main.bounds.height * 0.1,
             leading: 10,
@@ -28,32 +32,12 @@ final class SharePinNumberPageViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    private let togetherImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "person.3.fill")
-        imageView.tintColor = .white
-        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        return imageView
-    }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.text = "팀원들에게"
-        label.textColor = .white
-        label.numberOfLines = 0
-        label.lineBreakStrategy = .hangulWordPriority
-        label.setContentHuggingPriority(.required, for: .vertical)
-        return label
-    }()
     private let pinNumberStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.spacing = 5
         stackView.setContentHuggingPriority(.required, for: .vertical)
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
@@ -65,25 +49,47 @@ final class SharePinNumberPageViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
+    private let togetherImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "person.3.fill")
+        imageView.tintColor = .white
+        imageView.setContentHuggingPriority(.init(100), for: .vertical)
+        return imageView
+    }()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = .pretendard(family: .medium, size: 30)
+        label.text = "팀원들에게"
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.lineBreakStrategy = .hangulWordPriority
+        label.setContentHuggingPriority(.required, for: .vertical)
+        return label
+    }()
     private let pinNumberTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: UIScreen.main.bounds.height * 0.05)
+        label.font = .pretendardDefaultSize(family: .bold)
         label.textColor = .white
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.text = "PIN Number"
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: UIScreen.main.bounds.height * 0.07)
+        label.font = .pretendard(family: .bold, size: 50)
         label.textColor = .white
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
+        label.setContentHuggingPriority(.required, for: .vertical)
         label.text = " "  // 빈문자열로 할당하면 View에서 위치를 못잡음
         return label
     }()
@@ -94,9 +100,10 @@ final class SharePinNumberPageViewController: UIViewController {
         button.setTitleColor(.mainOrange, for: .normal)
         button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button.backgroundColor = .white
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendardDefaultSize(family: .medium)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.tintColor = .mainOrange
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.06 / 2
         button.clipsToBounds = true
         button.applyShadow(direction: .bottom)
         return button
@@ -105,7 +112,7 @@ final class SharePinNumberPageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .pretendard(family: .regular, size: 15)
         label.text = """
         모든 팀원이 동시에 진행하지 않아도 됩니다.
         각자 편한 시간에 진행해주세요.
@@ -122,8 +129,8 @@ final class SharePinNumberPageViewController: UIViewController {
         button.setTitle("미니게임 시작", for: .normal)
         button.setTitleColor(.mainOrange, for: .normal)
         button.backgroundColor = .white
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
-        button.layer.cornerRadius = 5
+        button.titleLabel?.font = .pretendardDefaultSize(family: .semiBold)
+        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.08 / 2
         button.clipsToBounds = true
         button.applyShadow(direction: .bottom)
         return button
@@ -163,19 +170,20 @@ final class SharePinNumberPageViewController: UIViewController {
         view.backgroundColor = .systemGray6
         view.addSubview(containerStackView)
         view.addSubview(backButton)  // FIXME: 백버튼이 Navi 뒤에
-        containerStackView.addArrangedSubview(togetherImageView)
-        containerStackView.addArrangedSubview(titleLabel)
         containerStackView.addArrangedSubview(pinNumberStackView)
-        containerStackView.addArrangedSubview(shareButton)
         containerStackView.addArrangedSubview(descriptionLabel)
         containerStackView.addArrangedSubview(gameStartButton)
         
+        pinNumberStackView.addArrangedSubview(togetherImageView)
+        pinNumberStackView.addArrangedSubview(titleLabel)
         pinNumberStackView.addArrangedSubview(pinNumberTitleLabel)
         pinNumberStackView.addArrangedSubview(pinNumberLabel)
+        pinNumberStackView.addArrangedSubview(shareButton)
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -35),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
             
             containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -184,11 +192,11 @@ final class SharePinNumberPageViewController: UIViewController {
             
             togetherImageView.widthAnchor.constraint(equalTo: togetherImageView.heightAnchor),
             
-            shareButton.heightAnchor.constraint(lessThanOrEqualTo: containerStackView.heightAnchor, multiplier: 0.06),
-            shareButton.widthAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.22),
+            shareButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.06),
+            shareButton.widthAnchor.constraint(equalToConstant: shareButton.intrinsicContentSize.width + 40),
             shareButton.centerXAnchor.constraint(equalTo: containerStackView.centerXAnchor),
             
-            gameStartButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.1),
+            gameStartButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.08),
             gameStartButton.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.8),
         ])
     }

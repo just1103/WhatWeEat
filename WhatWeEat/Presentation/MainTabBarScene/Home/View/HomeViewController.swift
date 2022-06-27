@@ -23,7 +23,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .pretendard(family: .light, size: 35)
+        label.font = .pretendard(family: .light, size: 30)
         label.textColor = .white
         label.text = "랜덤으로 골라봤어요"
         label.numberOfLines = 0
@@ -34,7 +34,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 40)
+        label.font = .pretendard(family: .bold, size: 35)
         label.textColor = .white
         label.text = "오늘 식사는"
         label.numberOfLines = 0
@@ -45,7 +45,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 53)
+        label.font = .pretendard(family: .bold, size: 45)
         label.textColor = .mainOrange
         label.text = "000"
         label.numberOfLines = 0
@@ -62,7 +62,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 40)
+        label.font = .pretendard(family: .bold, size: 35)
         label.textColor = .white
         label.text = "어떠세요?"
         label.numberOfLines = 0

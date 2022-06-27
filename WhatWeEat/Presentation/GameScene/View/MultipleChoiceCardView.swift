@@ -61,7 +61,7 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendardDefaultSize(family: .bold)
         label.textColor = .white
         return label
     }()
@@ -72,7 +72,7 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .pretendard(family: .medium, size: 30)
         label.textColor = .white
         return label
     }()

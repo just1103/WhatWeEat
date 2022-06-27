@@ -9,18 +9,28 @@ final class OnboardingPageViewController: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = Design.pageControlCurrentPageIndicatorTintColor
         pageControl.pageIndicatorTintColor = Design.pageControlPageIndicatorTintColor
         pageControl.currentPage = 0
+        pageControl.backgroundStyle = .minimal
+        pageControl.allowsContinuousInteraction = false
         pageControl.isUserInteractionEnabled = false
         return pageControl
+    }()
+    private let arrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "arrow")
+        return imageView
     }()
     private let skipButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Content.skipButtonTitle, for: .normal)
-        button.setTitleColor(Design.skipAndConfirmButtonTitleColor, for: .normal)
-        button.titleLabel?.font = Design.skipAndConfirmButtonTitleFont
-        button.backgroundColor = Design.skipAndConfirmButtonBackgroundColor
-        button.layer.cornerRadius = 8
-        button.clipsToBounds = true
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: Design.skipAndConfirmButtonTitleFont,
+            .foregroundColor: Design.skipAndConfirmButtonTitleColor,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributedString = NSMutableAttributedString(string: Content.skipButtonTitle, attributes: attributes)
+        button.setAttributedTitle(attributedString, for: .normal)
         return button
     }()
 
@@ -59,12 +69,21 @@ final class OnboardingPageViewController: UIPageViewController {
     private func configureUI() {
         view.backgroundColor = .white
         view.addSubview(pageControl)
+        view.addSubview(arrowImageView)
         view.addSubview(skipButton)
         
         NSLayoutConstraint.activate([
-            pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            pageControl.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -UIScreen.main.bounds.height * 0.15
+            ),
             pageControl.heightAnchor.constraint(equalToConstant: 20),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            arrowImageView.centerYAnchor.constraint(equalTo: skipButton.centerYAnchor),
+            arrowImageView.leadingAnchor.constraint(equalTo: pageControl.leadingAnchor),
+            arrowImageView.trailingAnchor.constraint(equalTo: skipButton.leadingAnchor, constant: -5),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 45),
             
             skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             skipButton.widthAnchor.constraint(equalToConstant: skipButton.intrinsicContentSize.width + 30),
@@ -108,7 +127,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        
+        // TODO: 마지막 페이지에서 뒤로 안 넘어감 - 잘못된 CurrentIndex가 넘어가는 것 같다. 
         guard let onboardingPages = onboardingPages as? [UIViewController],
               let currentIndex = onboardingPages.firstIndex(of: viewController) // -1 해주는것도 가능
         else {
@@ -121,6 +140,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         viewModelOutput?.previousPageIndex
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak viewController] previousIndex in  // FIXME: 1) subscribe가 여러번 호출되는 문제, 2) 의도하지 않게 VC의 retain count가 올라감 (retain 올리는건 부모가 주입할 때만 가능)
+                print(previousIndex)
                 guard let previousIndex = previousIndex else {
                     viewController = nil
                     return
@@ -147,6 +167,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         else {
             return nil
         }
+        print(currentIndex)
         var viewController: UIViewController?
         
         viewModelOutput?.nextPageIndex
@@ -184,6 +205,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     
     private func presentButtonUnlessLastPage(_ currentIndex: Int) {
         if currentIndex != onboardingPages.count - 1 {
+            arrowImageView.isHidden = false
             skipButton.isHidden = false
             pageControl.isHidden = false
         }
@@ -203,6 +225,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     
     private func hideButtonIfLastPage(_ currentIndex: Int) {
         if currentIndex == onboardingPages.count - 1 {
+            arrowImageView.isHidden = true
             skipButton.isHidden = true
             pageControl.isHidden = true
         }
@@ -214,9 +237,8 @@ extension OnboardingPageViewController {
     private enum Design {
         static let pageControlCurrentPageIndicatorTintColor: UIColor = .mainOrange
         static let pageControlPageIndicatorTintColor: UIColor = .systemGray
-        static let skipAndConfirmButtonBackgroundColor: UIColor = .mainOrange
-        static let skipAndConfirmButtonTitleColor: UIColor = .label
-        static let skipAndConfirmButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+        static let skipAndConfirmButtonTitleColor: UIColor = .mainOrange
+        static let skipAndConfirmButtonTitleFont: UIFont = .pretendard(family: .medium, size: 25)
     }
     
     private enum Content {

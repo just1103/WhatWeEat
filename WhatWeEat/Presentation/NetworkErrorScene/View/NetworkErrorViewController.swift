@@ -22,7 +22,7 @@ class NetworkErrorViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "네트워크 연결 상태를 확인해주세요"
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .medium, size: 30)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center

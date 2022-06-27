@@ -70,12 +70,12 @@ final class SettingViewModel {
                 )
                 let privacyPolicies = OrdinarySettingItem(
                     title: Content.privacyPoliciesTitle,
-                    content: FilePath.termsOfPrivacyContent,
+                    content: try? String(contentsOfFile: FilePath.termsOfPrivacy),
                     sectionKind: .ordinary
                 )
                 let openSourceLicense = OrdinarySettingItem(
                     title: Content.openSourceLicenseTitle,
-                    content: FilePath.openSourceLicenseContent,
+                    content: try? String(contentsOfFile: FilePath.openSourceLicense),
                     sectionKind: .ordinary
                 )
                 let feedBackToDeveloper = OrdinarySettingItem(
@@ -175,8 +175,8 @@ final class SettingViewModel {
 // MARK: - NameSpaces
 extension SettingViewModel {
     enum FilePath {  // TODO: 정리, 네이밍 수정? (TextByFilePath)
-        static let termsOfPrivacyContent = Bundle.main.path(forResource: "TermsOfPrivacy", ofType: "txt") ?? ""
-        static let openSourceLicenseContent = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
+        static let termsOfPrivacy = Bundle.main.path(forResource: "TermsOfPrivacy", ofType: "txt") ?? ""
+        static let openSourceLicense = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
     }
     
     enum Content {

@@ -4,15 +4,22 @@ import UIKit
 
 class GameResultViewController: UIViewController {
     // MARK: - Properties
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
     private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .mainOrange
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .pretendard(family: .regular, size: 15)
         label.text = "PIN NUMBER : "
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     private let playerCountLabel: UILabel = {
@@ -21,7 +28,7 @@ class GameResultViewController: UIViewController {
         label.text = "N명"
         label.textColor = .darkGray
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .medium, size: 30)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -32,7 +39,7 @@ class GameResultViewController: UIViewController {
         label.text = "이 선택한 오늘의 메뉴는"
         label.textColor = .darkGray
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .pretendard(family: .medium, size: 25)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -41,9 +48,9 @@ class GameResultViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "#키워드"
-        label.textColor = .darkGray
+        label.textColor = .mainOrange
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .medium, size: 25)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -54,7 +61,7 @@ class GameResultViewController: UIViewController {
         label.text = "마라탕"
         label.textColor = .mainOrange
         label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .bold, size: 35)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -64,17 +71,6 @@ class GameResultViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .mainOrange
         return view
-    }()
-    private let menuNameDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "입니다"
-        label.textColor = .mainOrange
-        label.textAlignment = .left
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 0
-        label.lineBreakStrategy = .hangulWordPriority
-        return label
     }()
     private let menuImageView: UIImageView = {
         let imageView = UIImageView()
@@ -103,7 +99,7 @@ class GameResultViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("다음 순위 메뉴 확인 (1/3)", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
         button.backgroundColor = .mainOrange
         button.contentHorizontalAlignment = .center
         button.layer.cornerRadius = 8
@@ -115,7 +111,7 @@ class GameResultViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("공유하기", for: .normal)
         button.setTitleColor(.mainOrange, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
         button.backgroundColor = .systemGray6
         button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button.tintColor = .mainOrange
@@ -124,7 +120,6 @@ class GameResultViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.isHidden = false
-//        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return button
     }()
     private let gameRestartButton: UIButton = {
@@ -132,7 +127,7 @@ class GameResultViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("게임 다시 시작", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
         button.backgroundColor = .systemGray6
         button.setImage(UIImage(systemName: "arrow.counterclockwise.circle"), for: .normal)
         button.tintColor = .darkGray
@@ -141,7 +136,6 @@ class GameResultViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.isHidden = false
-//        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return button
     }()
     
@@ -171,30 +165,32 @@ class GameResultViewController: UIViewController {
 
     private func configureUI() {
         view.backgroundColor = .systemGray6
-
+        
+        view.addSubview(backgroundView)
         view.addSubview(pinNumberLabel)
         view.addSubview(playerCountLabel)
         view.addSubview(playerCountDescriptionLabel)
         view.addSubview(keywordLabel)
         view.addSubview(menuNameLabel)
         view.addSubview(menuNameUnderline)
-        view.addSubview(menuNameDescriptionLabel)
         view.addSubview(menuImageView)
 //        view.addSubview(restaurantCheckButton)
         view.addSubview(nextMenuCheckButton)
         view.addSubview(shareButton)
         view.addSubview(gameRestartButton)
-        
-//        gameResultCheckButton.layer.cornerRadius = view.bounds.height * 0.1 * 0.5
-//        gameRestartButton.layer.cornerRadius = view.bounds.height * 0.07 * 0.5
 
         let screenHeight = UIScreen.main.bounds.height
         
         NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
             pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
-            playerCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: screenHeight * 0.04),
+            playerCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: screenHeight * 0.02),
             playerCountLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
 
             playerCountDescriptionLabel.bottomAnchor.constraint(equalTo: playerCountLabel.bottomAnchor),
@@ -211,13 +207,10 @@ class GameResultViewController: UIViewController {
             menuNameUnderline.widthAnchor.constraint(equalTo: menuNameLabel.widthAnchor, constant: 4),
             menuNameUnderline.heightAnchor.constraint(equalToConstant: 3),
 
-            menuNameDescriptionLabel.bottomAnchor.constraint(equalTo: menuNameUnderline.bottomAnchor),
-            menuNameDescriptionLabel.leadingAnchor.constraint(equalTo: menuNameLabel.trailingAnchor, constant: 5),
-            
             menuImageView.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor, constant: screenHeight * 0.04),
             menuImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             menuImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            menuImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+            menuImageView.heightAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.35),
             
 //            restaurantCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            restaurantCheckButton.bottomAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: -15),
@@ -226,6 +219,7 @@ class GameResultViewController: UIViewController {
             
             nextMenuCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextMenuCheckButton.topAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: 15),
+            nextMenuCheckButton.bottomAnchor.constraint(equalTo: shareButton.topAnchor, constant: -10),
             nextMenuCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.6),
             nextMenuCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
 
@@ -350,12 +344,10 @@ extension GameResultViewController {
                     let keywords = self.keywordLabel.text
                 else { return }
                 
-                let title = "[우리뭐먹지] 팀원과 오늘의 메뉴를 공유해보세요"  // TODO: 서버 테스트
+                let title = "[우리뭐먹지] 팀원과 오늘의 메뉴를 공유해보세요"
                 let content = """
                 [우리뭐먹지] 오늘의 메뉴는 #\(menuName) 입니다.
-                팀원들의 취향은 \(keywords)
-                
-                오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요.
+                팀원들이 이런 것을 원했어요. \(keywords)
                 """
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
@@ -367,3 +359,5 @@ extension GameResultViewController {
             .disposed(by: disposeBag)
     }
 }
+
+// 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 공유 content에 추가

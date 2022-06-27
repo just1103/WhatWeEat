@@ -66,7 +66,7 @@ final class DislikedFoodCell: UICollectionViewCell {
     
     func toggleSelectedCellUI() {
         if self.backgroundColor == .subYellow {
-            self.backgroundColor = .mainOrange.withAlphaComponent(0.62)
+            self.backgroundColor = .mainYellow
         } else {
             self.backgroundColor = .subYellow
         }

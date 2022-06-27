@@ -1,8 +1,9 @@
+import Lottie
 import RxCocoa
 import RxSwift
 import UIKit
 
-class SubmissionViewController: UIViewController {
+class ResultWaitingViewController: UIViewController {
     // MARK: - Properties
     private let backgroundView: UIView = {
         let view = UIView()
@@ -15,7 +16,7 @@ class SubmissionViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .pretendard(family: .regular, size: 15)
         label.text = "PIN NUMBER : "
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -27,10 +28,18 @@ class SubmissionViewController: UIViewController {
         label.text = "1명\n제출완료"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .pretendard(family: .medium, size: 30)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
+    }()
+    private let loadingCircleView: AnimationView = {
+        let animationView = AnimationView(name: "loader")
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.5
+        return animationView
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -43,7 +52,7 @@ class SubmissionViewController: UIViewController {
         """
         label.textColor = .white
         label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .pretendard(family: .medium, size: 23)
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -53,7 +62,7 @@ class SubmissionViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("결과 확인하기", for: .normal)
         button.setTitleColor(.mainOrange, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 25)
         button.backgroundColor = .white
         button.clipsToBounds = true
         button.isHidden = true  // TODO: default는 true, 사용자가 Host이거나 Host가 결과확인버튼을 탭한 이후 false로 변경
@@ -64,7 +73,7 @@ class SubmissionViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("게임 다시 시작", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
         button.backgroundColor = .white
         button.setImage(UIImage(systemName: "arrow.counterclockwise.circle"), for: .normal)
         button.tintColor = .darkGray
@@ -76,12 +85,12 @@ class SubmissionViewController: UIViewController {
         return button
     }()
 
-    private var viewModel: SubmissionViewModel!
+    private var viewModel: ResultWaitingViewModel!
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
 
     // MARK: - Initializers
-    convenience init(viewModel: SubmissionViewModel) {
+    convenience init(viewModel: ResultWaitingViewModel) {
         self.init()
         self.viewModel = viewModel
     }
@@ -102,16 +111,18 @@ class SubmissionViewController: UIViewController {
 
     private func configureUI() {
         view.backgroundColor = .systemGray6
-
+        
         view.addSubview(backgroundView)
         view.addSubview(pinNumberLabel)
+        view.addSubview(loadingCircleView)
         view.addSubview(submissionCountLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(gameResultCheckButton)
         view.addSubview(gameRestartButton)
         
-        gameResultCheckButton.layer.cornerRadius = view.bounds.height * 0.1 * 0.5
-        gameRestartButton.layer.cornerRadius = view.bounds.height * 0.07 * 0.5
+        loadingCircleView.play()
+        gameResultCheckButton.layer.cornerRadius = view.bounds.height * 0.08 * 0.5
+        gameRestartButton.layer.cornerRadius = view.bounds.height * 0.06 * 0.5
 
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -122,29 +133,34 @@ class SubmissionViewController: UIViewController {
             pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
-            submissionCountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            submissionCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: 100),
+            submissionCountLabel.centerXAnchor.constraint(equalTo: loadingCircleView.centerXAnchor),
+            submissionCountLabel.centerYAnchor.constraint(equalTo: loadingCircleView.centerYAnchor),
+            
+            loadingCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingCircleView.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: -15),
+            loadingCircleView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            loadingCircleView.heightAnchor.constraint(equalTo: loadingCircleView.widthAnchor),
             
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: submissionCountLabel.bottomAnchor, constant: 50),
+            descriptionLabel.bottomAnchor.constraint(equalTo: gameResultCheckButton.topAnchor, constant: -20),
             
             gameResultCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameResultCheckButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
-            gameResultCheckButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.1),
-            gameResultCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
+            gameResultCheckButton.bottomAnchor.constraint(equalTo: gameRestartButton.topAnchor, constant: -20),
+            gameResultCheckButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.08),
+            gameResultCheckButton.widthAnchor.constraint(equalToConstant: gameRestartButton.intrinsicContentSize.width + 80),
             
             gameRestartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             gameRestartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            gameRestartButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.07),
-            gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.45),
+            gameRestartButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.06),
+            gameRestartButton.widthAnchor.constraint(equalToConstant: gameRestartButton.intrinsicContentSize.width + 50),
         ])
     }
 }
 
 // MARK: - Rx Binding Methods
-extension SubmissionViewController {
+extension ResultWaitingViewController {
     private func bind() {
-        let input = SubmissionViewModel.Input(
+        let input = ResultWaitingViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
             gameResultCheckButtonDidTap: gameResultCheckButton.rx.tap.asObservable(),
             gameRestartButtonDidTap: gameRestartButton.rx.tap.asObservable()
@@ -199,11 +215,11 @@ extension SubmissionViewController {
     }
 }
 
-extension SubmissionViewController {
-    private enum Design {
-        static let previousQuestionButtonTitleColor: UIColor = .label
-        static let skipAndConfirmButtonBackgroundColor: UIColor = .mainYellow
-        static let skipAndConfirmButtonTitleColor: UIColor = .label
-        static let skipAndConfirmButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
-    }
+extension ResultWaitingViewController {
+//    private enum Design {
+//        static let previousQuestionButtonTitleColor: UIColor = .label
+//        static let skipAndConfirmButtonBackgroundColor: UIColor = .mainYellow
+//        static let skipAndConfirmButtonTitleColor: UIColor = .label
+//        static let skipAndConfirmButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+//    }
 }
