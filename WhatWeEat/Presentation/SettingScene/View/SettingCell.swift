@@ -7,7 +7,7 @@ class SettingCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.titleLabelFont
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()

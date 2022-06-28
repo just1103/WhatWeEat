@@ -103,23 +103,23 @@ final class CardGameViewModel {
     }
     
     private func createMenuNations() -> [MenuNation] {
-        let korean = MenuNation(kind: .korean, descriptionText: "한식")
-        let western = MenuNation(kind: .western, descriptionText: "양식")
-        let japanese = MenuNation(kind: .japanese, descriptionText: "일식")
-        let chinese = MenuNation(kind: .chinese, descriptionText: "중식")
-        let convenient = MenuNation(kind: .convenient, descriptionText: "분식")
-        let exotic = MenuNation(kind: .exotic, descriptionText: "이국음식\n(아시안)")
-        let etc = MenuNation(kind: .etc, descriptionText: "기타\n(샐러드, 치킨)")
+        let korean = MenuNation(kind: .korean, descriptionText: Text.koreanDescriptionText)
+        let western = MenuNation(kind: .western, descriptionText: Text.westernDescriptionText)
+        let japanese = MenuNation(kind: .japanese, descriptionText: Text.japaneseDescriptionText)
+        let chinese = MenuNation(kind: .chinese, descriptionText: Text.chineseDescriptionText)
+        let convenient = MenuNation(kind: .convenient, descriptionText: Text.convenientDescriptionText)
+        let exotic = MenuNation(kind: .exotic, descriptionText: Text.exoticDescriptionText)
+        let etc = MenuNation(kind: .etc, descriptionText: Text.etcDescriptionText)
         menuNations = [korean, western, japanese, chinese, convenient, exotic, etc]
         
         return menuNations
     }
     
     private func createMainIngredients() -> [MainIngredient] {
-        let rice = MainIngredient(kind: .rice, descriptionText: "밥")
-        let noodle = MainIngredient(kind: .noodle, descriptionText: "면")
-        let soup = MainIngredient(kind: .soup, descriptionText: "국")
-        let hateAll = MainIngredient(kind: .hateAll, descriptionText: "밥, 면, 국 다 싫어\n(치킨, 떡볶이, 딤섬)")
+        let rice = MainIngredient(kind: .rice, descriptionText: Text.riceDescriptionText)
+        let noodle = MainIngredient(kind: .noodle, descriptionText: Text.noodleDescriptionText)
+        let soup = MainIngredient(kind: .soup, descriptionText: Text.soupDescriptionText)
+        let hateAll = MainIngredient(kind: .hateAll, descriptionText: Text.hateAllDescriptionText)
         mainIngredients = [rice, noodle, soup, hateAll]
         
         return mainIngredients
@@ -192,7 +192,7 @@ final class CardGameViewModel {
                     self.showNextPage(with: decodedSoloGameResult)
                 } else {
                     self.showNextPage(with: nil)
-                    UserDefaults.standard.set(true, forKey: "isTogetherGameSubmitted")
+                    UserDefaults.standard.set(true, forKey: Text.isTogetherGameSubmittedKey)
                 }
             })
             .disposed(by: disposeBag)
@@ -269,5 +269,22 @@ final class CardGameViewModel {
                 
                 return indexPath
             }
+    }
+}
+
+extension CardGameViewModel {
+    private enum Text {
+        static let koreanDescriptionText = "한식"
+        static let westernDescriptionText = "양식"
+        static let japaneseDescriptionText = "일식"
+        static let chineseDescriptionText = "중식"
+        static let convenientDescriptionText = "분식"
+        static let exoticDescriptionText = "이국음식\n(아시안)"
+        static let etcDescriptionText = "기타\n(샐러드, 치킨)"
+        static let riceDescriptionText = "밥"
+        static let noodleDescriptionText = "면"
+        static let soupDescriptionText = "국"
+        static let hateAllDescriptionText = "밥, 면, 국 다 싫어\n(치킨, 떡볶이, 딤섬)"
+        static let isTogetherGameSubmittedKey = "isTogetherGameSubmitted"
     }
 }

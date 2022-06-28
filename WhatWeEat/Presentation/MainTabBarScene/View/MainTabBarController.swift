@@ -29,24 +29,24 @@ final class MainTabBarController: UITabBarController {
     
     // MARK: - Methods
     private func configureNavigationBar() {
-        let settingsImage = UIImage(systemName: "gearshape")
+        let settingsImage = Content.settingImage
         let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = settingsButton
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem?.tintColor = Design.navigationRightBarButtonTintColor
         
-        navigationItem.title = "우리뭐먹지"
+        navigationItem.title = Text.navigationTitle
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-            .font: UIFont.pretendard(family: .medium, size: 25),
+            NSAttributedString.Key.foregroundColor: Design.navigationTitleColor,
+            .font: Design.navigationTitleFont,
         ]
         
         navigationItem.hidesBackButton = true
     }
 
     private func configureTabBar() {
-        self.tabBar.tintColor = .mainOrange
-        self.tabBar.unselectedItemTintColor = .systemGray
-        tabBar.backgroundColor = .systemGray6
+        self.tabBar.tintColor = Design.tabBarTintColor
+        self.tabBar.unselectedItemTintColor = Design.tabBarUnselectedTintColor
+        tabBar.backgroundColor = Design.tabBarBackgroundColor
         
         viewControllers = pages
     }
@@ -54,13 +54,13 @@ final class MainTabBarController: UITabBarController {
     private func changeNavigationTitle(selectedIndex: Int) {
         switch selectedIndex {
         case 0:
-            navigationItem.title = "우리뭐먹지"
+            navigationItem.title = Text.homeNavigationTitle
         case 1:
-            navigationItem.title = "함께 메뉴 결정"
+            navigationItem.title = Text.togetherNavigationTitle
         case 2:
-            navigationItem.title = "혼밥 메뉴 결정"
+            navigationItem.title = Text.soloNavigationTitle
         default:
-            navigationItem.title = "우리뭐먹지"
+            navigationItem.title = Text.homeNavigationTitle
         }
     }
 }
@@ -80,5 +80,28 @@ extension MainTabBarController {
         let input = MainTabBarViewModel.Input(rightBarButtonItemDidTap: rightBarButtonItem.rx.tap.asObservable())
         
         viewModel.transform(input)
+    }
+}
+
+extension MainTabBarController {
+    private enum Design {
+        static let navigationTitleFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let navigationTitleColor: UIColor = .black
+        static let navigationRightBarButtonTintColor: UIColor = .black
+        static let tabBarTintColor: UIColor = .mainOrange
+        static let tabBarUnselectedTintColor: UIColor = .systemGray
+        static let tabBarBackgroundColor: UIColor = .systemGray6
+        
+    }
+    
+    private enum Content {
+        static let settingImage = UIImage(systemName: "gearshape")
+    }
+    
+    private enum Text {
+        static let navigationTitle = "우리뭐먹지"
+        static let homeNavigationTitle = "우리뭐먹지"
+        static let togetherNavigationTitle = "함께 메뉴 결정"
+        static let soloNavigationTitle = "혼밥 메뉴 결정"
     }
 }

@@ -49,19 +49,33 @@ final class DislikedFoodSurveyViewModel {
             .withUnretained(self)
             .flatMap { _ -> Observable<[DislikedFood]> in
             guard
-//                let chilliFoodImage = UIImage(named: "chilli"),
-                let intestineFoodImage = UIImage(named: "intestine"),
-                let sashimiFoodImage = UIImage(named: "sashimi"),
-                let seaFoodImage = UIImage(named: "fish"),
-                let meatFoodImage = UIImage(named: "meat")
+                let intestineFoodImage = Content.intestineFoodImage,
+                let sashimiFoodImage = Content.sashimiFoodImage,
+                let seaFoodImage = Content.seaFoodImage,
+                let meatFoodImage = Content.meatFoodImage
             else {
                 return Observable.just([])
             }
-//            let chilliFood = DislikedFood(kind: .spicy, descriptionImage: chilliFoodImage, descriptionText: "매콤한 음식")
-            let intestineFood = DislikedFood(kind: .intestine, descriptionImage: intestineFoodImage, descriptionText: "내장")
-            let sashimiFood = DislikedFood(kind: .sashimi, descriptionImage: sashimiFoodImage, descriptionText: "날 것 (회, 육회)")
-            let seaFood = DislikedFood(kind: .seafood, descriptionImage: seaFoodImage, descriptionText: "해산물")
-            let meatFood = DislikedFood(kind: .meat, descriptionImage: meatFoodImage, descriptionText: "고기")
+                let intestineFood = DislikedFood(
+                    kind: .intestine,
+                    descriptionImage: intestineFoodImage,
+                    descriptionText: Text.intestineFoodText
+                )
+            let sashimiFood = DislikedFood(
+                kind: .sashimi,
+                descriptionImage: sashimiFoodImage,
+                descriptionText: Text.sashimiFoodText
+            )
+            let seaFood = DislikedFood(
+                kind: .seafood,
+                descriptionImage: seaFoodImage,
+                descriptionText: Text.seaFoodText
+            )
+            let meatFood = DislikedFood(
+                kind: .meat,
+                descriptionImage: meatFoodImage,
+                descriptionText: Text.meatFoodText
+            )
             self.dislikedFoods = [intestineFood, sashimiFood, seaFood, meatFood]
               
             let realmManager = RealmManager.shared
@@ -96,12 +110,30 @@ final class DislikedFoodSurveyViewModel {
                 
                 if FirstLaunchChecker.isFirstLaunched() {
                     self.coordinator.dislikedFoodSurveyCoordinatorDelegate.showMainTabBarPage()
-                    UserDefaults.standard.set(false, forKey: "isFirstLaunched")
+                    UserDefaults.standard.set(false, forKey: Text.isFirstLaunchedKey)
                 } else {
                     guard let settingCoordinator = self.coordinator as? SettingCoordinator else { return }
                     settingCoordinator.popCurrentPage()
                 }
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension DislikedFoodSurveyViewModel {
+    private enum Content {
+        static let intestineFoodImage = UIImage(named: "intestine")
+        static let sashimiFoodImage = UIImage(named: "sashimi")
+        static let seaFoodImage = UIImage(named: "fish")
+        static let meatFoodImage = UIImage(named: "meat")
+    }
+    
+    private enum Text {
+        static let intestineFoodText = "내장"
+        static let sashimiFoodText = "날 것 (회, 육회)"
+        static let seaFoodText = "해산물"
+        static let meatFoodText = "고기"
+        
+        static let isFirstLaunchedKey = "isFirstLaunched"
     }
 }

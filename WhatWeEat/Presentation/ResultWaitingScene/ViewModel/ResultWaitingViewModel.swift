@@ -133,8 +133,8 @@ final class ResultWaitingViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.coordinator.showGameResultPage(with: self.pinNumber, soloGameResult: nil)
-                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
-                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
+                UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
+                UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
             .disposed(by: disposeBag)
     }
@@ -144,8 +144,8 @@ final class ResultWaitingViewModel {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: AppDelegate.token)
-                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
-                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
+                UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
+                UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
             .disposed(by: disposeBag)
     }
@@ -160,5 +160,12 @@ final class ResultWaitingViewModel {
             self.coordinator.showInitialTogetherMenuPage()
         })
         .disposed(by: disposeBag)
+    }
+}
+
+extension ResultWaitingViewModel {
+    private enum Text {
+        static let isTogetherGameSubmittedKey = "isTogetherGameSubmitted"
+        static let latestPinNumber = "latestPinNumber"
     }
 }

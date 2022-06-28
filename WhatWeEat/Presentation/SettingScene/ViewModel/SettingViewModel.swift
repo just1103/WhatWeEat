@@ -64,32 +64,32 @@ final class SettingViewModel {
                 }
                 
                 let editDislikedFoods = CommonSettingItem(
-                    title: Content.editDislikedFoodsTitle,
-                    content: Content.editDislikedFoodsContent,
+                    title: Text.editDislikedFoodsTitle,
+                    content: Text.editDislikedFoodsContent,
                     sectionKind: .dislikedFood
                 )
                 let privacyPolicies = CommonSettingItem(
-                    title: Content.privacyPoliciesTitle,
+                    title: Text.privacyPoliciesTitle,
                     content: try? String(contentsOfFile: FilePath.termsOfPrivacy),
                     sectionKind: .common
                 )
                 let openSourceLicense = CommonSettingItem(
-                    title: Content.openSourceLicenseTitle,
+                    title: Text.openSourceLicenseTitle,
                     content: try? String(contentsOfFile: FilePath.openSourceLicense),
                     sectionKind: .common
                 )
                 let feedBackToDeveloper = CommonSettingItem(
-                    title: Content.feedBackToDeveloperTitle,
-                    content: Content.feedBackToDeveloperContent,
+                    title: Text.feedBackToDeveloperTitle,
+                    content: Text.feedBackToDeveloperContent,
                     sectionKind: .common
                 )
                 let recommendToFriend = CommonSettingItem(
-                    title: Content.recommendToFriendTitle,
-                    content: Content.recommendToFriendContent,
+                    title: Text.recommendToFriendTitle,
+                    content: Text.recommendToFriendContent,
                     sectionKind: .common
                 )
                 let versionInformation = VersionSettingItem(
-                    title: Content.versionInformationTitle,
+                    title: Text.versionInformationTitle,
                     subtitle: self.configureVersionInformationSubtitle(),
                     buttonTitle: self.configureVersionInformationButtonUpdateTitle()
                 )
@@ -108,25 +108,25 @@ final class SettingViewModel {
     }
     
     private func checkCurrentAppVersion() -> String {
-        guard let currentAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            return Content.versionCheckErrorTitle
+        guard let currentAppVersion = Bundle.main.infoDictionary?[Text.versionInfoDictionaryKey] as? String else {
+            return Text.versionCheckErrorTitle
         }
         return currentAppVersion
     }
     
     private func checkLatestAppVersion() -> String {
-        let appBundleID = "com.WhatWeEat"
+        let appBundleID = Text.appBundleID
         
         guard
             let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appBundleID)"),
             let data = try? Data(contentsOf: url),
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-            let results = json["reslts"] as? [[String: Any]],
+            let results = json[Text.resultsKey] as? [[String: Any]],
             results.count > 0,
-            let latestAppVersion = results[safe: 0]?["version"] as? String
+            let latestAppVersion = results[safe: 0]?[Text.versionKey] as? String
         else {
 //            return "1.0"  // TODO: 테스트코드
-            return Content.versionCheckErrorTitle
+            return Text.versionCheckErrorTitle
         }
         
         return latestAppVersion
@@ -134,9 +134,9 @@ final class SettingViewModel {
     
     private func configureVersionInformationButtonUpdateTitle() -> String {
         if isUpdateNeeded() {
-            return Content.versionInformationButtonUpdateTitle
+            return Text.versionInformationButtonUpdateTitle
         } else {
-            return Content.versionInformationButtonLatestTitle
+            return Text.versionInformationButtonLatestTitle
         }
     }
     
@@ -177,7 +177,7 @@ extension SettingViewModel {
         static let openSourceLicense = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
     }
     
-    enum Content {
+    enum Text {
         static let editDislikedFoodsTitle = "못먹는 음식 수정하기"
         static let editDislikedFoodsContent = ""
         static let privacyPoliciesTitle = "개인정보 처리방침"
@@ -192,5 +192,9 @@ extension SettingViewModel {
         static let versionCheckErrorTitle = "버전 확인 불가"
         static let versionInformationButtonUpdateTitle = "업데이트"
         static let versionInformationButtonLatestTitle = "최신버전"
+        static let versionInfoDictionaryKey = "CFBundleShortVersionString"
+        static let appBundleID = "com.WhatWeEat"
+        static let resultsKey = "reslts"
+        static let versionKey = "version"
     }
 }

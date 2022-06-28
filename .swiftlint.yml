@@ -7,6 +7,7 @@ disabled_rules:
 - trailing_comma
 - force_try
 - large_tuple
+- identifier_name
 
 type_body_length: 250
 line_length: 140

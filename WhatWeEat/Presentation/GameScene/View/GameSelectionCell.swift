@@ -25,7 +25,7 @@ class GameSelectionCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -65,8 +65,8 @@ class GameSelectionCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.backgroundColor = .subYellow
-        self.layer.cornerRadius = 8
+        self.backgroundColor = Design.cellBackgroundColor
+        self.layer.cornerRadius = Design.cellCornerRadius
         self.clipsToBounds = true
         
         addSubview(descriptionLabel)
@@ -93,6 +93,8 @@ class GameSelectionCell: UICollectionViewCell {
 extension GameSelectionCell {
     private enum Design {
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 20)
+        static let cellBackgroundColor: UIColor = .subYellow
+        static let cellCornerRadius: CGFloat = 8
     }
     
     private enum Content {

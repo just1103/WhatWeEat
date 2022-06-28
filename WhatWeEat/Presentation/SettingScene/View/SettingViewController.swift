@@ -37,25 +37,25 @@ final class SettingViewController: UIViewController {
     
     // MARK: - Methods
     private func configureNavigationBar() {
-        let backButtonImage = UIImage(systemName: "arrow.backward")
+        let backButtonImage = Content.backButtonImage
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: backButtonImage,
             style: .plain,
             target: self,
             action: nil
         )
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = Design.navagationLeftBarButtonTintColor
         
-        navigationItem.title = "설정"
+        navigationItem.title = Text.navigationTitle
         let textAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-            .font: UIFont.pretendard(family: .medium, size: 25),
+            NSAttributedString.Key.foregroundColor: Design.navigationTitleColor,
+            .font: Design.navigationTitleFont,
         ]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     private func configureTableView() {
-        self.view.backgroundColor = .systemGray6
+        self.view.backgroundColor = Design.backgroundColor
         self.view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,5 +167,22 @@ extension SettingViewController: UITableViewDataSource {
 
             return cell
         }
+    }
+}
+
+extension SettingViewController {
+    private enum Design {
+        static let navagationLeftBarButtonTintColor: UIColor = .black
+        static let navigationTitleColor: UIColor = .black
+        static let navigationTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 25)
+        static let backgroundColor: UIColor = .systemGray6
+    }
+    
+    private enum Content {
+        static let backButtonImage = UIImage(systemName: "arrow.backward")
+    }
+    
+    private enum Text {
+        static let navigationTitle = "설정"
     }
 }

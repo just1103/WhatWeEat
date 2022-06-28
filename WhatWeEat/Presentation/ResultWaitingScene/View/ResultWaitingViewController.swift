@@ -8,78 +8,72 @@ class ResultWaitingViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .mainOrange
+        view.backgroundColor = Design.backgroundViewColor
         return view
     }()
     private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = .white
-        label.font = .pretendard(family: .regular, size: 15)
-        label.text = "PIN NUMBER : "
-        label.numberOfLines = 0
+        label.textColor = Design.pinNumberLabelTextColor
+        label.font = Design.pinNumberLabelFont
+        label.text = Text.pinNumberLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let submissionCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "1명\n제출완료"
-        label.textColor = .white
+        label.text = Text.submissionCountLabelText
+        label.textColor = Design.submissionCountLabelTextColor
         label.textAlignment = .center
-        label.font = .pretendard(family: .medium, size: 30)
-        label.numberOfLines = 0
+        label.font = Design.submissionCountLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let loadingCircleView: AnimationView = {
-        let animationView = AnimationView(name: "loader")
+        let animationView = Design.loadingCircleView
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
-        animationView.animationSpeed = 0.5
+        animationView.animationSpeed = Design.loadingCircleViewAnimationSpeed
         return animationView
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = """
-        팀원들을 기다리고 있어요.
-
-        Host가 결과확인 버튼을 누르면
-        오늘의 메뉴가 결정됩니다.
-        """
-        label.textColor = .white
+        label.text = Text.descriptionLabelText
+        label.textColor = Design.descriptionLabelTextColor
         label.textAlignment = .center
-        label.font = .pretendard(family: .medium, size: 23)
-        label.numberOfLines = 0
+        label.font = Design.descriptionLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let gameResultCheckButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("결과 확인하기", for: .normal)
-        button.setTitleColor(.mainOrange, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 25)
-        button.backgroundColor = .white
+        button.setTitle(Text.gameResultCheckButtonTitle, for: .normal)
+        button.setTitleColor(Design.gameResultCheckButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.gameResultCheckButtonTitleFont
+        button.backgroundColor = Design.gameResultCheckButtonBackgroundColor
         button.clipsToBounds = true
-        button.isHidden = true  // 사용자가 Host인 경우, Host가 결과확인버튼을 탭한 경우 false로 변경
+        button.isHidden = true
         return button
     }()
     private let gameRestartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("게임 다시 시작", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
-        button.backgroundColor = .white
-        button.setImage(UIImage(systemName: "arrow.counterclockwise.circle"), for: .normal)
-        button.tintColor = .darkGray
-        button.titleEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        button.setTitle(Text.gameRestartButtonTitle , for: .normal)
+        button.setTitleColor(Design.gameRestartButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.gameRestartButtonTitleFont
+        button.backgroundColor = Design.gameRestartButtonBackgroundColor
+        button.setImage(Content.gameRestartButtonImage, for: .normal)
+        button.tintColor = Design.gameRestartButtonTintColor
+        button.titleEdgeInsets = Design.gameRestartButtonTitleInsets
         button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.isHidden = false
         return button
@@ -121,8 +115,8 @@ class ResultWaitingViewController: UIViewController {
         view.addSubview(gameRestartButton)
         
         loadingCircleView.play()
-        gameResultCheckButton.layer.cornerRadius = view.bounds.height * 0.08 * 0.5
-        gameRestartButton.layer.cornerRadius = view.bounds.height * 0.06 * 0.5
+        gameResultCheckButton.layer.cornerRadius = Design.gameResultCheckButtonCornerRadius
+        gameRestartButton.layer.cornerRadius = Design.gameRestartButtonCornerRadius
 
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -130,28 +124,52 @@ class ResultWaitingViewController: UIViewController {
             backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            pinNumberLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.pinNumberLabelTopAnchorConstant
+            ),
+            pinNumberLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.pinNumberLabelTrailingAnchorAnchorConstant
+            ),
             
             submissionCountLabel.centerXAnchor.constraint(equalTo: loadingCircleView.centerXAnchor),
             submissionCountLabel.centerYAnchor.constraint(equalTo: loadingCircleView.centerYAnchor),
             
             loadingCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingCircleView.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: -15),
-            loadingCircleView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            loadingCircleView.topAnchor.constraint(
+                equalTo: pinNumberLabel.bottomAnchor,
+                constant: Constraint.loadingCircleViewTopAnchorConstant
+            ),
+            loadingCircleView.widthAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.widthAnchor,
+                multiplier: Constraint.loadingCircleViewWidthAnchorMultiplier
+            ),
             loadingCircleView.heightAnchor.constraint(equalTo: loadingCircleView.widthAnchor),
             
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: gameResultCheckButton.topAnchor, constant: -20),
+            descriptionLabel.bottomAnchor.constraint(
+                equalTo: gameResultCheckButton.topAnchor,
+                constant: Design.descriptionLabelBottomAnchorConstant
+            ),
             
             gameResultCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gameResultCheckButton.bottomAnchor.constraint(equalTo: gameRestartButton.topAnchor, constant: -20),
-            gameResultCheckButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.08),
+            gameResultCheckButton.bottomAnchor.constraint(
+                equalTo: gameRestartButton.topAnchor,
+                constant: Design.gameResultCheckButtonBottomAnchorConstant
+            ),
+            gameResultCheckButton.heightAnchor.constraint(equalToConstant: Design.gameResultCheckButtonHeightAnchorConstant),
             gameResultCheckButton.widthAnchor.constraint(equalToConstant: gameRestartButton.intrinsicContentSize.width + 80),
             
-            gameRestartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-            gameRestartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            gameRestartButton.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.06),
+            gameRestartButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Design.gameRestartButtonTrailingAnchorConstant
+            ),
+            gameRestartButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: Design.gameRestartButtonBottomAnchorConstant
+            ),
+            gameRestartButton.heightAnchor.constraint(equalToConstant: Design.gameRestartButtonHeightAnchorConstant),
             gameRestartButton.widthAnchor.constraint(equalToConstant: gameRestartButton.intrinsicContentSize.width + 50),
         ])
     }
@@ -216,10 +234,55 @@ extension ResultWaitingViewController {
 }
 
 extension ResultWaitingViewController {
-//    private enum Design {
-//        static let previousQuestionButtonTitleColor: UIColor = .label
-//        static let skipAndConfirmButtonBackgroundColor: UIColor = .mainYellow
-//        static let skipAndConfirmButtonTitleColor: UIColor = .label
-//        static let skipAndConfirmButtonTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
-//    }
+    private enum Design {
+        static let backgroundViewColor: UIColor = .mainOrange
+        static let pinNumberLabelTextColor: UIColor = .white
+        static let pinNumberLabelFont: UIFont = .pretendard(family: .regular, size: 15)
+        static let submissionCountLabelTextColor: UIColor = .white
+        static let submissionCountLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let loadingCircleView = AnimationView(name: "loader")
+        static let loadingCircleViewAnimationSpeed = 0.5
+        static let descriptionLabelTextColor: UIColor = .white
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 23)
+        static let gameResultCheckButtonTitleColor: UIColor = .mainOrange
+        static let gameResultCheckButtonTitleFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let gameResultCheckButtonBackgroundColor: UIColor = .white
+        static let gameRestartButtonTitleColor: UIColor = .darkGray
+        static let gameRestartButtonTitleFont: UIFont = .pretendard(family: .medium, size: 20)
+        static let gameRestartButtonBackgroundColor: UIColor = .white
+        static let gameRestartButtonTintColor: UIColor = .darkGray
+        static let gameRestartButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        static let gameResultCheckButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.08 * 0.5
+        static let gameRestartButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.06 * 0.5
+        static let descriptionLabelBottomAnchorConstant: CGFloat = -20
+        static let gameResultCheckButtonBottomAnchorConstant: CGFloat = -20
+        static let gameResultCheckButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
+        static let gameRestartButtonTrailingAnchorConstant: CGFloat = -15
+        static let gameRestartButtonBottomAnchorConstant: CGFloat = -15
+        static let gameRestartButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.06
+    }
+    
+    private enum Constraint {
+        static let pinNumberLabelTopAnchorConstant: CGFloat = 15
+        static let pinNumberLabelTrailingAnchorAnchorConstant: CGFloat = -15
+        static let loadingCircleViewTopAnchorConstant: CGFloat = -15
+        static let loadingCircleViewWidthAnchorMultiplier = 0.8
+    }
+    
+    private enum Content {
+        static let gameRestartButtonImage = UIImage(systemName: "arrow.counterclockwise.circle")
+    }
+    
+    private enum Text {
+        static let pinNumberLabelText = "PIN NUMBER : "
+        static let submissionCountLabelText = "1명\n제출완료"
+        static let descriptionLabelText = """
+        팀원들을 기다리고 있어요.
+
+        Host가 결과확인 버튼을 누르면
+        오늘의 메뉴가 결정됩니다.
+        """
+        static let gameResultCheckButtonTitle = "결과 확인하기"
+        static let gameRestartButtonTitle = "게임 다시 시작"
+    }
 }

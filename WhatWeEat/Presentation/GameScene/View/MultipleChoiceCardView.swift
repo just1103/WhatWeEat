@@ -9,27 +9,27 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         var columnCount: Int {
             switch self {
             case .menuNation:
-                return 2
+                return Content.menuNationColumnCount
             case .mainIngredient:
-                return 1
+                return Content.mainIngredientColumnCount
             }
         }
         
         var backgroundColor: UIColor {  // TODO: 무난한색깔 2개로 변경
             switch self {
             case .menuNation:
-                return .darkGray
+                return Design.menuNationBackgroundColor
             case .mainIngredient:
-                return .systemGray
+                return Design.mainIngredientBackgroundColor
             }
         }
         
         var sectionInset: NSDirectionalEdgeInsets {
             switch self {
             case .menuNation:
-                return NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+                return Design.menuNationSectionInsets
             case .mainIngredient:
-                return NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
+                return Design.mainIngredientSectionInsets
             }
         }
     }
@@ -41,34 +41,34 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 15, leading: 5, bottom: 10, trailing: 5)
+        stackView.directionalLayoutMargins = Design.containerStackViewMargins
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.spacing = 10
+        stackView.spacing = Design.containerStackViewSpacing
         stackView.backgroundColor = .black
-        stackView.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
+        stackView.layer.cornerRadius = Design.containerStackViewCornerRadius
         stackView.clipsToBounds = true
         return stackView
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "어떤 게 끌리세요?"
-        label.numberOfLines = 0
+        label.text = Text.titleLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
-        label.font = .pretendardDefaultSize(family: .bold)
-        label.textColor = .white
+        label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         return label
     }()
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "(중복 선택 가능)"
-        label.numberOfLines = 0
+        label.text = Text.subtitleLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
-        label.font = .pretendard(family: .medium, size: 30)
-        label.textColor = .white
+        label.font = Design.subtitleLabelFont
+        label.textColor = Design.subtitleLabelTextColor
         return label
     }()
     let choiceCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -94,7 +94,7 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
                 heightDimension: .fractionalHeight(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+            item.contentInsets = Design.collectionViewItemInsets
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(0.22)
@@ -116,7 +116,6 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
     
     func configureUI() {
         self.backgroundColor = UIColor.clear
-//        self.applyShadow(direction: .top, radius: 8)
         
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleLabel)
@@ -141,5 +140,33 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
         choiceCollectionView.translatesAutoresizingMaskIntoConstraints = false
         choiceCollectionView.backgroundColor = .black
         choiceCollectionView.register(cellType: GameSelectionCell.self)
+    }
+}
+
+// MARK: - Namespaces
+extension MultipleChoiceCardView {
+    private enum Design {
+        static let menuNationBackgroundColor: UIColor = .darkGray
+        static let mainIngredientBackgroundColor: UIColor = .systemGray
+        static let menuNationSectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+        static let mainIngredientSectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
+        static let containerStackViewMargins = NSDirectionalEdgeInsets(top: 15, leading: 5, bottom: 10, trailing: 5)
+        static let containerStackViewSpacing: CGFloat = 10
+        static let containerStackViewCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
+        static let titleLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
+        static let titleLabelTextColor: UIColor = .white
+        static let subtitleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let subtitleLabelTextColor: UIColor = .white
+        static let collectionViewItemInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+    }
+
+    private enum Content {
+        static let menuNationColumnCount = 2
+        static let mainIngredientColumnCount = 1
+    }
+    
+    private enum Text {
+        static let titleLabelText = "어떤 게 끌리세요?"
+        static let subtitleLabelText = "(중복 선택 가능)"
     }
 }

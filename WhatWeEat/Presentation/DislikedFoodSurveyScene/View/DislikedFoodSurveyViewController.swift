@@ -20,40 +20,40 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "못먹는 음식"
-        label.numberOfLines = 0
+        label.text = Text.titleLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 40)
+        label.font = Design.titleLabelFont
         return label
     }()
     private let titleDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "을 알려주세요"
-        label.numberOfLines = 0
+        label.text = Text.titleDescriptionLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 25)
+        label.font = Design.titleDescriptionLabelFont
         return label
     }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "메뉴에서 제외하고 추천드려요"
+        label.text = Text.descriptionLabelText
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
-        label.font = .pretendard(family: .medium, size: 22)
+        label.font = Design.descriptionLabelFont
         return label
     }()
     private let confirmButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("확인", for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 25)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .mainYellow
-        button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
+        button.setTitle(Text.confirmButtonTitle, for: .normal)
+        button.titleLabel?.font = Design.confirmButtonFont
+        button.setTitleColor(Design.confirmButtonTitleColor, for: .normal)
+        button.backgroundColor = Design.confirmButtonBackgroundColor
+        button.titleEdgeInsets = Design.confirmButtonTitleEdgeInsets
         return button
     }()
     
@@ -104,8 +104,8 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     }
     
     private func showErrorVersionAlert() {
-        let okAlertAction = UIAlertAction(title: Content.okAlertActionTitle, style: .default)
-        let alert = AlertFactory().createAlert(title: Content.versionErrorTitle, message: nil, actions: okAlertAction)
+        let okAlertAction = UIAlertAction(title: Text.okAlertActionTitle, style: .default)
+        let alert = AlertFactory().createAlert(title: Text.versionErrorTitle, message: nil, actions: okAlertAction)
         present(alert, animated: true)
     }
     
@@ -117,7 +117,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Design.collectionViewBackgroundColor
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -128,7 +128,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
             }
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+            item.contentInsets = Design.collectionViewItemInset
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.4))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
@@ -154,8 +154,8 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
     }
     
     private func showUnknownSectionErrorAlert() {
-        let okAlertAction = UIAlertAction(title: Content.okAlertActionTitle, style: .default)
-        let alert = AlertFactory().createAlert(title: Content.unknownSectionErrorTitle, actions: okAlertAction)
+        let okAlertAction = UIAlertAction(title: Text.okAlertActionTitle, style: .default)
+        let alert = AlertFactory().createAlert(title: Text.unknownSectionErrorTitle, actions: okAlertAction)
         present(alert, animated: true)
     }
     
@@ -167,25 +167,51 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         view.addSubview(confirmButton)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-//            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.titleLabelTopAnchorConstant
+            ),
+            titleLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.titleLabelLeadingAnchorConstant
+            ),
             
             titleDescriptionLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            titleDescriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 2),
-            titleDescriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            titleDescriptionLabel.leadingAnchor.constraint(
+                equalTo: titleLabel.trailingAnchor,
+                constant: Constraint.titleDescriptionLabelLeadingAnchorConstant
+            ),
+            titleDescriptionLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.titleDescriptionLabelTrailingAnchorConstant),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20),
+            descriptionLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.descriptionLabelHorizontalConstant
+            ),
+            descriptionLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.descriptionLabelHorizontalConstant
+            ),
             
-            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            collectionView.topAnchor.constraint(
+                equalTo: descriptionLabel.bottomAnchor,
+                constant: Constraint.collectionViewTopAnchorConstant
+            ),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -30),
+            collectionView.bottomAnchor.constraint(
+                equalTo: confirmButton.topAnchor,
+                constant: Constraint.collectionViewBottomAnchorConstant
+            ),
             
-            confirmButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            confirmButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.09),
+            confirmButton.widthAnchor.constraint(
+                equalToConstant: Constraint.confirmButtonWidthAnchorConstant
+            ),
+            confirmButton.heightAnchor.constraint(
+                equalToConstant: Constraint.confirmButtonHeightAnchorConstant
+            ),
             confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
@@ -237,9 +263,37 @@ extension DislikedFoodSurveyViewController {
 
 // MARK: - NameSpaces
 extension DislikedFoodSurveyViewController {
-    private enum Content {
+    private enum Design {
+        static let titleLabelFont: UIFont = .pretendard(family: .bold, size: 40)
+        static let titleDescriptionLabelFont: UIFont = .pretendard(family: .bold, size: 25)
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
+        static let confirmButtonFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let confirmButtonTitleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
+        static let confirmButtonTitleColor: UIColor = .black
+        static let confirmButtonBackgroundColor: UIColor = .mainYellow
+        static let collectionViewItemInset = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        static let collectionViewBackgroundColor: UIColor = .white
+    }
+    
+    private enum Constraint {
+        static let titleLabelTopAnchorConstant: CGFloat = 30
+        static let titleLabelLeadingAnchorConstant: CGFloat = 20
+        static let titleDescriptionLabelLeadingAnchorConstant: CGFloat = 2
+        static let titleDescriptionLabelTrailingAnchorConstant: CGFloat = -15
+        static let descriptionLabelHorizontalConstant: CGFloat = 20
+        static let collectionViewTopAnchorConstant: CGFloat = 40
+        static let collectionViewBottomAnchorConstant: CGFloat = -30
+        static let confirmButtonWidthAnchorConstant: CGFloat = UIScreen.main.bounds.width
+        static let confirmButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.09
+    }
+    
+    private enum Text {
         static let unknownSectionErrorTitle = "알 수 없는 Section입니다"
         static let okAlertActionTitle = "OK"
         static let versionErrorTitle = "기기를 iOS 15.4 이상으로 업데이트 해주세요"
+        static let titleLabelText = "못먹는 음식"
+        static let titleDescriptionLabelText = "을 알려주세요"
+        static let descriptionLabelText = "메뉴에서 제외하고 추천드려요"
+        static let confirmButtonTitle = "확인"
     }
 }

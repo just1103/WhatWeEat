@@ -8,7 +8,7 @@ final class OnboardingPageViewController: UIPageViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = Design.pageControlCurrentPageIndicatorTintColor
         pageControl.pageIndicatorTintColor = Design.pageControlPageIndicatorTintColor
-        pageControl.currentPage = 0
+        pageControl.currentPage = .zero
         pageControl.backgroundStyle = .minimal
         pageControl.allowsContinuousInteraction = false
         pageControl.isUserInteractionEnabled = false
@@ -18,7 +18,7 @@ final class OnboardingPageViewController: UIPageViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "arrow")
+        imageView.image = Content.arrowImageViewImage
         return imageView
     }()
     private let skipButton: UIButton = {
@@ -29,7 +29,7 @@ final class OnboardingPageViewController: UIPageViewController {
             .foregroundColor: Design.skipAndConfirmButtonTitleColor,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
-        let attributedString = NSMutableAttributedString(string: Content.skipButtonTitle, attributes: attributes)
+        let attributedString = NSMutableAttributedString(string: Text.skipButtonTitle, attributes: attributes)
         button.setAttributedTitle(attributedString, for: .normal)
         return button
     }()
@@ -72,19 +72,28 @@ final class OnboardingPageViewController: UIPageViewController {
         NSLayoutConstraint.activate([
             pageControl.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -UIScreen.main.bounds.height * 0.15
+                constant: Constraint.pageControlBottomAnchorConstant
             ),
-            pageControl.heightAnchor.constraint(equalToConstant: 20),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            pageControl.heightAnchor.constraint(equalToConstant: Constraint.pageControlHeightAnchorConstant),
+            pageControl.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constraint.pageControlLeadingAnchorConstant
+            ),
             
             arrowImageView.centerYAnchor.constraint(equalTo: skipButton.centerYAnchor),
             arrowImageView.leadingAnchor.constraint(equalTo: pageControl.leadingAnchor),
-            arrowImageView.trailingAnchor.constraint(equalTo: skipButton.leadingAnchor, constant: -5),
-            arrowImageView.heightAnchor.constraint(equalToConstant: 45),
+            arrowImageView.trailingAnchor.constraint(
+                equalTo: skipButton.leadingAnchor,
+                constant: Constraint.arrowImageViewTrailingAnchorConstant
+            ),
+            arrowImageView.heightAnchor.constraint(equalToConstant: Constraint.arrowImageViewHeightAnchorConstant),
             
-            skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            skipButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: Constraint.skipButtonBottomAnchorConstant
+            ),
             skipButton.widthAnchor.constraint(equalToConstant: skipButton.intrinsicContentSize.width + 30),
-            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constraint.skipButtonTrailingAnchorConstant),
         ])
     }
 }
@@ -190,7 +199,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     }
 }
 
-// MARK: - NameSpaces
+// MARK: - Namespaces
 extension OnboardingPageViewController {
     private enum Design {
         static let pageControlCurrentPageIndicatorTintColor: UIColor = .mainOrange
@@ -199,7 +208,21 @@ extension OnboardingPageViewController {
         static let skipAndConfirmButtonTitleFont: UIFont = .pretendard(family: .medium, size: 25)
     }
     
+    private enum Constraint {
+        static let pageControlBottomAnchorConstant: CGFloat = -UIScreen.main.bounds.height * 0.15
+        static let pageControlHeightAnchorConstant: CGFloat = 20
+        static let pageControlLeadingAnchorConstant: CGFloat = 20
+        static let arrowImageViewTrailingAnchorConstant: CGFloat = -5
+        static let arrowImageViewHeightAnchorConstant: CGFloat = 45
+        static let skipButtonBottomAnchorConstant: CGFloat = -10
+        static let skipButtonTrailingAnchorConstant: CGFloat = -40
+    }
+    
     private enum Content {
+        static let arrowImageViewImage = UIImage(named: "arrow")
+    }
+    
+    private enum Text {
         static let skipButtonTitle: String = "Skip"
     }
 }

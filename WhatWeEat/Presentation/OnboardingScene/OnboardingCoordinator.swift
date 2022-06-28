@@ -32,13 +32,13 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
     
     private func makeOnboardingPage() {
         let firstPage = OnboardingContentViewController(
-            titleLabelText: Content.firstPageTitleLabelText,
-            descriptionLabelText: Content.firstPageDescriptionLabelText,
+            titleLabelText: Text.firstPageTitleLabelText,
+            descriptionLabelText: Text.firstPageDescriptionLabelText,
             image: Content.firstPageImage
         )
         let secondPage = OnboardingContentViewController(
-            titleLabelText: Content.secondPageTitleLabelText,
-            descriptionLabelText: Content.secondPageDescriptionLabelText,
+            titleLabelText: Text.secondPageTitleLabelText,
+            descriptionLabelText: Text.secondPageDescriptionLabelText,
             image: Content.secondPageImage
         )
         
@@ -57,8 +57,7 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
 
 // MARK: - NameSpaces
 extension OnboardingCoordinator {
-    // TODO: 찰리 - Text로 이름 변경 (상수 텍스트를 가졌다는 전달력이 있음)
-    private enum Content {  // VC이 갖고있냐 (View다, 상수이고), VM (String도 데이터다)이 갖고있냐 의견 분분
+    private enum Text {
         static let skipButtonTitle: String = "Skip"
         static let firstPageTitleLabelText: String = "안녕하세요"
         static let firstPageDescriptionLabelText: String = """
@@ -71,7 +70,6 @@ extension OnboardingCoordinator {
         혼밥 메뉴도,
         우리 팀의 회식 메뉴도 정할 수 있어요.
         """
-        static let firstPageImage: UIImage? = UIImage(named: "image")
         static let secondPageTitleLabelText: String = "메뉴 정하기"
         static let secondPageDescriptionLabelText: String = """
         각자 미니게임을 진행하면
@@ -79,6 +77,10 @@ extension OnboardingCoordinator {
         
         혼자서도 미니게임을 할 수 있어요.
         """
+    }
+    
+    private enum Content {  // VC이 갖고있냐 (View다, 상수이고), VM (String도 데이터다)이 갖고있냐 의견 분분
+        static let firstPageImage: UIImage? = UIImage(named: "image")
         static let secondPageImage: UIImage? = UIImage(named: "image")
     }
 }
