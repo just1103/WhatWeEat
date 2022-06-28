@@ -20,9 +20,9 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         makeMainTabBarPage()
         
         if TogetherGameSubmittedChecker.isSubmitted {
-            guard let togetherCoordinator = childCoordinators.filter { $0.type == .togetherMenu }.first as? TogetherMenuCoordinator else {
-                return
-            }
+            guard
+                let togetherCoordinator = childCoordinators.filter({ $0.type == .togetherMenu }).first as? TogetherMenuCoordinator
+            else { return }
             
             togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber)
         }

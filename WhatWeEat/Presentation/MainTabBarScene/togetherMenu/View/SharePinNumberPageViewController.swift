@@ -103,7 +103,7 @@ final class SharePinNumberPageViewController: UIViewController {
         button.titleLabel?.font = .pretendardDefaultSize(family: .medium)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.tintColor = .mainOrange
-        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.06 / 2
+        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.06 * 0.5
         button.clipsToBounds = true
         button.applyShadow(direction: .bottom)
         return button
@@ -112,10 +112,10 @@ final class SharePinNumberPageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .pretendard(family: .regular, size: 15)
+        label.font = .pretendard(family: .regular, size: 20)
         label.text = """
-        모든 팀원이 동시에 진행하지 않아도 됩니다.
-        각자 편한 시간에 진행해주세요.
+        모든 팀원이 동시에 진행하지 않아도 됩니다
+        각자 편한 시간에 진행해주세요
         """
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
@@ -129,8 +129,8 @@ final class SharePinNumberPageViewController: UIViewController {
         button.setTitle("미니게임 시작", for: .normal)
         button.setTitleColor(.mainOrange, for: .normal)
         button.backgroundColor = .white
-        button.titleLabel?.font = .pretendardDefaultSize(family: .semiBold)
-        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.08 / 2
+        button.titleLabel?.font = .pretendard(family: .medium, size: 30)
+        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.08 * 0.5
         button.clipsToBounds = true
         button.applyShadow(direction: .bottom)
         return button
@@ -166,10 +166,10 @@ final class SharePinNumberPageViewController: UIViewController {
     }
     
     private func configureUI() {
-        // TODO: 디자인 반영하여 수정
         view.backgroundColor = .systemGray6
         view.addSubview(containerStackView)
-        view.addSubview(backButton)  // FIXME: 백버튼이 Navi 뒤에
+        view.addSubview(backButton)
+        
         containerStackView.addArrangedSubview(pinNumberStackView)
         containerStackView.addArrangedSubview(descriptionLabel)
         containerStackView.addArrangedSubview(gameStartButton)
@@ -183,7 +183,7 @@ final class SharePinNumberPageViewController: UIViewController {
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
+            backButton.widthAnchor.constraint(equalToConstant: backButton.intrinsicContentSize.width + 20),
             
             containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -193,7 +193,7 @@ final class SharePinNumberPageViewController: UIViewController {
             togetherImageView.widthAnchor.constraint(equalTo: togetherImageView.heightAnchor),
             
             shareButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.06),
-            shareButton.widthAnchor.constraint(equalToConstant: shareButton.intrinsicContentSize.width + 40),
+            shareButton.widthAnchor.constraint(equalToConstant: shareButton.intrinsicContentSize.width + 50),
             shareButton.centerXAnchor.constraint(equalTo: containerStackView.centerXAnchor),
             
             gameStartButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.08),
@@ -217,8 +217,8 @@ extension SharePinNumberPageViewController {
         configureShareButtonDidTap(with: output.shareButtonDidTap)
     }
     
-    private func configurePinNumber(with pinNumber: Observable<String>) {
-        pinNumber
+    private func configurePinNumber(with outputObservable: Observable<String>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, pinNumberText) in
@@ -227,8 +227,8 @@ extension SharePinNumberPageViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configureShareButtonDidTap(with shareButtonDidTap: Observable<Void>) {
-        shareButtonDidTap
+    private func configureShareButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in

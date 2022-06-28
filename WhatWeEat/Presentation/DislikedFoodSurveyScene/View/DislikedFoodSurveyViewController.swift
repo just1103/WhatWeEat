@@ -206,11 +206,12 @@ extension DislikedFoodSurveyViewController {
         configureSelectedCell(at: output.selectedFoodIndexPath)
     }
 
-    private func configureItems(with dislikedFoods: Observable<[DislikedFood]>) {
-        dislikedFoods
+    private func configureItems(with outputObservable: Observable<[DislikedFood]>) {
+        outputObservable
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] dislikedFoods in
-                self?.configureInitialSnapshot(with: dislikedFoods)
+            .subscribe(onNext: { (self, dislikedFoods) in
+                self.configureInitialSnapshot(with: dislikedFoods)
             })
             .disposed(by: disposeBag)
     }
@@ -224,9 +225,10 @@ extension DislikedFoodSurveyViewController {
     
     private func configureSelectedCell(at indexPath: Observable<IndexPath>) {
         indexPath
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let selectedCell = self?.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
+            .subscribe(onNext: { (self, indexPath) in
+                guard let selectedCell = self.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
                 selectedCell.toggleSelectedCellUI()
             })
             .disposed(by: disposeBag)

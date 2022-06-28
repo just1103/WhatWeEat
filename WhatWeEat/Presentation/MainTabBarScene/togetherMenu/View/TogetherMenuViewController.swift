@@ -188,22 +188,24 @@ extension TogetherMenuViewController {
                 
                 let alert = AlertFactory().createAlert(
                     style: .alert,
-                    title: "PIN번호를 입력해주세요",
+                    title: "PIN 번호를 입력해주세요",
                     message: nil,
                     actions: cancelAction
                 )
                 alert.addTextField { textField in
                     textField.placeholder = "PIN 번호를 입력해주세요"
                 }
+                
                 guard let textField = alert.textFields?[safe: 0] else { return }
+                
                 let okAction = UIAlertAction(title: "확인", style: .default) { _ in
                     self.validatePinNumber(textField.text ?? "")
                         .observe(on: MainScheduler.instance)
                         .subscribe(onNext: { isValid in
                             if isValid {
-                                self.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")
+                                self.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")  // TODO: 여기서 호출하는게 적절한지 고려
                             } else {
-                                alert.message = "잘못된 PIN번호 입니다. 다시 입력해주세요."
+                                alert.message = "잘못된 PIN 번호 입니다. 다시 입력해주세요."
                                 textField.text = nil
                                 self.present(alert, animated: true)
                             }

@@ -47,18 +47,18 @@ final class CardGameViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let initialCardIndiciesAndPinNumber = configureInitialCardIndiciesAndPinNumber(with: input.invokedViewDidLoad)
-        let menuNations = configureMenuNations(with: input.invokedViewDidLoad)
-        let mainIngredients = configureMainIngredients(with: input.invokedViewDidLoad)
-        let nextCardIndiciesWhenLike = configureNextCardIndiciesWhenLike(with: input.likeButtonDidTap)
-        let nextCardIndiciesWhenHate = configureNextCardIndiciesWhenHate(with: input.hateButtonDidTap)
-        let nextCardIndiciesWhenSkip = configureNextCardIndiciesWhenSkip(with: input.skipButtonDidTap)
-        let previousCardIndicies = configurePreviousCardIndicies(with: input.previousQuestionButtonDidTap)
+        let initialCardIndiciesAndPinNumber = configureInitialCardIndiciesAndPinNumber(by: input.invokedViewDidLoad)
+        let menuNations = configureMenuNations(by: input.invokedViewDidLoad)
+        let mainIngredients = configureMainIngredients(by: input.invokedViewDidLoad)
+        let nextCardIndiciesWhenLike = configureNextCardIndiciesWhenLike(by: input.likeButtonDidTap)
+        let nextCardIndiciesWhenHate = configureNextCardIndiciesWhenHate(by: input.hateButtonDidTap)
+        let nextCardIndiciesWhenSkip = configureNextCardIndiciesWhenSkip(by: input.skipButtonDidTap)
+        let previousCardIndicies = configurePreviousCardIndicies(by: input.previousQuestionButtonDidTap)
         let menuNationsSelectedindexPath = configureMenuNationsSelectedindexPath(
-            with: input.menuNationsCellDidSelect
+            by: input.menuNationsCellDidSelect
         )
         let mainIngredientsSelectedindexPath = configureMainIngredientsSelectedindexPath(
-            with: input.mainIngredientsCellDidSelect
+            by: input.mainIngredientsCellDidSelect
         )
         
         let output = Output(
@@ -77,7 +77,7 @@ final class CardGameViewModel {
     }
     
     private func configureInitialCardIndiciesAndPinNumber(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<(CardIndicies, String?)> {
         inputObserver
             .withUnretained(self)
@@ -86,7 +86,7 @@ final class CardGameViewModel {
             }
     }
     
-    private func configureMenuNations(with inputObserver: Observable<Void>) -> Observable<[MenuNation]> {
+    private func configureMenuNations(by inputObserver: Observable<Void>) -> Observable<[MenuNation]> {
         inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<[MenuNation]> in
@@ -94,7 +94,7 @@ final class CardGameViewModel {
             }
     }
     
-    private func configureMainIngredients(with inputObserver: Observable<Void>) -> Observable<[MainIngredient]> {
+    private func configureMainIngredients(by inputObserver: Observable<Void>) -> Observable<[MainIngredient]> {
         inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<[MainIngredient]> in
@@ -126,7 +126,7 @@ final class CardGameViewModel {
     }
     
     private func configureNextCardIndiciesWhenLike(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
@@ -139,7 +139,7 @@ final class CardGameViewModel {
     }
     
     private func configureNextCardIndiciesWhenHate(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
@@ -152,7 +152,7 @@ final class CardGameViewModel {
     }
     
     private func configureNextCardIndiciesWhenSkip(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
@@ -218,7 +218,7 @@ final class CardGameViewModel {
     }
     
     private func configurePreviousCardIndicies(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<(CardIndicies, Bool?)> {
         inputObserver
             .withUnretained(self)
@@ -246,7 +246,7 @@ final class CardGameViewModel {
     }
     
     private func configureMenuNationsSelectedindexPath(
-        with inputObserver: Observable<IndexPath>
+        by inputObserver: Observable<IndexPath>
     ) -> Observable<IndexPath> {
         return inputObserver
             .withUnretained(self)
@@ -259,7 +259,7 @@ final class CardGameViewModel {
     }
     
     private func configureMainIngredientsSelectedindexPath(
-        with inputObserver: Observable<IndexPath>
+        by inputObserver: Observable<IndexPath>
     ) -> Observable<IndexPath> {
         return inputObserver
             .withUnretained(self)

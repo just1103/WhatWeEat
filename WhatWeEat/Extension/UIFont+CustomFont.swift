@@ -60,6 +60,6 @@ extension UIFont {
         return UIFont(name: "Pretendard-\(family.kind)", size: family.defaultSize) ?? UIFont.systemFont(ofSize: family.defaultSize)
     }
     
-    // 큰글씨 : 가는체, 볼드or 엑스트라볼드
+    // 큰글씨 : 가는체, 볼드/엑스트라볼드
     // 작은글씨 (일반) : 중간체, 볼드
 }

@@ -18,14 +18,15 @@ final class SettingDetailViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) {
-        configurebackButtonDidTapObservable(with: input.backButtonDidTap)
+        configurebackButtonDidTapObservable(by: input.backButtonDidTap)
     }
     
-    private func configurebackButtonDidTapObservable(with inputObserver: Observable<Void>) {
+    private func configurebackButtonDidTapObservable(by inputObserver: Observable<Void>) {
         inputObserver
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.coordinator.popCurrentPage()
+            .subscribe(onNext: { _ in
+                self.coordinator.popCurrentPage()
             })
             .disposed(by: disposeBag)
     }

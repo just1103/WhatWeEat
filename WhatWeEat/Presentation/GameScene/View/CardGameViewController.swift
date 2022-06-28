@@ -8,9 +8,7 @@ import RxCocoa
 final class CardGameViewController: UIViewController {
     // MARK: - Nested Types
     private enum AnswerKind {
-        case like
-        case hate
-        case skip
+        case like, hate, skip
         
         var nextAnimationCoordinate: (angle: CGFloat, x: CGFloat, y: CGFloat) {
             switch self {
@@ -262,7 +260,7 @@ extension CardGameViewController {
                     self.pinNumberLabel.isHidden = true
                     return
                 }
-                self.pinNumberLabel.text = "PIN Number : \(pinNumber)"
+                self.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
                 self.pinNumberLabel.isHidden = false
             })
             .disposed(by: disposeBag)

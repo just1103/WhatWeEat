@@ -41,12 +41,14 @@ final class SharePinNumberPageViewModel {
     }
     
     private func configurePinNumber() -> Observable<String> {
-        pinNumberData.map { [weak self] in
-            guard let pinNumberText = String(data: $0, encoding: .utf8) else {
+        pinNumberData
+            .withUnretained(self)
+            .map { (self, pinNumberData) in
+            guard let pinNumberText = String(data: pinNumberData, encoding: .utf8) else {
                 return ""
             }
             
-            self?.pinNumber = pinNumberText
+            self.pinNumber = pinNumberText
             
             return pinNumberText
         }

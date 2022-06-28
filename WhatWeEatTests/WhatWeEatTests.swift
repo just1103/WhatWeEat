@@ -1,10 +1,3 @@
-//
-//  WhatWeEatTests.swift
-//  WhatWeEatTests
-//
-//  Created by Hyoju Son on 2022/05/23.
-//
-
 import XCTest
 @testable import WhatWeEat
 

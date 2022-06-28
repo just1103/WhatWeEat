@@ -45,9 +45,10 @@ final class DislikedFoodSurveyViewModel {
     }
 
     private func configureDislikedFoods(by inputObserver: Observable<Void>) -> Observable<[DislikedFood]> {
-        inputObserver.flatMap { [weak self] _ -> Observable<[DislikedFood]> in
+        inputObserver
+            .withUnretained(self)
+            .flatMap { _ -> Observable<[DislikedFood]> in
             guard
-                let self = self,
 //                let chilliFoodImage = UIImage(named: "chilli"),
                 let intestineFoodImage = UIImage(named: "intestine"),
                 let sashimiFoodImage = UIImage(named: "sashimi"),
@@ -74,8 +75,10 @@ final class DislikedFoodSurveyViewModel {
     }
     
     private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
-        return inputObserver.map { [weak self] indexPath in
-            guard let selectedDislikedFood = self?.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
+        return inputObserver
+            .withUnretained(self)
+            .map { (self, indexPath) in
+            guard let selectedDislikedFood = self.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
             selectedDislikedFood.toggleChecked()
             return indexPath
         }

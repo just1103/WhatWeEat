@@ -132,7 +132,10 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
             gradationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             gradationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            randomDescriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.1),
+            randomDescriptionLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: UIScreen.main.bounds.height * 0.1
+            ),
             randomDescriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             todayLunchDescriptionLabel.topAnchor.constraint(equalTo: randomDescriptionLabel.bottomAnchor, constant: 30),
             todayLunchDescriptionLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
@@ -163,19 +166,20 @@ extension HomeViewController {
         configureRandomMenu(with: output.randomMenu)
     }
     
-    private func configureRandomMenu(with randomMenu: Observable<Menu>) {
-        randomMenu
-            .subscribe(onNext: { [weak self] menu in
+    private func configureRandomMenu(with outputObservable: Observable<Menu>) {
+        outputObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, randomMenu) in
                 DispatchQueue.global().async {
-                    guard let menuImageURL = menu.imageURL,
+                    guard let menuImageURL = randomMenu.imageURL,
                           let imageURL = URL(string: menuImageURL),
                           let imageData = try? Data(contentsOf: imageURL),
                           let loadedImage = UIImage(data: imageData)
                     else { return }
                     
                     DispatchQueue.main.async {
-                        self?.randomMenuImageView.image = loadedImage
-                        self?.menuNameLabel.text = menu.name
+                        self.randomMenuImageView.image = loadedImage
+                        self.menuNameLabel.text = randomMenu.name
                     }
                 }
             })

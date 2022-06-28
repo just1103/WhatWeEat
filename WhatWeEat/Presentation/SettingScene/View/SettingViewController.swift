@@ -2,14 +2,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-// TODO: 텍스트 위아래 여백+
-// 설정 네비게이션바 색깔을 그레이로, 네비게이션 타이틀 텍스트컬러를 오렌지로 바꿔보기
+// TODO: 설정 네비게이션바 색깔 수정
 
 final class SettingViewController: UIViewController {
     // MARK: - Nested Types
     enum SectionKind: Int, CaseIterable {
         case dislikedFood
-        case ordinary 
+        case common 
         case version
     }
     
@@ -91,19 +90,21 @@ extension SettingViewController {
         configureBackButtonDidTap(with: output.backButtonDidTap)
     }
     
-    private func configureTableViewItems(with items: Observable<[SettingItem]>) {
-        items
-            .subscribe(onNext: { [weak self] items in
-                self?.settingItems = items as [SettingItem]
+    private func configureTableViewItems(with outputObservable: Observable<[SettingItem]>) {
+        outputObservable
+            .withUnretained(self)
+            .subscribe(onNext: { (self, items) in
+                self.settingItems = items as [SettingItem]
             })
             .disposed(by: disposeBag)
     }
     
-    private func configureBackButtonDidTap(with backButtonDidTap: Observable<Void>) {
-        backButtonDidTap
+    private func configureBackButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: false)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: false)
             })
             .disposed(by: disposeBag)
     }
@@ -121,9 +122,9 @@ extension SettingViewController: UITableViewDataSource {
         case .dislikedFood:
             let dislikedFoodItems = settingItems.filter { $0.sectionKind == .dislikedFood }
             return dislikedFoodItems.count
-        case .ordinary:
-            let ordinarySettingItems = settingItems.filter { $0.sectionKind == .ordinary }
-            return ordinarySettingItems.count
+        case .common:
+            let commonSettingItems = settingItems.filter { $0.sectionKind == .common }
+            return commonSettingItems.count
         case .version:
             let versionItems = settingItems.filter { $0.sectionKind == .version }
             return versionItems.count
@@ -136,7 +137,7 @@ extension SettingViewController: UITableViewDataSource {
         case .dislikedFood:
             let cell = tableView.dequeueReusableCell(of: SettingCell.self, for: indexPath)
             guard
-                let dislikedFoodItems = settingItems.filter({ $0.sectionKind == .dislikedFood }) as? [SettingViewModel.OrdinarySettingItem]
+                let dislikedFoodItems = settingItems.filter({ $0.sectionKind == .dislikedFood }) as? [SettingViewModel.CommonSettingItem]
             else {
                 return UITableViewCell()
             }
@@ -145,15 +146,15 @@ extension SettingViewController: UITableViewDataSource {
             }
 
             return cell
-        case .ordinary:
+        case .common:
             let cell = tableView.dequeueReusableCell(of: SettingCell.self, for: indexPath)
             guard
-                let ordinarySettingItems = settingItems.filter({ $0.sectionKind == .ordinary }) as? [SettingViewModel.OrdinarySettingItem]
+                let commonSettingItems = settingItems.filter({ $0.sectionKind == .common }) as? [SettingViewModel.CommonSettingItem]
             else {
                 return UITableViewCell()
             }
             
-            cell.apply(title: ordinarySettingItems[indexPath.row].title)
+            cell.apply(title: commonSettingItems[indexPath.row].title)
 
             return cell
         case .version:

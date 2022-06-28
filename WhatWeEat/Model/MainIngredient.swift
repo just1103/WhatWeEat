@@ -2,10 +2,7 @@ import Foundation
 
 class MainIngredient {
     enum Kind {
-        case rice
-        case noodle
-        case soup
-        case hateAll
+        case rice, noodle, soup, hateAll
     }
     
     var isChecked: Bool = false

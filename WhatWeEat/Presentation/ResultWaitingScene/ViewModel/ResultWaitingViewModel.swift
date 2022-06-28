@@ -29,17 +29,17 @@ final class ResultWaitingViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let pinNumberAndResultWaitingInformation = configureInitialUI(with: input.invokedViewDidLoad)
+        let pinNumberAndResultWaitingInformation = configureInitialUI(by: input.invokedViewDidLoad)
         let updatedSubmissionCount = PublishSubject<Int>()
         let updatedIsGameClosed = PublishSubject<Bool>()
 
         configureUpdatedSubmissionCountAndIsGameClosed(
-            with: input.invokedViewDidLoad,
+            by: input.invokedViewDidLoad,
             outputForSubmissionCount: updatedSubmissionCount,
             outputForIsGameClosed: updatedIsGameClosed
         )
-        configureGameResultCheckButtonDidTap(with: input.gameResultCheckButtonDidTap)
-        configureGameRestartButtonDidTap(with: input.gameRestartButtonDidTap)
+        configureGameResultCheckButtonDidTap(by: input.gameResultCheckButtonDidTap)
+        configureGameRestartButtonDidTap(by: input.gameRestartButtonDidTap)
 
         let output = Output(
             pinNumberAndResultWaitingInformation: pinNumberAndResultWaitingInformation,
@@ -50,7 +50,7 @@ final class ResultWaitingViewModel {
         return output
     }
     
-    private func configureInitialUI(with inputObserver: Observable<Void>) -> Observable<(String, Int, Bool, Bool)> {
+    private func configureInitialUI(by inputObserver: Observable<Void>) -> Observable<(String, Int, Bool, Bool)> {
         return inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<(String, Int, Bool, Bool)> in
@@ -78,7 +78,7 @@ final class ResultWaitingViewModel {
     
     // FIXME: 여기는 inout처럼 쓰는 방법 밖에 없을까? (외부에 PublishSubject 타입의 output을 두는 방법)
     private func configureUpdatedSubmissionCountAndIsGameClosed(
-        with inputObserver: Observable<Void>,
+        by inputObserver: Observable<Void>,
         outputForSubmissionCount: PublishSubject<Int>,
         outputForIsGameClosed: PublishSubject<Bool>
     ) {
@@ -128,7 +128,7 @@ final class ResultWaitingViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func configureGameResultCheckButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureGameResultCheckButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in
@@ -139,7 +139,7 @@ final class ResultWaitingViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func configureGameRestartButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureGameRestartButtonDidTap(by inputObserver: Observable<Void>) {
         return inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in

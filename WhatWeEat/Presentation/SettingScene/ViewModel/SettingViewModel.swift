@@ -19,7 +19,7 @@ final class SettingViewModel {
         let backButtonDidTap: Observable<Void>
     }
     
-    struct OrdinarySettingItem: SettingItem {
+    struct CommonSettingItem: SettingItem {
         let title: String
         let content: String?
         let sectionKind: SettingViewController.SectionKind
@@ -48,45 +48,45 @@ final class SettingViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let tableViewItems = configureTableViewItems(with: input.invokedViewDidLoad)
-        configureSettingItemDidSelectObservable(with: input.settingItemDidSelect)
+        let tableViewItems = configureTableViewItems(by: input.invokedViewDidLoad)
+        configureSettingItemDidSelectObservable(by: input.settingItemDidSelect)
         
         let output = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
 
         return output
     }
     
-    private func configureTableViewItems(with inputObserver: Observable<Void>) -> Observable<[SettingItem]> {
+    private func configureTableViewItems(by inputObserver: Observable<Void>) -> Observable<[SettingItem]> {
         inputObserver
             .flatMap { [weak self] () -> Observable<[SettingItem]> in
                 guard let self = self else {
                     return Observable.just([])
                 }
                 
-                let editDislikedFoods = OrdinarySettingItem(
+                let editDislikedFoods = CommonSettingItem(
                     title: Content.editDislikedFoodsTitle,
                     content: Content.editDislikedFoodsContent,
                     sectionKind: .dislikedFood
                 )
-                let privacyPolicies = OrdinarySettingItem(
+                let privacyPolicies = CommonSettingItem(
                     title: Content.privacyPoliciesTitle,
                     content: try? String(contentsOfFile: FilePath.termsOfPrivacy),
-                    sectionKind: .ordinary
+                    sectionKind: .common
                 )
-                let openSourceLicense = OrdinarySettingItem(
+                let openSourceLicense = CommonSettingItem(
                     title: Content.openSourceLicenseTitle,
                     content: try? String(contentsOfFile: FilePath.openSourceLicense),
-                    sectionKind: .ordinary
+                    sectionKind: .common
                 )
-                let feedBackToDeveloper = OrdinarySettingItem(
+                let feedBackToDeveloper = CommonSettingItem(
                     title: Content.feedBackToDeveloperTitle,
                     content: Content.feedBackToDeveloperContent,
-                    sectionKind: .ordinary
+                    sectionKind: .common
                 )
-                let recommendToFriend = OrdinarySettingItem(
+                let recommendToFriend = CommonSettingItem(
                     title: Content.recommendToFriendTitle,
                     content: Content.recommendToFriendContent,
-                    sectionKind: .ordinary
+                    sectionKind: .common
                 )
                 let versionInformation = VersionSettingItem(
                     title: Content.versionInformationTitle,
@@ -147,23 +147,21 @@ final class SettingViewModel {
         return currentAppVersion == latestAppVersion ? false : true
     }
     
-    private func configureSettingItemDidSelectObservable(with inputObserver: Observable<IndexPath>) {
+    private func configureSettingItemDidSelectObservable(by inputObserver: Observable<IndexPath>) {
         inputObserver
-            .subscribe(onNext: { [weak self] indexPath in
-                guard
-                    let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section),
-                    let self = self
-                else { return }
+            .withUnretained(self)
+            .subscribe(onNext: { (self, indexPath) in
+                guard let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section) else { return }
                 
                 switch sectionKind {
                 case .dislikedFood:
                     self.coordinator.showDislikedFoodSurveyPage()
-                case .ordinary:
+                case .common:
                     guard
-                        let ordinarySettingItems = self.settingItems.filter({ $0.sectionKind == .ordinary }) as? [OrdinarySettingItem],
-                        let content = ordinarySettingItems[indexPath.row].content
+                        let commonSettingItems = self.settingItems.filter({ $0.sectionKind == .common }) as? [CommonSettingItem],
+                        let content = commonSettingItems[indexPath.row].content
                     else { return }
-                    self.coordinator.showSettingDetailPageWith(title: ordinarySettingItems[indexPath.row].title, content: content)
+                    self.coordinator.showSettingDetailPageWith(title: commonSettingItems[indexPath.row].title, content: content)
                 case .version:
                     return
                 }
@@ -174,7 +172,7 @@ final class SettingViewModel {
 
 // MARK: - NameSpaces
 extension SettingViewModel {
-    enum FilePath {  // TODO: 정리, 네이밍 수정? (TextByFilePath)
+    enum FilePath { 
         static let termsOfPrivacy = Bundle.main.path(forResource: "TermsOfPrivacy", ofType: "txt") ?? ""
         static let openSourceLicense = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
     }

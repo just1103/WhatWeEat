@@ -57,7 +57,7 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
 
 // MARK: - NameSpaces
 extension OnboardingCoordinator {
-    // TODO: Text로 이름 변경 (상수 텍스트를 가졌다는 전달력이 있음)
+    // TODO: 찰리 - Text로 이름 변경 (상수 텍스트를 가졌다는 전달력이 있음)
     private enum Content {  // VC이 갖고있냐 (View다, 상수이고), VM (String도 데이터다)이 갖고있냐 의견 분분
         static let skipButtonTitle: String = "Skip"
         static let firstPageTitleLabelText: String = "안녕하세요"
@@ -71,7 +71,7 @@ extension OnboardingCoordinator {
         혼밥 메뉴도,
         우리 팀의 회식 메뉴도 정할 수 있어요.
         """
-        static let firstPageImage: UIImage? = UIImage(named: "Image")
+        static let firstPageImage: UIImage? = UIImage(named: "image")
         static let secondPageTitleLabelText: String = "메뉴 정하기"
         static let secondPageDescriptionLabelText: String = """
         각자 미니게임을 진행하면
@@ -79,6 +79,6 @@ extension OnboardingCoordinator {
         
         혼자서도 미니게임을 할 수 있어요.
         """
-        static let secondPageImage: UIImage? = UIImage(named: "Image")
+        static let secondPageImage: UIImage? = UIImage(named: "image")
     }
 }

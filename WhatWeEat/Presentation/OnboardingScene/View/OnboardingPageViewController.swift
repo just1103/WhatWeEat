@@ -34,11 +34,8 @@ final class OnboardingPageViewController: UIPageViewController {
         return button
     }()
 
-    private var onboardingPages = [OnboardingContentProtocol]()
-    private let currentIndexForPreviousPage = PublishSubject<Int>()
-    private let currentIndexForNextPageAndPageCount = PublishSubject<(Int, Int)>()
     private var viewModel: OnboardingViewModel!
-    private var viewModelOutput: OnboardingViewModel.Output?
+    private var onboardingPages = [OnboardingContentProtocol]()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -95,23 +92,18 @@ final class OnboardingPageViewController: UIPageViewController {
 // MARK: - Rx Binding Methods
 extension OnboardingPageViewController {
     private func bind() {
-        let input = OnboardingViewModel.Input(
-            currentIndexForPreviousPage: currentIndexForPreviousPage.asObservable(),
-            currentIndexForNextPageAndPageCount: currentIndexForNextPageAndPageCount.asObservable(),
-            skipButtonDidTap: skipButton.rx.tap.asObservable()
-        )
+        let input = OnboardingViewModel.Input(skipButtonDidTap: skipButton.rx.tap.asObservable())
         
-        viewModelOutput = viewModel.transform(input)
-        guard let skipButtonDidTap = viewModelOutput?.skipButtonDidTap else { return }
+        let output = viewModel.transform(input)
         
-        configureSkipButtonDidTap(with: skipButtonDidTap)
+        configureSkipButtonDidTap(with: output.skipButtonDidTap)
     }
     
-    private func configureSkipButtonDidTap(with skipButtonDidTap: Observable<Void>) {
-        skipButtonDidTap
+    private func configureSkipButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
+            .subscribe(onNext: { _ in
                 let lastPageIndex = 2
                 self.hideButtonIfLastPage(lastPageIndex)
                 guard let lastPage = self.onboardingPages.last as? UIViewController else { return }
@@ -127,37 +119,15 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        // TODO: 마지막 페이지에서 뒤로 안 넘어감 - 잘못된 CurrentIndex가 넘어가는 것 같다. 
         guard let onboardingPages = onboardingPages as? [UIViewController],
-              let currentIndex = onboardingPages.firstIndex(of: viewController) // -1 해주는것도 가능
+              let currentIndex = onboardingPages.firstIndex(of: viewController)
         else {
             return nil
         }
-        var viewController: UIViewController?
-        
-        // 캡쳐가 맞는데 진정한 캡쳐가 아님. VC을 weak 처리해줘야 함 => 캡쳐리스트 내부에서 weak viewController 처리
-        // onError가 발생하면 클로저 내부가 메모리 해제가 안될 수 있음
-        viewModelOutput?.previousPageIndex
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak viewController] previousIndex in  // FIXME: 1) subscribe가 여러번 호출되는 문제, 2) 의도하지 않게 VC의 retain count가 올라감 (retain 올리는건 부모가 주입할 때만 가능)
-                print(previousIndex)
-                guard let previousIndex = previousIndex else {
-                    viewController = nil
-                    return
-                }
-                
-                // subscript 적용
-                viewController = self?.onboardingPages[previousIndex] as? UIViewController // FIXME: 비동기라서 코드 순서를 보장할 수 없음
-                // semaphore를 쓰면 안됨
-                // subscribe를 밖에서 하고 데이터를 들고 있다가 (과부하이지 않을까 고민이 필요) 메서드에 넣어줌
-            })
-            .disposed(by: disposeBag)
-        
-        currentIndexForPreviousPage.onNext(currentIndex)
-        
-        return viewController
+
+        return onboardingPages[safe: currentIndex - 1]
     }
-    
+
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
@@ -167,23 +137,8 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         else {
             return nil
         }
-        print(currentIndex)
-        var viewController: UIViewController?
         
-        viewModelOutput?.nextPageIndex
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { nextIndex in
-                guard let nextIndex = nextIndex else {
-                    viewController = nil
-                    return
-                }
-                viewController = onboardingPages[nextIndex]
-            })
-            .disposed(by: disposeBag)
-        
-        currentIndexForNextPageAndPageCount.onNext((currentIndex, onboardingPages.count))
-        
-        return viewController
+        return onboardingPages[safe: currentIndex + 1]
     }
 }
 
@@ -201,6 +156,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
         else { return }
         
         presentButtonUnlessLastPage(currentIndex)
+        pageControl.currentPage = currentIndex
     }
     
     private func presentButtonUnlessLastPage(_ currentIndex: Int) {
@@ -219,7 +175,9 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
               let viewController = pendingViewControllers.first,
               let currentIndex = onboardingPages.firstIndex(of: viewController)
         else { return }
-        pageControl.currentPage = currentIndex
+        
+        // FIXME: 살짝만 스크롤하더라도 pageControl이 바뀌는 문제 발생 -> didFinishAnimating 메서드로 옮김
+//        pageControl.currentPage = currentIndex
         hideButtonIfLastPage(currentIndex)
     }
     

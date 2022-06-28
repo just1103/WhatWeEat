@@ -1,15 +1,10 @@
 import UIKit
 
-// TODO: Cell 간에 내부 여백주기 (가로, 세로 줄이고)
-// 체크박스 크기 작게 (텍스트 크기만큼)
-
-// 진행상태 bar를 주는게 낫겠다
-// Cell 위에 체크박스 있는 것보다 없는게 나을듯, 색깔만 들어가도 사용자가 선택됨을 알수있음
+// TODO: 진행상태 bar 추가
 final class MultipleChoiceCardView: UIView, CardViewProtocol {
     // MARK: - Nested Types
     enum QuestionKind {
-        case menuNation
-        case mainIngredient
+        case menuNation, mainIngredient
         
         var columnCount: Int {
             switch self {

@@ -24,8 +24,10 @@ final class SoloMenuViewModel: GameStartWaitingViewModel {
     }
     
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
-        inputObserver.subscribe(onNext: { [weak self] _ in
-            self?.coordinator.showGamePage()
+        inputObserver
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+            self.coordinator.showGamePage()
         })
         .disposed(by: disposeBag)
     }

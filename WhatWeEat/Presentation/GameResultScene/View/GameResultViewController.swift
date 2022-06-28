@@ -81,7 +81,7 @@ class GameResultViewController: UIViewController {
         imageView.clipsToBounds = true
         return imageView
     }()
-    // TODO: 지도 SDK 추가 후 추가
+    // TODO: 지도 SDK 추가 후 구현
 //    private let restaurantCheckButton: UIButton = {
 //        let button = UIButton()
 //        button.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +99,7 @@ class GameResultViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("다음 순위 메뉴 확인 (1/3)", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
+        button.titleLabel?.font = .pretendard(family: .medium, size: 22)
         button.backgroundColor = .mainOrange
         button.contentHorizontalAlignment = .center
         button.layer.cornerRadius = 8
@@ -220,7 +220,7 @@ class GameResultViewController: UIViewController {
             nextMenuCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextMenuCheckButton.topAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: 15),
             nextMenuCheckButton.bottomAnchor.constraint(equalTo: shareButton.topAnchor, constant: -10),
-            nextMenuCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.6),
+            nextMenuCheckButton.widthAnchor.constraint(equalToConstant: nextMenuCheckButton.intrinsicContentSize.width + 80),
             nextMenuCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
 
             shareButton.bottomAnchor.constraint(equalTo: gameRestartButton.topAnchor, constant: -10),
@@ -254,8 +254,8 @@ extension GameResultViewController {
         configureShareButtonDidTap(with: output.shareButtonDidTap)
     }
 
-    private func configureContents(with inputObservable: Observable<(Menu, Int, String?)>) {
-        inputObservable
+    private func configureContents(with outputObservable: Observable<(Menu, Int, String?)>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, menusAndPlayerCountAndPinNumber) in
@@ -306,8 +306,8 @@ extension GameResultViewController {
         }
     }
     
-    private func configureNextMenuContents(with inputObservable: Observable<(Menu?, Int)>) {
-        inputObservable
+    private func configureNextMenuContents(with outputObservable: Observable<(Menu?, Int)>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, nextMenuAndIndex) in
@@ -334,8 +334,8 @@ extension GameResultViewController {
         self.menuNameLabel.text = menu.name
     }
 
-    private func configureShareButtonDidTap(with shareButtonDidTap: Observable<Void>) {
-        shareButtonDidTap
+    private func configureShareButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
@@ -348,7 +348,7 @@ extension GameResultViewController {
                 let content = """
                 [우리뭐먹지] 오늘의 메뉴는 #\(menuName) 입니다.
                 팀원들이 이런 것을 원했어요. \(keywords)
-                """
+                """  // 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 텍스트 추가
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
                 let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -359,5 +359,3 @@ extension GameResultViewController {
             .disposed(by: disposeBag)
     }
 }
-
-// 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 공유 content에 추가

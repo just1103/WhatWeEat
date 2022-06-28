@@ -24,8 +24,10 @@ final class EnterWithPinNumberViewModel: GameStartWaitingViewModel {
     }
     
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
-        inputObserver.subscribe(onNext: { [weak self] _ in
-            self?.coordinator.showGamePage(with: self?.pinNumber)
+        inputObserver
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+            self.coordinator.showGamePage(with: self.pinNumber)
         })
         .disposed(by: disposeBag)
     }

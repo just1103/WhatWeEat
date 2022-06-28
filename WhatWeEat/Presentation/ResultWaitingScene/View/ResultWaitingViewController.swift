@@ -65,7 +65,7 @@ class ResultWaitingViewController: UIViewController {
         button.titleLabel?.font = .pretendard(family: .medium, size: 25)
         button.backgroundColor = .white
         button.clipsToBounds = true
-        button.isHidden = true  // TODO: default는 true, 사용자가 Host이거나 Host가 결과확인버튼을 탭한 이후 false로 변경
+        button.isHidden = true  // 사용자가 Host인 경우, Host가 결과확인버튼을 탭한 경우 false로 변경
         return button
     }()
     private let gameRestartButton: UIButton = {
@@ -174,9 +174,9 @@ extension ResultWaitingViewController {
     }
 
     private func configurePinNumberAndResultWaitingInformation(
-        with inputObservable: Observable<(String, Int, Bool, Bool)>
+        with outputObservable: Observable<(String, Int, Bool, Bool)>
     ) {
-        inputObservable
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, pinNumberAndResultWaitingInformation) in
@@ -192,8 +192,8 @@ extension ResultWaitingViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configureUpdatedSubmissionCount(with inputObservable: Observable<Int>) {
-        inputObservable
+    private func configureUpdatedSubmissionCount(with outputObservable: Observable<Int>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, updatedSubmissionCount) in
@@ -202,8 +202,8 @@ extension ResultWaitingViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configureUpdatedIsGameClosed(with inputObservable: Observable<Bool>) {
-        inputObservable
+    private func configureUpdatedIsGameClosed(with outputObservable: Observable<Bool>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, isGameClosed) in

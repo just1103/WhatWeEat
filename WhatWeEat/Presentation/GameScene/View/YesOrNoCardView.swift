@@ -6,7 +6,6 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black.withAlphaComponent(0.5)
-//        view.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
         view.layer.cornerRadius = 30
         view.clipsToBounds = true
         return view
@@ -15,7 +14,6 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
         imageView.layer.cornerRadius = 30
         imageView.clipsToBounds = true
         return imageView
@@ -27,7 +25,7 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         label.font = Design.questionLabelFont
         label.numberOfLines = 0
         label.lineBreakStrategy = .hangulWordPriority
-        label.textColor = .white  // TODO: 텍스트 색상 고려
+        label.textColor = .white  // TODO: 이미지 확인 후 텍스트 색상 고려
         return label
     }()
     
