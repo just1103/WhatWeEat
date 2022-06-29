@@ -14,7 +14,6 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
     
     // MARK: - Methods
     func start() {
-        // TODO: 초기화면에서 인터넷 연결안되어 있으면 View 띄워줌, 다른 탭의 View에도 추가 필요
         if FirstLaunchChecker.isFirstLaunched() {
             showOnboardingPage()
         } else {

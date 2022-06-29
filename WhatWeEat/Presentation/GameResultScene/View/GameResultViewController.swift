@@ -157,6 +157,14 @@ class GameResultViewController: UIViewController {
         bind()
         invokedViewDidLoad.onNext(())
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    deinit {
+        print("!!!")
+    }
 
     // MARK: - Methods
     private func configureNavigationBar() {
@@ -194,16 +202,18 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.pinNumberLabelTrailingAnchorConstant
             ),
             
-            playerCountLabel.topAnchor.constraint(
-                equalTo: pinNumberLabel.bottomAnchor,
-                constant: Constraint.playerCountLabelTopAnchorConstant
+            playerCountLabel.bottomAnchor.constraint(
+                equalTo: playerCountDescriptionLabel.bottomAnchor
             ),
             playerCountLabel.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                 constant: Constraint.playerCountLabelLeadingAnchorConstant
             ),
 
-            playerCountDescriptionLabel.bottomAnchor.constraint(equalTo: playerCountLabel.bottomAnchor),
+            playerCountDescriptionLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.playerCountDescriptionLabelTopAnchorConstant
+            ),
             playerCountDescriptionLabel.leadingAnchor.constraint(
                 equalTo: playerCountLabel.trailingAnchor,
                 constant: Constraint.playerCountDescriptionLabelLeadingAnchorConstant
@@ -453,7 +463,7 @@ extension GameResultViewController {
         static let nextMenuCheckButtonTitleColor: UIColor = .white
         static let nextMenuCheckButtonTitleFont: UIFont = .pretendard(family: .medium, size: 22)
         static let nextMenuCheckButtonBackgroundColor: UIColor = .mainOrange
-        static let nextMenuCheckButtonCornerRadius:CGFloat = 8
+        static let nextMenuCheckButtonCornerRadius: CGFloat = 8
         static let shareButtonTitleColor: UIColor = .mainOrange
         static let shareButtonTitleFont: UIFont = .pretendard(family: .medium, size: 20)
         static let shareButtonBackgroundColor: UIColor = .systemGray6
@@ -470,10 +480,10 @@ extension GameResultViewController {
     }
     
     private enum Constraint {
-        static let pinNumberLabelTopAnchorConstant: CGFloat = -15
+        static let pinNumberLabelTopAnchorConstant: CGFloat = 15
         static let pinNumberLabelTrailingAnchorConstant: CGFloat = -15
-        static let playerCountLabelTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.02
         static let playerCountLabelLeadingAnchorConstant: CGFloat = 20
+        static let playerCountDescriptionLabelTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
         static let playerCountDescriptionLabelLeadingAnchorConstant: CGFloat = 2
         static let keywordLabelTopAnchorConstant: CGFloat = 5
         static let keywordLabelLeadingAnchorConstant: CGFloat = 20

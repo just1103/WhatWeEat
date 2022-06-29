@@ -87,7 +87,6 @@ extension SettingViewController {
         let output = viewModel.transform(input)
         
         configureTableViewItems(with: output.tableViewItems)
-        configureBackButtonDidTap(with: output.backButtonDidTap)
     }
     
     private func configureTableViewItems(with outputObservable: Observable<[SettingItem]>) {
@@ -95,16 +94,6 @@ extension SettingViewController {
             .withUnretained(self)
             .subscribe(onNext: { (self, items) in
                 self.settingItems = items as [SettingItem]
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func configureBackButtonDidTap(with outputObservable: Observable<Void>) {
-        outputObservable
-            .withUnretained(self)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: false)
             })
             .disposed(by: disposeBag)
     }

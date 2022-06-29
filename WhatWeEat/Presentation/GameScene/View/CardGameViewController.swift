@@ -23,6 +23,22 @@ final class CardGameViewController: UIViewController {
     }
     
     // MARK: - Properties
+    private let progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.progressViewStyle = .default
+        progressView.trackTintColor = Design.progressViewTrackTintColor
+        progressView.progressTintColor = Design.progressViewProgressTintColor
+//        progressView.setTitle(Text.previousQuestionButtonTitle, for: .normal)
+//        progressView.setTitleColor(Design.previousQuestionButtonTitleColor, for: .normal)
+//        progressView.setImage(Content.previousQuestionButtonImage, for: .normal)
+//        progressView.tintColor = Design.previousQuestionButtonTintColor
+//        progressView.titleLabel?.font = Design.previousQuestionButtonTitleFont
+//        progressView.titleEdgeInsets = Design.previousQuestionButtonTitleInsets
+//        progressView.contentHorizontalAlignment = .leading
+//        progressView.isHidden = true
+        return progressView
+    }()
     private let previousQuestionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +129,9 @@ final class CardGameViewController: UIViewController {
     private lazy var cards: [CardViewProtocol] = [
         hangoverCard, greasyCard, healthCard, alcoholCard, instantCard, spicyCard, richCard, mainIngredientCard, nationCard
     ]
+    private var progressForEachCard: Float {
+        return Float(1) / Float(cards.count)
+    }
     
     typealias CardIndicies = (Int, Int, Int)
     
@@ -132,20 +151,31 @@ final class CardGameViewController: UIViewController {
     
     // MARK: - Methods
     private func configureUI() {
+        view.addSubview(progressView)
         view.addSubview(previousQuestionButton)
         view.addSubview(pinNumberLabel)
         view.addSubview(buttonStackView)
         view.addSubview(skipAndNextButton)
-                
+        
         buttonStackView.addArrangedSubview(likeButton)
         buttonStackView.addArrangedSubview(hateButton)
+        
+        progressView.progress = progressForEachCard
         
         likeButton.layer.cornerRadius = Design.likeButtonCornerRadius
         hateButton.layer.cornerRadius = Design.hateButtonCornerRadius
         
         NSLayoutConstraint.activate([
-            previousQuestionButton.topAnchor.constraint(
+            progressView.topAnchor.constraint(
                 equalTo: view.topAnchor,
+                constant: Constraint.progressViewTopAnchorConstant
+            ),
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            progressView.heightAnchor.constraint(equalToConstant: Constraint.progressViewHeightAnchorConstant),
+            
+            previousQuestionButton.topAnchor.constraint(
+                equalTo: progressView.bottomAnchor,
                 constant: Constraint.previousQuestionButtonTopAnchorConstant
             ),
             previousQuestionButton.leadingAnchor.constraint(
@@ -158,7 +188,7 @@ final class CardGameViewController: UIViewController {
             ),
             
             pinNumberLabel.topAnchor.constraint(
-                equalTo: view.topAnchor,
+                equalTo: progressView.bottomAnchor,
                 constant: Constraint.pinNumberLabelTopAnchorConstant
             ),
             pinNumberLabel.trailingAnchor.constraint(
@@ -169,7 +199,10 @@ final class CardGameViewController: UIViewController {
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             buttonStackView.widthAnchor.constraint(equalToConstant: Constraint.buttonStackViewWidthAnchorConstant),
             buttonStackView.heightAnchor.constraint(equalToConstant: Constraint.buttonStackViewHeightAnchorConstant),
-            buttonStackView.bottomAnchor.constraint(equalTo: skipAndNextButton.topAnchor, constant: Constraint.buttonStackViewBottomAnchorConstant),
+            buttonStackView.bottomAnchor.constraint(
+                equalTo: skipAndNextButton.topAnchor,
+                constant: Constraint.buttonStackViewBottomAnchorConstant
+            ),
             
             skipAndNextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             skipAndNextButton.widthAnchor.constraint(equalToConstant: Constraint.skipAndNextButtonWidthAnchorConstant),
@@ -368,6 +401,8 @@ extension CardGameViewController {
 
             firstCard.frame = self.cardFrame(for: 0)
             secondCard?.frame = self.cardFrame(for: 1)
+            
+            self.progressView.progress += self.progressForEachCard
         } completion: { [weak self] _ in
             guard let self = self else { return }
             submittedCard.removeFromSuperview()
@@ -440,6 +475,8 @@ extension CardGameViewController {
             thirdCard?.frame = self.cardFrame(for: 2)
             
             previousThirdCard?.removeFromSuperview()
+            
+            self.progressView.progress -= self.progressForEachCard
         }
     }
     
@@ -473,6 +510,8 @@ extension CardGameViewController {
 // MARK: - NameSpaces
 extension CardGameViewController {
     private enum Design {
+        static let progressViewTrackTintColor: UIColor = .subYellow
+        static let progressViewProgressTintColor: UIColor = .mainOrange
         static let previousQuestionButtonTitleColor: UIColor = .label
         static let skipButtonBackgroundColor: UIColor = .mainYellow
         static let skipButtonTitleColor: UIColor = .label
@@ -510,10 +549,12 @@ extension CardGameViewController {
     }
     
     private enum Constraint {
-        static let previousQuestionButtonTopAnchorConstant: CGFloat = 60
+        static let progressViewTopAnchorConstant: CGFloat = 45
+        static let progressViewHeightAnchorConstant: CGFloat = 5
+        static let previousQuestionButtonTopAnchorConstant: CGFloat = 10
         static let previousQuestionButtonLeadingAnchorConstant: CGFloat = 15
         static let previousQuestionButtonWidthAnchorMultiplier = 0.5
-        static let pinNumberLabelTopAnchorConstant: CGFloat = 50
+        static let pinNumberLabelTopAnchorConstant: CGFloat = 10
         static let pinNumberLabelTrailingAnchorConstant: CGFloat = -15
         static let buttonStackViewWidthAnchorConstant: CGFloat = UIScreen.main.bounds.width
         static let buttonStackViewHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.1

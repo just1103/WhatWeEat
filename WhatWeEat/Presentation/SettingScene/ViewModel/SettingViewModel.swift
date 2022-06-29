@@ -16,7 +16,6 @@ final class SettingViewModel {
     
     struct Output {
         let tableViewItems: Observable<[SettingItem]>
-        let backButtonDidTap: Observable<Void>
     }
     
     struct CommonSettingItem: SettingItem {
@@ -50,8 +49,9 @@ final class SettingViewModel {
     func transform(_ input: Input) -> Output {
         let tableViewItems = configureTableViewItems(by: input.invokedViewDidLoad)
         configureSettingItemDidSelectObservable(by: input.settingItemDidSelect)
+        configureBackButtonDidTap(by: input.backButtonDidTap)
         
-        let output = Output(tableViewItems: tableViewItems, backButtonDidTap: input.backButtonDidTap)
+        let output = Output(tableViewItems: tableViewItems)
 
         return output
     }
@@ -83,19 +83,19 @@ final class SettingViewModel {
                     content: Text.feedBackToDeveloperContent,
                     sectionKind: .common
                 )
-                let recommendToFriend = CommonSettingItem(
-                    title: Text.recommendToFriendTitle,
-                    content: Text.recommendToFriendContent,
-                    sectionKind: .common
-                )
+//                let recommendToFriend = CommonSettingItem(
+//                    title: Text.recommendToFriendTitle,
+//                    content: Text.recommendToFriendContent,
+//                    sectionKind: .common
+//                )
                 let versionInformation = VersionSettingItem(
                     title: Text.versionInformationTitle,
                     subtitle: self.configureVersionInformationSubtitle(),
                     buttonTitle: self.configureVersionInformationButtonUpdateTitle()
                 )
                 self.settingItems = [
-                    editDislikedFoods, privacyPolicies, openSourceLicense, feedBackToDeveloper, recommendToFriend, versionInformation
-                ]
+                    editDislikedFoods, privacyPolicies, openSourceLicense, feedBackToDeveloper, versionInformation
+                ]  // TODO: 다음 배포버전에서 recommendToFriend 구현
                 
                 return Observable.just(self.settingItems)
             }
@@ -168,6 +168,16 @@ final class SettingViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
+    func configureBackButtonDidTap(by inputObserver: Observable<Void>) {
+        inputObserver
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                self.coordinator.popCurrentPage()
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: - NameSpaces
@@ -186,8 +196,8 @@ extension SettingViewModel {
         static let feedBackToDeveloperContent = """
         개발자 이메일: aaaa@gmail.com
         """
-        static let recommendToFriendTitle = "친구에게 추천하기"
-        static let recommendToFriendContent = ""
+//        static let recommendToFriendTitle = "친구에게 추천하기"
+//        static let recommendToFriendContent = ""
         static let versionInformationTitle = "버전 정보"
         static let versionCheckErrorTitle = "버전 확인 불가"
         static let versionInformationButtonUpdateTitle = "업데이트"

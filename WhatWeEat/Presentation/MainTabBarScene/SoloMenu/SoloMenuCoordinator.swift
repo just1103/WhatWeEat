@@ -22,6 +22,13 @@ final class SoloMenuCoordinator: CoordinatorProtocol {
         return navigationController
     }
     
+    func showNetworkErrorPage() {
+        let networkErrorViewModel = NetworkErrorViewModel(coordinator: self)
+        let networkErrorViewController = NetworkErrorViewController(viewModel: networkErrorViewModel)
+        
+        navigationController?.pushViewController(networkErrorViewController, animated: false)
+    }
+    
     func showGamePage(with pinNumber: String? = nil) {
         guard let navigationController = navigationController else { return }
         let gameCoordinator = GameCoordinator(navigationController: navigationController, pinNumber: pinNumber)
@@ -46,11 +53,10 @@ extension SoloMenuCoordinator: SoloGameCoordinatorDelegate {
     
     func removeFromChildCoordinators(coordinator: CoordinatorProtocol) {
         let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
-        childCoordinators = updatedChildCoordinators
+        childCoordinators = updatedChildCoordinators  
     }
     
-    // 마찬가지
-    // TODO: solo-C는 유지한 채로 초기화면으로 돌아가게만 해주면 되려나?
+    // solo-C는 유지
     func showInitialSoloMenuPage() {
 //        delegate.removeFromChildCoordinatorsAndRestart(coordinator: self)
         

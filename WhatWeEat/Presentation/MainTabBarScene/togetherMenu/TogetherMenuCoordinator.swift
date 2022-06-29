@@ -4,7 +4,7 @@ import UIKit
 protocol MenuCoordinatorDelegate: AnyObject {
     func hideNavigationBarAndTabBar()
     func showNavigationBarAndTabBar()
-    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol)
+//    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol)
 }
 
 final class TogetherMenuCoordinator: CoordinatorProtocol {
@@ -27,6 +27,13 @@ final class TogetherMenuCoordinator: CoordinatorProtocol {
         }
 
         return navigationController
+    }
+    
+    func showNetworkErrorPage() {
+        let networkErrorViewModel = NetworkErrorViewModel(coordinator: self)
+        let networkErrorViewController = NetworkErrorViewController(viewModel: networkErrorViewModel)
+        
+        navigationController?.pushViewController(networkErrorViewController, animated: false)
     }
     
     func showSharePinNumberPage(with pinNumber: Observable<Data>) {
@@ -79,10 +86,9 @@ extension TogetherMenuCoordinator: TogetherGameCoordinatorDelegate {
     }
 
     // 게임 재시작 버튼
-    // TODO: together-C는 유지한 채로
-    // 초기화면으로 돌아가게만 해주면 되려나?
+    // together-C는 유지
     func showInitialTogetherMenuPage() {
-        delegate.removeFromChildCoordinatorsAndRestart(coordinator: self)
+//        delegate.removeFromChildCoordinatorsAndRestart(coordinator: self)
         
         let togetherMenuViewModel = TogetherMenuViewModel(coordinator: self)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)

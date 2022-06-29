@@ -108,15 +108,14 @@ final class GameResultViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
                 if self.pinNumber == nil {
-                    // TODO: GameCoordinator 메모리 해제되는지 확인 필요
                     self.coordinator.showInitialSoloMenuPage()
-                    self.coordinator.finish()  // TODO: 여기서 할지, ViewModel deinit에서 할지 판단
                 } else {
-                    // TODO: GameCoordinator 메모리 해제되는지 확인 필요
                     // 그룹 정보 삭제는 서버에서 처리 (1일 후 삭제)
                     self.coordinator.showInitialTogetherMenuPage()
-                    self.coordinator.finish()
                 }
+                
+                self.coordinator.popCurrentPage()  // 기존 결과화면을 내림 (여기서 왜 ViewModel deinit이 안되지?)
+                self.coordinator.finish()  // TODO: 여기서는 호출되는데, ViewModel deinit은 호출 안됨
             })
             .disposed(by: disposeBag)
     }

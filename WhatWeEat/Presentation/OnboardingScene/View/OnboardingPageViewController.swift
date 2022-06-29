@@ -185,8 +185,6 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
               let currentIndex = onboardingPages.firstIndex(of: viewController)
         else { return }
         
-        // FIXME: 살짝만 스크롤하더라도 pageControl이 바뀌는 문제 발생 -> didFinishAnimating 메서드로 옮김
-//        pageControl.currentPage = currentIndex
         hideButtonIfLastPage(currentIndex)
     }
     

@@ -4,6 +4,7 @@ import RxSwift
 final class TogetherMenuViewModel {
     // MARK: - Nested Types
     struct Input {
+        let invokedViewDidLoad: Observable<Void>
         let makeGroupButtonDidTap: Observable<Void>
         let pinNumberButtonDidTap: Observable<Void>
     }
@@ -23,6 +24,7 @@ final class TogetherMenuViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
+        checkNetworkConnection(by: input.invokedViewDidLoad)
         configureMakeGroupButtonDidTapObservable(input.makeGroupButtonDidTap)
 //        configurePinNumberButtonDidTapObservable(input.pinNumberButtonDidTap)
         
@@ -33,6 +35,21 @@ final class TogetherMenuViewModel {
     
     func showEnterWithPinNumberPage(pinNumber: String) {
         coordinator.showEnterWithPinNumberPage(pinNumber: pinNumber)
+    }
+    
+    private func checkNetworkConnection(by inputObserver: Observable<Void>) {
+        inputObserver
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.checkNetworkConnection()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func checkNetworkConnection() {
+        if NetworkConnectionManager.shared.isCurrentlyConnected == false {
+            coordinator.showNetworkErrorPage()
+        }
     }
     
     private func configureMakeGroupButtonDidTapObservable(_ inputObserver: Observable<Void>) {

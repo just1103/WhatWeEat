@@ -87,6 +87,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
     }()
     
     private var viewModel: TogetherMenuViewModel!
+    private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -101,6 +102,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         super.viewDidLoad()
         configureUI()
         bind()
+        invokedViewDidLoad.onNext(())
     }
     
     // MARK: - Methods
@@ -205,6 +207,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
 extension TogetherMenuViewController {
     private func bind() {
         let input = TogetherMenuViewModel.Input(
+            invokedViewDidLoad: invokedViewDidLoad.asObservable(),
             makeGroupButtonDidTap: makeGroupButton.rx.tap.asObservable(),
             pinNumberButtonDidTap: pinNumberButton.rx.tap.asObservable()
         )

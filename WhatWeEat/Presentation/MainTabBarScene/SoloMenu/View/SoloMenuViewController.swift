@@ -1,10 +1,12 @@
 import UIKit
 import RxCocoa
+import RxSwift
 
 // ???: Solo메뉴, Together메뉴의 중복되는 게임대기화면을 상속으로 처리하여 중복코드 최소화 (다른 방법 고민)
 final class SoloMenuViewController: GameStartWaitingViewController, TabBarContentProtocol {
     // MARK: - Properties
     private var viewModel: SoloMenuViewModel!
+    private let invokedViewDidLoad = PublishSubject<Void>()
     
     // MARK: - Initializers
     convenience init(viewModel: SoloMenuViewModel) {
@@ -16,8 +18,9 @@ final class SoloMenuViewController: GameStartWaitingViewController, TabBarConten
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()  // ??? super.configureUI 아니여도 쓸수있음
+        configureUI()
         bind()
+        invokedViewDidLoad.onNext(())
     }
     
     // MARK: - Methods
@@ -32,7 +35,10 @@ final class SoloMenuViewController: GameStartWaitingViewController, TabBarConten
 // MARK: - Rx binding Methods
 extension SoloMenuViewController {
     private func bind() {
-        let input = SoloMenuViewModel.Input(gameStartButtonDidTap: gameStartButton.rx.tap.asObservable())
+        let input = SoloMenuViewModel.Input(
+            invokedViewDidLoad: invokedViewDidLoad.asObservable(),
+            gameStartButtonDidTap: gameStartButton.rx.tap.asObservable()
+        )
         
         viewModel.transform(input)
     }

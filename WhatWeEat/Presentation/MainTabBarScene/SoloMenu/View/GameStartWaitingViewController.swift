@@ -165,7 +165,7 @@ extension GameStartWaitingViewController {
         static let readyLabelLeadingAnchorConstant: CGFloat = 40
         static let readyLabelTrailingAnchorConstant: CGFloat = -40
         static let gameStartButtonBottomAnchorConstant: CGFloat = -50
-        static let gameStartButtonLeadingAnchorConstant: CGFloat = -50
+        static let gameStartButtonLeadingAnchorConstant: CGFloat = 50
         static let gameStartButtonTrailingAnchorConstant: CGFloat = -50
         static let gameStartButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
     }
