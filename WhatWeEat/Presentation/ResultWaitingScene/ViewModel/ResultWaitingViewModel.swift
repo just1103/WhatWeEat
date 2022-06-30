@@ -76,7 +76,7 @@ final class ResultWaitingViewModel {
         return observable
     }
     
-    // FIXME: 여기는 inout처럼 쓰는 방법 밖에 없을까? (외부에 PublishSubject 타입의 output을 두는 방법)
+    // FIXME: inout처럼 쓰는 방법 밖에 없을까? (외부에 PublishSubject 타입의 output을 두는 방법)
     private func configureUpdatedSubmissionCountAndIsGameClosed(
         by inputObserver: Observable<Void>,
         outputForSubmissionCount: PublishSubject<Int>,
@@ -158,6 +158,8 @@ final class ResultWaitingViewModel {
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { _ in
             self.coordinator.showInitialTogetherMenuPage()
+            self.coordinator.popCurrentPage() 
+            self.coordinator.finish()  // FIXME: Together-C가 계속 쌓이는 문제 발생
         })
         .disposed(by: disposeBag)
     }

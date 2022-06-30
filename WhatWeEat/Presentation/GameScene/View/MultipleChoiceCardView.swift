@@ -97,7 +97,7 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(0.22)
-            ) // TODO: 화면 크기에 따라 변경
+            ) 
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: questionKind.columnCount)
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = questionKind.sectionInset

@@ -59,28 +59,26 @@ final class OnboardingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresen
 extension OnboardingCoordinator {
     private enum Text {
         static let skipButtonTitle: String = "Skip"
-        static let firstPageTitleLabelText: String = "안녕하세요"
+        static let firstPageTitleLabelText: String = "다같이 뭐 먹을지 고민될 때"
         static let firstPageDescriptionLabelText: String = """
-        메뉴 고르다 점심시간이 사라진 경험..
-        있으신가요?
+        아무거나 괜찮다는데,
+        막상 고르면 그건 싫다죠?
         
-        우리 뭐먹지는 여러분의 취향을 바탕으로
-        적합한 메뉴를 추천해주는 앱입니다.
-        
-        혼밥 메뉴도,
-        우리 팀의 회식 메뉴도 정할 수 있어요.
+        우리뭐먹지가 대신 골라드릴게요
         """
-        static let secondPageTitleLabelText: String = "메뉴 정하기"
+        static let secondPageTitleLabelText: String = "당신의 먹취향은?"
         static let secondPageDescriptionLabelText: String = """
-        각자 미니게임을 진행하면
-        팀원들이 모두 만족할만한 메뉴를 추천해줍니다.
-        
-        혼자서도 미니게임을 할 수 있어요.
+        9가지 질문으로 취향을 분석해서
+        모두가 만족할 메뉴를 알아내요
+                
+        물론, 혼밥메뉴도 추천해드려요
         """
+//        누구든 PIN 번호로
+//        간단히 참여할 수 있어요
     }
     
-    private enum Content {  // VC이 갖고있냐 (View다, 상수이고), VM (String도 데이터다)이 갖고있냐 의견 분분
-        static let firstPageImage: UIImage? = UIImage(named: "image")
+    private enum Content { 
+        static let firstPageImage: UIImage? = UIImage(named: "appIconWhite")
         static let secondPageImage: UIImage? = UIImage(named: "image")
     }
 }

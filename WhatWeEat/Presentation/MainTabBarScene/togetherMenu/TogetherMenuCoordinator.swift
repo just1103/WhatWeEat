@@ -93,7 +93,7 @@ extension TogetherMenuCoordinator: TogetherGameCoordinatorDelegate {
         let togetherMenuViewModel = TogetherMenuViewModel(coordinator: self)
         let togetherMenuViewController = TogetherMenuViewController(viewModel: togetherMenuViewModel)
         
-        // FIXME: 화면에서 사라진 SharePinNumberPage를 navigationController.viewControllers에서 빼줬는데 메모리에 살아있음
+        // FIXME: 화면에서 사라진 SharePinNumberPage를 navigationController.viewControllers에서 빼줬는데 메모리에서 해제되지 않는 문제 발생
         navigationController?.viewControllers = [togetherMenuViewController]
     }
 }

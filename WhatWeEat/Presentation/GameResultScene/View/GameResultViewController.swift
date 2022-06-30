@@ -80,7 +80,7 @@ class GameResultViewController: UIViewController {
         imageView.clipsToBounds = true
         return imageView
     }()
-    // TODO: 지도 SDK 추가 후 구현
+    // TODO: 다음 배포버전에서 구현 예정 (지도 SDK 추가)
 //    private let restaurantCheckButton: UIButton = {
 //        let button = UIButton()
 //        button.translatesAutoresizingMaskIntoConstraints = false
@@ -212,7 +212,6 @@ class GameResultViewController: UIViewController {
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                 constant: Constraint.playerCountLabelLeadingAnchorConstant
             ),
-
             playerCountDescriptionLabel.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
                 constant: Constraint.playerCountDescriptionLabelTopAnchorConstant
@@ -239,7 +238,6 @@ class GameResultViewController: UIViewController {
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                 constant: Constraint.menuNameLabelLeadingAnchorConstant
             ),
-            
             menuNameUnderline.topAnchor.constraint(
                 equalTo: menuNameLabel.bottomAnchor,
                 constant: Constraint.menuNameUnderlineTopAnchorConstant
@@ -305,8 +303,8 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.nextMenuCheckButtonBottomAnchorConstant
             ),
             nextMenuCheckButton.widthAnchor.constraint(equalToConstant: nextMenuCheckButton.intrinsicContentSize.width + 80),
-            nextMenuCheckButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.055),
-
+            nextMenuCheckButton.heightAnchor.constraint(equalToConstant: Constraint.nextMenuCheckButtonHeightAnchorConstant),
+            
             shareButton.bottomAnchor.constraint(
                 equalTo: gameRestartButton.topAnchor,
                 constant: Constraint.shareButtonBottomAnchorConstant
@@ -316,8 +314,8 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.shareButtonTrailingAnchorConstant
             ),
             shareButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            shareButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.04),
-
+            shareButton.heightAnchor.constraint(equalToConstant: Constraint.shareButtonHeightAnchorConstant),
+            
             gameRestartButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                 constant: Constraint.gameRestartButtonBottomAnchorConstant
@@ -327,7 +325,7 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.gameRestartButtonTrailingAnchorConstant
             ),
             gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            gameRestartButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.04),
+            gameRestartButton.heightAnchor.constraint(equalToConstant: Constraint.gameRestartButtonHeightAnchorConstant),
         ])
     }
     
@@ -514,9 +512,12 @@ extension GameResultViewController {
         static let menuImageViewTrailingAnchorConstant: CGFloat = -20
         static let menuImageViewHeightAnchorMultiplier: CGFloat = 0.35
         static let nextMenuCheckButtonTopAnchorConstant: CGFloat = 15
+        static let nextMenuCheckButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.055
         static let nextMenuCheckButtonBottomAnchorConstant: CGFloat = -15
+        static let shareButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.04
         static let shareButtonBottomAnchorConstant: CGFloat = -10
         static let shareButtonTrailingAnchorConstant: CGFloat = -20
+        static let gameRestartButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.04
         static let gameRestartButtonBottomAnchorConstant: CGFloat = -15
         static let gameRestartButtonTrailingAnchorConstant: CGFloat = -20
     }

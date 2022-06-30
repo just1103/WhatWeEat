@@ -136,7 +136,6 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
                 equalTo: containerStackView.heightAnchor,
                 multiplier: Constraint.makeGroupButtonHeightAnchorMultiplier
             ),
-
             makeGroupTitleLabel.bottomAnchor.constraint(
                 equalTo: makeGroupButton.bottomAnchor,
                 constant: Constraint.makeGroupTitleLabelBottomAnchorConstant
@@ -145,7 +144,6 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
                 equalTo: makeGroupButton.trailingAnchor,
                 constant: Constraint.makeGroupTitleLabelTrailingAnchorConstant
             ),
-//            makeGroupDescriptionLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.1),
             makeGroupDescriptionLabel.bottomAnchor.constraint(
                 equalTo: makeGroupTitleLabel.topAnchor,
                 constant: Constraint.makeGroupDescriptionLabelBottomAnchorConstant
@@ -170,8 +168,6 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
                 equalTo: containerStackView.heightAnchor,
                 multiplier: Constraint.pinNumberButtonHeightAnchorMultiplier
             ),
-
-//            pinNumberTitleLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
             pinNumberTitleLabel.bottomAnchor.constraint(
                 equalTo: pinNumberButton.bottomAnchor,
                 constant: Constraint.pinNumberTitleLabelBottomAnchorConstant
@@ -180,7 +176,6 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
                 equalTo: pinNumberButton.leadingAnchor,
                 constant: Constraint.pinNumberTitleLabelLeadingAnchorConstant
             ),
-//            pinNumberDescriptionLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.1),
             pinNumberDescriptionLabel.bottomAnchor.constraint(
                 equalTo: pinNumberTitleLabel.topAnchor,
                 constant: Constraint.pinNumberDescriptionLabelBottomAnchorConstant

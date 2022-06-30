@@ -33,7 +33,7 @@ final class GameResultViewModel {
     }
     
     deinit {
-        coordinator.finish()  // TODO: 호출되는지 확인 필요
+        coordinator.finish()  // FIXME: 호출안되는 문제 발생
     }
     
     // MARK: - Methods
@@ -114,13 +114,13 @@ final class GameResultViewModel {
                     self.coordinator.showInitialTogetherMenuPage()
                 }
                 
-                self.coordinator.popCurrentPage()  // 기존 결과화면을 내림 (여기서 왜 ViewModel deinit이 안되지?)
+                self.coordinator.popCurrentPage()  // 기존 결과화면을 내림 (여기서 왜 ViewModel deinit이 안되는지 파악 필요)
                 self.coordinator.finish()  // TODO: 여기서는 호출되는데, ViewModel deinit은 호출 안됨
             })
             .disposed(by: disposeBag)
     }
     
-    // TODO: 화면전환 - 식당 (다음 배포버전에서 추가할 예정)
+    // TODO: 다음 배포버전에서 구현 예정 (식당 화면으로 전환)
 //    private func configureRestaurantCheckButtonDidTap(by inputObserver: Observable<Void>) {
 //    }
 }

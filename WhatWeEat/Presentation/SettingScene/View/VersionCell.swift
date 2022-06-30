@@ -37,7 +37,7 @@ class VersionCell: UITableViewCell {
         label.textColor = Design.subtitleLabelTextColor
         return label
     }()
-    // TODO: 다음 배포버전에서 추가 - 업데이트 버튼을 탭하면 AppStore 앱을 보여줌
+    // TODO: 다음 배포버전에서 추가 (업데이트 버튼을 탭하면 AppStore 앱으로 연결)
     private let versionStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false

@@ -2,8 +2,6 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-// TODO: 설정 네비게이션바 색깔 수정
-
 final class SettingViewController: UIViewController {
     // MARK: - Nested Types
     enum SectionKind: Int, CaseIterable {

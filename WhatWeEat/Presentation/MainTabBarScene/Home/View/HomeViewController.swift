@@ -68,7 +68,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-    // TODO: 다음 업데이트 때 추가 예정
+    // TODO: 다음 배포버전에서 구현 예정
 //    private let restaurantLocationButton: UIButton = {
 //        let button = UIButton()
 //        button.translatesAutoresizingMaskIntoConstraints = false

@@ -95,7 +95,7 @@ final class SettingViewModel {
                 )
                 self.settingItems = [
                     editDislikedFoods, privacyPolicies, openSourceLicense, feedBackToDeveloper, versionInformation
-                ]  // TODO: 다음 배포버전에서 recommendToFriend 구현
+                ]  // TODO: 다음 배포버전에서 구현 예정 (recommendToFriend 추가)
                 
                 return Observable.just(self.settingItems)
             }

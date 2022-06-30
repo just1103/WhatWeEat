@@ -9,6 +9,8 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = Design.containerStackViewSpacing
+        stackView.directionalLayoutMargins = Design.containerStackViewMargins
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private let descriptionImageView: UIImageView = {
@@ -25,7 +27,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         label.font = Design.titleLabelFont
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.numberOfLines = .zero
+//        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -71,22 +73,10 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         containerStackView.addArrangedSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(
-                equalTo: view.topAnchor,
-                constant: Constraint.containerStackViewTopAnchorConstant
-            ),
-            containerStackView.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
-                constant: Constraint.containerStackViewLeadingAnchorConstant
-            ),
-            containerStackView.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
-                constant: Constraint.containerStackViewTrailingAnchorConstant
-            ),
-            descriptionImageView.heightAnchor.constraint(
-                greaterThanOrEqualToConstant: Constraint.containerStackViewHeightAnchorConstant
-            ),
-            descriptionImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
+            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
@@ -94,16 +84,23 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
 // MARK: - Namespaces
 extension OnboardingContentViewController {
     private enum Design {
-        static let titleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
-        static let descriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let containerStackViewSpacing: CGFloat = 25
+        static let containerStackViewMargins = NSDirectionalEdgeInsets(
+            top: UIScreen.main.bounds.height * 0.02,
+            leading: UIScreen.main.bounds.width * 0.05,
+            bottom: UIScreen.main.bounds.width * 0.6,
+            trailing: UIScreen.main.bounds.width * 0.05
+        )
         static let imageCornerRadius: CGFloat = 5
-        static let containerStackViewSpacing: CGFloat = 20
+        static let titleLabelFont: UIFont = .pretendard(family: .bold, size: 30)
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
     }
     
     private enum Constraint {
-        static let containerStackViewTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.15
-        static let containerStackViewLeadingAnchorConstant: CGFloat = UIScreen.main.bounds.width * 0.03
-        static let containerStackViewTrailingAnchorConstant: CGFloat = -UIScreen.main.bounds.width * 0.03
-        static let containerStackViewHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.25
+        // TODO: 레이아웃 적절한지 확인
+//        static let containerStackViewTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.1
+//        static let containerStackViewLeadingAnchorConstant: CGFloat = UIScreen.main.bounds.width * 0.03
+//        static let containerStackViewTrailingAnchorConstant: CGFloat = -UIScreen.main.bounds.width * 0.03
+//        static let containerStackViewHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.25
     }
 }

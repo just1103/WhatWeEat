@@ -31,11 +31,11 @@ final class SharePinNumberActivityItemSource: NSObject, UIActivityItemSource {
     
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metaData = LPLinkMetadata()
-        guard let iconImage = Content.iconImage else {  // TODO: 디자인 작업 후 앱 로고로 변경
+        guard let appIconImage = Content.appIconImage else {  // TODO: 디자인 작업 후 앱 로고로 변경
             return LPLinkMetadata()
         }
         metaData.title = title
-        metaData.iconProvider = NSItemProvider(object: iconImage)
+        metaData.iconProvider = NSItemProvider(object: appIconImage)
         metaData.originalURL = URL(fileURLWithPath: content)
         return metaData
     }
@@ -44,6 +44,6 @@ final class SharePinNumberActivityItemSource: NSObject, UIActivityItemSource {
 // MARK: - Namespaces
 extension SharePinNumberActivityItemSource {
     private enum Content {
-        static let iconImage = UIImage(named: "meat")
+        static let appIconImage = UIImage(named: "appIconWhite")
     }
 }
