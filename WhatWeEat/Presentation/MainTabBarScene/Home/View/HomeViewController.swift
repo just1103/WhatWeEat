@@ -7,7 +7,6 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = Content.randomMenuImage
         return imageView
     }()
     private let gradationView: UIView = {
@@ -84,6 +83,9 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
     private let invokedViewWillAppear = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
+    private lazy var constraintsForNormalMenuNameLayout: [NSLayoutConstraint] = setupConstraintsForNormalMenuNameLayout()
+    private lazy var constraintsForLongMenuNameLayout: [NSLayoutConstraint] = setupConstraintsForLongMenuNameLayout()
+    
     // MARK: - Initializers
     convenience init(viewModel: HomeViewModel) {
         self.init()
@@ -145,25 +147,48 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
                 constant: Constraint.todayLunchDescriptionLabelTopAnchorConstant
             ),
             todayLunchDescriptionLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
+            
             menuNameLabel.topAnchor.constraint(
                 equalTo: todayLunchDescriptionLabel.bottomAnchor,
-                constant: Constraint.todayLunchDescriptionLabelBottomAnchorConstant
+                constant: Constraint.menuNameLabelTopAnchorConstant
             ),
             menuNameLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
+                
             menuNameUnderline.widthAnchor.constraint(equalTo: menuNameLabel.widthAnchor),
             menuNameUnderline.heightAnchor.constraint(
                 equalToConstant: Constraint.menuNameUnderlineHeightAnchorConstant
             ),
             menuNameUnderline.leadingAnchor.constraint(equalTo: menuNameLabel.leadingAnchor),
             menuNameUnderline.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor),
+            
+//            restaurantLocationButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+        ])
+        
+        NSLayoutConstraint.activate(constraintsForNormalMenuNameLayout)
+    }
+    
+    private func setupConstraintsForNormalMenuNameLayout() -> [NSLayoutConstraint] {
+        let constraints = [
             menuNameDescriptionLabel.leadingAnchor.constraint(
                 equalTo: menuNameLabel.trailingAnchor,
                 constant: Constraint.menuNameDescriptionLabelLeadingAnchorConstant
             ),
-            menuNameDescriptionLabel.bottomAnchor.constraint(equalTo: menuNameLabel.bottomAnchor)
+            menuNameDescriptionLabel.bottomAnchor.constraint(equalTo: menuNameLabel.bottomAnchor),
+        ]
+        
+        return constraints
+    }
 
-//            restaurantLocationButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
-        ])
+    private func setupConstraintsForLongMenuNameLayout() -> [NSLayoutConstraint] {
+        let constraints = [
+            menuNameDescriptionLabel.leadingAnchor.constraint(equalTo: randomDescriptionLabel.leadingAnchor),
+            menuNameDescriptionLabel.topAnchor.constraint(
+                equalTo: menuNameLabel.bottomAnchor,
+                constant: Constraint.menuNameDescriptionLabelTopAnchorConstant
+            ),
+        ]
+        
+        return constraints
     }
 }
 
@@ -194,6 +219,14 @@ extension HomeViewController {
                     DispatchQueue.main.async {
                         self.randomMenuImageView.image = loadedImage
                         self.menuNameLabel.text = randomMenu.name
+                        
+                        if randomMenu.name.count >= 6 {
+                            NSLayoutConstraint.deactivate(self.constraintsForNormalMenuNameLayout)
+                            NSLayoutConstraint.activate(self.constraintsForLongMenuNameLayout)
+                        } else {
+                            NSLayoutConstraint.deactivate(self.constraintsForLongMenuNameLayout)
+                            NSLayoutConstraint.activate(self.constraintsForNormalMenuNameLayout)
+                        }
                     }
                 }
             })
@@ -221,9 +254,10 @@ extension HomeViewController {
         static let randomDescriptionLabelTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.1
         static let randomDescriptionLabelLeadingAnchorConstant: CGFloat = 20
         static let todayLunchDescriptionLabelTopAnchorConstant: CGFloat = 30
-        static let todayLunchDescriptionLabelBottomAnchorConstant: CGFloat = 5
+        static let menuNameLabelTopAnchorConstant: CGFloat = 5
         static let menuNameUnderlineHeightAnchorConstant: CGFloat = 2
         static let menuNameDescriptionLabelLeadingAnchorConstant: CGFloat = 10
+        static let menuNameDescriptionLabelTopAnchorConstant: CGFloat = 15
     }
     
     private enum Content {
@@ -235,8 +269,8 @@ extension HomeViewController {
     private enum Text {
         static let randomDescriptionLabelText = "랜덤으로 골라봤어요"
         static let todayLunchDescriptionLabelText = "오늘 식사는"
-        static let menuNameLabelText = "000"
-        static let menuNameDescriptionLabelText = "어떠세요?"
+        static let menuNameLabelText = "로딩중"
+        static let menuNameDescriptionLabelText = "어때요?"
         static let tapBarTitle = "Home"
     }
 }

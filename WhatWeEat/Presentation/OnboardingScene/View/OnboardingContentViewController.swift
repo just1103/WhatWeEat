@@ -102,8 +102,8 @@ extension OnboardingContentViewController {
     
     private enum Constraint {
         static let containerStackViewTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.15
-        static let containerStackViewLeadingAnchorConstant: CGFloat = 20
-        static let containerStackViewTrailingAnchorConstant: CGFloat = -20
+        static let containerStackViewLeadingAnchorConstant: CGFloat = UIScreen.main.bounds.width * 0.03
+        static let containerStackViewTrailingAnchorConstant: CGFloat = -UIScreen.main.bounds.width * 0.03
         static let containerStackViewHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.25
     }
 }

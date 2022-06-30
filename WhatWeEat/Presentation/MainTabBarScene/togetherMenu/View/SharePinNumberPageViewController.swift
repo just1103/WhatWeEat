@@ -88,7 +88,7 @@ final class SharePinNumberPageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(Text.shareButtonTitle, for: .normal)
         button.setTitleColor(.mainOrange, for: .normal)
-        button.setImage(Content.shareButtonImage , for: .normal)
+        button.setImage(Content.shareButtonImage, for: .normal)
         button.backgroundColor = .white
         button.titleLabel?.font = Design.shareButtonTitleFont
         button.titleEdgeInsets = Design.shareButtonTitleInsets
@@ -113,7 +113,7 @@ final class SharePinNumberPageViewController: UIViewController {
     private let gameStartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Text.gameStartButtonTitle , for: .normal)
+        button.setTitle(Text.gameStartButtonTitle, for: .normal)
         button.setTitleColor(Design.gameStartButtonTitleColor, for: .normal)
         button.backgroundColor = .white
         button.titleLabel?.font = Design.gameStartButtonTitleFont
@@ -266,11 +266,11 @@ extension SharePinNumberPageViewController {
         static let togetherImageViewTintColor: UIColor = .white
         static let titleLabelTextColor: UIColor = .white
         static let titleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
-        static let pinNumberTitleLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
+        static let pinNumberTitleLabelFont: UIFont = .pretendardWithDefaultSize(family: .bold)
         static let pinNumberTitleLabelTextColor: UIColor = .white
         static let pinNumberLabelFont: UIFont = .pretendard(family: .bold, size: 50)
         static let pinNumberLabelTextColor: UIColor = .white
-        static let shareButtonTitleFont: UIFont = .pretendardDefaultSize(family: .medium)
+        static let shareButtonTitleFont: UIFont = .pretendardWithDefaultSize(family: .medium)
         static let shareButtonTitleInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         static let shareButtonTintColor: UIColor = .mainOrange
         static let shareButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.06 * 0.5

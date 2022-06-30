@@ -305,10 +305,7 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.nextMenuCheckButtonBottomAnchorConstant
             ),
             nextMenuCheckButton.widthAnchor.constraint(equalToConstant: nextMenuCheckButton.intrinsicContentSize.width + 80),
-            nextMenuCheckButton.heightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                multiplier: Constraint.nextMenuCheckButtonHeightAnchorMultiplier
-            ),
+            nextMenuCheckButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.055),
 
             shareButton.bottomAnchor.constraint(
                 equalTo: gameRestartButton.topAnchor,
@@ -319,10 +316,7 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.shareButtonTrailingAnchorConstant
             ),
             shareButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            shareButton.heightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                multiplier: Constraint.shareButtonHeightAnchorMultiplier
-            ),
+            shareButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.04),
 
             gameRestartButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
@@ -333,10 +327,7 @@ class GameResultViewController: UIViewController {
                 constant: Constraint.gameRestartButtonTrailingAnchorConstant
             ),
             gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            gameRestartButton.heightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.heightAnchor,
-                multiplier: Constraint.gameRestartButtonHeightAnchorMultiplier
-            ),
+            gameRestartButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.04),
         ])
     }
     
@@ -488,19 +479,19 @@ extension GameResultViewController {
         static let nextMenuCheckButtonTitleColor: UIColor = .white
         static let nextMenuCheckButtonTitleFont: UIFont = .pretendard(family: .medium, size: 22)
         static let nextMenuCheckButtonBackgroundColor: UIColor = .mainOrange
-        static let nextMenuCheckButtonCornerRadius: CGFloat = 8
+        static let nextMenuCheckButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.055 * 0.5
         static let shareButtonTitleColor: UIColor = .mainOrange
         static let shareButtonTitleFont: UIFont = .pretendard(family: .medium, size: 20)
         static let shareButtonBackgroundColor: UIColor = .systemGray6
         static let shareButtonTintColor: UIColor = .mainOrange
         static let shareButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
-        static let shareButtonCornerRadius: CGFloat = 8
+        static let shareButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
         static let gameRestartButtonTitleColor: UIColor = .darkGray
         static let gameRestartButtonFont: UIFont = .pretendard(family: .medium, size: 20)
         static let gameRestartButtonBackgroundColor: UIColor = .systemGray6
         static let gameRestartButtonTintColor: UIColor = .darkGray
         static let gameRestartButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
-        static let gameRestartButtonCornerRadius: CGFloat = 8
+        static let gameRestartButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
         static let backgroundColor: UIColor = .systemGray6
     }
     
@@ -509,7 +500,7 @@ extension GameResultViewController {
         static let pinNumberLabelTrailingAnchorConstant: CGFloat = -15
         static let playerCountLabelLeadingAnchorConstant: CGFloat = 20
         static let playerCountDescriptionLabelTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
-        static let playerCountDescriptionLabelLeadingAnchorConstant: CGFloat = 2
+        static let playerCountDescriptionLabelLeadingAnchorConstant: CGFloat = 1
         static let keywordLabelTopAnchorConstant: CGFloat = 5
         static let keywordLabelLeadingAnchorConstant: CGFloat = 20
         static let menuNameLabelTopAnchorConstant: CGFloat = 5
@@ -523,14 +514,11 @@ extension GameResultViewController {
         static let menuImageViewTrailingAnchorConstant: CGFloat = -20
         static let menuImageViewHeightAnchorMultiplier: CGFloat = 0.35
         static let nextMenuCheckButtonTopAnchorConstant: CGFloat = 15
-        static let nextMenuCheckButtonHeightAnchorMultiplier: CGFloat = 0.06
-        static let nextMenuCheckButtonBottomAnchorConstant: CGFloat = -10
+        static let nextMenuCheckButtonBottomAnchorConstant: CGFloat = -15
         static let shareButtonBottomAnchorConstant: CGFloat = -10
         static let shareButtonTrailingAnchorConstant: CGFloat = -20
-        static let shareButtonHeightAnchorMultiplier: CGFloat = 0.05
         static let gameRestartButtonBottomAnchorConstant: CGFloat = -15
         static let gameRestartButtonTrailingAnchorConstant: CGFloat = -20
-        static let gameRestartButtonHeightAnchorMultiplier: CGFloat = 0.05
     }
     
     private enum Content {

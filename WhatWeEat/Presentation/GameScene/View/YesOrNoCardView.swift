@@ -81,7 +81,7 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
 // MARK: - NameSpaces
 extension YesOrNoCardView {
     private enum Design {
-        static let questionLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
+        static let questionLabelFont: UIFont = .pretendardWithDefaultSize(family: .bold)
         static let filterViewBackgroundColor: UIColor = .black.withAlphaComponent(0.5)
         static let cornerRadius: CGFloat = 30
         static let questionLabelTextColor: UIColor = .white

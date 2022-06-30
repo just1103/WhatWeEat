@@ -59,10 +59,10 @@ final class SettingViewController: UIViewController {
         self.view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .backgroundGray
+        tableView.backgroundColor = Design.tableViewBackgroundColor
+        tableView.dataSource = self
         tableView.register(cellType: VersionCell.self)
         tableView.register(cellType: SettingCell.self)
-        tableView.dataSource = self
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -165,6 +165,7 @@ extension SettingViewController {
         static let navigationTitleColor: UIColor = .black
         static let navigationTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 25)
         static let backgroundColor: UIColor = .systemGray6
+        static let tableViewBackgroundColor: UIColor = .systemGray6
     }
     
     private enum Content {

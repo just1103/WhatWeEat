@@ -37,6 +37,7 @@ class VersionCell: UITableViewCell {
         label.textColor = Design.subtitleLabelTextColor
         return label
     }()
+    // TODO: 다음 배포버전에서 추가 - 업데이트 버튼을 탭하면 AppStore 앱을 보여줌
     private let versionStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -124,10 +125,8 @@ class VersionCell: UITableViewCell {
 extension VersionCell {
     private enum Design {
         static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
-        
         static let subtitleLabelFont: UIFont = .pretendard(family: .regular, size: 15)
         static let subtitleLabelTextColor: UIColor = .systemGray
-        
         static let versionStatusButtonTitleFont: UIFont = .pretendard(family: .regular, size: 15)
         static let versionStatusButtonUpdateTitleColor: UIColor = .black
         static let versionStatusButtonLatestTitleColor: UIColor = .systemGray

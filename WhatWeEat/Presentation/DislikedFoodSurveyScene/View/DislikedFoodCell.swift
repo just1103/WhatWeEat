@@ -74,7 +74,7 @@ final class DislikedFoodCell: UICollectionViewCell {
         containerStackView.addArrangedSubview(descriptionImageView)
         containerStackView.addArrangedSubview(descriptionLabel)
 
-        NSLayoutConstraint.activate([  // TODO: 상수 Namespaces 처리
+        NSLayoutConstraint.activate([ 
             containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

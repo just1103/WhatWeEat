@@ -1,6 +1,5 @@
 import UIKit
 
-// TODO: 진행상태 bar 추가
 final class MultipleChoiceCardView: UIView, CardViewProtocol {
     // MARK: - Nested Types
     enum QuestionKind {
@@ -147,13 +146,13 @@ final class MultipleChoiceCardView: UIView, CardViewProtocol {
 extension MultipleChoiceCardView {
     private enum Design {
         static let menuNationBackgroundColor: UIColor = .darkGray
-        static let mainIngredientBackgroundColor: UIColor = .systemGray
-        static let menuNationSectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+        static let mainIngredientBackgroundColor: UIColor = .gray
+        static let menuNationSectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 13, bottom: 0, trailing: 13)
         static let mainIngredientSectionInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
         static let containerStackViewMargins = NSDirectionalEdgeInsets(top: 15, leading: 5, bottom: 10, trailing: 5)
         static let containerStackViewSpacing: CGFloat = 10
         static let containerStackViewCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
-        static let titleLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
+        static let titleLabelFont: UIFont = .pretendardWithDefaultSize(family: .bold)
         static let titleLabelTextColor: UIColor = .white
         static let subtitleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
         static let subtitleLabelTextColor: UIColor = .white
