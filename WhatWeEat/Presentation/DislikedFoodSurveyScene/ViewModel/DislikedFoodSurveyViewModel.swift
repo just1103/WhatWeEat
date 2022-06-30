@@ -120,6 +120,7 @@ final class DislikedFoodSurveyViewModel {
     }
 }
 
+// MARK: - Namespaces
 extension DislikedFoodSurveyViewModel {
     private enum Content {
         static let intestineFoodImage = UIImage(named: "intestine")

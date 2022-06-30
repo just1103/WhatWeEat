@@ -237,6 +237,7 @@ extension SharePinNumberPageViewController {
     }
 }
 
+// MARK: - Namespaces
 extension SharePinNumberPageViewController {
     private enum Design {
         static let backButtonTitleFont: UIFont = .pretendard(family: .medium, size: 15)

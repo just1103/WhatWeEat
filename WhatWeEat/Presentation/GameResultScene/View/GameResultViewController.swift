@@ -75,7 +75,6 @@ class GameResultViewController: UIViewController {
     private let menuImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = Content.menuImage
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = Design.menuImageViewCornerRadius
         imageView.clipsToBounds = true
@@ -138,6 +137,12 @@ class GameResultViewController: UIViewController {
         button.isHidden = false
         return button
     }()
+    private let loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        return activityIndicator
+    }()
     
     private var viewModel: GameResultViewModel!
     private let invokedViewDidLoad = PublishSubject<Void>()
@@ -154,16 +159,13 @@ class GameResultViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
+        startLoadingActivityIndicator()
         bind()
         invokedViewDidLoad.onNext(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-    }
-    
-    deinit {
-        print("!!!")
     }
 
     // MARK: - Methods
@@ -181,6 +183,7 @@ class GameResultViewController: UIViewController {
         view.addSubview(keywordLabel)
         view.addSubview(menuNameLabel)
         view.addSubview(menuNameUnderline)
+        view.addSubview(loadingActivityIndicator)
         view.addSubview(menuImageView)
 //        view.addSubview(restaurantCheckButton)
         view.addSubview(nextMenuCheckButton)
@@ -252,6 +255,23 @@ class GameResultViewController: UIViewController {
             menuNameUnderline.heightAnchor.constraint(
                 equalToConstant: Constraint.menuNameUnderlineHeightAnchorConstant
             ),
+            
+            loadingActivityIndicator.topAnchor.constraint(
+                equalTo: menuNameLabel.bottomAnchor,
+                constant: Constraint.menuImageViewTopAnchorConstant
+            ),
+            loadingActivityIndicator.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.menuImageViewLeadingAnchorConstant
+            ),
+            loadingActivityIndicator.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.menuImageViewTrailingAnchorConstant
+            ),
+            loadingActivityIndicator.heightAnchor.constraint(
+                greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Constraint.menuImageViewHeightAnchorMultiplier
+            ),
 
             menuImageView.topAnchor.constraint(
                 equalTo: menuNameLabel.bottomAnchor,
@@ -318,6 +338,10 @@ class GameResultViewController: UIViewController {
                 multiplier: Constraint.gameRestartButtonHeightAnchorMultiplier
             ),
         ])
+    }
+    
+    private func startLoadingActivityIndicator() {
+        loadingActivityIndicator.startAnimating()
     }
 }
 
@@ -386,6 +410,7 @@ extension GameResultViewController {
             else { return }
             
             DispatchQueue.main.async {
+                self.loadingActivityIndicator.stopAnimating()
                 self.menuImageView.image = loadedImage
             }
         }
@@ -509,7 +534,6 @@ extension GameResultViewController {
     }
     
     private enum Content {
-        static let menuImage = UIImage(named: "meat") // TODO: 수정
         static let shareButtonImage = UIImage(systemName: "square.and.arrow.up")
         static let gameRestartButtonImage = UIImage(systemName: "arrow.counterclockwise.circle")
     }

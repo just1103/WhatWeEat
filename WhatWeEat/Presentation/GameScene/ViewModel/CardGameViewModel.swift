@@ -5,8 +5,8 @@ final class CardGameViewModel {
     // MARK: - Nested Types
     struct Input {
         let invokedViewDidLoad: Observable<Void>
-        let likeButtonDidTap: Observable<Void>
-        let hateButtonDidTap: Observable<Void>
+        let yesButtonDidTap: Observable<Void>
+        let noButtonDidTap: Observable<Void>
         let skipButtonDidTap: Observable<Void>
         let previousQuestionButtonDidTap: Observable<Void>
         let menuNationsCellDidSelect: Observable<IndexPath>
@@ -50,8 +50,8 @@ final class CardGameViewModel {
         let initialCardIndiciesAndPinNumber = configureInitialCardIndiciesAndPinNumber(by: input.invokedViewDidLoad)
         let menuNations = configureMenuNations(by: input.invokedViewDidLoad)
         let mainIngredients = configureMainIngredients(by: input.invokedViewDidLoad)
-        let nextCardIndiciesWhenLike = configureNextCardIndiciesWhenLike(by: input.likeButtonDidTap)
-        let nextCardIndiciesWhenHate = configureNextCardIndiciesWhenHate(by: input.hateButtonDidTap)
+        let nextCardIndiciesWhenLike = configureNextCardIndiciesWhenLike(by: input.yesButtonDidTap)
+        let nextCardIndiciesWhenHate = configureNextCardIndiciesWhenHate(by: input.noButtonDidTap)
         let nextCardIndiciesWhenSkip = configureNextCardIndiciesWhenSkip(by: input.skipButtonDidTap)
         let previousCardIndicies = configurePreviousCardIndicies(by: input.previousQuestionButtonDidTap)
         let menuNationsSelectedindexPath = configureMenuNationsSelectedindexPath(

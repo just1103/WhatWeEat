@@ -83,6 +83,7 @@ extension MainTabBarController {
     }
 }
 
+// MARK: - Namespaces
 extension MainTabBarController {
     private enum Design {
         static let navigationTitleFont: UIFont = .pretendard(family: .medium, size: 25)

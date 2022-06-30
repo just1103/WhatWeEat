@@ -41,6 +41,7 @@ final class SharePinNumberActivityItemSource: NSObject, UIActivityItemSource {
     }
 }
 
+// MARK: - Namespaces
 extension SharePinNumberActivityItemSource {
     private enum Content {
         static let iconImage = UIImage(named: "meat")

@@ -73,25 +73,25 @@ final class CardGameViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
-    private let likeButton: UIButton = {
+    private let yesButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Text.likeButtonTitle, for: .normal)
+        button.setTitle(Text.yesButtonTitle, for: .normal)
         button.titleLabel?.font = Design.skipButtonTitleFont
-        button.backgroundColor = Design.likeButtonBackgroundColor
-        button.setTitleColor(Design.likeButtonTitleColor, for: .normal)
+        button.backgroundColor = Design.yesButtonBackgroundColor
+        button.setTitleColor(Design.yesButtonTitleColor, for: .normal)
         button.clipsToBounds = true
         return button
     }()
-    private let hateButton: UIButton = {
+    private let noButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Text.hateButtonTitle, for: .normal)
+        button.setTitle(Text.noButtonTitle, for: .normal)
         button.titleLabel?.font = Design.skipButtonTitleFont
         button.backgroundColor = .white
-        button.setTitleColor(Design.hateButtonTitleColor, for: .normal)
-        button.layer.borderColor = Design.hateButtonBorderColor
-        button.layer.borderWidth = Design.hateButtonBorderWidth
+        button.setTitleColor(Design.noButtonTitleColor, for: .normal)
+        button.layer.borderColor = Design.noButtonBorderColor
+        button.layer.borderWidth = Design.noButtonBorderWidth
         button.clipsToBounds = true
         return button
     }()
@@ -110,14 +110,13 @@ final class CardGameViewController: UIViewController {
     private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
-    // TODO: 카드 이미지 추가 및 Namespaces 추가
-    private let hangoverCard = YesOrNoCardView(image: UIImage(named: "spicy"), title: Text.hangoverCardTitle)
-    private let greasyCard = YesOrNoCardView(image: UIImage(named: "cheers"), title: Text.greasyCardTitle)
-    private let healthCard = YesOrNoCardView(image: UIImage(named: "spicy"), title: Text.healthCardTitle)
-    private let alcoholCard = YesOrNoCardView(image: UIImage(named: "cheers"), title: Text.alcoholCardTitle)
-    private let instantCard = YesOrNoCardView(image: UIImage(named: "spicy"), title: Text.instantCardTitle)
-    private let spicyCard = YesOrNoCardView(image: UIImage(named: "cheers"), title: Text.spicyCardTitle)
-    private let richCard = YesOrNoCardView(image: UIImage(named: "spicy"), title: Text.richCardTitle)
+    private let hangoverCard = YesOrNoCardView(image: Content.hangoverCardImage, title: Text.hangoverCardTitle)
+    private let greasyCard = YesOrNoCardView(image: Content.greasyCardImage, title: Text.greasyCardTitle)
+    private let healthyCard = YesOrNoCardView(image: Content.healthyCardImage, title: Text.healthCardTitle)
+    private let alcoholCard = YesOrNoCardView(image: Content.alcoholCardImage, title: Text.alcoholCardTitle)
+    private let instantCard = YesOrNoCardView(image: Content.instantCardImage, title: Text.instantCardTitle)
+    private let spicyCard = YesOrNoCardView(image: Content.spicyCardImage, title: Text.spicyCardTitle)
+    private let richCard = YesOrNoCardView(image: Content.richCardImage, title: Text.richCardTitle)
     private let mainIngredientCard = MultipleChoiceCardView(
         title: Text.mainIngredientCardTitle,
         subtitle: Text.mainIngredientCardSubtitle
@@ -127,7 +126,7 @@ final class CardGameViewController: UIViewController {
         subtitle: Text.nationCardSubtitle
     )
     private lazy var cards: [CardViewProtocol] = [
-        hangoverCard, greasyCard, healthCard, alcoholCard, instantCard, spicyCard, richCard, mainIngredientCard, nationCard
+        hangoverCard, greasyCard, healthyCard, alcoholCard, instantCard, spicyCard, richCard, mainIngredientCard, nationCard
     ]
     private var progressForEachCard: Float {
         return Float(1) / Float(cards.count)
@@ -157,13 +156,13 @@ final class CardGameViewController: UIViewController {
         view.addSubview(buttonStackView)
         view.addSubview(skipAndNextButton)
         
-        buttonStackView.addArrangedSubview(likeButton)
-        buttonStackView.addArrangedSubview(hateButton)
+        buttonStackView.addArrangedSubview(yesButton)
+        buttonStackView.addArrangedSubview(noButton)
         
         progressView.progress = progressForEachCard
         
-        likeButton.layer.cornerRadius = Design.likeButtonCornerRadius
-        hateButton.layer.cornerRadius = Design.hateButtonCornerRadius
+        yesButton.layer.cornerRadius = Design.yesButtonCornerRadius
+        noButton.layer.cornerRadius = Design.noButtonCornerRadius
         
         NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(
@@ -251,8 +250,8 @@ extension CardGameViewController {
     private func bind() {
         let input = CardGameViewModel.Input(
             invokedViewDidLoad: invokedViewDidLoad.asObservable(),
-            likeButtonDidTap: likeButton.rx.tap.asObservable(),
-            hateButtonDidTap: hateButton.rx.tap.asObservable(),
+            yesButtonDidTap: yesButton.rx.tap.asObservable(),
+            noButtonDidTap: noButton.rx.tap.asObservable(),
             skipButtonDidTap: skipAndNextButton.rx.tap.asObservable(),
             previousQuestionButtonDidTap: previousQuestionButton.rx.tap.asObservable(),
             menuNationsCellDidSelect: mainIngredientCard.choiceCollectionView.rx.itemSelected.asObservable(),
@@ -528,13 +527,13 @@ extension CardGameViewController {
             bottom: 0,
             trailing: UIScreen.main.bounds.width * 0.1
         )
-        static let likeButtonBackgroundColor: UIColor = .mainOrange
-        static let likeButtonTitleColor: UIColor = .white
-        static let likeButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
-        static let hateButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
-        static let hateButtonTitleColor: UIColor = .mainOrange
-        static let hateButtonBorderColor: CGColor = UIColor.mainOrange.cgColor
-        static let hateButtonBorderWidth: CGFloat = 2
+        static let yesButtonBackgroundColor: UIColor = .mainOrange
+        static let yesButtonTitleColor: UIColor = .white
+        static let yesButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
+        static let noButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.1 * 0.5
+        static let noButtonTitleColor: UIColor = .mainOrange
+        static let noButtonBorderColor: CGColor = UIColor.mainOrange.cgColor
+        static let noButtonBorderWidth: CGFloat = 2
         static let skipAndNextButtonTitleInsets = UIEdgeInsets(top: 15, left: 0, bottom: 30, right: 0)
         static let firstCardOriginX = UIScreen.main.bounds.width * 0.1
         static let firstCardOriginY = UIScreen.main.bounds.height * 0.15
@@ -565,12 +564,19 @@ extension CardGameViewController {
     
     private enum Content {
         static let previousQuestionButtonImage = UIImage(systemName: "arrow.uturn.backward.circle")
+        static let hangoverCardImage = UIImage(named: "hangover")
+        static let greasyCardImage = UIImage(named: "greasy")
+        static let healthyCardImage = UIImage(named: "healthy")
+        static let alcoholCardImage = UIImage(named: "alcohol")
+        static let instantCardImage = UIImage(named: "instant")
+        static let spicyCardImage = UIImage(named: "spicy")
+        static let richCardImage = UIImage(named: "rich")
     }
     
     private enum Text {
         static let skipButtonTitle: String = "Skip"
-        static let likeButtonTitle: String = "좋아요"
-        static let hateButtonTitle: String = "싫어요"
+        static let yesButtonTitle: String = "Yes"
+        static let noButtonTitle: String = "No"
         static let previousQuestionButtonTitle = "이전 질문"
         static let skipAndNextButtonTitle = "다음 (상관 없음)"
         static let hangoverCardTitle = "해장이 필요하신가요?"
