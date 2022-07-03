@@ -471,7 +471,7 @@ extension GameResultViewController {
         static let keywordLabelTextColor: UIColor = .mainOrange
         static let keywordLabelFont: UIFont = .pretendard(family: .medium, size: 25)
         static let menuNameLabelTextColor: UIColor = .mainOrange
-        static let menuNameLabelFont: UIFont = .pretendard(family: .bold, size: 35)
+        static let menuNameLabelFont: UIFont = .pretendard(family: .bold, size: 38)
         static let menuNameUnderlineBackgroundColor: UIColor = .mainOrange
         static let menuImageViewCornerRadius: CGFloat = 8
         static let nextMenuCheckButtonTitleColor: UIColor = .white

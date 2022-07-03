@@ -44,7 +44,7 @@ final class HomeViewController: UIViewController, TabBarContentProtocol {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = Design.menuNameLabelFont
+        label.font = Design.menuNameLabelNormalFont
         label.textColor = Design.menuNameLabelTextColor
         label.text = Text.menuNameLabelText
         label.numberOfLines = .zero
@@ -220,12 +220,18 @@ extension HomeViewController {
                         self.randomMenuImageView.image = loadedImage
                         self.menuNameLabel.text = randomMenu.name
                         
-                        if randomMenu.name.count >= 6 {
+                        if randomMenu.name.count >= 10 {
                             NSLayoutConstraint.deactivate(self.constraintsForNormalMenuNameLayout)
                             NSLayoutConstraint.activate(self.constraintsForLongMenuNameLayout)
+                            self.menuNameLabel.font = Design.menuNameLabelLongFont
+                        } else if randomMenu.name.count >= 6 {
+                            NSLayoutConstraint.deactivate(self.constraintsForNormalMenuNameLayout)
+                            NSLayoutConstraint.activate(self.constraintsForLongMenuNameLayout)
+                            self.menuNameLabel.font = Design.menuNameLabelNormalFont
                         } else {
                             NSLayoutConstraint.deactivate(self.constraintsForLongMenuNameLayout)
                             NSLayoutConstraint.activate(self.constraintsForNormalMenuNameLayout)
+                            self.menuNameLabel.font = Design.menuNameLabelNormalFont
                         }
                     }
                 }
@@ -241,7 +247,8 @@ extension HomeViewController {
         static let randomDescriptionLabelTextColor: UIColor = .white
         static let todayLunchDescriptionLabelFont: UIFont = .pretendard(family: .bold, size: 35)
         static let todayLunchDescriptionLabelTextColor: UIColor = .white
-        static let menuNameLabelFont: UIFont = .pretendard(family: .bold, size: 45)
+        static let menuNameLabelNormalFont: UIFont = .pretendard(family: .bold, size: 45)
+        static let menuNameLabelLongFont: UIFont = .pretendard(family: .bold, size: 39)
         static let menuNameLabelTextColor: UIColor = .mainOrange
         static let menuNameUnderlineBackgroundColor: UIColor = .mainOrange
         static let menuNameDescriptionLabelFont: UIFont = .pretendard(family: .bold, size: 35)
