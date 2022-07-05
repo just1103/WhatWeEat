@@ -279,7 +279,7 @@ extension TogetherMenuViewController {
         static let makeGroupDescriptionLabelTextColor: UIColor = .white
         static let makeGroupTitleLabelFont: UIFont = .pretendard(family: .bold, size: 35)
         static let makeGroupTitleLabelTextColor: UIColor = .white
-        static let separatorLineViewBackgroundColor: UIColor = .systemGray4
+        static let separatorLineViewBackgroundColor: UIColor = .mediumLightGray
         static let pinNumberButtonBackgroundColor: UIColor = .lightGray
         static let pinNumberButtonCornerRadius: CGFloat = 20
         static let pinNumberImageViewTintColor: UIColor = .black

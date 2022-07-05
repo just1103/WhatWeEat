@@ -37,7 +37,7 @@ class SettingCell: UITableViewCell {
     
     private func configureUI() {
         backgroundColor = Design.backgroundColor
-        accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator  // TODO: 다크모드에서 색상이 연하므로 accessoryView를 chevron.right 이미지의 Button으로 교체
         selectionStyle = .none
         
         addSubview(titleLabel)
@@ -55,7 +55,7 @@ class SettingCell: UITableViewCell {
 extension SettingCell {
     private enum Design {
         static let backgroundColor: UIColor = .white
-        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 20)
         static let titleLabelTextColor: UIColor = .black
     }
 }

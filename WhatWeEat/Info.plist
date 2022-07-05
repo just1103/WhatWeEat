@@ -12,10 +12,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>net.whatWeEat</string>
+			<string>com.IntjDevelopers.WhatWeEat</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>net.whatWeEat</string>
+				<string>com.IntjDevelopers.WhatWeEat</string>
 			</array>
 		</dict>
 	</array>

@@ -128,7 +128,7 @@ class VersionCell: UITableViewCell {
 extension VersionCell {
     private enum Design {
         static let backgroundColor: UIColor = .white
-        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 20)
         static let titleLabelTextColor: UIColor = .black
         static let subtitleLabelFont: UIFont = .pretendard(family: .regular, size: 15)
         static let subtitleLabelTextColor: UIColor = .systemGray
