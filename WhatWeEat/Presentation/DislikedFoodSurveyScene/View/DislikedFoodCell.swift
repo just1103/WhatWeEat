@@ -24,6 +24,7 @@ final class DislikedFoodCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
+        label.textColor = Design.descriptionLabelTextColor
         label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.setContentHuggingPriority(.required, for: .vertical)
@@ -93,6 +94,7 @@ final class DislikedFoodCell: UICollectionViewCell {
 extension DislikedFoodCell {
     private enum Design {
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 18)
+        static let descriptionLabelTextColor: UIColor = .black
         static let containerStackViewMargins = NSDirectionalEdgeInsets(
             top: 20,
             leading: 10,

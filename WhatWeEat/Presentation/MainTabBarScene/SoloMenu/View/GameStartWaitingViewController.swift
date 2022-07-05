@@ -152,7 +152,7 @@ extension GameStartWaitingViewController {
         static let gameStartButtonTitleFont: UIFont = .pretendard(family: .medium, size: 30)
         static let gameStartButtonBackgroundColor: UIColor = .white
         static let gameStartButtonCornerRadius: CGFloat =  UIScreen.main.bounds.height * 0.08 * 0.5
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

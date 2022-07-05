@@ -23,6 +23,7 @@ class VersionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -89,6 +90,8 @@ class VersionCell: UITableViewCell {
     }
     
     private func configureUI() {
+        backgroundColor = Design.backgroundColor
+        
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleStackView)
         containerStackView.addArrangedSubview(versionStatusButton)
@@ -124,7 +127,9 @@ class VersionCell: UITableViewCell {
 // MARK: - NameSpaces
 extension VersionCell {
     private enum Design {
+        static let backgroundColor: UIColor = .white
         static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
+        static let titleLabelTextColor: UIColor = .black
         static let subtitleLabelFont: UIFont = .pretendard(family: .regular, size: 15)
         static let subtitleLabelTextColor: UIColor = .systemGray
         static let versionStatusButtonTitleFont: UIFont = .pretendard(family: .regular, size: 15)

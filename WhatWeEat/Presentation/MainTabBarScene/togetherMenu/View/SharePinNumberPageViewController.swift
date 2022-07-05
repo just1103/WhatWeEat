@@ -222,9 +222,10 @@ extension SharePinNumberPageViewController {
                 
                 let title = Text.activityViewTitle
                 let content = """
-                [우리뭐먹지] 팀원이 공유한 \(pinNumber)
+                [우리뭐먹지] Host가 PIN 번호 \(pinNumber)를 공유합니다.
                 
-                PIN 번호를 통해 입장하여 오늘의 메뉴를 골라보세요
+                PIN 번호로 입장하여 미니게임을 진행해보세요.
+                취향을 분석해서 모두가 만족할 메뉴를 골라드려요.
                 """
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
@@ -279,7 +280,7 @@ extension SharePinNumberPageViewController {
         static let gameStartButtonTitleColor: UIColor = .mainOrange
         static let gameStartButtonTitleFont: UIFont = .pretendard(family: .medium, size: 30)
         static let gameStartButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.08 * 0.5
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

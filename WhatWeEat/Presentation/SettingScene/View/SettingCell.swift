@@ -7,6 +7,7 @@ class SettingCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
@@ -35,8 +36,10 @@ class SettingCell: UITableViewCell {
     }
     
     private func configureUI() {
-        self.accessoryType = .disclosureIndicator
-        self.selectionStyle = .none
+        backgroundColor = Design.backgroundColor
+        accessoryType = .disclosureIndicator
+        selectionStyle = .none
+        
         addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
@@ -51,6 +54,8 @@ class SettingCell: UITableViewCell {
 // MARK: - NameSpaces
 extension SettingCell {
     private enum Design {
+        static let backgroundColor: UIColor = .white
         static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
+        static let titleLabelTextColor: UIColor = .black
     }
 }

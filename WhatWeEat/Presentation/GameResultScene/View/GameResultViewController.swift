@@ -445,8 +445,10 @@ extension GameResultViewController {
                 
                 let title = Text.activityViewTitle
                 let content = """
-                [우리뭐먹지] 오늘의 메뉴는 #\(menuName) 입니다.
-                팀원들이 이런 것을 원했어요. \(keywords)
+                [우리뭐먹지] 오늘 메뉴는 #\(menuName) 어때요?
+                
+                팀원들이 이런 것을 원했어요.
+                \(keywords)
                 """  // 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 텍스트 추가
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
@@ -480,17 +482,17 @@ extension GameResultViewController {
         static let nextMenuCheckButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.055 * 0.5
         static let shareButtonTitleColor: UIColor = .mainOrange
         static let shareButtonTitleFont: UIFont = .pretendard(family: .medium, size: 20)
-        static let shareButtonBackgroundColor: UIColor = .systemGray6
+        static let shareButtonBackgroundColor: UIColor = .lightGray
         static let shareButtonTintColor: UIColor = .mainOrange
         static let shareButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
         static let shareButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
         static let gameRestartButtonTitleColor: UIColor = .darkGray
         static let gameRestartButtonFont: UIFont = .pretendard(family: .medium, size: 20)
-        static let gameRestartButtonBackgroundColor: UIColor = .systemGray6
+        static let gameRestartButtonBackgroundColor: UIColor = .lightGray
         static let gameRestartButtonTintColor: UIColor = .darkGray
         static let gameRestartButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
         static let gameRestartButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

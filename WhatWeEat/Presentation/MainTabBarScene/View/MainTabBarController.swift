@@ -91,7 +91,7 @@ extension MainTabBarController {
         static let navigationRightBarButtonTintColor: UIColor = .black
         static let tabBarTintColor: UIColor = .mainOrange
         static let tabBarUnselectedTintColor: UIColor = .systemGray
-        static let tabBarBackgroundColor: UIColor = .systemGray6
+        static let tabBarBackgroundColor: UIColor = .lightGray
         
     }
     

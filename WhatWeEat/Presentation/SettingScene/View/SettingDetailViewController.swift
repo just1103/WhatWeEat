@@ -6,6 +6,8 @@ class SettingDetailViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = Design.textViewFont
+        textView.textColor = Design.textViewTextColor
+        textView.backgroundColor = Design.textViewBackgroundColor
         textView.textContainer.lineBreakMode = .byWordWrapping
         textView.dataDetectorTypes = .all
         textView.textContainerInset = Design.textViewContentInsets
@@ -46,8 +48,9 @@ class SettingDetailViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.addSubview(textView)
         view.backgroundColor = Design.backgroundColor
+        view.addSubview(textView)
+        
         textView.text = content
         textView.setContentOffset(.zero, animated: false)
         textView.layoutIfNeeded()
@@ -74,9 +77,11 @@ extension SettingDetailViewController {
 extension SettingDetailViewController {
     private enum Design {
         static let textViewFont: UIFont = .pretendard(family: .medium, size: 15)
+        static let textViewTextColor: UIColor = .black
+        static let textViewBackgroundColor: UIColor = .white
         static let textViewContentInsets = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
         static let backButtonTintColor: UIColor = .black
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Content {

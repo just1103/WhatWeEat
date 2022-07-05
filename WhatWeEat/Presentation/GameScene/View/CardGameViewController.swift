@@ -2,9 +2,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-// 네비게이션바 레이블의 높이 = 설정 아이콘 높이 맞추기
-// 홈메뉴의 네비게이션바 색상만 블랙으로 or 나머지는 화이트로 / 세 탭바 모두 그레이로 통일
-
+// TODO: 네비게이션바 레이블의 높이 = 설정 아이콘 높이 맞추기
 final class CardGameViewController: UIViewController {
     // MARK: - Nested Types
     private enum AnswerKind {
@@ -29,14 +27,6 @@ final class CardGameViewController: UIViewController {
         progressView.progressViewStyle = .default
         progressView.trackTintColor = Design.progressViewTrackTintColor
         progressView.progressTintColor = Design.progressViewProgressTintColor
-//        progressView.setTitle(Text.previousQuestionButtonTitle, for: .normal)
-//        progressView.setTitleColor(Design.previousQuestionButtonTitleColor, for: .normal)
-//        progressView.setImage(Content.previousQuestionButtonImage, for: .normal)
-//        progressView.tintColor = Design.previousQuestionButtonTintColor
-//        progressView.titleLabel?.font = Design.previousQuestionButtonTitleFont
-//        progressView.titleEdgeInsets = Design.previousQuestionButtonTitleInsets
-//        progressView.contentHorizontalAlignment = .leading
-//        progressView.isHidden = true
         return progressView
     }()
     private let previousQuestionButton: UIButton = {
@@ -511,9 +501,9 @@ extension CardGameViewController {
     private enum Design {
         static let progressViewTrackTintColor: UIColor = .subYellow
         static let progressViewProgressTintColor: UIColor = .mainOrange
-        static let previousQuestionButtonTitleColor: UIColor = .label
+        static let previousQuestionButtonTitleColor: UIColor = .black
         static let skipButtonBackgroundColor: UIColor = .mainYellow
-        static let skipButtonTitleColor: UIColor = .label
+        static let skipButtonTitleColor: UIColor = .black
         static let skipButtonTitleFont: UIFont = .pretendard(family: .regular, size: 20)
         static let previousQuestionButtonTintColor: UIColor = .black
         static let previousQuestionButtonTitleFont: UIFont = .pretendard(family: .regular, size: 15)

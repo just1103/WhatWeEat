@@ -254,7 +254,7 @@ extension HomeViewController {
         static let menuNameDescriptionLabelFont: UIFont = .pretendard(family: .bold, size: 35)
         static let menuNameDescriptionLabelTextColor: UIColor = .white
         static let tabBarTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 12)
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

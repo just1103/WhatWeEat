@@ -25,6 +25,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
 //        label.numberOfLines = .zero
@@ -35,6 +36,7 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Design.descriptionLabelFont
+        label.textColor = Design.descriptionLabelTextColor
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
@@ -93,7 +95,9 @@ extension OnboardingContentViewController {
         )
         static let imageCornerRadius: CGFloat = 5
         static let titleLabelFont: UIFont = .pretendard(family: .bold, size: 30)
+        static let titleLabelTextColor: UIColor = .black
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
+        static let descriptionLabelTextColor: UIColor = .black
     }
     
     private enum Constraint {

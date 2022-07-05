@@ -25,6 +25,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
         label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         return label
     }()
     private let titleDescriptionLabel: UILabel = {
@@ -35,6 +36,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
         label.font = Design.titleDescriptionLabelFont
+        label.textColor = Design.titleDescriptionLabelTextColor
         return label
     }()
     private let descriptionLabel: UILabel = {
@@ -44,6 +46,7 @@ final class DislikedFoodSurveyViewController: UIViewController, OnboardingConten
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .left
         label.font = Design.descriptionLabelFont
+        label.textColor = Design.descriptionLabelTextColor
         return label
     }()
     private let confirmButton: UIButton = {
@@ -265,8 +268,11 @@ extension DislikedFoodSurveyViewController {
 extension DislikedFoodSurveyViewController {
     private enum Design {
         static let titleLabelFont: UIFont = .pretendard(family: .bold, size: 40)
+        static let titleLabelTextColor: UIColor = .black
         static let titleDescriptionLabelFont: UIFont = .pretendard(family: .bold, size: 25)
+        static let titleDescriptionLabelTextColor: UIColor = .black
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
+        static let descriptionLabelTextColor: UIColor = .black
         static let confirmButtonFont: UIFont = .pretendard(family: .medium, size: 25)
         static let confirmButtonTitleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 20, right: 0)
         static let confirmButtonTitleColor: UIColor = .black

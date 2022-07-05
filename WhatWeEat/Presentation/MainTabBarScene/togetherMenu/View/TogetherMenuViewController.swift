@@ -280,7 +280,7 @@ extension TogetherMenuViewController {
         static let makeGroupTitleLabelFont: UIFont = .pretendard(family: .bold, size: 35)
         static let makeGroupTitleLabelTextColor: UIColor = .white
         static let separatorLineViewBackgroundColor: UIColor = .systemGray4
-        static let pinNumberButtonBackgroundColor: UIColor = .systemGray6
+        static let pinNumberButtonBackgroundColor: UIColor = .lightGray
         static let pinNumberButtonCornerRadius: CGFloat = 20
         static let pinNumberImageViewTintColor: UIColor = .black
         static let pinNumberDescriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
@@ -288,7 +288,7 @@ extension TogetherMenuViewController {
         static let pinNumberTitleLabelFont: UIFont = .pretendard(family: .bold, size: 35)
         static let pinNumberTitleLabelTextColor: UIColor = .black
         static let tabBarTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 12)
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

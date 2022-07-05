@@ -104,7 +104,7 @@ class ResultWaitingViewController: UIViewController {
     }
 
     private func configureUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .lightGray
         
         view.addSubview(backgroundView)
         view.addSubview(pinNumberLabel)

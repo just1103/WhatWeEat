@@ -162,8 +162,8 @@ extension SettingViewController {
         static let navagationLeftBarButtonTintColor: UIColor = .black
         static let navigationTitleColor: UIColor = .black
         static let navigationTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 25)
-        static let backgroundColor: UIColor = .systemGray6
-        static let tableViewBackgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
+        static let tableViewBackgroundColor: UIColor = .lightGray
     }
     
     private enum Content {

@@ -23,6 +23,7 @@ class NetworkErrorViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Text.errorTitleLabelText
         label.font = Design.errorTitleLabelFont
+        label.textColor = Design.errorTitleLabelTextColor
         label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
@@ -106,9 +107,10 @@ extension NetworkErrorViewController {
         static let backgroundViewColor: UIColor = .white
         static let errorImageViewTintColor: UIColor = .darkGray
         static let errorTitleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let errorTitleLabelTextColor: UIColor = .black
         static let retryButtonSize = UIImage.SymbolConfiguration(pointSize: 40)
         static let retryButtonTintColor: UIColor = .darkGray
-        static let backgroundColor: UIColor = .systemGray6
+        static let backgroundColor: UIColor = .lightGray
     }
     
     private enum Constraint {

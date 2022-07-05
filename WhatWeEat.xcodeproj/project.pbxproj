@@ -464,8 +464,8 @@
 				DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */,
 				DE56951528573065009F3DCE /* UICollectionView+Cell.swift */,
 				DE814E622852D18D003F5FBC /* Array+Subscript.swift */,
-				365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */,
 				365EC7DB28634A7C0094823A /* UIView+Effects.swift */,
+				365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */,
 				36A5E3CE2867E6B50057A556 /* UIFont+CustomFont.swift */,
 			);
 			path = Extension;
