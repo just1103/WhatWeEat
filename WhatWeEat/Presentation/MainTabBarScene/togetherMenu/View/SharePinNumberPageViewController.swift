@@ -222,10 +222,9 @@ extension SharePinNumberPageViewController {
                 
                 let title = Text.activityViewTitle
                 let content = """
-                [우리뭐먹지] Host가 PIN 번호 \(pinNumber)를 공유합니다.
+                [우리뭐먹지] Host가 PIN 번호 \(pinNumber)를 공유했어요.
                 
-                PIN 번호로 입장하여 미니게임을 진행해보세요.
-                취향을 분석해서 모두가 만족할 메뉴를 골라드려요.
+                PIN 번호로 입장해서 미니게임을 진행해보세요. 취향을 분석해서 모두가 만족할 메뉴를 골라드려요.
                 """
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
