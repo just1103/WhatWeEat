@@ -78,7 +78,7 @@ extension OnboardingCoordinator {
     }
     
     private enum Content { 
-        static let firstPageImage: UIImage? = UIImage(named: "appIconWhite")
+        static let firstPageImage: UIImage? = UIImage(named: "appIconWhiteCircle")
         static let secondPageImage: UIImage? = UIImage(named: "image")
     }
 }
