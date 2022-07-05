@@ -6,34 +6,10 @@ Realm Swift
 https://github.com/realm/realm-swift
 Apache License Version 10.26.0
 
-Rx for iOS
-https://github.com/ReactiveX/RxSwift
-Apache License Version 6.5.0
+Firebase for iOS
+https://github.com/firebase/firebase-ios-sdk
+Apache License Version 9.0.0
 
-Realm Swift
-https://github.com/realm/realm-swift
-Apache License Version 10.26.0
-
-Rx for iOS
-https://github.com/ReactiveX/RxSwift
-Apache License Version 6.5.0
-
-Realm Swift
-https://github.com/realm/realm-swift
-Apache License Version 10.26.0
-
-Rx for iOS
-https://github.com/ReactiveX/RxSwift
-Apache License Version 6.5.0
-
-Realm Swift
-https://github.com/realm/realm-swift
-Apache License Version 10.26.0
-
-Rx for iOS
-https://github.com/ReactiveX/RxSwift
-Apache License Version 6.5.0
-
-Realm Swift
-https://github.com/realm/realm-swift
-Apache License Version 10.26.0
+Lottie for iOS
+https://github.com/airbnb/lottie-ios
+Apache License Version 3.0.0

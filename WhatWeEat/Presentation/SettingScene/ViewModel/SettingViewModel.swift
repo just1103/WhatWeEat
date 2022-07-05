@@ -80,7 +80,7 @@ final class SettingViewModel {
                 )
                 let feedBackToDeveloper = CommonSettingItem(
                     title: Text.feedBackToDeveloperTitle,
-                    content: Text.feedBackToDeveloperContent,
+                    content: try? String(contentsOfFile: FilePath.feedback),
                     sectionKind: .common
                 )
 //                let recommendToFriend = CommonSettingItem(
@@ -185,6 +185,7 @@ extension SettingViewModel {
     enum FilePath { 
         static let termsOfPrivacy = Bundle.main.path(forResource: "TermsOfPrivacy", ofType: "txt") ?? ""
         static let openSourceLicense = Bundle.main.path(forResource: "OpenSourceLicense", ofType: "txt") ?? ""
+        static let feedback = Bundle.main.path(forResource: "Feedback", ofType: "txt") ?? ""
     }
     
     enum Text {
