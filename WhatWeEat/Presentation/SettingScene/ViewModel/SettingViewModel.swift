@@ -115,10 +115,8 @@ final class SettingViewModel {
     }
     
     private func checkLatestAppVersion() -> String {
-        let appBundleID = Text.appBundleID
-        
         guard
-            let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appBundleID)"),
+            let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
             let data = try? Data(contentsOf: url),
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
             let results = json[Text.resultsKey] as? [[String: Any]],
@@ -194,9 +192,6 @@ extension SettingViewModel {
         static let privacyPoliciesTitle = "개인정보 처리방침"
         static let openSourceLicenseTitle = "오픈소스 라이센스"
         static let feedBackToDeveloperTitle = "개발자에게 피드백하기"
-        static let feedBackToDeveloperContent = """
-        개발자 이메일: aaaa@gmail.com
-        """
 //        static let recommendToFriendTitle = "친구에게 추천하기"
 //        static let recommendToFriendContent = ""
         static let versionInformationTitle = "버전 정보"
@@ -204,7 +199,7 @@ extension SettingViewModel {
         static let versionInformationButtonUpdateTitle = "업데이트"
         static let versionInformationButtonLatestTitle = "최신버전"
         static let versionInfoDictionaryKey = "CFBundleShortVersionString"
-        static let appBundleID = "com.WhatWeEat"
+        static let appBundleID = "com.IntjDevelopers.WhatWeEat"
         static let resultsKey = "reslts"
         static let versionKey = "version"
     }

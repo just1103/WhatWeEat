@@ -13,3 +13,7 @@ Apache License Version 9.0.0
 Lottie for iOS
 https://github.com/airbnb/lottie-ios
 Apache License Version 3.0.0
+
+SwiftLint
+https://github.com/realm/SwiftLint
+Apache License Version 0.47.1

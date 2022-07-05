@@ -532,7 +532,7 @@ extension GameResultViewController {
         static let playerCountLabelText = "N명"
         static let playerCountDescriptionLabelText = "이 선택한 오늘의 메뉴는"
         static let keywordLabelText = "#키워드"
-        static let menuNameLabelText = "마라탕"
+        static let menuNameLabelText = "로딩중"
         static let nextMenuCheckButtonTitle = "다음 순위 메뉴 확인 (1/3)"
         static let shareButtonTitle = "공유하기"
         static let gameRestartButtonTitle = "게임 다시 시작"
