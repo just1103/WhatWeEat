@@ -1,0 +1,15 @@
+disabled_rules:
+- trailing_whitespace
+- xctfail_message
+- function_parameter_count
+- legacy_constructor
+- force_cast
+- trailing_comma
+- force_try
+- large_tuple
+- identifier_name
+
+type_body_length: 250
+line_length: 140
+function_body_length: 50
+file_length: 600
