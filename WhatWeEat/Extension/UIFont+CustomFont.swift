@@ -51,15 +51,11 @@ extension UIFont {
         }
     }
     
-    // TODO: 종류별로 Font size를 정해서 기본값 지정해도 될듯
     static func pretendard(family: Family = .medium, size: CGFloat = 12) -> UIFont {
         return UIFont(name: "Pretendard-\(family.kind)", size: size) ?? UIFont.systemFont(ofSize: size)
     }
     
-    static func pretendardDefaultSize(family: Family = .medium) -> UIFont {
+    static func pretendardWithDefaultSize(family: Family = .medium) -> UIFont {
         return UIFont(name: "Pretendard-\(family.kind)", size: family.defaultSize) ?? UIFont.systemFont(ofSize: family.defaultSize)
     }
-    
-    // 큰글씨 : 가는체, 볼드or 엑스트라볼드
-    // 작은글씨 (일반) : 중간체, 볼드
 }

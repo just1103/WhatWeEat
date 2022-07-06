@@ -92,6 +92,7 @@
 		DE814E632852D18D003F5FBC /* Array+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE814E622852D18D003F5FBC /* Array+Subscript.swift */; };
 		DE86105628475881002D781B /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE86105528475881002D781B /* SettingDetailViewController.swift */; };
 		DE8610582847625E002D781B /* SettingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8610572847625E002D781B /* SettingDetailViewModel.swift */; };
+		DEA70575287420F2007B5E4E /* Feedback.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEA70574287420F2007B5E4E /* Feedback.txt */; };
 		DEC0466E2863160100B01840 /* TogetherGameSubmittedChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC0466D2863160100B01840 /* TogetherGameSubmittedChecker.swift */; };
 		DEDF03242859D8ED000F7915 /* SoloMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */; };
 		DEDF03262859D8FB000F7915 /* TogetherMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */; };
@@ -207,6 +208,7 @@
 		DE814E622852D18D003F5FBC /* Array+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Subscript.swift"; sourceTree = "<group>"; };
 		DE86105528475881002D781B /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		DE8610572847625E002D781B /* SettingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewModel.swift; sourceTree = "<group>"; };
+		DEA70574287420F2007B5E4E /* Feedback.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Feedback.txt; sourceTree = "<group>"; };
 		DEC0466D2863160100B01840 /* TogetherGameSubmittedChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGameSubmittedChecker.swift; sourceTree = "<group>"; };
 		DEDF03232859D8ED000F7915 /* SoloMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMenuCoordinator.swift; sourceTree = "<group>"; };
 		DEDF03252859D8FB000F7915 /* TogetherMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherMenuCoordinator.swift; sourceTree = "<group>"; };
@@ -462,8 +464,8 @@
 				DEEBE39928460A0B002697B5 /* UITableView+Cell.swift */,
 				DE56951528573065009F3DCE /* UICollectionView+Cell.swift */,
 				DE814E622852D18D003F5FBC /* Array+Subscript.swift */,
-				365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */,
 				365EC7DB28634A7C0094823A /* UIView+Effects.swift */,
+				365EC7D9286348CD0094823A /* UIColor+CustomColor.swift */,
 				36A5E3CE2867E6B50057A556 /* UIFont+CustomFont.swift */,
 			);
 			path = Extension;
@@ -607,6 +609,7 @@
 			children = (
 				365EC7E2286543CD0094823A /* TermsOfPrivacy.txt */,
 				365EC7E4286546400094823A /* OpenSourceLicense.txt */,
+				DEA70574287420F2007B5E4E /* Feedback.txt */,
 			);
 			path = Term;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				36A5E3CC2867E4B60057A556 /* Pretendard-Thin.otf in Resources */,
 				36A5E3C72867E4B60057A556 /* Pretendard-SemiBold.otf in Resources */,
 				36A5E3CA2867E4B60057A556 /* Pretendard-Black.otf in Resources */,
+				DEA70575287420F2007B5E4E /* Feedback.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,13 +1167,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "우리뭐먹지";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1178,8 +1185,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IntjDevelopers.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Provisioning_Development_WhatWeEat;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1191,13 +1199,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhatWeEat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "우리뭐먹지";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1206,8 +1217,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WhatWeEat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IntjDevelopers.WhatWeEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Provisioning_Release_WhatWeEat;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

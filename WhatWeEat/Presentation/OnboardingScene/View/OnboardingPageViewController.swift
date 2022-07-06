@@ -8,7 +8,7 @@ final class OnboardingPageViewController: UIPageViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = Design.pageControlCurrentPageIndicatorTintColor
         pageControl.pageIndicatorTintColor = Design.pageControlPageIndicatorTintColor
-        pageControl.currentPage = 0
+        pageControl.currentPage = .zero
         pageControl.backgroundStyle = .minimal
         pageControl.allowsContinuousInteraction = false
         pageControl.isUserInteractionEnabled = false
@@ -18,7 +18,7 @@ final class OnboardingPageViewController: UIPageViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "arrow")
+        imageView.image = Content.arrowImageViewImage
         return imageView
     }()
     private let skipButton: UIButton = {
@@ -29,16 +29,13 @@ final class OnboardingPageViewController: UIPageViewController {
             .foregroundColor: Design.skipAndConfirmButtonTitleColor,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
-        let attributedString = NSMutableAttributedString(string: Content.skipButtonTitle, attributes: attributes)
+        let attributedString = NSMutableAttributedString(string: Text.skipButtonTitle, attributes: attributes)
         button.setAttributedTitle(attributedString, for: .normal)
         return button
     }()
 
-    private var onboardingPages = [OnboardingContentProtocol]()
-    private let currentIndexForPreviousPage = PublishSubject<Int>()
-    private let currentIndexForNextPageAndPageCount = PublishSubject<(Int, Int)>()
     private var viewModel: OnboardingViewModel!
-    private var viewModelOutput: OnboardingViewModel.Output?
+    private var onboardingPages = [OnboardingContentProtocol]()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -75,19 +72,28 @@ final class OnboardingPageViewController: UIPageViewController {
         NSLayoutConstraint.activate([
             pageControl.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -UIScreen.main.bounds.height * 0.15
+                constant: Constraint.pageControlBottomAnchorConstant
             ),
-            pageControl.heightAnchor.constraint(equalToConstant: 20),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            pageControl.heightAnchor.constraint(equalToConstant: Constraint.pageControlHeightAnchorConstant),
+            pageControl.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constraint.pageControlLeadingAnchorConstant
+            ),
             
             arrowImageView.centerYAnchor.constraint(equalTo: skipButton.centerYAnchor),
             arrowImageView.leadingAnchor.constraint(equalTo: pageControl.leadingAnchor),
-            arrowImageView.trailingAnchor.constraint(equalTo: skipButton.leadingAnchor, constant: -5),
-            arrowImageView.heightAnchor.constraint(equalToConstant: 45),
+            arrowImageView.trailingAnchor.constraint(
+                equalTo: skipButton.leadingAnchor,
+                constant: Constraint.arrowImageViewTrailingAnchorConstant
+            ),
+            arrowImageView.heightAnchor.constraint(equalToConstant: Constraint.arrowImageViewHeightAnchorConstant),
             
-            skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            skipButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: Constraint.skipButtonBottomAnchorConstant
+            ),
             skipButton.widthAnchor.constraint(equalToConstant: skipButton.intrinsicContentSize.width + 30),
-            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constraint.skipButtonTrailingAnchorConstant),
         ])
     }
 }
@@ -95,23 +101,18 @@ final class OnboardingPageViewController: UIPageViewController {
 // MARK: - Rx Binding Methods
 extension OnboardingPageViewController {
     private func bind() {
-        let input = OnboardingViewModel.Input(
-            currentIndexForPreviousPage: currentIndexForPreviousPage.asObservable(),
-            currentIndexForNextPageAndPageCount: currentIndexForNextPageAndPageCount.asObservable(),
-            skipButtonDidTap: skipButton.rx.tap.asObservable()
-        )
+        let input = OnboardingViewModel.Input(skipButtonDidTap: skipButton.rx.tap.asObservable())
         
-        viewModelOutput = viewModel.transform(input)
-        guard let skipButtonDidTap = viewModelOutput?.skipButtonDidTap else { return }
+        let output = viewModel.transform(input)
         
-        configureSkipButtonDidTap(with: skipButtonDidTap)
+        configureSkipButtonDidTap(with: output.skipButtonDidTap)
     }
     
-    private func configureSkipButtonDidTap(with skipButtonDidTap: Observable<Void>) {
-        skipButtonDidTap
+    private func configureSkipButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
+            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
+            .subscribe(onNext: { _ in
                 let lastPageIndex = 2
                 self.hideButtonIfLastPage(lastPageIndex)
                 guard let lastPage = self.onboardingPages.last as? UIViewController else { return }
@@ -127,37 +128,15 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        // TODO: 마지막 페이지에서 뒤로 안 넘어감 - 잘못된 CurrentIndex가 넘어가는 것 같다. 
         guard let onboardingPages = onboardingPages as? [UIViewController],
-              let currentIndex = onboardingPages.firstIndex(of: viewController) // -1 해주는것도 가능
+              let currentIndex = onboardingPages.firstIndex(of: viewController)
         else {
             return nil
         }
-        var viewController: UIViewController?
-        
-        // 캡쳐가 맞는데 진정한 캡쳐가 아님. VC을 weak 처리해줘야 함 => 캡쳐리스트 내부에서 weak viewController 처리
-        // onError가 발생하면 클로저 내부가 메모리 해제가 안될 수 있음
-        viewModelOutput?.previousPageIndex
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak viewController] previousIndex in  // FIXME: 1) subscribe가 여러번 호출되는 문제, 2) 의도하지 않게 VC의 retain count가 올라감 (retain 올리는건 부모가 주입할 때만 가능)
-                print(previousIndex)
-                guard let previousIndex = previousIndex else {
-                    viewController = nil
-                    return
-                }
-                
-                // subscript 적용
-                viewController = self?.onboardingPages[previousIndex] as? UIViewController // FIXME: 비동기라서 코드 순서를 보장할 수 없음
-                // semaphore를 쓰면 안됨
-                // subscribe를 밖에서 하고 데이터를 들고 있다가 (과부하이지 않을까 고민이 필요) 메서드에 넣어줌
-            })
-            .disposed(by: disposeBag)
-        
-        currentIndexForPreviousPage.onNext(currentIndex)
-        
-        return viewController
+
+        return onboardingPages[safe: currentIndex - 1]
     }
-    
+
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
@@ -167,23 +146,8 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         else {
             return nil
         }
-        print(currentIndex)
-        var viewController: UIViewController?
         
-        viewModelOutput?.nextPageIndex
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { nextIndex in
-                guard let nextIndex = nextIndex else {
-                    viewController = nil
-                    return
-                }
-                viewController = onboardingPages[nextIndex]
-            })
-            .disposed(by: disposeBag)
-        
-        currentIndexForNextPageAndPageCount.onNext((currentIndex, onboardingPages.count))
-        
-        return viewController
+        return onboardingPages[safe: currentIndex + 1]
     }
 }
 
@@ -201,6 +165,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
         else { return }
         
         presentButtonUnlessLastPage(currentIndex)
+        pageControl.currentPage = currentIndex
     }
     
     private func presentButtonUnlessLastPage(_ currentIndex: Int) {
@@ -219,7 +184,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
               let viewController = pendingViewControllers.first,
               let currentIndex = onboardingPages.firstIndex(of: viewController)
         else { return }
-        pageControl.currentPage = currentIndex
+        
         hideButtonIfLastPage(currentIndex)
     }
     
@@ -232,7 +197,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
     }
 }
 
-// MARK: - NameSpaces
+// MARK: - Namespaces
 extension OnboardingPageViewController {
     private enum Design {
         static let pageControlCurrentPageIndicatorTintColor: UIColor = .mainOrange
@@ -241,7 +206,21 @@ extension OnboardingPageViewController {
         static let skipAndConfirmButtonTitleFont: UIFont = .pretendard(family: .medium, size: 25)
     }
     
+    private enum Constraint {
+        static let pageControlBottomAnchorConstant: CGFloat = -UIScreen.main.bounds.height * 0.15
+        static let pageControlHeightAnchorConstant: CGFloat = 20
+        static let pageControlLeadingAnchorConstant: CGFloat = 20
+        static let arrowImageViewTrailingAnchorConstant: CGFloat = -5
+        static let arrowImageViewHeightAnchorConstant: CGFloat = 45
+        static let skipButtonBottomAnchorConstant: CGFloat = -10
+        static let skipButtonTrailingAnchorConstant: CGFloat = -40
+    }
+    
     private enum Content {
+        static let arrowImageViewImage = UIImage(named: "arrow")
+    }
+    
+    private enum Text {
         static let skipButtonTitle: String = "Skip"
     }
 }

@@ -52,7 +52,19 @@ final class SettingCoordinator: CoordinatorProtocol, DislikedFoodSurveyPresentab
         navigationController?.popViewController(animated: false)
     }
     
-    private func showAppStorePage() {
-        // TODO: 링크를 통해 APPStore 앱 연결
+    func showAppStorePage() {
+        let appID = "1632157845"
+        let url = "itms-apps://itunes.apple.com/app/\(appID)"
+        
+        guard
+            let url = URL(string: url),
+            UIApplication.shared.canOpenURL(url)
+        else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 }

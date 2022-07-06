@@ -18,10 +18,10 @@ final class MainTabBarViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) {
-        configureRightBarButtonItemDidTap(with: input.rightBarButtonItemDidTap)
+        configureRightBarButtonItemDidTap(by: input.rightBarButtonItemDidTap)
     }
     
-    private func configureRightBarButtonItemDidTap(with inputObserver: Observable<Void>) {
+    private func configureRightBarButtonItemDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in

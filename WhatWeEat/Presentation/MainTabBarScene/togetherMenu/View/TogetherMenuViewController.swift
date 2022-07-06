@@ -1,6 +1,6 @@
-import UIKit
 import RxCocoa
 import RxSwift
+import UIKit
 
 final class TogetherMenuViewController: UIViewController, TabBarContentProtocol {
     // MARK: - Properties
@@ -10,88 +10,84 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.backgroundColor = .white
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: UIScreen.main.bounds.height * 0.05,
-            leading: 20,
-            bottom: UIScreen.main.bounds.height * 0.05,
-            trailing: 20
-        )
+        stackView.backgroundColor = Design.containerStackViewBackgroundColor
+        stackView.directionalLayoutMargins = Design.containerStackViewMargins
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private let makeGroupButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .mainOrange
-        button.layer.cornerRadius = 20
+        button.backgroundColor = Design.makeGroupButtonBackgroundColor
+        button.layer.cornerRadius = Design.makeGroupButtonCornerRadius
         button.clipsToBounds = true
         return button
     }()
     private let makeGroupImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "person.3.fill")
+        imageView.image = Content.makeGroupImage
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
+        imageView.tintColor = Design.makeGroupImageViewTintColor
         return imageView
     }()
     private let makeGroupDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "팀원들과 미니게임을 시작하려면"
-        label.font = .pretendard(family: .regular, size: 20)
-        label.textColor = .white
+        label.text = Text.makeGroupDescriptionLabelText
+        label.font = Design.makeGroupDescriptionLabelFont
+        label.textColor = Design.makeGroupDescriptionLabelTextColor
         return label
     }()
     private let makeGroupTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "그룹 만들기"
-        label.font = .pretendard(family: .bold, size: 35)
-        label.textColor = .white
+        label.text = Text.makeGroupTitleLabelText
+        label.font = Design.makeGroupTitleLabelFont
+        label.textColor = Design.makeGroupTitleLabelTextColor
         return label
     }()
     private let separatorLineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = Design.separatorLineViewBackgroundColor
         return view
     }()
     private let pinNumberButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemGray6
-        button.layer.cornerRadius = 20
+        button.backgroundColor = Design.pinNumberButtonBackgroundColor
+        button.layer.cornerRadius = Design.pinNumberButtonCornerRadius
         button.clipsToBounds = true
         return button
     }()
     private let pinNumberImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "123.rectangle")
+        imageView.image = Content.pinNumberImage
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
+        imageView.tintColor = Design.pinNumberImageViewTintColor
         return imageView
     }()
     private let pinNumberDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "이미 생성된 그룹이 있다면"
-        label.font = .pretendard(family: .regular, size: 20)
-        label.textColor = .black
+        label.text = Text.pinNumberDescriptionLabelText
+        label.font = Design.pinNumberDescriptionLabelFont
+        label.textColor = Design.pinNumberDescriptionLabelTextColor
         return label
     }()
     private let pinNumberTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "PIN으로 입장하기"
-        label.font = .pretendard(family: .bold, size: 35)
-        label.textColor = .black
+        label.text = Text.pinNumberTitleLabelText
+        label.font = Design.pinNumberTitleLabelFont
+        label.textColor = Design.pinNumberTitleLabelTextColor
         return label
     }()
     
     private var viewModel: TogetherMenuViewModel!
+    private let invokedViewDidLoad = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     
     // MARK: - Initializers
@@ -106,18 +102,19 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
         super.viewDidLoad()
         configureUI()
         bind()
+        invokedViewDidLoad.onNext(())
     }
     
     // MARK: - Methods
     private func configureTabBar() {
-        tabBarItem.title = "함께 메뉴 결정"
-        tabBarItem.image = UIImage(systemName: "person.3")
-        tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
-        tabBarItem.setTitleTextAttributes([.font: UIFont.pretendard(family: .medium, size: 12)], for: .normal)
+        tabBarItem.title = Text.tabBarTitle
+        tabBarItem.image = Content.tabBarImage
+        tabBarItem.selectedImage = Content.tabBarSelectedImage
+        tabBarItem.setTitleTextAttributes([.font: Design.tabBarTitleFont], for: .normal)
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = Design.backgroundColor
         view.addSubview(containerStackView)
         containerStackView.addArrangedSubview(makeGroupButton)
         containerStackView.addArrangedSubview(separatorLineView)
@@ -135,33 +132,68 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
             containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            makeGroupButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.5),
-
-//            makeGroupTitleLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.2),
-            makeGroupTitleLabel.bottomAnchor.constraint(equalTo: makeGroupButton.bottomAnchor, constant: -10),
-            makeGroupTitleLabel.trailingAnchor.constraint(equalTo: makeGroupButton.trailingAnchor, constant: -10),
-//            makeGroupDescriptionLabel.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.1),
-            makeGroupDescriptionLabel.bottomAnchor.constraint(equalTo: makeGroupTitleLabel.topAnchor, constant: -8),
+            makeGroupButton.heightAnchor.constraint(
+                equalTo: containerStackView.heightAnchor,
+                multiplier: Constraint.makeGroupButtonHeightAnchorMultiplier
+            ),
+            makeGroupTitleLabel.bottomAnchor.constraint(
+                equalTo: makeGroupButton.bottomAnchor,
+                constant: Constraint.makeGroupTitleLabelBottomAnchorConstant
+            ),
+            makeGroupTitleLabel.trailingAnchor.constraint(
+                equalTo: makeGroupButton.trailingAnchor,
+                constant: Constraint.makeGroupTitleLabelTrailingAnchorConstant
+            ),
+            makeGroupDescriptionLabel.bottomAnchor.constraint(
+                equalTo: makeGroupTitleLabel.topAnchor,
+                constant: Constraint.makeGroupDescriptionLabelBottomAnchorConstant
+            ),
             makeGroupDescriptionLabel.trailingAnchor.constraint(equalTo: makeGroupTitleLabel.trailingAnchor),
-            makeGroupImageView.heightAnchor.constraint(equalTo: makeGroupButton.heightAnchor, multiplier: 0.5),
+            makeGroupImageView.heightAnchor.constraint(
+                equalTo: makeGroupButton.heightAnchor,
+                multiplier: Constraint.makeGroupImageViewHeightAnchorMultiplier
+            ),
             makeGroupImageView.widthAnchor.constraint(equalTo: makeGroupImageView.heightAnchor),
-            makeGroupImageView.bottomAnchor.constraint(equalTo: makeGroupDescriptionLabel.topAnchor, constant: 10),
+            makeGroupImageView.bottomAnchor.constraint(
+                equalTo: makeGroupDescriptionLabel.topAnchor,
+                constant: Constraint.makeGroupImageViewBottomAnchorConstant
+            ),
             makeGroupImageView.trailingAnchor.constraint(equalTo: makeGroupTitleLabel.trailingAnchor),
             
-            separatorLineView.heightAnchor.constraint(equalToConstant: 1),
+            separatorLineView.heightAnchor.constraint(
+                equalToConstant: Constraint.separatorLineViewHeightAnchorConstant
+            ),
             
-            pinNumberButton.heightAnchor.constraint(equalTo: containerStackView.heightAnchor, multiplier: 0.3),
-
-//            pinNumberTitleLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
-            pinNumberTitleLabel.bottomAnchor.constraint(equalTo: pinNumberButton.bottomAnchor, constant: -10),
-            pinNumberTitleLabel.leadingAnchor.constraint(equalTo: pinNumberButton.leadingAnchor, constant: 10),
-//            pinNumberDescriptionLabel.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.1),
-            pinNumberDescriptionLabel.bottomAnchor.constraint(equalTo: pinNumberTitleLabel.topAnchor, constant: -8),
+            pinNumberButton.heightAnchor.constraint(
+                equalTo: containerStackView.heightAnchor,
+                multiplier: Constraint.pinNumberButtonHeightAnchorMultiplier
+            ),
+            pinNumberTitleLabel.bottomAnchor.constraint(
+                equalTo: pinNumberButton.bottomAnchor,
+                constant: Constraint.pinNumberTitleLabelBottomAnchorConstant
+            ),
+            pinNumberTitleLabel.leadingAnchor.constraint(
+                equalTo: pinNumberButton.leadingAnchor,
+                constant: Constraint.pinNumberTitleLabelLeadingAnchorConstant
+            ),
+            pinNumberDescriptionLabel.bottomAnchor.constraint(
+                equalTo: pinNumberTitleLabel.topAnchor,
+                constant: Constraint.pinNumberDescriptionLabelBottomAnchorConstant
+            ),
             pinNumberDescriptionLabel.leadingAnchor.constraint(equalTo: pinNumberTitleLabel.leadingAnchor),
-            pinNumberImageView.heightAnchor.constraint(equalTo: pinNumberButton.heightAnchor, multiplier: 0.3),
+            pinNumberImageView.heightAnchor.constraint(
+                equalTo: pinNumberButton.heightAnchor,
+                multiplier: Constraint.pinNumberImageViewHeightAnchorMultiplier
+            ),
             pinNumberImageView.widthAnchor.constraint(equalTo: pinNumberImageView.heightAnchor),
-            pinNumberImageView.trailingAnchor.constraint(equalTo: pinNumberButton.trailingAnchor, constant: -10),
-            pinNumberImageView.bottomAnchor.constraint(equalTo: pinNumberButton.bottomAnchor, constant: -30),
+            pinNumberImageView.trailingAnchor.constraint(
+                equalTo: pinNumberButton.trailingAnchor,
+                constant: Constraint.pinNumberImageViewTrailingAnchorConstant
+            ),
+            pinNumberImageView.bottomAnchor.constraint(
+                equalTo: pinNumberButton.bottomAnchor,
+                constant: Constraint.pinNumberImageViewBottomAnchorConstant
+            ),
         ])
     }
 }
@@ -170,6 +202,7 @@ final class TogetherMenuViewController: UIViewController, TabBarContentProtocol 
 extension TogetherMenuViewController {
     private func bind() {
         let input = TogetherMenuViewModel.Input(
+            invokedViewDidLoad: invokedViewDidLoad.asObservable(),
             makeGroupButtonDidTap: makeGroupButton.rx.tap.asObservable(),
             pinNumberButtonDidTap: pinNumberButton.rx.tap.asObservable()
         )
@@ -184,26 +217,28 @@ extension TogetherMenuViewController {
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
-                let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+                let cancelAction = UIAlertAction(title: Text.cancelActionTitle, style: .cancel)
                 
                 let alert = AlertFactory().createAlert(
                     style: .alert,
-                    title: "PIN번호를 입력해주세요",
+                    title: Text.alertTitle,
                     message: nil,
                     actions: cancelAction
                 )
                 alert.addTextField { textField in
-                    textField.placeholder = "PIN 번호를 입력해주세요"
+                    textField.placeholder = Text.alertTextFieldPlaceholder
                 }
+                
                 guard let textField = alert.textFields?[safe: 0] else { return }
-                let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                
+                let okAction = UIAlertAction(title: Text.okActionTitle, style: .default) { _ in
                     self.validatePinNumber(textField.text ?? "")
                         .observe(on: MainScheduler.instance)
                         .subscribe(onNext: { isValid in
                             if isValid {
-                                self.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")
+                                self.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")  // TODO: 여기서 호출하는게 적절한지 고려
                             } else {
-                                alert.message = "잘못된 PIN번호 입니다. 다시 입력해주세요."
+                                alert.message = Text.errorAlertMessage
                                 textField.text = nil
                                 self.present(alert, animated: true)
                             }
@@ -224,5 +259,72 @@ extension TogetherMenuViewController {
         )
         
         return isValid
+    }
+}
+
+// MARK: - Namespaces
+extension TogetherMenuViewController {
+    private enum Design {
+        static let containerStackViewBackgroundColor: UIColor = .white
+        static let containerStackViewMargins = NSDirectionalEdgeInsets(
+            top: UIScreen.main.bounds.height * 0.05,
+            leading: 20,
+            bottom: UIScreen.main.bounds.height * 0.05,
+            trailing: 20
+        )
+        static let makeGroupButtonBackgroundColor: UIColor = .mainOrange
+        static let makeGroupButtonCornerRadius: CGFloat = 20
+        static let makeGroupImageViewTintColor: UIColor = .white
+        static let makeGroupDescriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let makeGroupDescriptionLabelTextColor: UIColor = .white
+        static let makeGroupTitleLabelFont: UIFont = .pretendard(family: .bold, size: 35)
+        static let makeGroupTitleLabelTextColor: UIColor = .white
+        static let separatorLineViewBackgroundColor: UIColor = .mediumLightGray
+        static let pinNumberButtonBackgroundColor: UIColor = .lightGray
+        static let pinNumberButtonCornerRadius: CGFloat = 20
+        static let pinNumberImageViewTintColor: UIColor = .black
+        static let pinNumberDescriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let pinNumberDescriptionLabelTextColor: UIColor = .black
+        static let pinNumberTitleLabelFont: UIFont = .pretendard(family: .bold, size: 35)
+        static let pinNumberTitleLabelTextColor: UIColor = .black
+        static let tabBarTitleFont: UIFont = UIFont.pretendard(family: .medium, size: 12)
+        static let backgroundColor: UIColor = .lightGray
+    }
+    
+    private enum Constraint {
+        static let makeGroupButtonHeightAnchorMultiplier = 0.5
+        static let makeGroupTitleLabelBottomAnchorConstant: CGFloat = -10
+        static let makeGroupTitleLabelTrailingAnchorConstant: CGFloat = -10
+        static let makeGroupDescriptionLabelBottomAnchorConstant: CGFloat = -8
+        static let makeGroupImageViewHeightAnchorMultiplier = 0.5
+        static let makeGroupImageViewBottomAnchorConstant: CGFloat = 10
+        static let separatorLineViewHeightAnchorConstant: CGFloat = 1
+        static let pinNumberButtonHeightAnchorMultiplier = 0.3
+        static let pinNumberTitleLabelBottomAnchorConstant: CGFloat = -10
+        static let pinNumberTitleLabelLeadingAnchorConstant: CGFloat = 10
+        static let pinNumberDescriptionLabelBottomAnchorConstant: CGFloat = -8
+        static let pinNumberImageViewHeightAnchorMultiplier = 0.3
+        static let pinNumberImageViewTrailingAnchorConstant: CGFloat = -10
+        static let pinNumberImageViewBottomAnchorConstant: CGFloat = -30
+    }
+    
+    private enum Content {
+        static let makeGroupImage = UIImage(systemName: "person.3.fill")
+        static let pinNumberImage = UIImage(systemName: "123.rectangle")
+        static let tabBarImage = UIImage(systemName: "person.3")
+        static let tabBarSelectedImage = UIImage(systemName: "person.3.fill")
+    }
+    
+    private enum Text {
+        static let makeGroupDescriptionLabelText = "팀원들과 미니게임을 시작하려면"
+        static let makeGroupTitleLabelText = "그룹 만들기"
+        static let pinNumberDescriptionLabelText = "이미 생성된 그룹이 있다면"
+        static let pinNumberTitleLabelText = "PIN으로 입장하기"
+        static let tabBarTitle = "함께 메뉴 결정"
+        static let cancelActionTitle = "취소"
+        static let alertTitle = "PIN 번호를 입력해주세요"
+        static let alertTextFieldPlaceholder = "PIN 번호를 입력해주세요"
+        static let okActionTitle = "확인"
+        static let errorAlertMessage = "잘못된 PIN 번호 입니다. 다시 입력해주세요."
     }
 }

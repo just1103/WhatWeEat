@@ -5,17 +5,19 @@ class SettingDetailViewController: UIViewController {
     private let textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .pretendard(family: .medium, size: 15)
+        textView.font = Design.textViewFont
+        textView.textColor = Design.textViewTextColor
+        textView.backgroundColor = Design.textViewBackgroundColor
         textView.textContainer.lineBreakMode = .byWordWrapping
         textView.dataDetectorTypes = .all
-        textView.textContainerInset = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
+        textView.textContainerInset = Design.textViewContentInsets
         textView.isEditable = false
         return textView
     }()
     
     private var viewModel: SettingDetailViewModel!
-    private var settingTitle: String = ""
-    private var content: String = ""
+    private var settingTitle: String = Text.initialSettingTitle
+    private var content: String = Text.initialContent
     
     // MARK: - Initializers
     convenience init(viewModel: SettingDetailViewModel, title: String, content: String) {
@@ -35,20 +37,20 @@ class SettingDetailViewController: UIViewController {
     
     // MARK: - Methods
     private func configureNavigationBar() {
-        let backButtonImage = UIImage(systemName: "arrow.backward")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: backButtonImage,
+            image: Content.backButtonImage,
             style: .plain,
             target: self,
             action: nil
         )
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = Design.backButtonTintColor
         navigationItem.title = settingTitle
     }
     
     private func configureUI() {
+        view.backgroundColor = Design.backgroundColor
         view.addSubview(textView)
-        view.backgroundColor = .systemGray6
+        
         textView.text = content
         textView.setContentOffset(.zero, animated: false)
         textView.layoutIfNeeded()
@@ -69,5 +71,25 @@ extension SettingDetailViewController {
         let input = SettingDetailViewModel.Input(backButtonDidTap: leftBarButtonItem.rx.tap.asObservable())
         
         viewModel.transform(input)
+    }
+}
+
+extension SettingDetailViewController {
+    private enum Design {
+        static let textViewFont: UIFont = .pretendard(family: .medium, size: 15)
+        static let textViewTextColor: UIColor = .black
+        static let textViewBackgroundColor: UIColor = .white
+        static let textViewContentInsets = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
+        static let backButtonTintColor: UIColor = .black
+        static let backgroundColor: UIColor = .lightGray
+    }
+    
+    private enum Content {
+        static let backButtonImage = UIImage(systemName: "arrow.backward")
+    }
+    
+    private enum Text {
+        static let initialSettingTitle = ""
+        static let initialContent = ""
     }
 }

@@ -7,17 +7,17 @@ class GameResultViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = Design.backgroundViewColor
         return view
     }()
     private let pinNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = .mainOrange
-        label.font = .pretendard(family: .regular, size: 15)
-        label.text = "PIN NUMBER : "
-        label.numberOfLines = 0
+        label.textColor = Design.pinNumberLabelTextColor
+        label.font = Design.pinNumberLabelFont
+        label.text = Text.pinNumberLabelText
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
@@ -25,63 +25,62 @@ class GameResultViewController: UIViewController {
     private let playerCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "N명"
-        label.textColor = .darkGray
+        label.text = Text.playerCountLabelText
+        label.textColor = Design.playerCountLabelTextColor
         label.textAlignment = .left
-        label.font = .pretendard(family: .medium, size: 30)
-        label.numberOfLines = 0
+        label.font = Design.playerCountLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let playerCountDescriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "이 선택한 오늘의 메뉴는"
-        label.textColor = .darkGray
+        label.text = Text.playerCountDescriptionLabelText
+        label.textColor = Design.playerCountDescriptionLabelTextColor
         label.textAlignment = .left
-        label.font = .pretendard(family: .medium, size: 25)
-        label.numberOfLines = 0
+        label.font = Design.playerCountDescriptionLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let keywordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "#키워드"
-        label.textColor = .mainOrange
+        label.text = Text.keywordLabelText
+        label.textColor = Design.keywordLabelTextColor
         label.textAlignment = .left
-        label.font = .pretendard(family: .medium, size: 25)
-        label.numberOfLines = 0
+        label.font = Design.keywordLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let menuNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "마라탕"
-        label.textColor = .mainOrange
+        label.text = Text.menuNameLabelText
+        label.textColor = Design.menuNameLabelTextColor
         label.textAlignment = .left
-        label.font = .pretendard(family: .bold, size: 35)
-        label.numberOfLines = 0
+        label.font = Design.menuNameLabelFont
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
     private let menuNameUnderline: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .mainOrange
+        view.backgroundColor = Design.menuNameUnderlineBackgroundColor
         return view
     }()
     private let menuImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "meat")
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
+        imageView.layer.cornerRadius = Design.menuImageViewCornerRadius
         imageView.clipsToBounds = true
         return imageView
     }()
-    // TODO: 지도 SDK 추가 후 추가
+    // TODO: 다음 배포버전에서 구현 예정 (지도 SDK 추가)
 //    private let restaurantCheckButton: UIButton = {
 //        let button = UIButton()
 //        button.translatesAutoresizingMaskIntoConstraints = false
@@ -97,27 +96,27 @@ class GameResultViewController: UIViewController {
     private let nextMenuCheckButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("다음 순위 메뉴 확인 (1/3)", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
-        button.backgroundColor = .mainOrange
+        button.setTitle(Text.nextMenuCheckButtonTitle, for: .normal)
+        button.setTitleColor(Design.nextMenuCheckButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.nextMenuCheckButtonTitleFont
+        button.backgroundColor = Design.nextMenuCheckButtonBackgroundColor
         button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Design.nextMenuCheckButtonCornerRadius
         button.clipsToBounds = true
         return button
     }()
     private let shareButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("공유하기", for: .normal)
-        button.setTitleColor(.mainOrange, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
-        button.backgroundColor = .systemGray6
-        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        button.tintColor = .mainOrange
-        button.titleEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        button.setTitle(Text.shareButtonTitle, for: .normal)
+        button.setTitleColor(Design.shareButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.shareButtonTitleFont
+        button.backgroundColor = Design.shareButtonBackgroundColor
+        button.setImage(Content.shareButtonImage, for: .normal)
+        button.tintColor = Design.shareButtonTintColor
+        button.titleEdgeInsets = Design.shareButtonTitleInsets
         button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Design.shareButtonCornerRadius
         button.clipsToBounds = true
         button.isHidden = false
         return button
@@ -125,18 +124,24 @@ class GameResultViewController: UIViewController {
     private let gameRestartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("게임 다시 시작", for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.titleLabel?.font = .pretendard(family: .medium, size: 20)
-        button.backgroundColor = .systemGray6
-        button.setImage(UIImage(systemName: "arrow.counterclockwise.circle"), for: .normal)
-        button.tintColor = .darkGray
-        button.titleEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        button.setTitle(Text.gameRestartButtonTitle, for: .normal)
+        button.setTitleColor(Design.gameRestartButtonTitleColor, for: .normal)
+        button.titleLabel?.font = Design.gameRestartButtonFont
+        button.backgroundColor = Design.gameRestartButtonBackgroundColor
+        button.setImage(Content.gameRestartButtonImage, for: .normal)
+        button.tintColor = Design.gameRestartButtonTintColor
+        button.titleEdgeInsets = Design.gameRestartButtonTitleInsets
         button.contentHorizontalAlignment = .center
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = Design.gameRestartButtonCornerRadius
         button.clipsToBounds = true
         button.isHidden = false
         return button
+    }()
+    private let loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        return activityIndicator
     }()
     
     private var viewModel: GameResultViewModel!
@@ -154,8 +159,13 @@ class GameResultViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
+        startLoadingActivityIndicator()
         bind()
         invokedViewDidLoad.onNext(())
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 
     // MARK: - Methods
@@ -164,7 +174,7 @@ class GameResultViewController: UIViewController {
     }
 
     private func configureUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = Design.backgroundColor
         
         view.addSubview(backgroundView)
         view.addSubview(pinNumberLabel)
@@ -173,13 +183,12 @@ class GameResultViewController: UIViewController {
         view.addSubview(keywordLabel)
         view.addSubview(menuNameLabel)
         view.addSubview(menuNameUnderline)
+        view.addSubview(loadingActivityIndicator)
         view.addSubview(menuImageView)
 //        view.addSubview(restaurantCheckButton)
         view.addSubview(nextMenuCheckButton)
         view.addSubview(shareButton)
         view.addSubview(gameRestartButton)
-
-        let screenHeight = UIScreen.main.bounds.height
         
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -187,30 +196,97 @@ class GameResultViewController: UIViewController {
             backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
-            pinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            pinNumberLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            pinNumberLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.pinNumberLabelTopAnchorConstant
+            ),
+            pinNumberLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.pinNumberLabelTrailingAnchorConstant
+            ),
             
-            playerCountLabel.topAnchor.constraint(equalTo: pinNumberLabel.bottomAnchor, constant: screenHeight * 0.02),
-            playerCountLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            playerCountLabel.bottomAnchor.constraint(
+                equalTo: playerCountDescriptionLabel.bottomAnchor
+            ),
+            playerCountLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.playerCountLabelLeadingAnchorConstant
+            ),
+            playerCountDescriptionLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.playerCountDescriptionLabelTopAnchorConstant
+            ),
+            playerCountDescriptionLabel.leadingAnchor.constraint(
+                equalTo: playerCountLabel.trailingAnchor,
+                constant: Constraint.playerCountDescriptionLabelLeadingAnchorConstant
+            ),
+            
+            keywordLabel.topAnchor.constraint(
+                equalTo: playerCountLabel.bottomAnchor,
+                constant: Constraint.keywordLabelTopAnchorConstant
+            ),
+            keywordLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.keywordLabelLeadingAnchorConstant
+            ),
+            
+            menuNameLabel.topAnchor.constraint(
+                equalTo: keywordLabel.bottomAnchor,
+                constant: Constraint.menuNameLabelTopAnchorConstant
+            ),
+            menuNameLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.menuNameLabelLeadingAnchorConstant
+            ),
+            menuNameUnderline.topAnchor.constraint(
+                equalTo: menuNameLabel.bottomAnchor,
+                constant: Constraint.menuNameUnderlineTopAnchorConstant
+            ),
+            menuNameUnderline.leadingAnchor.constraint(
+                equalTo: menuNameLabel.leadingAnchor,
+                constant: Constraint.menuNameUnderlineLeadingAnchorConstant
+            ),
+            menuNameUnderline.widthAnchor.constraint(
+                equalTo: menuNameLabel.widthAnchor,
+                constant: Constraint.menuNameUnderlineWidthAnchorConstant
+            ),
+            menuNameUnderline.heightAnchor.constraint(
+                equalToConstant: Constraint.menuNameUnderlineHeightAnchorConstant
+            ),
+            
+            loadingActivityIndicator.topAnchor.constraint(
+                equalTo: menuNameLabel.bottomAnchor,
+                constant: Constraint.menuImageViewTopAnchorConstant
+            ),
+            loadingActivityIndicator.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.menuImageViewLeadingAnchorConstant
+            ),
+            loadingActivityIndicator.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.menuImageViewTrailingAnchorConstant
+            ),
+            loadingActivityIndicator.heightAnchor.constraint(
+                greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Constraint.menuImageViewHeightAnchorMultiplier
+            ),
 
-            playerCountDescriptionLabel.bottomAnchor.constraint(equalTo: playerCountLabel.bottomAnchor),
-            playerCountDescriptionLabel.leadingAnchor.constraint(equalTo: playerCountLabel.trailingAnchor, constant: 2),
-            
-            keywordLabel.topAnchor.constraint(equalTo: playerCountLabel.bottomAnchor, constant: 5),
-            keywordLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            menuNameLabel.topAnchor.constraint(equalTo: keywordLabel.bottomAnchor, constant: 5),
-            menuNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            menuNameUnderline.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor, constant: 2),
-            menuNameUnderline.leadingAnchor.constraint(equalTo: menuNameLabel.leadingAnchor, constant: -2),
-            menuNameUnderline.widthAnchor.constraint(equalTo: menuNameLabel.widthAnchor, constant: 4),
-            menuNameUnderline.heightAnchor.constraint(equalToConstant: 3),
-
-            menuImageView.topAnchor.constraint(equalTo: menuNameLabel.bottomAnchor, constant: screenHeight * 0.04),
-            menuImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            menuImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            menuImageView.heightAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.35),
+            menuImageView.topAnchor.constraint(
+                equalTo: menuNameLabel.bottomAnchor,
+                constant: Constraint.menuImageViewTopAnchorConstant
+            ),
+            menuImageView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.menuImageViewLeadingAnchorConstant
+            ),
+            menuImageView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.menuImageViewTrailingAnchorConstant
+            ),
+            menuImageView.heightAnchor.constraint(
+                greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Constraint.menuImageViewHeightAnchorMultiplier
+            ),
             
 //            restaurantCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            restaurantCheckButton.bottomAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: -15),
@@ -218,21 +294,43 @@ class GameResultViewController: UIViewController {
 //            restaurantCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
             
             nextMenuCheckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nextMenuCheckButton.topAnchor.constraint(equalTo: menuImageView.bottomAnchor, constant: 15),
-            nextMenuCheckButton.bottomAnchor.constraint(equalTo: shareButton.topAnchor, constant: -10),
-            nextMenuCheckButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.6),
-            nextMenuCheckButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.06),
-
-            shareButton.bottomAnchor.constraint(equalTo: gameRestartButton.topAnchor, constant: -10),
-            shareButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nextMenuCheckButton.topAnchor.constraint(
+                equalTo: menuImageView.bottomAnchor,
+                constant: Constraint.nextMenuCheckButtonTopAnchorConstant
+            ),
+            nextMenuCheckButton.bottomAnchor.constraint(
+                equalTo: shareButton.topAnchor,
+                constant: Constraint.nextMenuCheckButtonBottomAnchorConstant
+            ),
+            nextMenuCheckButton.widthAnchor.constraint(equalToConstant: nextMenuCheckButton.intrinsicContentSize.width + 80),
+            nextMenuCheckButton.heightAnchor.constraint(equalToConstant: Constraint.nextMenuCheckButtonHeightAnchorConstant),
+            
+            shareButton.bottomAnchor.constraint(
+                equalTo: gameRestartButton.topAnchor,
+                constant: Constraint.shareButtonBottomAnchorConstant
+            ),
+            shareButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.shareButtonTrailingAnchorConstant
+            ),
             shareButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            shareButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05),
-
-            gameRestartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
-            gameRestartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            shareButton.heightAnchor.constraint(equalToConstant: Constraint.shareButtonHeightAnchorConstant),
+            
+            gameRestartButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: Constraint.gameRestartButtonBottomAnchorConstant
+            ),
+            gameRestartButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.gameRestartButtonTrailingAnchorConstant
+            ),
             gameRestartButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.5),
-            gameRestartButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.05),
+            gameRestartButton.heightAnchor.constraint(equalToConstant: Constraint.gameRestartButtonHeightAnchorConstant),
         ])
+    }
+    
+    private func startLoadingActivityIndicator() {
+        loadingActivityIndicator.startAnimating()
     }
 }
 
@@ -254,8 +352,8 @@ extension GameResultViewController {
         configureShareButtonDidTap(with: output.shareButtonDidTap)
     }
 
-    private func configureContents(with inputObservable: Observable<(Menu, Int, String?)>) {
-        inputObservable
+    private func configureContents(with outputObservable: Observable<(Menu, Int, String?)>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, menusAndPlayerCountAndPinNumber) in
@@ -301,13 +399,14 @@ extension GameResultViewController {
             else { return }
             
             DispatchQueue.main.async {
+                self.loadingActivityIndicator.stopAnimating()
                 self.menuImageView.image = loadedImage
             }
         }
     }
     
-    private func configureNextMenuContents(with inputObservable: Observable<(Menu?, Int)>) {
-        inputObservable
+    private func configureNextMenuContents(with outputObservable: Observable<(Menu?, Int)>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (self, nextMenuAndIndex) in
@@ -334,8 +433,8 @@ extension GameResultViewController {
         self.menuNameLabel.text = menu.name
     }
 
-    private func configureShareButtonDidTap(with shareButtonDidTap: Observable<Void>) {
-        shareButtonDidTap
+    private func configureShareButtonDidTap(with outputObservable: Observable<Void>) {
+        outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
@@ -344,11 +443,13 @@ extension GameResultViewController {
                     let keywords = self.keywordLabel.text
                 else { return }
                 
-                let title = "[우리뭐먹지] 팀원과 오늘의 메뉴를 공유해보세요"
+                let title = Text.activityViewTitle
                 let content = """
-                [우리뭐먹지] 오늘의 메뉴는 #\(menuName) 입니다.
-                팀원들이 이런 것을 원했어요. \(keywords)
-                """
+                [우리뭐먹지] 오늘 메뉴는 #\(menuName) 어때요?
+                
+                팀원들이 이런 것을 원했어요.
+                \(keywords)
+                """  // 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 텍스트 추가
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
                 let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -360,4 +461,83 @@ extension GameResultViewController {
     }
 }
 
-// 오늘의 메뉴를 맛볼 수 있는 주변 식당도 알려드려요. // TODO: 지도 SDK 추가 후 공유 content에 추가
+extension GameResultViewController {
+    private enum Design {
+        static let backgroundViewColor: UIColor = .white
+        static let pinNumberLabelTextColor: UIColor = .mainOrange
+        static let pinNumberLabelFont: UIFont = .pretendard(family: .regular, size: 15)
+        static let playerCountLabelTextColor: UIColor = .darkGray
+        static let playerCountLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let playerCountDescriptionLabelTextColor: UIColor = .darkGray
+        static let playerCountDescriptionLabelFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let keywordLabelTextColor: UIColor = .mainOrange
+        static let keywordLabelFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let menuNameLabelTextColor: UIColor = .mainOrange
+        static let menuNameLabelFont: UIFont = .pretendard(family: .bold, size: 38)
+        static let menuNameUnderlineBackgroundColor: UIColor = .mainOrange
+        static let menuImageViewCornerRadius: CGFloat = 8
+        static let nextMenuCheckButtonTitleColor: UIColor = .white
+        static let nextMenuCheckButtonTitleFont: UIFont = .pretendard(family: .medium, size: 22)
+        static let nextMenuCheckButtonBackgroundColor: UIColor = .mainOrange
+        static let nextMenuCheckButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.055 * 0.5
+        static let shareButtonTitleColor: UIColor = .mainOrange
+        static let shareButtonTitleFont: UIFont = .pretendard(family: .medium, size: 20)
+        static let shareButtonBackgroundColor: UIColor = .lightGray
+        static let shareButtonTintColor: UIColor = .mainOrange
+        static let shareButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        static let shareButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
+        static let gameRestartButtonTitleColor: UIColor = .darkGray
+        static let gameRestartButtonFont: UIFont = .pretendard(family: .medium, size: 20)
+        static let gameRestartButtonBackgroundColor: UIColor = .lightGray
+        static let gameRestartButtonTintColor: UIColor = .darkGray
+        static let gameRestartButtonTitleInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        static let gameRestartButtonCornerRadius: CGFloat = UIScreen.main.bounds.height * 0.04 * 0.5
+        static let backgroundColor: UIColor = .lightGray
+    }
+    
+    private enum Constraint {
+        static let pinNumberLabelTopAnchorConstant: CGFloat = 15
+        static let pinNumberLabelTrailingAnchorConstant: CGFloat = -15
+        static let playerCountLabelLeadingAnchorConstant: CGFloat = 20
+        static let playerCountDescriptionLabelTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
+        static let playerCountDescriptionLabelLeadingAnchorConstant: CGFloat = 1
+        static let keywordLabelTopAnchorConstant: CGFloat = 5
+        static let keywordLabelLeadingAnchorConstant: CGFloat = 20
+        static let menuNameLabelTopAnchorConstant: CGFloat = 5
+        static let menuNameLabelLeadingAnchorConstant: CGFloat = 20
+        static let menuNameUnderlineTopAnchorConstant: CGFloat = 2
+        static let menuNameUnderlineLeadingAnchorConstant: CGFloat = 2
+        static let menuNameUnderlineWidthAnchorConstant: CGFloat = 2
+        static let menuNameUnderlineHeightAnchorConstant: CGFloat = 2
+        static let menuImageViewTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.04
+        static let menuImageViewLeadingAnchorConstant: CGFloat = 20
+        static let menuImageViewTrailingAnchorConstant: CGFloat = -20
+        static let menuImageViewHeightAnchorMultiplier: CGFloat = 0.35
+        static let nextMenuCheckButtonTopAnchorConstant: CGFloat = 15
+        static let nextMenuCheckButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.055
+        static let nextMenuCheckButtonBottomAnchorConstant: CGFloat = -15
+        static let shareButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.04
+        static let shareButtonBottomAnchorConstant: CGFloat = -10
+        static let shareButtonTrailingAnchorConstant: CGFloat = -20
+        static let gameRestartButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.04
+        static let gameRestartButtonBottomAnchorConstant: CGFloat = -15
+        static let gameRestartButtonTrailingAnchorConstant: CGFloat = -20
+    }
+    
+    private enum Content {
+        static let shareButtonImage = UIImage(systemName: "square.and.arrow.up")
+        static let gameRestartButtonImage = UIImage(systemName: "arrow.counterclockwise.circle")
+    }
+    
+    private enum Text {
+        static let pinNumberLabelText = "PIN NUMBER : "
+        static let playerCountLabelText = "N명"
+        static let playerCountDescriptionLabelText = "이 선택한 오늘의 메뉴는"
+        static let keywordLabelText = "#키워드"
+        static let menuNameLabelText = "로딩중"
+        static let nextMenuCheckButtonTitle = "다음 순위 메뉴 확인 (1/3)"
+        static let shareButtonTitle = "공유하기"
+        static let gameRestartButtonTitle = "게임 다시 시작"
+        static let activityViewTitle = "[우리뭐먹지] 팀원과 오늘의 메뉴를 공유해보세요"
+    }
+}

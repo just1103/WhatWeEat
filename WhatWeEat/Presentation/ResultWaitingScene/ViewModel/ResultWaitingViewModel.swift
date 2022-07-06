@@ -29,17 +29,17 @@ final class ResultWaitingViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let pinNumberAndResultWaitingInformation = configureInitialUI(with: input.invokedViewDidLoad)
+        let pinNumberAndResultWaitingInformation = configureInitialUI(by: input.invokedViewDidLoad)
         let updatedSubmissionCount = PublishSubject<Int>()
         let updatedIsGameClosed = PublishSubject<Bool>()
 
         configureUpdatedSubmissionCountAndIsGameClosed(
-            with: input.invokedViewDidLoad,
+            by: input.invokedViewDidLoad,
             outputForSubmissionCount: updatedSubmissionCount,
             outputForIsGameClosed: updatedIsGameClosed
         )
-        configureGameResultCheckButtonDidTap(with: input.gameResultCheckButtonDidTap)
-        configureGameRestartButtonDidTap(with: input.gameRestartButtonDidTap)
+        configureGameResultCheckButtonDidTap(by: input.gameResultCheckButtonDidTap)
+        configureGameRestartButtonDidTap(by: input.gameRestartButtonDidTap)
 
         let output = Output(
             pinNumberAndResultWaitingInformation: pinNumberAndResultWaitingInformation,
@@ -50,7 +50,7 @@ final class ResultWaitingViewModel {
         return output
     }
     
-    private func configureInitialUI(with inputObserver: Observable<Void>) -> Observable<(String, Int, Bool, Bool)> {
+    private func configureInitialUI(by inputObserver: Observable<Void>) -> Observable<(String, Int, Bool, Bool)> {
         return inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<(String, Int, Bool, Bool)> in
@@ -76,9 +76,9 @@ final class ResultWaitingViewModel {
         return observable
     }
     
-    // FIXME: 여기는 inout처럼 쓰는 방법 밖에 없을까? (외부에 PublishSubject 타입의 output을 두는 방법)
+    // FIXME: inout처럼 쓰는 방법 밖에 없을까? (외부에 PublishSubject 타입의 output을 두는 방법)
     private func configureUpdatedSubmissionCountAndIsGameClosed(
-        with inputObserver: Observable<Void>,
+        by inputObserver: Observable<Void>,
         outputForSubmissionCount: PublishSubject<Int>,
         outputForIsGameClosed: PublishSubject<Bool>
     ) {
@@ -128,24 +128,24 @@ final class ResultWaitingViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func configureGameResultCheckButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureGameResultCheckButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.coordinator.showGameResultPage(with: self.pinNumber, soloGameResult: nil)
-                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
-                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
+                UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
+                UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
             .disposed(by: disposeBag)
     }
     
-    private func configureGameRestartButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureGameRestartButtonDidTap(by inputObserver: Observable<Void>) {
         return inputObserver
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: AppDelegate.token)
-                UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
-                UserDefaults.standard.set(nil, forKey: "latestPinNumber")
+                UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
+                UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
             .disposed(by: disposeBag)
     }
@@ -158,7 +158,16 @@ final class ResultWaitingViewModel {
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { _ in
             self.coordinator.showInitialTogetherMenuPage()
+            self.coordinator.popCurrentPage() 
+            self.coordinator.finish()  // FIXME: Together-C가 계속 쌓이는 문제 발생
         })
         .disposed(by: disposeBag)
+    }
+}
+
+extension ResultWaitingViewModel {
+    private enum Text {
+        static let isTogetherGameSubmittedKey = "isTogetherGameSubmitted"
+        static let latestPinNumber = "latestPinNumber"
     }
 }

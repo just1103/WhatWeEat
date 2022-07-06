@@ -33,15 +33,15 @@ final class GameResultViewModel {
     }
     
     deinit {
-        coordinator.finish()  // TODO: 호출되는지 확인 필요
+        coordinator.finish()  // FIXME: 호출안되는 문제 발생
     }
     
     // MARK: - Methods
     func transform(_ input: Input) -> Output {
-        let firstMenuAndPlayerCountAndPinNumber = configureFirstMenuAndPlayerCountAndPinNumber(with: input.invokedViewDidLoad)
+        let firstMenuAndPlayerCountAndPinNumber = configureFirstMenuAndPlayerCountAndPinNumber(by: input.invokedViewDidLoad)
 //        configureRestaurantCheckButtonDidTap(with: input.restaurantCheckButtonDidTap)
-        let nextMenu = configureNextMenuCheckButtonDidTap(with: input.nextMenuCheckButtonDidTap)
-        configureGameRestartButtonDidTap(with: input.gameRestartButtonDidTap)
+        let nextMenu = configureNextMenuCheckButtonDidTap(by: input.nextMenuCheckButtonDidTap)
+        configureGameRestartButtonDidTap(by: input.gameRestartButtonDidTap)
 
         let output = Output(
             firstMenuAndPlayerCountAndPinNumber: firstMenuAndPlayerCountAndPinNumber,
@@ -53,7 +53,7 @@ final class GameResultViewModel {
     }
     
     private func configureFirstMenuAndPlayerCountAndPinNumber(
-        with inputObserver: Observable<Void>
+        by inputObserver: Observable<Void>
     ) -> Observable<(Menu, Int, String?)> {
         inputObserver
             .withUnretained(self)
@@ -92,7 +92,7 @@ final class GameResultViewModel {
         return menusAndPlayerCount
     }
     
-    private func configureNextMenuCheckButtonDidTap(with inputObserver: Observable<Void>) -> Observable<(Menu?, Int)> {
+    private func configureNextMenuCheckButtonDidTap(by inputObserver: Observable<Void>) -> Observable<(Menu?, Int)> {
         inputObserver
             .withUnretained(self)
             .flatMap { _ -> Observable<(Menu?, Int)> in
@@ -102,26 +102,25 @@ final class GameResultViewModel {
             }
     }
 
-    private func configureGameRestartButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureGameRestartButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { _ in
                 if self.pinNumber == nil {
-                    // TODO: 화면 전환 - 혼밥메뉴 초기화면, GameCoordinator 메모리 해제
                     self.coordinator.showInitialSoloMenuPage()
-                    self.coordinator.finish()  // TODO: 여기서 할지, ViewModel deinit에서 할지 판단
                 } else {
-                    // TODO: 화면 전환 - 함께메뉴 초기화면, GameCoordinator 메모리 해제
                     // 그룹 정보 삭제는 서버에서 처리 (1일 후 삭제)
                     self.coordinator.showInitialTogetherMenuPage()
-                    self.coordinator.finish()
                 }
+                
+                self.coordinator.popCurrentPage()  // 기존 결과화면을 내림 (여기서 왜 ViewModel deinit이 안되는지 파악 필요)
+                self.coordinator.finish()  // TODO: 여기서는 호출되는데, ViewModel deinit은 호출 안됨
             })
             .disposed(by: disposeBag)
     }
     
-    // TODO: 화면전환 - 식당 (다음 배포버전에서 추가할 예정)
-//    private func configureRestaurantCheckButtonDidTap(with inputObserver: Observable<Void>) {
+    // TODO: 다음 배포버전에서 구현 예정 (식당 화면으로 전환)
+//    private func configureRestaurantCheckButtonDidTap(by inputObserver: Observable<Void>) {
 //    }
 }

@@ -5,9 +5,8 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
     private let filterView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black.withAlphaComponent(0.5)
-//        view.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
-        view.layer.cornerRadius = 30
+        view.backgroundColor = Design.filterViewBackgroundColor
+        view.layer.cornerRadius = Design.cornerRadius
         view.clipsToBounds = true
         return view
     }()
@@ -15,8 +14,7 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = UIScreen.main.bounds.height * 0.1 * 0.5
-        imageView.layer.cornerRadius = 30
+        imageView.layer.cornerRadius = Design.cornerRadius
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -25,9 +23,9 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.questionLabelFont
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
-        label.textColor = .white  // TODO: 텍스트 색상 고려
+        label.textColor = Design.questionLabelTextColor
         return label
     }()
     
@@ -41,8 +39,7 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
     
     // MARK: - Methods
     func configureUI() {
-        self.backgroundColor = UIColor.clear
-//        self.applyShadow(direction: .top, radius: 8)
+        self.backgroundColor = Design.backgroundColor
         
         addSubview(imageView)
         addSubview(filterView)
@@ -59,8 +56,14 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            questionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            questionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            questionLabel.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor,
+                constant: Constraint.questionLabelLeadingAnchorConstant
+            ),
+            questionLabel.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor,
+                constant: Constraint.questionLabelTrailingAnchorConstant
+            ),
             questionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
@@ -78,6 +81,15 @@ final class YesOrNoCardView: UIView, CardViewProtocol {
 // MARK: - NameSpaces
 extension YesOrNoCardView {
     private enum Design {
-        static let questionLabelFont: UIFont = .pretendardDefaultSize(family: .bold)
+        static let questionLabelFont: UIFont = .pretendardWithDefaultSize(family: .bold)
+        static let filterViewBackgroundColor: UIColor = .black.withAlphaComponent(0.5)
+        static let cornerRadius: CGFloat = 30
+        static let questionLabelTextColor: UIColor = .white
+        static let backgroundColor: UIColor = .clear
+    }
+    
+    private enum Constraint {
+        static let questionLabelLeadingAnchorConstant: CGFloat = 10
+        static let questionLabelTrailingAnchorConstant: CGFloat = -10
     }
 }

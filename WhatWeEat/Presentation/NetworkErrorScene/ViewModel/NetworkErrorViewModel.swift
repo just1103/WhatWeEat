@@ -17,10 +17,10 @@ final class NetworkErrorViewModel {
     }
     
     func transform(_ input: Input) {
-        configureRetryButtonDidTap(with: input.retryButtonDidTap)
+        configureRetryButtonDidTap(by: input.retryButtonDidTap)
     }
 
-    private func configureRetryButtonDidTap(with inputObserver: Observable<Void>) {
+    private func configureRetryButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)

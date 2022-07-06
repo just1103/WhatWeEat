@@ -23,7 +23,8 @@ class VersionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.titleLabelFont
-        label.numberOfLines = 0
+        label.textColor = Design.titleLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -32,7 +33,7 @@ class VersionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.subtitleLabelFont
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textColor = Design.subtitleLabelTextColor
         return label
@@ -40,10 +41,11 @@ class VersionCell: UITableViewCell {
     private let versionStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 28
+        button.layer.cornerRadius = Design.versionStatusButtonCornerRadius
         button.titleLabel?.font = Design.versionStatusButtonTitleFont
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+        button.titleEdgeInsets = Design.versionStatusButtonTitleInsets
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -51,7 +53,6 @@ class VersionCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
-        self.isUserInteractionEnabled = false
     }
     
     @available(*, unavailable)
@@ -65,7 +66,6 @@ class VersionCell: UITableViewCell {
         titleLabel.text = nil
         subtitleLabel.text = nil
         versionStatusButton.setTitle(nil, for: .normal)
-        versionStatusButton.isUserInteractionEnabled = true
     }
     
     // MARK: - Methods
@@ -77,17 +77,19 @@ class VersionCell: UITableViewCell {
     }
     
     private func setupVersionStatusButton() {
-        if versionStatusButton.titleLabel?.text == Content.versionInformationButtonUpdateTitle {
+        if versionStatusButton.titleLabel?.text == Text.versionInformationButtonUpdateTitle {
             versionStatusButton.setTitleColor(Design.versionStatusButtonUpdateTitleColor, for: .normal)
             versionStatusButton.backgroundColor = .mainYellow
         } else {
             versionStatusButton.setTitleColor(Design.versionStatusButtonLatestTitleColor, for: .normal)
             versionStatusButton.backgroundColor = Design.versionStatusButtonLatestBackgroundColor
-            versionStatusButton.isUserInteractionEnabled = false
         }
     }
     
     private func configureUI() {
+        backgroundColor = Design.backgroundColor
+        selectionStyle = .none
+        
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleStackView)
         containerStackView.addArrangedSubview(versionStatusButton)
@@ -95,12 +97,27 @@ class VersionCell: UITableViewCell {
         titleStackView.addArrangedSubview(subtitleLabel)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
-            containerStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            containerStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            containerStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -15),
+            containerStackView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: Constraint.containerStackViewTopAnchorConstant
+            ),
+            containerStackView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.containerStackViewLeadingAnchorConstant
+            ),
+            containerStackView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.containerStackViewTrailingAnchorConstant
+            ),
+            containerStackView.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                constant: Constraint.containerStackViewBottomAnchorConstant
+            ),
             
-            versionStatusButton.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25)
+            versionStatusButton.widthAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.widthAnchor,
+                multiplier: Constraint.versionStatusButtonWidthAnchorMultiplier
+            )
         ])
     }
 }
@@ -108,19 +125,29 @@ class VersionCell: UITableViewCell {
 // MARK: - NameSpaces
 extension VersionCell {
     private enum Design {
-        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
-        
+        static let backgroundColor: UIColor = .white
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let titleLabelTextColor: UIColor = .black
         static let subtitleLabelFont: UIFont = .pretendard(family: .regular, size: 15)
         static let subtitleLabelTextColor: UIColor = .systemGray
-        
         static let versionStatusButtonTitleFont: UIFont = .pretendard(family: .regular, size: 15)
         static let versionStatusButtonUpdateTitleColor: UIColor = .black
         static let versionStatusButtonLatestTitleColor: UIColor = .systemGray
         static let versionStatusButtonUpdateBackgroundColor: UIColor = .mainYellow
         static let versionStatusButtonLatestBackgroundColor: UIColor = .white
+        static let versionStatusButtonCornerRadius: CGFloat = 23
+        static let versionStatusButtonTitleInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
     }
     
-    enum Content {
+    enum Constraint {
+        static let containerStackViewTopAnchorConstant: CGFloat = 15
+        static let containerStackViewLeadingAnchorConstant: CGFloat = 30
+        static let containerStackViewTrailingAnchorConstant: CGFloat = -10
+        static let containerStackViewBottomAnchorConstant: CGFloat = -15
+        static let versionStatusButtonWidthAnchorMultiplier = 0.25
+    }
+    
+    enum Text {
         static let versionInformationButtonUpdateTitle = "업데이트"
         static let versionInformationButtonLatestTitle = "최신버전"
     }

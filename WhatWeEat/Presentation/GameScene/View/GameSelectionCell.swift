@@ -2,30 +2,13 @@ import UIKit
 
 class GameSelectionCell: UICollectionViewCell {
     // MARK: - Properties
-//    private let containerStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.axis = .horizontal
-//        stackView.alignment = .center
-//        stackView.distribution = .fill
-//        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-//        stackView.isLayoutMarginsRelativeArrangement = true
-//        return stackView
-//    }()
-//    private let checkBoxImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.image = Content.uncheckedImage
-//        imageView.tintColor = .black
-//        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-//        return imageView
-//    }()
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
-        label.numberOfLines = 0
+        label.textColor = .black
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -44,7 +27,6 @@ class GameSelectionCell: UICollectionViewCell {
     // MARK: - Lifecycle Methods
     override func prepareForReuse() {
         super.prepareForReuse()
-//        checkBoxImageView.image = nil
         descriptionLabel.text = nil
     }
     
@@ -65,26 +47,15 @@ class GameSelectionCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.backgroundColor = .subYellow
-        self.layer.cornerRadius = 8
+        self.backgroundColor = Design.cellBackgroundColor
+        self.layer.cornerRadius = Design.cellCornerRadius
         self.clipsToBounds = true
         
         addSubview(descriptionLabel)
-//        addSubview(containerStackView)
-//        containerStackView.addArrangedSubview(checkBoxImageView)
-//        containerStackView.addArrangedSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
             descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             descriptionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-//            containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
-//            containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-//            containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-//            checkBoxImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.1),
-//            checkBoxImageView.heightAnchor.constraint(equalTo: checkBoxImageView.widthAnchor),
         ])
     }
 }
@@ -93,10 +64,8 @@ class GameSelectionCell: UICollectionViewCell {
 extension GameSelectionCell {
     private enum Design {
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 20)
-    }
-    
-    private enum Content {
-        static let checkedImage = UIImage(systemName: "checkmark.square")
-        static let uncheckedImage = UIImage(systemName: "square")
+        static let descriptionLabelTextColor: UIColor = .black
+        static let cellBackgroundColor: UIColor = .subYellow
+        static let cellCornerRadius: CGFloat = 8
     }
 }

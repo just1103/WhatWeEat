@@ -8,7 +8,9 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 20
+        stackView.spacing = Design.containerStackViewSpacing
+        stackView.directionalLayoutMargins = Design.containerStackViewMargins
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private let descriptionImageView: UIImageView = {
@@ -23,9 +25,10 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Design.titleLabelFont
+        label.textColor = Design.titleLabelTextColor
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.numberOfLines = 0
+//        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -33,8 +36,9 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Design.descriptionLabelFont
+        label.textColor = Design.descriptionLabelTextColor
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -71,20 +75,28 @@ final class OnboardingContentViewController: UIViewController, OnboardingContent
         containerStackView.addArrangedSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.15),
-            containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.height * 0.25),
-            descriptionImageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
+            containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
 
-// MARK: - NameSpaces
+// MARK: - Namespaces
 extension OnboardingContentViewController {
     private enum Design {
-        static let titleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
-        static let descriptionLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let containerStackViewSpacing: CGFloat = 25
+        static let containerStackViewMargins = NSDirectionalEdgeInsets(
+            top: UIScreen.main.bounds.height * 0.02,
+            leading: UIScreen.main.bounds.width * 0.05,
+            bottom: UIScreen.main.bounds.width * 0.6,
+            trailing: UIScreen.main.bounds.width * 0.05
+        )
         static let imageCornerRadius: CGFloat = 5
+        static let titleLabelFont: UIFont = .pretendard(family: .bold, size: 30)
+        static let titleLabelTextColor: UIColor = .black
+        static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
+        static let descriptionLabelTextColor: UIColor = .black
     }
 }

@@ -21,7 +21,7 @@ final class GameCoordinator: CoordinatorProtocol {
     var navigationController: UINavigationController?
     var type: CoordinatorType = .game
     weak var delegate: GameCoordinatorDelegate!
-    private var pinNumber: String?  // FIXME: 게임이 종료되거나, 게임 도중에 앱을 종료할 때 삭제해야할듯? PINNumber를 어떻게 이어갈지 헷갈림... -> 앱종료하면 자동으로 Coodinator가 삭제됨, 재시작하면 새로 핀넘버 만들거나 다른 핀넘버 입력하니까 상관없음
+    private var pinNumber: String?  // TODO: 게임이 종료되는 시점에 메모리에서 해제되는지 확인 필요
     
     // MARK: - Initializers
     init(navigationController: UINavigationController, pinNumber: String?) {
@@ -34,8 +34,7 @@ final class GameCoordinator: CoordinatorProtocol {
         makeCardGamePage(with: pinNumber)
         delegate.hideNavigationBarAndTabBar()
     }
-    
-    // TODO: 게임결과화면에서 다시 시작하기 누르면 finish를 호출
+
     func finish() {
         delegate.removeFromChildCoordinators(coordinator: self)
     }

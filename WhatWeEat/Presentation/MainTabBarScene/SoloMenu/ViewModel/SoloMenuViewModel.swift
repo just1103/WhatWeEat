@@ -6,6 +6,7 @@ protocol GameStartWaitingViewModel { }
 final class SoloMenuViewModel: GameStartWaitingViewModel {
     // MARK: - Nested Types
     struct Input {
+        let invokedViewDidLoad: Observable<Void>
         let gameStartButtonDidTap: Observable<Void>
     }
     
@@ -20,12 +21,30 @@ final class SoloMenuViewModel: GameStartWaitingViewModel {
     
     // MARK: - Methods
     func transform(_ input: Input) {
+        checkNetworkConnection(by: input.invokedViewDidLoad)
         configureGameStartButtonDidTap(by: input.gameStartButtonDidTap)
     }
     
+    private func checkNetworkConnection(by inputObserver: Observable<Void>) {
+        inputObserver
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.checkNetworkConnection()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func checkNetworkConnection() {
+        if NetworkConnectionManager.shared.isCurrentlyConnected == false {
+            coordinator.showNetworkErrorPage()
+        }
+    }
+    
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
-        inputObserver.subscribe(onNext: { [weak self] _ in
-            self?.coordinator.showGamePage()
+        inputObserver
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+            self.coordinator.showGamePage()
         })
         .disposed(by: disposeBag)
     }

@@ -20,9 +20,9 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         makeMainTabBarPage()
         
         if TogetherGameSubmittedChecker.isSubmitted {
-            guard let togetherCoordinator = childCoordinators.filter { $0.type == .togetherMenu }.first as? TogetherMenuCoordinator else {
-                return
-            }
+            guard
+                let togetherCoordinator = childCoordinators.filter({ $0.type == .togetherMenu }).first as? TogetherMenuCoordinator
+            else { return }
             
             togetherCoordinator.showLatestSubmissionPage(pinNumber: TogetherGameSubmittedChecker.latestPinNumber)
         }
@@ -55,8 +55,8 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
         childCoordinators = updatedChildCoordinators
     }
     
-    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol) {
-        // ???: 아래를 해줘야할 것 같지만 없어도 정상작동한다...
+//    func removeFromChildCoordinatorsAndRestart(coordinator: CoordinatorProtocol) {
+        // ???: 아래를 해줘야할 것 같지만 없어도 정상작동한다... -> 기존 Coordinator는 유지
 //        let updatedChildCoordinators = childCoordinators.filter { $0 !== coordinator }
 //        childCoordinators = updatedChildCoordinators
 //        var newCoordinator: CoordinatorProtocol?
@@ -75,7 +75,7 @@ final class MainTabBarCoordinator: CoordinatorProtocol, SettingCoordinatorDelega
 //        guard let newCoordinator = newCoordinator else { return }
 //
 //        childCoordinators.append(newCoordinator)
-    }
+//    }
     
     private func makeMainTabBarPage() {
         let homeCoordinator = HomeCoordinator()

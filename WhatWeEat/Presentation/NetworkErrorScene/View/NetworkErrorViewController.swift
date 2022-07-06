@@ -7,23 +7,24 @@ class NetworkErrorViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = Design.backgroundViewColor
         return view
     }()
     private let errorImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "wifi.slash")
+        imageView.image = Content.errorImage
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .darkGray
+        imageView.tintColor = Design.errorImageViewTintColor
         return imageView
     }()
     private let errorTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "네트워크 연결 상태를 확인해주세요"
-        label.font = .pretendard(family: .medium, size: 30)
-        label.numberOfLines = 0
+        label.text = Text.errorTitleLabelText
+        label.font = Design.errorTitleLabelFont
+        label.textColor = Design.errorTitleLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.textAlignment = .center
         return label
@@ -31,10 +32,10 @@ class NetworkErrorViewController: UIViewController {
     private let retryButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "arrow.clockwise.circle"), for: .normal)
+        button.setImage(Content.retryButtonImage, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 40), forImageIn: .normal)
-        button.tintColor = .darkGray
+        button.setPreferredSymbolConfiguration(Design.retryButtonSize, forImageIn: .normal)
+        button.tintColor = Design.retryButtonTintColor
         return button
     }()
     
@@ -53,7 +54,7 @@ class NetworkErrorViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = Design.backgroundColor
         view.addSubview(backgroundView)
         view.addSubview(errorImageView)
         view.addSubview(errorTitleLabel)
@@ -69,14 +70,23 @@ class NetworkErrorViewController: UIViewController {
             errorTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             errorTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
-            errorImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+            errorImageView.heightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Constraint.errorImageViewHeightAnchorMultiplier
+            ),
             errorImageView.widthAnchor.constraint(equalTo: errorImageView.heightAnchor),
-            errorImageView.bottomAnchor.constraint(equalTo: errorTitleLabel.topAnchor, constant: -60),
+            errorImageView.bottomAnchor.constraint(
+                equalTo: errorTitleLabel.topAnchor,
+                constant: Constraint.errorImageViewBottomAnchorConstant
+            ),
             errorImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             retryButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             retryButton.topAnchor.constraint(equalTo: errorTitleLabel.bottomAnchor),
-            retryButton.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
+            retryButton.heightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                multiplier: Constraint.retryButtonHeightAnchorMultiplier
+            ),
             retryButton.widthAnchor.constraint(equalTo: retryButton.heightAnchor),
         ])
     }
@@ -88,5 +98,33 @@ extension NetworkErrorViewController {
         let input = NetworkErrorViewModel.Input(retryButtonDidTap: retryButton.rx.tap.asObservable())
         
         viewModel.transform(input)
+    }
+}
+
+// MARK: - Namespaces
+extension NetworkErrorViewController {
+    private enum Design {
+        static let backgroundViewColor: UIColor = .white
+        static let errorImageViewTintColor: UIColor = .darkGray
+        static let errorTitleLabelFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let errorTitleLabelTextColor: UIColor = .black
+        static let retryButtonSize = UIImage.SymbolConfiguration(pointSize: 40)
+        static let retryButtonTintColor: UIColor = .darkGray
+        static let backgroundColor: UIColor = .lightGray
+    }
+    
+    private enum Constraint {
+        static let errorImageViewHeightAnchorMultiplier = 0.2
+        static let errorImageViewBottomAnchorConstant: CGFloat = -60
+        static let retryButtonHeightAnchorMultiplier = 0.15
+    }
+    
+    private enum Content {
+        static let errorImage = UIImage(systemName: "wifi.slash")
+        static let retryButtonImage = UIImage(systemName: "arrow.clockwise.circle")
+    }
+    
+    private enum Text {
+        static let errorTitleLabelText = "네트워크 연결 상태를 확인해주세요"
     }
 }

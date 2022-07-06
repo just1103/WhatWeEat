@@ -9,14 +9,9 @@ final class DislikedFoodCell: UICollectionViewCell {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
-            top: 20,
-            leading: 10,
-            bottom: 20,
-            trailing: 10
-        )
+        stackView.directionalLayoutMargins = Design.containerStackViewMargins
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.spacing = 10
+        stackView.spacing = Design.containerStackViewSpacing
         return stackView
     }()
     private let descriptionImageView: UIImageView = {
@@ -29,7 +24,8 @@ final class DislikedFoodCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Design.descriptionLabelFont
-        label.numberOfLines = 0
+        label.textColor = Design.descriptionLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -50,7 +46,6 @@ final class DislikedFoodCell: UICollectionViewCell {
     // MARK: - Lifecycle Methods
     override func prepareForReuse() {
         super.prepareForReuse()
-//        checkBoxImageView.image = nil
         descriptionImageView.image = nil
         descriptionLabel.text = nil
     }
@@ -80,13 +75,16 @@ final class DislikedFoodCell: UICollectionViewCell {
         containerStackView.addArrangedSubview(descriptionImageView)
         containerStackView.addArrangedSubview(descriptionLabel)
 
-        NSLayoutConstraint.activate([  // TODO: 상수 Namespaces 처리
+        NSLayoutConstraint.activate([ 
             containerStackView.topAnchor.constraint(equalTo: self.topAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            descriptionImageView.heightAnchor.constraint(greaterThanOrEqualTo: self.heightAnchor, multiplier: 0.4),
+            descriptionImageView.heightAnchor.constraint(
+                greaterThanOrEqualTo: self.heightAnchor,
+                multiplier: Constraint.descriptionImageViewHeightAnchorMultiplier
+            ),
             descriptionImageView.heightAnchor.constraint(equalTo: descriptionImageView.widthAnchor),
         ])
     }
@@ -96,6 +94,18 @@ final class DislikedFoodCell: UICollectionViewCell {
 extension DislikedFoodCell {
     private enum Design {
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 18)
+        static let descriptionLabelTextColor: UIColor = .black
+        static let containerStackViewMargins = NSDirectionalEdgeInsets(
+            top: 20,
+            leading: 10,
+            bottom: 20,
+            trailing: 10
+        )
+        static let containerStackViewSpacing: CGFloat = 10
+    }
+    
+    private enum Constraint {
+        static let descriptionImageViewHeightAnchorMultiplier = 0.4
     }
     
     private enum Content {

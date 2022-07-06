@@ -7,7 +7,8 @@ class SettingCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = Design.titleLabelFont
-        label.numberOfLines = 0
+        label.textColor = Design.titleLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
@@ -35,8 +36,10 @@ class SettingCell: UITableViewCell {
     }
     
     private func configureUI() {
-        self.accessoryType = .disclosureIndicator
-        self.selectionStyle = .none
+        backgroundColor = Design.backgroundColor
+        accessoryType = .disclosureIndicator  // TODO: 다크모드에서 색상이 연하므로 accessoryView를 chevron.right 이미지의 Button으로 교체
+        selectionStyle = .none
+        
         addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
@@ -51,6 +54,8 @@ class SettingCell: UITableViewCell {
 // MARK: - NameSpaces
 extension SettingCell {
     private enum Design {
-        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 22)
+        static let backgroundColor: UIColor = .white
+        static let titleLabelFont: UIFont = .pretendard(family: .regular, size: 20)
+        static let titleLabelTextColor: UIColor = .black
     }
 }

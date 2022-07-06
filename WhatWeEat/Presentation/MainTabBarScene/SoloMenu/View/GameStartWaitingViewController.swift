@@ -1,17 +1,17 @@
 import Lottie
-import UIKit
 import RxCocoa
+import UIKit
 
 class GameStartWaitingViewController: UIViewController {
     // MARK: - Properties
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .mainOrange
+        view.backgroundColor = Design.backgroundViewColor
         return view
     }()
     private let circleAnimationView: AnimationView = {
-        let animationView = AnimationView(name: "circle")
+        let animationView = Content.circleAnimationView
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
@@ -21,13 +21,10 @@ class GameStartWaitingViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .pretendard(family: .bold, size: 30)
-        label.text = """
-        장의 소리에
-        귀 기울여주세요...
-        """
-        label.textColor = .white
-        label.numberOfLines = 0
+        label.font = Design.descriptionLabelFont
+        label.text = Text.descriptionLabelText
+        label.textColor = Design.descriptionLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
@@ -35,20 +32,20 @@ class GameStartWaitingViewController: UIViewController {
     private let personImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "person.fill")
+        imageView.image = Content.personImage
         imageView.contentMode = .scaleAspectFit
         imageView.setContentHuggingPriority(.init(100), for: .vertical)
-        imageView.tintColor = .white
+        imageView.tintColor = Design.personImageViewTintColor
         return imageView
     }()
     private let readyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = .pretendard(family: .medium, size: 25)
-        label.text = "준비되셨다면"
-        label.textColor = .white
-        label.numberOfLines = 0
+        label.font = Design.readyLabelFont
+        label.text = Text.readyLabelText
+        label.textColor = Design.readyLabelTextColor
+        label.numberOfLines = .zero
         label.lineBreakStrategy = .hangulWordPriority
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
@@ -56,17 +53,17 @@ class GameStartWaitingViewController: UIViewController {
     let gameStartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("미니게임 시작", for: .normal)
-        button.setTitleColor(.mainOrange, for: .normal)
+        button.setTitle(Text.gameStartButtonTitle, for: .normal)
+        button.setTitleColor(Design.gameStartButtonTitleColor, for: .normal)
         button.backgroundColor = .white
-        button.titleLabel?.font = .pretendard(family: .medium, size: 30)
-        button.layer.cornerRadius = UIScreen.main.bounds.height * 0.08 * 0.5
+        button.titleLabel?.font = Design.gameStartButtonTitleFont
+        button.layer.cornerRadius = Design.gameStartButtonCornerRadius
         button.clipsToBounds = true
         return button
     }()
     
     func configureUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = Design.backgroundColor
         view.addSubview(backgroundView)
         view.addSubview(circleAnimationView)
         view.addSubview(descriptionLabel)
@@ -85,26 +82,105 @@ class GameStartWaitingViewController: UIViewController {
             
             circleAnimationView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             circleAnimationView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            circleAnimationView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 1.5),
+            circleAnimationView.widthAnchor.constraint(
+                equalToConstant: Constraint.circleAnimationViewWidthAnchorConstant
+            ),
             circleAnimationView.heightAnchor.constraint(equalTo: circleAnimationView.widthAnchor),
             
             personImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             personImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            personImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
+            personImageView.widthAnchor.constraint(
+                equalToConstant: Constraint.personImageViewWidthAnchorConstant
+            ),
             personImageView.heightAnchor.constraint(equalTo: personImageView.widthAnchor),
             
-            descriptionLabel.bottomAnchor.constraint(equalTo: personImageView.topAnchor, constant: -40),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            descriptionLabel.bottomAnchor.constraint(
+                equalTo: personImageView.topAnchor,
+                constant: Constraint.descriptionLabelBottomAnchorConstant
+            ),
+            descriptionLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.descriptionLabelLeadingAnchorConstant
+            ),
+            descriptionLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.descriptionLabelTrailingAnchorConstant
+            ),
             
-            readyLabel.bottomAnchor.constraint(equalTo: gameStartButton.topAnchor, constant: -30),
-            readyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            readyLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            readyLabel.bottomAnchor.constraint(
+                equalTo: gameStartButton.topAnchor,
+                constant: Constraint.readyLabelBottomAnchorConstant
+            ),
+            readyLabel.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.readyLabelLeadingAnchorConstant
+            ),
+            readyLabel.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.readyLabelTrailingAnchorConstant
+            ),
             
-            gameStartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            gameStartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            gameStartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            gameStartButton.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.08),
+            gameStartButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: Constraint.gameStartButtonBottomAnchorConstant
+            ),
+            gameStartButton.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: Constraint.gameStartButtonLeadingAnchorConstant
+            ),
+            gameStartButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: Constraint.gameStartButtonTrailingAnchorConstant
+            ),
+            gameStartButton.heightAnchor.constraint(
+                equalToConstant: Constraint.gameStartButtonHeightAnchorConstant
+            ),
         ])
+    }
+}
+
+// MARK: - Namespaces
+extension GameStartWaitingViewController {
+    private enum Design {
+        static let backgroundViewColor: UIColor = .mainOrange
+        static let descriptionLabelFont: UIFont = .pretendard(family: .bold, size: 30)
+        static let descriptionLabelTextColor: UIColor = .white
+        static let personImageViewTintColor: UIColor = .white
+        static let readyLabelFont: UIFont = .pretendard(family: .medium, size: 25)
+        static let readyLabelTextColor: UIColor = .white
+        static let gameStartButtonTitleColor: UIColor = .mainOrange
+        static let gameStartButtonTitleFont: UIFont = .pretendard(family: .medium, size: 30)
+        static let gameStartButtonBackgroundColor: UIColor = .white
+        static let gameStartButtonCornerRadius: CGFloat =  UIScreen.main.bounds.height * 0.08 * 0.5
+        static let backgroundColor: UIColor = .lightGray
+    }
+    
+    private enum Constraint {
+        static let circleAnimationViewWidthAnchorConstant: CGFloat = UIScreen.main.bounds.width * 1.5
+        static let personImageViewWidthAnchorConstant: CGFloat = UIScreen.main.bounds.width * 0.4
+        static let descriptionLabelBottomAnchorConstant: CGFloat = -40
+        static let descriptionLabelLeadingAnchorConstant: CGFloat = 40
+        static let descriptionLabelTrailingAnchorConstant: CGFloat = -40
+        static let readyLabelBottomAnchorConstant: CGFloat = -30
+        static let readyLabelLeadingAnchorConstant: CGFloat = 40
+        static let readyLabelTrailingAnchorConstant: CGFloat = -40
+        static let gameStartButtonBottomAnchorConstant: CGFloat = -50
+        static let gameStartButtonLeadingAnchorConstant: CGFloat = 50
+        static let gameStartButtonTrailingAnchorConstant: CGFloat = -50
+        static let gameStartButtonHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.08
+    }
+    
+    private enum Content {
+        static let circleAnimationView = AnimationView(name: "circle")
+        static let personImage = UIImage(systemName: "person.fill")
+    }
+    
+    private enum Text {
+        static let descriptionLabelText = """
+        장의 소리에
+        귀 기울여주세요...
+        """
+        static let readyLabelText = "준비되셨다면"
+        static let gameStartButtonTitle = "미니게임 시작"
     }
 }
