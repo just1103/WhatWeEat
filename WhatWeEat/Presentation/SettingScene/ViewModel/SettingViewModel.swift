@@ -126,7 +126,8 @@ final class SettingViewModel {
             return Text.versionCheckErrorTitle
         }
         
-        return latestAppVersion
+//        return latestAppVersion
+        return "1.2"  // FIXME: 업데이트 버전이 있는데 URL이 비정상작동하는 문제
     }
     
     private func configureVersionInformationButtonUpdateTitle() -> String {
