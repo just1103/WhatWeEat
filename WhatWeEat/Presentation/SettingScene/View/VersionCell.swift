@@ -38,7 +38,6 @@ class VersionCell: UITableViewCell {
         label.textColor = Design.subtitleLabelTextColor
         return label
     }()
-    // TODO: 다음 배포버전에서 추가 (업데이트 버튼을 탭하면 AppStore 앱으로 연결)
     private let versionStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +45,7 @@ class VersionCell: UITableViewCell {
         button.titleLabel?.font = Design.versionStatusButtonTitleFont
         button.titleEdgeInsets = Design.versionStatusButtonTitleInsets
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -53,7 +53,6 @@ class VersionCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
-        self.isUserInteractionEnabled = false
     }
     
     @available(*, unavailable)
@@ -67,7 +66,6 @@ class VersionCell: UITableViewCell {
         titleLabel.text = nil
         subtitleLabel.text = nil
         versionStatusButton.setTitle(nil, for: .normal)
-        versionStatusButton.isUserInteractionEnabled = true
     }
     
     // MARK: - Methods
@@ -85,12 +83,12 @@ class VersionCell: UITableViewCell {
         } else {
             versionStatusButton.setTitleColor(Design.versionStatusButtonLatestTitleColor, for: .normal)
             versionStatusButton.backgroundColor = Design.versionStatusButtonLatestBackgroundColor
-            versionStatusButton.isUserInteractionEnabled = false
         }
     }
     
     private func configureUI() {
         backgroundColor = Design.backgroundColor
+        selectionStyle = .none
         
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleStackView)
@@ -137,7 +135,7 @@ extension VersionCell {
         static let versionStatusButtonLatestTitleColor: UIColor = .systemGray
         static let versionStatusButtonUpdateBackgroundColor: UIColor = .mainYellow
         static let versionStatusButtonLatestBackgroundColor: UIColor = .white
-        static let versionStatusButtonCornerRadius: CGFloat = 28
+        static let versionStatusButtonCornerRadius: CGFloat = 23
         static let versionStatusButtonTitleInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
     }
     

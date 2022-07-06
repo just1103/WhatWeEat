@@ -99,12 +99,4 @@ extension OnboardingContentViewController {
         static let descriptionLabelFont: UIFont = .pretendard(family: .medium, size: 22)
         static let descriptionLabelTextColor: UIColor = .black
     }
-    
-    private enum Constraint {
-        // TODO: 레이아웃 적절한지 확인
-//        static let containerStackViewTopAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.1
-//        static let containerStackViewLeadingAnchorConstant: CGFloat = UIScreen.main.bounds.width * 0.03
-//        static let containerStackViewTrailingAnchorConstant: CGFloat = -UIScreen.main.bounds.width * 0.03
-//        static let containerStackViewHeightAnchorConstant: CGFloat = UIScreen.main.bounds.height * 0.25
-    }
 }
