@@ -113,17 +113,16 @@ final class SettingViewModel {
         }
         return currentAppVersion
     }
-    
-    private func checkLatestAppVersion() -> String {
+
+    private func checkLatestAppVersion() -> String {  // TODO: 테스트코드 작성
         guard
-            let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
+            let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
             let data = try? Data(contentsOf: url),
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
             let results = json[Text.resultsKey] as? [[String: Any]],
             results.count > 0,
             let latestAppVersion = results[safe: 0]?[Text.versionKey] as? String
         else {
-//            return "1.0"  // TODO: 테스트코드
             return Text.versionCheckErrorTitle
         }
         
@@ -202,7 +201,7 @@ extension SettingViewModel {
         static let versionInformationButtonLatestTitle = "최신버전"
         static let versionInfoDictionaryKey = "CFBundleShortVersionString"
         static let appBundleID = "com.IntjDevelopers.WhatWeEat"
-        static let resultsKey = "reslts"
+        static let resultsKey = "results"
         static let versionKey = "version"
     }
 }
