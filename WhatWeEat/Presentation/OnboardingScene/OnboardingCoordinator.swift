@@ -73,12 +73,10 @@ extension OnboardingCoordinator {
                 
         물론, 혼밥메뉴도 추천해드려요.
         """
-//        누구든 PIN 번호로
-//        간단히 참여할 수 있어요
     }
     
     private enum Content { 
         static let firstPageImage: UIImage? = UIImage(named: "appIconWhiteCircle")
-        static let secondPageImage: UIImage? = UIImage(named: "image")
+        static let secondPageImage: UIImage? = UIImage(named: "gameScreenshot")
     }
 }
