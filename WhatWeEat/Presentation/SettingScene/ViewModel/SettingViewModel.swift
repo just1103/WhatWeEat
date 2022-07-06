@@ -163,7 +163,6 @@ final class SettingViewModel {
                 case .version:
                     return
                     // TODO: 다음 배포버전에서 추가 (AppStore에 등록된 이후 추가해야 함)
-                    // Cell 위의 업데이트 버튼을 눌러도, 버전정보 Cell을 눌러도 AppStore로 연결
 //                    self.coordinator.showAppStorePage()
                 }
             })
