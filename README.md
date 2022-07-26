@@ -167,7 +167,7 @@ OnboardingPage 중 못먹는음식 화면에서만 `PageControl`과 `skip` 버�
 따라서 기존 메서드에서는 버튼이 다시 보이도록 하는 기능만 담당하도록 하고, `pageViewController(_:willTransitionTo pendingViewControllers:)` 메서드를 추가하여 화면 전환 직전에 버튼이 사라지도록 기능을 분리하여 해결했습니다.
 
 ### 1-4 키워드
-- 라이브러리 : Realm, SwiftLint, SPM
+- 라이브러리 : Realm, SPM
 - UI : Build UI Programmatically, PageViewController, CollectionView (DiffableDataSource, Snapshot, Compositional Layout)
 
 ## 2️⃣ STEP2. 네트워크 및 TabBar 화면/설정 화면 구현
@@ -220,8 +220,7 @@ Coordinator 구조는 아래와 같습니다.
 이후 rx를 통해 ViewModel로부터 `SettingItem 배열`을 전달받고, `cellForRowAt` 메서드의 indexPath를 통해 각 section에 맞는 Cell Item을 `filter` 및 `다운캐스팅`하여 TableView에 나타냈습니다.
 
 ### 2-4 키워드
-- Architecture : MVVM-C
-- Network : URLSession, MultipartFormData, REST-ful API
+- Network : URLSession, REST-ful API
 - 비동기 처리 : RxSiwft/RxCocoa
 - DB : UserDefault, JSON Parsing
 - UI : TabBarController/NavigationController, TableView, ActivityView, Alert, TextField
@@ -267,8 +266,7 @@ Coordinator 구조는 아래와 같습니다.
 ### 3-4 키워드
 - Pattern : Factory Pattern, Singleton Pattern
 - Graphics : animate, CGAffineTransform
-- Layout : Auto Layout, Frame/Bounds, StackView
-- UI : UIProgressView
+- UI : UIProgressView, Auto Layout, Frame/Bounds, StackView
 - Timer
 
 ## 4️⃣ STEP4. 게임결과 화면 구현
