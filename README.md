@@ -2,9 +2,9 @@
 
 ## 목차
 - [🍙 프로젝트 소개](#-프로젝트-소개)
-- [📱 주요 화면 및 기능](#-주요-화면-및-기능)
 - [🗺 Architecture](#-architecture)
 - [🗂 파일 디렉토리 구조](#-파일-디렉토리-구조)
+- [📱 주요 화면 및 기능](#-주요-화면-및-기능)
 - [1️⃣ STEP1. `Onboarding 화면` 구현](#-step1.-onboarding-화면-구현)
     + [관련 PR](#1-1-관련-pr) 
     + [고민한 점](#1-2-고민한-점) 
@@ -49,36 +49,6 @@
        - 서버 : Spring boot
     - Deployment Target : iOS 14.0
     
-## 📱 주요 화면 및 기능
-> 🍖 Onboarding 화면 - 못먹는 음식을 알려주시면 추천 메뉴에서 제외해요
-
-<img src="https://i.imgur.com/TPSBQzd.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180999107-38eb6fc9-f990-4dd8-8fa5-6c4e801d6d91.png" width="200">
-
-> 🙌 함께메뉴결정 탭의 그룹생성하기 시나리오 - 팀원들에게 PIN 번호를 알려주세요. 인원 제한 없이 누구나 참여할 수 있어요
-
-<img src="https://user-images.githubusercontent.com/70856586/181000270-69df24c9-2766-46d5-8cfe-28b1217cbb4b.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000286-6e5a7fcd-7c2f-436d-b057-b9a3b52663eb.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000299-5726bcaf-3675-4250-969c-66e516b67f78.png" width="200">  
-
-> 🔢 함께메뉴결정 탭의 PIN으로 입장하기 시나리오 - Host가 알려준 PIN 번호를 입력하여 간단히 참여해봐요
-
-<img src="https://user-images.githubusercontent.com/70856586/181001529-c6543d3b-cad2-461b-a057-1e68baa94e7a.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181004631-aa30a955-bc23-45f4-b26a-f772140ca3d6.jpeg" width="200">
-
-> 🕹️ 게임 / 게임결과대기 / 게임결과 화면 - Host가 결과확인 버튼을 탭할 때까지 게임을 진행해주세요
-
-<img src="https://user-images.githubusercontent.com/70856586/180999044-280ec6cf-de94-4feb-ac03-27fae4f4320c.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180999083-47b8ec93-89c1-46df-8989-91f5471f5f5b.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180998997-a768d43b-e12e-40ec-8a4d-3179f0831512.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181001824-fdff64c3-f907-4e59-b0b9-737048c4ed68.png" width="200">
-
-> 🎲 Home 탭 - 게임을 하기 귀찮다면 랜덤메뉴도 있어요   
-
-<img src="https://user-images.githubusercontent.com/70856586/180999171-7f385198-9a7f-46e6-9906-313f133410c0.png" width="200">
-
-> ⚙️ 설정 화면 - 못먹는 음식을 수정하거나, 개발자에게 피드백을 남길 수 있어요
-
-<img src="https://user-images.githubusercontent.com/70856586/180999640-403792b1-8bfc-4187-9a1e-f209b6b2fb1a.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000085-0a99afb5-cd2a-480f-acb5-789c785370fe.png" width="200">
-
-> ⚠️ 오류 화면 - 네트워크 연결이 불안정하면 알려드려요
-
-<img src="https://user-images.githubusercontent.com/70856586/181002265-b1452d35-ef81-4b52-b629-1d6d7d2b00d5.jpeg" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181002251-9d041ff3-8352-42c3-9c65-6d4a183e3449.jpeg" width="200">
-
-
 ## 🗺 Architecture
 ### MVVM-C 
 <img width="1152" src="https://i.imgur.com/dHvlARE.jpg"> 
@@ -131,14 +101,43 @@
     └──Mock
 ```
 
+## 📱 주요 화면 및 기능
+> 🍖 Onboarding 화면 - 못먹는 음식을 알려주시면 추천 메뉴에서 제외해요
+
+<img src="https://i.imgur.com/TPSBQzd.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180999107-38eb6fc9-f990-4dd8-8fa5-6c4e801d6d91.png" width="200">
+
+> 🙌 함께메뉴결정 탭의 그룹생성하기 시나리오 - 팀원들에게 PIN 번호를 알려주세요. 인원 제한 없이 누구나 참여할 수 있어요
+
+<img src="https://user-images.githubusercontent.com/70856586/181000270-69df24c9-2766-46d5-8cfe-28b1217cbb4b.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000286-6e5a7fcd-7c2f-436d-b057-b9a3b52663eb.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000299-5726bcaf-3675-4250-969c-66e516b67f78.png" width="200">  
+
+> 🔢 함께메뉴결정 탭의 PIN으로 입장하기 시나리오 - Host가 알려준 PIN 번호를 입력하여 간단히 참여해봐요
+
+<img src="https://user-images.githubusercontent.com/70856586/181001529-c6543d3b-cad2-461b-a057-1e68baa94e7a.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181004631-aa30a955-bc23-45f4-b26a-f772140ca3d6.jpeg" width="200">
+
+> 🕹️ 게임 / 게임결과대기 / 게임결과 화면 - Host가 결과확인 버튼을 탭할 때까지 게임을 진행해주세요
+
+<img src="https://user-images.githubusercontent.com/70856586/180999044-280ec6cf-de94-4feb-ac03-27fae4f4320c.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180999083-47b8ec93-89c1-46df-8989-91f5471f5f5b.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/180998997-a768d43b-e12e-40ec-8a4d-3179f0831512.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181001824-fdff64c3-f907-4e59-b0b9-737048c4ed68.png" width="200">
+
+> 🎲 Home 탭 - 게임을 하기 귀찮다면 랜덤메뉴도 있어요   
+
+<img src="https://user-images.githubusercontent.com/70856586/180999171-7f385198-9a7f-46e6-9906-313f133410c0.png" width="200">
+
+> ⚙️ 설정 화면 - 못먹는 음식을 수정하거나, 개발자에게 피드백을 남길 수 있어요
+
+<img src="https://user-images.githubusercontent.com/70856586/180999640-403792b1-8bfc-4187-9a1e-f209b6b2fb1a.png" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181000085-0a99afb5-cd2a-480f-acb5-789c785370fe.png" width="200">
+
+> ⚠️ 오류 화면 - 네트워크 연결이 불안정하면 알려드려요
+
+<img src="https://user-images.githubusercontent.com/70856586/181002265-b1452d35-ef81-4b52-b629-1d6d7d2b00d5.jpeg" width="200">  <img src="https://user-images.githubusercontent.com/70856586/181002251-9d041ff3-8352-42c3-9c65-6d4a183e3449.jpeg" width="200">
+
+
 ## 1️⃣ STEP1. Onboarding 화면 구현
 ### 1-1 관련 PR
 - [PR-1. Feature/landing: 앱을 처음 실행하는 경우 온보딩 페이지를 실행하도록 합니다](https://github.com/just1103/WhatWeEat/pull/1)
 - [PR-2. Realm을 연동하여 못먹는음식 데이터를 Local DB에 저장합니다](https://github.com/just1103/WhatWeEat/pull/2)
 
 ### 1-2 고민한 점
-> 1) `못먹는음식 화면`의 UI 및 Model 구성   
-
+#### 1) `못먹는음식 화면`의 UI 및 Model 구성   
 사용자가 앱을 최초 실행한 경우, 앱의 기능과 사용 방법을 소개하기 위해 `PageViewController`를 활용하여 `OnboardingPage`를 구현했습니다. 1~2페이지는 앱에 대한 설명을 나타내고, 3페이지에는 사용자가 못먹는음식을 제출하도록 했습니다.
 
 |1~2페이지|3페이지|
