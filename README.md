@@ -82,7 +82,8 @@
 ## 🗺 Architecture
 ### MVVM-C 
 <img width="1152" src="https://i.imgur.com/dHvlARE.jpg"> 
-> MVVM
+
+> MVVM   
 - `ViewController` (View)는 화면을 그리는 역할을 담당하고, `ViewModel`은 데이터 및 비즈니스 로직 관리, 화면 전환 요청 등을 담당하도록 역할을 분리했습니다.
 - 추후 ViewModel에 대한 테스트 코드를 추가하여 안정성을 개선할 예정입니다.
 - 프로그램의 복잡도가 높아질 경우 Clean Architecture를 도입할 예정입니다.
