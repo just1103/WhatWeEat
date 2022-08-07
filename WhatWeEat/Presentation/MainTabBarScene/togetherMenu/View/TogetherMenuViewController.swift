@@ -216,7 +216,7 @@ extension TogetherMenuViewController {
         buttonDidTap
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { (owner, _) in
                 let cancelAction = UIAlertAction(title: Text.cancelActionTitle, style: .cancel)
                 
                 let alert = AlertFactory().createAlert(
@@ -232,22 +232,22 @@ extension TogetherMenuViewController {
                 guard let textField = alert.textFields?[safe: 0] else { return }
                 
                 let okAction = UIAlertAction(title: Text.okActionTitle, style: .default) { _ in
-                    self.validatePinNumber(textField.text ?? "")
+                    owner.validatePinNumber(textField.text ?? "")
                         .observe(on: MainScheduler.instance)
                         .subscribe(onNext: { isValid in
                             if isValid {
-                                self.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")  // TODO: 여기서 호출하는게 적절한지 고려
+                                owner.viewModel.showEnterWithPinNumberPage(pinNumber: textField.text ?? "")  // TODO: 여기서 호출하는게 적절한지 고려
                             } else {
                                 alert.message = Text.errorAlertMessage
                                 textField.text = nil
-                                self.present(alert, animated: true)
+                                owner.present(alert, animated: true)
                             }
                         })
-                        .disposed(by: self.disposeBag)
+                        .disposed(by: owner.disposeBag)
                 }
                 alert.addAction(okAction)
                 
-                self.present(alert, animated: true)
+                owner.present(alert, animated: true)
             })
             .disposed(by: disposeBag)
     }

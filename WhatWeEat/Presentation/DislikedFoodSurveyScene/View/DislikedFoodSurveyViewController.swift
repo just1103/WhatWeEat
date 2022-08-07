@@ -239,8 +239,8 @@ extension DislikedFoodSurveyViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, dislikedFoods) in
-                self.configureInitialSnapshot(with: dislikedFoods)
+            .subscribe(onNext: { (owner, dislikedFoods) in
+                owner.configureInitialSnapshot(with: dislikedFoods)
             })
             .disposed(by: disposeBag)
     }
@@ -256,8 +256,8 @@ extension DislikedFoodSurveyViewController {
         indexPath
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, indexPath) in
-                guard let selectedCell = self.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
+            .subscribe(onNext: { (owner, indexPath) in
+                guard let selectedCell = owner.collectionView.cellForItem(at: indexPath) as? DislikedFoodCell else { return }
                 selectedCell.toggleSelectedCellUI()
             })
             .disposed(by: disposeBag)

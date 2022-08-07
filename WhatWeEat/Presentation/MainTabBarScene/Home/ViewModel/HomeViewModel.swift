@@ -35,8 +35,8 @@ final class HomeViewModel {
     private func checkNetworkConnection(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.checkNetworkConnection()
+            .subscribe(onNext: { (owner, _) in
+                owner.checkNetworkConnection()
             })
             .disposed(by: disposeBag)
     }

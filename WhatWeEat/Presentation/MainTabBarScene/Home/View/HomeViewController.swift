@@ -208,7 +208,7 @@ extension HomeViewController {
     private func configureRandomMenu(with outputObservable: Observable<Menu>) {
         outputObservable
             .withUnretained(self)
-            .subscribe(onNext: { (self, randomMenu) in
+            .subscribe(onNext: { (owner, randomMenu) in
                 DispatchQueue.global().async {
                     guard let menuImageURL = randomMenu.imageURL,
                           let imageURL = URL(string: menuImageURL),
@@ -217,21 +217,21 @@ extension HomeViewController {
                     else { return }
                     
                     DispatchQueue.main.async {
-                        self.randomMenuImageView.image = loadedImage
-                        self.menuNameLabel.text = randomMenu.name
+                        owner.randomMenuImageView.image = loadedImage
+                        owner.menuNameLabel.text = randomMenu.name
                         
                         if randomMenu.name.count >= 10 {
-                            NSLayoutConstraint.deactivate(self.constraintsForNormalMenuNameLayout)
-                            NSLayoutConstraint.activate(self.constraintsForLongMenuNameLayout)
-                            self.menuNameLabel.font = Design.menuNameLabelLongFont
+                            NSLayoutConstraint.deactivate(owner.constraintsForNormalMenuNameLayout)
+                            NSLayoutConstraint.activate(owner.constraintsForLongMenuNameLayout)
+                            owner.menuNameLabel.font = Design.menuNameLabelLongFont
                         } else if randomMenu.name.count >= 6 {
-                            NSLayoutConstraint.deactivate(self.constraintsForNormalMenuNameLayout)
-                            NSLayoutConstraint.activate(self.constraintsForLongMenuNameLayout)
-                            self.menuNameLabel.font = Design.menuNameLabelNormalFont
+                            NSLayoutConstraint.deactivate(owner.constraintsForNormalMenuNameLayout)
+                            NSLayoutConstraint.activate(owner.constraintsForLongMenuNameLayout)
+                            owner.menuNameLabel.font = Design.menuNameLabelNormalFont
                         } else {
-                            NSLayoutConstraint.deactivate(self.constraintsForLongMenuNameLayout)
-                            NSLayoutConstraint.activate(self.constraintsForNormalMenuNameLayout)
-                            self.menuNameLabel.font = Design.menuNameLabelNormalFont
+                            NSLayoutConstraint.deactivate(owner.constraintsForLongMenuNameLayout)
+                            NSLayoutConstraint.activate(owner.constraintsForNormalMenuNameLayout)
+                            owner.menuNameLabel.font = Design.menuNameLabelNormalFont
                         }
                     }
                 }

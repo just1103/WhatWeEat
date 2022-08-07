@@ -40,8 +40,8 @@ final class TogetherMenuViewModel {
     private func checkNetworkConnection(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.checkNetworkConnection()
+            .subscribe(onNext: { (owner, _) in
+                owner.checkNetworkConnection()
             })
             .disposed(by: disposeBag)
     }
@@ -56,11 +56,11 @@ final class TogetherMenuViewModel {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { (owner, _) in
                 let pinNumberObservable = NetworkProvider().request(
                     api: WhatWeEatURL.CreateGroupAPI(token: AppDelegate.token)
                 )
-                self.coordinator.showSharePinNumberPage(with: pinNumberObservable)
+                owner.coordinator.showSharePinNumberPage(with: pinNumberObservable)
             })
             .disposed(by: disposeBag)
     }
@@ -70,8 +70,8 @@ final class TogetherMenuViewModel {
 //        inputObserver
 //            .withUnretained(self)
 //            .observe(on: MainScheduler.instance)
-//            .subscribe(onNext: { _ in
-//                self.coordinator.showEnterWithPinNumberPage(pinNumber: pinNumber)
+//            .subscribe(onNext: { (owner, _) in
+//                owner.coordinator.showEnterWithPinNumberPage(pinNumber: owner.pinNumber)
 //            })
 //            .disposed(by: disposeBag)
 //    }

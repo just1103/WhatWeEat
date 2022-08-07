@@ -81,24 +81,24 @@ final class CardGameViewModel {
     ) -> Observable<(CardIndicies, String?)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(CardIndicies, String?)> in
-                return Observable.just((self.visibleCardIndices, self.pinNumber))
+            .flatMap { (owner, _) -> Observable<(CardIndicies, String?)> in
+                return Observable.just((owner.visibleCardIndices, owner.pinNumber))
             }
     }
     
     private func configureMenuNations(by inputObserver: Observable<Void>) -> Observable<[MenuNation]> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<[MenuNation]> in
-                return Observable.just(self.createMenuNations())
+            .flatMap { (owner, _) -> Observable<[MenuNation]> in
+                return Observable.just(owner.createMenuNations())
             }
     }
     
     private func configureMainIngredients(by inputObserver: Observable<Void>) -> Observable<[MainIngredient]> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<[MainIngredient]> in
-                return Observable.just(self.createMainIngredients())
+            .flatMap { (owner, _) -> Observable<[MainIngredient]> in
+                return Observable.just(owner.createMainIngredients())
             }
     }
     
@@ -130,11 +130,11 @@ final class CardGameViewModel {
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<CardIndicies> in
-                self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameAnswers.append(true)
+            .flatMap { (owner, _) -> Observable<CardIndicies> in
+                owner.visibleCardIndices = owner.nextVisibleCardIndices(from: owner.visibleCardIndices)
+                owner.gameAnswers.append(true)
                 
-                return Observable.just(self.visibleCardIndices)
+                return Observable.just(owner.visibleCardIndices)
             }
     }
     
@@ -143,11 +143,11 @@ final class CardGameViewModel {
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(CardIndicies)> in
-                self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameAnswers.append(false)
+            .flatMap { (owner, _) -> Observable<(CardIndicies)> in
+                owner.visibleCardIndices = owner.nextVisibleCardIndices(from: owner.visibleCardIndices)
+                owner.gameAnswers.append(false)
                 
-                return Observable.just(self.visibleCardIndices)
+                return Observable.just(owner.visibleCardIndices)
             }
     }
     
@@ -156,15 +156,15 @@ final class CardGameViewModel {
     ) -> Observable<CardIndicies> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(CardIndicies)> in
-                self.visibleCardIndices = self.nextVisibleCardIndices(from: self.visibleCardIndices)
-                self.gameAnswers.append(nil)
+            .flatMap { (owner, _) -> Observable<(CardIndicies)> in
+                owner.visibleCardIndices = owner.nextVisibleCardIndices(from: owner.visibleCardIndices)
+                owner.gameAnswers.append(nil)
                 
-                if self.isLastQuestion {
-                    self.submitResult()
+                if owner.isLastQuestion {
+                    owner.submitResult()
                 }
                 
-                return Observable.just(self.visibleCardIndices)
+                return Observable.just(owner.visibleCardIndices)
             }
     }
     
@@ -187,11 +187,11 @@ final class CardGameViewModel {
         _ = NetworkProvider().request(api: WhatWeEatURL.ResultSubmissionAPI(pinNumber: self.pinNumber, body: encodedData))
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, soloGameResult) in
+            .subscribe(onNext: { (owner, soloGameResult) in
                 if let decodedSoloGameResult = JSONParser<GameResult>().decode(from: soloGameResult) {
-                    self.showNextPage(with: decodedSoloGameResult)
+                    owner.showNextPage(with: decodedSoloGameResult)
                 } else {
-                    self.showNextPage(with: nil)
+                    owner.showNextPage(with: nil)
                     UserDefaults.standard.set(true, forKey: Text.isTogetherGameSubmittedKey)
                 }
             })
@@ -222,14 +222,14 @@ final class CardGameViewModel {
     ) -> Observable<(CardIndicies, Bool?)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(CardIndicies, Bool?)> in
-                if self.gameAnswers.isEmpty == false {
-                    self.visibleCardIndices = self.previousVisibleCardIndices(from: self.visibleCardIndices)
-                    let lastestAnswer = self.gameAnswers.removeLast()
+            .flatMap { (owner, _) -> Observable<(CardIndicies, Bool?)> in
+                if owner.gameAnswers.isEmpty == false {
+                    owner.visibleCardIndices = owner.previousVisibleCardIndices(from: owner.visibleCardIndices)
+                    let lastestAnswer = owner.gameAnswers.removeLast()
                     
-                    return Observable.just((self.visibleCardIndices, lastestAnswer))
+                    return Observable.just((owner.visibleCardIndices, lastestAnswer))
                 } else {
-                    return Observable.just((self.visibleCardIndices, nil))
+                    return Observable.just((owner.visibleCardIndices, nil))
                 }
             }
     }
@@ -250,8 +250,8 @@ final class CardGameViewModel {
     ) -> Observable<IndexPath> {
         return inputObserver
             .withUnretained(self)
-            .map { (self, indexPath) in
-                guard let selectedMenuNation = self.menuNations[safe: indexPath.row] else { return IndexPath() }
+            .map { (owner, indexPath) in
+                guard let selectedMenuNation = owner.menuNations[safe: indexPath.row] else { return IndexPath() }
                 selectedMenuNation.toggleChecked()
                 
                 return indexPath
@@ -263,8 +263,8 @@ final class CardGameViewModel {
     ) -> Observable<IndexPath> {
         return inputObserver
             .withUnretained(self)
-            .map { (self, indexPath) in
-                guard let selectedMenuNation = self.mainIngredients[safe: indexPath.row] else { return IndexPath() }
+            .map { (owner, indexPath) in
+                guard let selectedMenuNation = owner.mainIngredients[safe: indexPath.row] else { return IndexPath() }
                 selectedMenuNation.toggleChecked()
                 
                 return indexPath

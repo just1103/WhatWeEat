@@ -25,8 +25,8 @@ final class SettingDetailViewModel {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.coordinator.popCurrentPage()
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.popCurrentPage()
             })
             .disposed(by: disposeBag)
     }

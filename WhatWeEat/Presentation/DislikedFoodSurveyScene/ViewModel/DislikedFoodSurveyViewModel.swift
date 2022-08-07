@@ -47,52 +47,53 @@ final class DislikedFoodSurveyViewModel {
     private func configureDislikedFoods(by inputObserver: Observable<Void>) -> Observable<[DislikedFood]> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<[DislikedFood]> in
-            guard
-                let intestineFoodImage = Content.intestineFoodImage,
-                let sashimiFoodImage = Content.sashimiFoodImage,
-                let seaFoodImage = Content.seaFoodImage,
-                let meatFoodImage = Content.meatFoodImage
-            else {
-                return Observable.just([])
-            }
+            .flatMap { (owner, _) -> Observable<[DislikedFood]> in
+                guard
+                    let intestineFoodImage = Content.intestineFoodImage,
+                    let sashimiFoodImage = Content.sashimiFoodImage,
+                    let seaFoodImage = Content.seaFoodImage,
+                    let meatFoodImage = Content.meatFoodImage
+                else {
+                    return Observable.just([])
+                }
+                
                 let intestineFood = DislikedFood(
                     kind: .intestine,
                     descriptionImage: intestineFoodImage,
                     descriptionText: Text.intestineFoodText
                 )
-            let sashimiFood = DislikedFood(
-                kind: .sashimi,
-                descriptionImage: sashimiFoodImage,
-                descriptionText: Text.sashimiFoodText
-            )
-            let seaFood = DislikedFood(
-                kind: .seafood,
-                descriptionImage: seaFoodImage,
-                descriptionText: Text.seaFoodText
-            )
-            let meatFood = DislikedFood(
-                kind: .meat,
-                descriptionImage: meatFoodImage,
-                descriptionText: Text.meatFoodText
-            )
-            self.dislikedFoods = [intestineFood, sashimiFood, seaFood, meatFood]
-              
-            let realmManager = RealmManager.shared
-            let checkedFoodsFromRealm = realmManager.read()
-            
-            _ = self.dislikedFoods.filter { checkedFoodsFromRealm.contains($0.kind) }
-                .map { $0.toggleChecked() }
-            
-            return Observable.just(self.dislikedFoods)
-        }
+                let sashimiFood = DislikedFood(
+                    kind: .sashimi,
+                    descriptionImage: sashimiFoodImage,
+                    descriptionText: Text.sashimiFoodText
+                )
+                let seaFood = DislikedFood(
+                    kind: .seafood,
+                    descriptionImage: seaFoodImage,
+                    descriptionText: Text.seaFoodText
+                )
+                let meatFood = DislikedFood(
+                    kind: .meat,
+                    descriptionImage: meatFoodImage,
+                    descriptionText: Text.meatFoodText
+                )
+                owner.dislikedFoods = [intestineFood, sashimiFood, seaFood, meatFood]
+                
+                let realmManager = RealmManager.shared
+                let checkedFoodsFromRealm = realmManager.read()
+                
+                _ = owner.dislikedFoods.filter { checkedFoodsFromRealm.contains($0.kind) }
+                    .map { $0.toggleChecked() }
+                
+                return Observable.just(owner.dislikedFoods)
+            }
     }
     
     private func configureSelectedFoodIndexPathObservable(by inputObserver: Observable<IndexPath>) -> Observable<IndexPath> {
         return inputObserver
             .withUnretained(self)
-            .map { (self, indexPath) in
-            guard let selectedDislikedFood = self.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
+            .map { (owner, indexPath) in
+            guard let selectedDislikedFood = owner.dislikedFoods[safe: indexPath.row] else { return IndexPath() }
             selectedDislikedFood.toggleChecked()
             return indexPath
         }
@@ -102,17 +103,17 @@ final class DislikedFoodSurveyViewModel {
         inputObserver
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                let checkedFoods = self.dislikedFoods.filter { $0.isChecked }
+            .subscribe(onNext: { (owner, _) in
+                let checkedFoods = owner.dislikedFoods.filter { $0.isChecked }
                 
                 let realmManger = RealmManager.shared
                 realmManger.deleteAndCreate(checkedFoods)
                 
                 if FirstLaunchChecker.isFirstLaunched() {
-                    self.coordinator.dislikedFoodSurveyCoordinatorDelegate.showMainTabBarPage()
+                    owner.coordinator.dislikedFoodSurveyCoordinatorDelegate.showMainTabBarPage()
                     UserDefaults.standard.set(false, forKey: Text.isFirstLaunchedKey)
                 } else {
-                    guard let settingCoordinator = self.coordinator as? SettingCoordinator else { return }
+                    guard let settingCoordinator = owner.coordinator as? SettingCoordinator else { return }
                     settingCoordinator.popCurrentPage()
                 }
             })

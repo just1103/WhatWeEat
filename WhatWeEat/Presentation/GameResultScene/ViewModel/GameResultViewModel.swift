@@ -33,7 +33,7 @@ final class GameResultViewModel {
     }
     
     deinit {
-        coordinator.finish()  // FIXME: 호출안되는 문제 발생
+        coordinator.finish()
     }
     
     // MARK: - Methods
@@ -57,26 +57,26 @@ final class GameResultViewModel {
     ) -> Observable<(Menu, Int, String?)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(Menu, Int, String?)> in
-                if let pinNumber = self.pinNumber {
-                    return self.fetchTogetherGameResult(with: self.pinNumber)
+            .flatMap { (owner, _) -> Observable<(Menu, Int, String?)> in
+                if let pinNumber = owner.pinNumber {
+                    return owner.fetchTogetherGameResult(with: owner.pinNumber)
                         .map { menusAndPlayerCount in
                             guard let firstMenu = menusAndPlayerCount.menus.first else {
                                 return (Menu(name: "", imageURL: "", keywords: []), menusAndPlayerCount.playerCount, pinNumber)
                             }
                             
-                            self.menus = menusAndPlayerCount.menus
+                            owner.menus = menusAndPlayerCount.menus
                             
                             return (firstMenu, menusAndPlayerCount.playerCount, pinNumber)
                         }
                 } else {
-                    guard let soloGameResult = self.soloGameResult,
+                    guard let soloGameResult = owner.soloGameResult,
                           let firstMenu = soloGameResult.menus.first
                     else {
                         return Observable.just((Menu(name: "", imageURL: "", keywords: []), 1, nil))
                     }
                     
-                    self.menus = soloGameResult.menus
+                    owner.menus = soloGameResult.menus
                     
                     return Observable.just((firstMenu, soloGameResult.playerCount, nil))
                 }
@@ -95,10 +95,10 @@ final class GameResultViewModel {
     private func configureNextMenuCheckButtonDidTap(by inputObserver: Observable<Void>) -> Observable<(Menu?, Int)> {
         inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(Menu?, Int)> in
-                self.currentMenuIndex += 1
+            .flatMap { (owner, _) -> Observable<(Menu?, Int)> in
+                owner.currentMenuIndex += 1
                 
-                return Observable.just((self.menus[safe: self.currentMenuIndex], self.currentMenuIndex))
+                return Observable.just((owner.menus[safe: owner.currentMenuIndex], owner.currentMenuIndex))
             }
     }
 
@@ -106,16 +106,15 @@ final class GameResultViewModel {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                if self.pinNumber == nil {
-                    self.coordinator.showInitialSoloMenuPage()
+            .subscribe(onNext: { (owner, _) in
+                if owner.pinNumber == nil {
+                    owner.coordinator.showInitialSoloMenuPage()
                 } else {
                     // 그룹 정보 삭제는 서버에서 처리 (1일 후 삭제)
-                    self.coordinator.showInitialTogetherMenuPage()
+                    owner.coordinator.showInitialTogetherMenuPage()
                 }
                 
-                self.coordinator.popCurrentPage()  // 기존 결과화면을 내림 (여기서 왜 ViewModel deinit이 안되는지 파악 필요)
-                self.coordinator.finish()  // TODO: 여기서는 호출되는데, ViewModel deinit은 호출 안됨
+                owner.coordinator.popCurrentPage()  // 기존 결과화면을 내림 
             })
             .disposed(by: disposeBag)
     }

@@ -28,8 +28,8 @@ final class SoloMenuViewModel: GameStartWaitingViewModel {
     private func checkNetworkConnection(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.checkNetworkConnection()
+            .subscribe(onNext: { (owner, _) in
+                owner.checkNetworkConnection()
             })
             .disposed(by: disposeBag)
     }
@@ -43,9 +43,9 @@ final class SoloMenuViewModel: GameStartWaitingViewModel {
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-            self.coordinator.showGamePage()
-        })
-        .disposed(by: disposeBag)
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.showGamePage()
+            })
+            .disposed(by: disposeBag)
     }
 }
