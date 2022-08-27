@@ -60,6 +60,7 @@
 		366F186228BA32DB0042317C /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366F186128BA32DB0042317C /* MockURLSession.swift */; };
 		366F186428BA330C0042317C /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366F186328BA330C0042317C /* URLSessionProtocol.swift */; };
 		366F186628BA34280042317C /* JSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366F186528BA34280042317C /* JSONParserTests.swift */; };
+		366F186F28BA4A460042317C /* MockGameResult.json in Resources */ = {isa = PBXBuildFile; fileRef = 366F186E28BA4A460042317C /* MockGameResult.json */; };
 		36A5E3AF286552FB0057A556 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */; };
 		36A5E3B1286589970057A556 /* ResultWaiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3B0286589970057A556 /* ResultWaiting.swift */; };
 		36A5E3C52867E4B60057A556 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36A5E3BC2867E4B60057A556 /* Pretendard-ExtraLight.otf */; };
@@ -183,6 +184,7 @@
 		366F186128BA32DB0042317C /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		366F186328BA330C0042317C /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		366F186528BA34280042317C /* JSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParserTests.swift; sourceTree = "<group>"; };
+		366F186E28BA4A460042317C /* MockGameResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockGameResult.json; sourceTree = "<group>"; };
 		36A5E3AE286552FB0057A556 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		36A5E3B0286589970057A556 /* ResultWaiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWaiting.swift; sourceTree = "<group>"; };
 		36A5E3BC2867E4B60057A556 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				36DE6EB428761CA2000AA042 /* MockRandomMenu.json */,
+				366F186E28BA4A460042317C /* MockGameResult.json */,
 				366F186128BA32DB0042317C /* MockURLSession.swift */,
 			);
 			path = MockData;
@@ -932,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36DE6EB528761CA2000AA042 /* MockRandomMenu.json in Resources */,
+				366F186F28BA4A460042317C /* MockGameResult.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,7 +1271,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1287,7 +1291,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XD7KFVM4LP;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.applecider.WhatWeEatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
