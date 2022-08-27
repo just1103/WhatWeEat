@@ -1,31 +1,17 @@
 import Foundation
 import RxSwift
 
-enum NetworkError: Error, LocalizedError {
-    case statusCodeError
-    case unknownError
-    case urlIsNil
-    
-    var errorDescription: String? {
-        switch self {
-        case .statusCodeError:
-            return "정상적인 StatusCode가 아닙니다."
-        case .unknownError:
-            return "알수 없는 에러가 발생했습니다."
-        case .urlIsNil:
-            return "정상적인 URL이 아닙니다."
-        }
-    }
-}
-
 struct NetworkProvider {
-    private let session: URLSession
+    // MARK: - Properties
+    private let session: URLSessionProtocol
     private let disposeBag = DisposeBag()
     
-    init(session: URLSession = URLSession.shared) {
+    // MARK: - Initializers
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
     
+    // MARK: - Methods
     func fetchData<T: Codable>(api: Gettable, decodingType: T.Type) -> Observable<T> {
         return Observable.create { emitter in
             guard let task = dataTask(api: api, emitter: emitter) else {
@@ -88,5 +74,23 @@ struct NetworkProvider {
         }
         
         return task
+    }
+}
+
+// MARK: - NetworkError
+enum NetworkError: Error, LocalizedError {
+    case statusCodeError
+    case unknownError
+    case urlIsNil
+    
+    var errorDescription: String? {
+        switch self {
+        case .statusCodeError:
+            return "정상적인 StatusCode가 아닙니다."
+        case .unknownError:
+            return "알수 없는 에러가 발생했습니다."
+        case .urlIsNil:
+            return "정상적인 URL이 아닙니다."
+        }
     }
 }
