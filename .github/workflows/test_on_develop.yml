@@ -17,7 +17,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build Xcode
-      working-directory: WhatWeEat
+    - name: Run tests
       run: |
-        xcodebuild test -project WhatWeEat/WhatWeEat.xcodeproj -scheme WhatWeEat -destination 'platform=iOS Simulator,name=iPhone 13 Pro,OS=14.1'
+        xcodebuild clean test -project WhatWeEat.xcodeproj -scheme WhatWeEat -destination 'platform=iOS Simulator,name=iPhone 13 Pro,OS=14.1'
