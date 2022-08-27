@@ -1,3 +1,5 @@
+[![Run Test](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml/badge.svg)](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml)
+
 # 우리뭐먹지 
 
 ## 목차
