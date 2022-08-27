@@ -1,4 +1,5 @@
-[![Run Test](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml/badge.svg)](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml)
+![iOS 14.0](https://img.shields.io/badge/iOS-14.0-lightgrey?style=flat&color=181717)
+[![Swift 5.6](https://img.shields.io/badge/Swift-5.6-F05138.svg?style=flat&color=F05138)](https://swift.org/download/) [![Xcode 13.4](https://img.shields.io/badge/Xcode-13.4-147EFB.svg?style=flat&color=147EFB)](https://apps.apple.com/kr/app/xcode/id497799835?mt=12) [![Run Test](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml/badge.svg)](https://github.com/just1103/WhatWeEat/actions/workflows/test_on_develop.yml)
 
 # 우리뭐먹지 
 
