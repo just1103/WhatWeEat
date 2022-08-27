@@ -118,6 +118,7 @@ final class SettingViewModel {
         guard
             let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
             let data = try? Data(contentsOf: url),
+            // TODO: JSONSerialization -> JSONDecoder().decode 대체 가능한지 확인
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
             let results = json[Text.resultsKey] as? [[String: Any]],
             results.count > 0,
