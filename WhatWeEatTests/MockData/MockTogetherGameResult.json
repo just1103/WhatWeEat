@@ -1,0 +1,32 @@
+{
+  "menus": [
+    {
+      "name": "샐러드",
+      "imageURL": "https://user-images.githubusercontent.com/70856586/176447481-5d38679a-f11c-49a7-afd3-efcaae3f5064.jpg",
+      "keywords": [
+        "간편",
+        "매콤 X",
+        "안주 X"
+      ]
+    },
+    {
+      "name": "포케",
+      "imageURL": "https://user-images.githubusercontent.com/70856586/176663425-468c4991-2057-49dc-9753-a58b5a08e646.jpg",
+      "keywords": [
+        "간편",
+        "매콤 X",
+        "안주 X"
+      ]
+    },
+    {
+      "name": "샌드위치",
+      "imageURL": "https://user-images.githubusercontent.com/70856586/176447488-90c79306-d3a0-4743-b77d-0c9bb961f5c4.jpg",
+      "keywords": [
+        "간편",
+        "매콤 X",
+        "안주 X"
+      ]
+    }
+  ],
+  "playerCount": 5
+}
