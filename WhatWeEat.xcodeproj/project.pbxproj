@@ -11,7 +11,7 @@
 		3636DE57283B225100F04111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE56283B225100F04111 /* SceneDelegate.swift */; };
 		3636DE5E283B225200F04111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3636DE5D283B225200F04111 /* Assets.xcassets */; };
 		3636DE61283B225200F04111 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3636DE5F283B225200F04111 /* LaunchScreen.storyboard */; };
-		3636DE6C283B225200F04111 /* WhatWeEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE6B283B225200F04111 /* WhatWeEatTests.swift */; };
+		3636DE6C283B225200F04111 /* NetworkProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE6B283B225200F04111 /* NetworkProviderTests.swift */; };
 		3636DE85283B24DC00F04111 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3636DE84283B24DC00F04111 /* .swiftlint.yml */; };
 		3636DE8B283B55D300F04111 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE8A283B55D300F04111 /* OnboardingPageViewController.swift */; };
 		3636DE8D283B561A00F04111 /* OnboardingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636DE8C283B561A00F04111 /* OnboardingContentViewController.swift */; };
@@ -68,7 +68,7 @@
 		36A5E3CC2867E4B60057A556 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36A5E3C32867E4B60057A556 /* Pretendard-Thin.otf */; };
 		36A5E3CD2867E4B60057A556 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36A5E3C42867E4B60057A556 /* Pretendard-Light.otf */; };
 		36A5E3CF2867E6B50057A556 /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5E3CE2867E6B50057A556 /* UIFont+CustomFont.swift */; };
-		36DE6EB528761CA2000AA042 /* ItunesAppSearchResult.txt in Resources */ = {isa = PBXBuildFile; fileRef = 36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.txt */; };
+		36DE6EB528761CA2000AA042 /* ItunesAppSearchResult.json in Resources */ = {isa = PBXBuildFile; fileRef = 36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.json */; };
 		36E5AFE628504C4300D185D6 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */; };
 		36E5AFE928504EB600D185D6 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */; };
 		DE095C85283B241A00C7E109 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DE095C84283B241A00C7E109 /* RxCocoa */; };
@@ -131,7 +131,7 @@
 		3636DE60283B225200F04111 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3636DE62283B225200F04111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3636DE67283B225200F04111 /* WhatWeEatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatWeEatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3636DE6B283B225200F04111 /* WhatWeEatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWeEatTests.swift; sourceTree = "<group>"; };
+		3636DE6B283B225200F04111 /* NetworkProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProviderTests.swift; sourceTree = "<group>"; };
 		3636DE84283B24DC00F04111 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3636DE8A283B55D300F04111 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		3636DE8C283B561A00F04111 /* OnboardingContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		36A5E3C42867E4B60057A556 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		36A5E3CE2867E6B50057A556 /* UIFont+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFont.swift"; sourceTree = "<group>"; };
 		36DE6EB22875F871000AA042 /* WhatWeEat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatWeEat.entitlements; sourceTree = "<group>"; };
-		36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ItunesAppSearchResult.txt; sourceTree = "<group>"; };
+		36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ItunesAppSearchResult.json; sourceTree = "<group>"; };
 		36E5AFE528504C4300D185D6 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		36E5AFE828504EB600D185D6 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DE310329283F6446009CA7C3 /* FirstLaunchChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchChecker.swift; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				36DE6EB328761C69000AA042 /* MockData */,
-				3636DE6B283B225200F04111 /* WhatWeEatTests.swift */,
+				3636DE6B283B225200F04111 /* NetworkProviderTests.swift */,
 			);
 			path = WhatWeEatTests;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 		36DE6EB328761C69000AA042 /* MockData */ = {
 			isa = PBXGroup;
 			children = (
-				36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.txt */,
+				36DE6EB428761CA2000AA042 /* ItunesAppSearchResult.json */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -919,7 +919,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36DE6EB528761CA2000AA042 /* ItunesAppSearchResult.txt in Resources */,
+				36DE6EB528761CA2000AA042 /* ItunesAppSearchResult.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,7 +1036,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3636DE6C283B225200F04111 /* WhatWeEatTests.swift in Sources */,
+				3636DE6C283B225200F04111 /* NetworkProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
