@@ -35,6 +35,11 @@ class SettingDetailViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        textView.backgroundColor = .red
+    }
+    
     // MARK: - Methods
     private func configureNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -53,7 +58,8 @@ class SettingDetailViewController: UIViewController {
         
         textView.text = content
         textView.setContentOffset(.zero, animated: false)
-        textView.layoutIfNeeded()
+//        textView.layoutIfNeeded() // TODO: TEST
+        textView.setNeedsLayout()
         
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

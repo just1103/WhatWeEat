@@ -356,11 +356,11 @@ extension GameResultViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, menusAndPlayerCountAndPinNumber) in
+            .subscribe(onNext: { (owner, menusAndPlayerCountAndPinNumber) in
                 let (menu, playerCount, pinNumber) = menusAndPlayerCountAndPinNumber
                 
-                self.configureLabels(menu: menu, playerCount: playerCount, pinNumber: pinNumber)
-                self.configureImage(menu: menu)
+                owner.configureLabels(menu: menu, playerCount: playerCount, pinNumber: pinNumber)
+                owner.configureImage(menu: menu)
             })
             .disposed(by: disposeBag)
     }
@@ -409,15 +409,15 @@ extension GameResultViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, nextMenuAndIndex) in
+            .subscribe(onNext: { (owner, nextMenuAndIndex) in
                 let (nextMenu, indexOfMenu) = nextMenuAndIndex
                 guard let nextMenu = nextMenu else { return }
                 
                 if indexOfMenu < 3 {
-                    self.configureNextMenuLabels(menu: nextMenu)
-                    self.configureImage(menu: nextMenu)
+                    owner.configureNextMenuLabels(menu: nextMenu)
+                    owner.configureImage(menu: nextMenu)
                     
-                    self.nextMenuCheckButton.setTitle("다음 순위 메뉴 확인 (\(indexOfMenu + 1)/3)", for: .normal)
+                    owner.nextMenuCheckButton.setTitle("다음 순위 메뉴 확인 (\(indexOfMenu + 1)/3)", for: .normal)
                 }
             })
             .disposed(by: disposeBag)
@@ -437,10 +437,10 @@ extension GameResultViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { (owner, _) in
                 guard
-                    let menuName = self.menuNameLabel.text,
-                    let keywords = self.keywordLabel.text
+                    let menuName = owner.menuNameLabel.text,
+                    let keywords = owner.keywordLabel.text
                 else { return }
                 
                 let title = Text.activityViewTitle
@@ -453,9 +453,9 @@ extension GameResultViewController {
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
                 let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.shareButton
+                activityViewController.popoverPresentationController?.sourceView = owner.shareButton
                 activityViewController.popoverPresentationController?.permittedArrowDirections = .down
-                self.present(activityViewController, animated: true)
+                owner.present(activityViewController, animated: true)
             })
             .disposed(by: disposeBag)
     }

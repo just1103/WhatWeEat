@@ -197,14 +197,14 @@ extension ResultWaitingViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, pinNumberAndResultWaitingInformation) in
+            .subscribe(onNext: { (owner, pinNumberAndResultWaitingInformation) in
                 let (pinNumber, submissionCount, isHost, isGameClosed) = pinNumberAndResultWaitingInformation
                 
-                self.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
-                self.submissionCountLabel.text = "\(submissionCount)명\n제출 완료"
+                owner.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
+                owner.submissionCountLabel.text = "\(submissionCount)명\n제출 완료"
                 
                 if isHost || isGameClosed {
-                    self.gameResultCheckButton.isHidden = false
+                    owner.gameResultCheckButton.isHidden = false
                 }
             })
             .disposed(by: disposeBag)
@@ -214,8 +214,8 @@ extension ResultWaitingViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, updatedSubmissionCount) in
-                self.submissionCountLabel.text = "\(updatedSubmissionCount)명\n제출 완료"
+            .subscribe(onNext: { (owner, updatedSubmissionCount) in
+                owner.submissionCountLabel.text = "\(updatedSubmissionCount)명\n제출 완료"
             })
             .disposed(by: disposeBag)
     }
@@ -224,9 +224,9 @@ extension ResultWaitingViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, isGameClosed) in
+            .subscribe(onNext: { (owner, isGameClosed) in
                 if isGameClosed {
-                    self.gameResultCheckButton.isHidden = false
+                    owner.gameResultCheckButton.isHidden = false
                 }
             })
             .disposed(by: disposeBag)

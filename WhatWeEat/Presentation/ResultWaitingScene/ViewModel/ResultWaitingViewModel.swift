@@ -53,16 +53,16 @@ final class ResultWaitingViewModel {
     private func configureInitialUI(by inputObserver: Observable<Void>) -> Observable<(String, Int, Bool, Bool)> {
         return inputObserver
             .withUnretained(self)
-            .flatMap { _ -> Observable<(String, Int, Bool, Bool)> in
-                return self.fetchResultWaitingInformation(with: self.pinNumber)
+            .flatMap { (owner, _) -> Observable<(String, Int, Bool, Bool)> in
+                return owner.fetchResultWaitingInformation(with: owner.pinNumber)
                     .map { resultWaiting in
                         let submissionCount = resultWaiting.submissionCount
                         let isHost = resultWaiting.isHost
                         let isGameClosed = resultWaiting.isGameClosed
                         
-                        self.latestSubmissionCount = submissionCount
+                        owner.latestSubmissionCount = submissionCount
                         
-                        return (self.pinNumber, submissionCount, isHost, isGameClosed)
+                        return (owner.pinNumber, submissionCount, isHost, isGameClosed)
                     }
             }
     }
@@ -84,8 +84,8 @@ final class ResultWaitingViewModel {
     ) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.setupTimerForUpdatedSubmissionCount(
+            .subscribe(onNext: { (owner, _) in
+                owner.setupTimerForUpdatedSubmissionCount(
                     outputForSubmissionCount: outputForSubmissionCount,
                     outputForIsGameClosed: outputForIsGameClosed
                 )
@@ -112,13 +112,13 @@ final class ResultWaitingViewModel {
     ) {
         fetchResultWaitingInformation(with: pinNumber)
             .withUnretained(self)
-            .subscribe(onNext: { (self, resultWaiting) in
+            .subscribe(onNext: { (owner, resultWaiting) in
                 let submissionCount = resultWaiting.submissionCount
                 let isGameClosed = resultWaiting.isGameClosed
 
-                if submissionCount != self.latestSubmissionCount {
+                if submissionCount != owner.latestSubmissionCount {
                     outputForSubmissionCount.onNext(submissionCount)
-                    self.latestSubmissionCount = submissionCount
+                    owner.latestSubmissionCount = submissionCount
                 }
                 
                 if isGameClosed {
@@ -131,8 +131,8 @@ final class ResultWaitingViewModel {
     private func configureGameResultCheckButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.coordinator.showGameResultPage(with: self.pinNumber, soloGameResult: nil)
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.showGameResultPage(with: owner.pinNumber, soloGameResult: nil)
                 UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
                 UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
@@ -142,8 +142,8 @@ final class ResultWaitingViewModel {
     private func configureGameRestartButtonDidTap(by inputObserver: Observable<Void>) {
         return inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.requestGameSubmissionCancel(pinNumber: self.pinNumber, token: AppDelegate.token)
+            .subscribe(onNext: { (owner, _) in
+                owner.requestGameSubmissionCancel(pinNumber: owner.pinNumber, token: AppDelegate.token)
                 UserDefaults.standard.set(false, forKey: Text.isTogetherGameSubmittedKey)
                 UserDefaults.standard.set(nil, forKey: Text.latestPinNumber)
             })
@@ -156,10 +156,9 @@ final class ResultWaitingViewModel {
         )
         .withUnretained(self)
         .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { _ in
-            self.coordinator.showInitialTogetherMenuPage()
-            self.coordinator.popCurrentPage() 
-            self.coordinator.finish()  // FIXME: Together-C가 계속 쌓이는 문제 발생
+        .subscribe(onNext: { (owner, _) in
+            owner.coordinator.showInitialTogetherMenuPage()
+            owner.coordinator.popCurrentPage()
         })
         .disposed(by: disposeBag)
     }

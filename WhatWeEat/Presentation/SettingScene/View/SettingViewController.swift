@@ -90,8 +90,8 @@ extension SettingViewController {
     private func configureTableViewItems(with outputObservable: Observable<[SettingItem]>) {
         outputObservable
             .withUnretained(self)
-            .subscribe(onNext: { (self, items) in
-                self.settingItems = items as [SettingItem]
+            .subscribe(onNext: { (owner, items) in
+                owner.settingItems = items as [SettingItem]
             })
             .disposed(by: disposeBag)
     }

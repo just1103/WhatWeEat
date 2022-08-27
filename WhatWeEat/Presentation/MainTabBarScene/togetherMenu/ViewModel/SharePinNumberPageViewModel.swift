@@ -43,12 +43,12 @@ final class SharePinNumberPageViewModel {
     private func configurePinNumber() -> Observable<String> {
         pinNumberData
             .withUnretained(self)
-            .map { (self, pinNumberData) in
+            .map { (owner, pinNumberData) in
             guard let pinNumberText = String(data: pinNumberData, encoding: .utf8) else {
                 return ""
             }
             
-            self.pinNumber = pinNumberText
+            owner.pinNumber = pinNumberText
             
             return pinNumberText
         }
@@ -57,8 +57,8 @@ final class SharePinNumberPageViewModel {
     private func configureBackButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.coordinator.popCurrentPage()
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.popCurrentPage()
         })
         .disposed(by: disposeBag)
     }
@@ -66,10 +66,10 @@ final class SharePinNumberPageViewModel {
     private func configureGameStartButtonDidTap(by inputObserver: Observable<Void>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.coordinator.showGamePage(with: self.pinNumber)
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.showGamePage(with: owner.pinNumber)
                 UserDefaults.standard.set(false, forKey: "isTogetherGameSubmitted")
-                UserDefaults.standard.set(self.pinNumber, forKey: "latestPinNumber")
+                UserDefaults.standard.set(owner.pinNumber, forKey: "latestPinNumber")
         })
         .disposed(by: disposeBag)
     }

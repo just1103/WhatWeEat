@@ -207,8 +207,8 @@ extension SharePinNumberPageViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (self, pinNumberText) in
-                self.pinNumberLabel.text = "\(pinNumberText)"
+            .subscribe(onNext: { (owner, pinNumberText) in
+                owner.pinNumberLabel.text = "\(pinNumberText)"
             })
             .disposed(by: disposeBag)
     }
@@ -217,8 +217,8 @@ extension SharePinNumberPageViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                guard let pinNumber = self.pinNumberLabel.text else { return }
+            .subscribe(onNext: { (owner, _) in
+                guard let pinNumber = owner.pinNumberLabel.text else { return }
                 
                 let title = Text.activityViewTitle
                 let content = """
@@ -229,9 +229,9 @@ extension SharePinNumberPageViewController {
                 let items = [SharePinNumberActivityItemSource(title: title, content: content)]
                 
                 let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.shareButton
+                activityViewController.popoverPresentationController?.sourceView = owner.shareButton
                 activityViewController.popoverPresentationController?.permittedArrowDirections = .down
-                self.present(activityViewController, animated: true)
+                owner.present(activityViewController, animated: true)
             })
             .disposed(by: disposeBag)
     }

@@ -113,21 +113,22 @@ final class SettingViewModel {
         }
         return currentAppVersion
     }
-    
-    private func checkLatestAppVersion() -> String {
+
+    private func checkLatestAppVersion() -> String {  // TODO: 테스트코드 작성
         guard
-            let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
+            let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(Text.appBundleID)"),
             let data = try? Data(contentsOf: url),
+            // TODO: JSONSerialization -> JSONDecoder().decode 대체 가능한지 확인
             let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
             let results = json[Text.resultsKey] as? [[String: Any]],
             results.count > 0,
             let latestAppVersion = results[safe: 0]?[Text.versionKey] as? String
         else {
-//            return "1.0"  // TODO: 테스트코드
             return Text.versionCheckErrorTitle
         }
         
-        return latestAppVersion
+//        return latestAppVersion
+        return "1.2"  // FIXME: 업데이트 버전이 있는데 URL이 비정상작동하는 문제
     }
     
     private func configureVersionInformationButtonUpdateTitle() -> String {
@@ -148,22 +149,22 @@ final class SettingViewModel {
     private func configureSettingItemDidSelectObservable(by inputObserver: Observable<IndexPath>) {
         inputObserver
             .withUnretained(self)
-            .subscribe(onNext: { (self, indexPath) in
+            .subscribe(onNext: { (owner, indexPath) in
                 guard let sectionKind = SettingViewController.SectionKind(rawValue: indexPath.section) else { return }
                 
                 switch sectionKind {
                 case .dislikedFood:
-                    self.coordinator.showDislikedFoodSurveyPage()
+                    owner.coordinator.showDislikedFoodSurveyPage()
                 case .common:
                     guard
-                        let commonSettingItems = self.settingItems.filter({ $0.sectionKind == .common }) as? [CommonSettingItem],
+                        let commonSettingItems = owner.settingItems.filter({ $0.sectionKind == .common }) as? [CommonSettingItem],
                         let content = commonSettingItems[indexPath.row].content
                     else { return }
-                    self.coordinator.showSettingDetailPageWith(title: commonSettingItems[indexPath.row].title, content: content)
+                    owner.coordinator.showSettingDetailPageWith(title: commonSettingItems[indexPath.row].title, content: content)
                 case .version:
                     return
                     // TODO: 다음 배포버전에서 추가 (AppStore에 등록된 이후 추가해야 함)
-//                    self.coordinator.showAppStorePage()
+//                    owner.coordinator.showAppStorePage()
                 }
             })
             .disposed(by: disposeBag)
@@ -173,8 +174,8 @@ final class SettingViewModel {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.coordinator.popCurrentPage()
+            .subscribe(onNext: { (owner, _) in
+                owner.coordinator.popCurrentPage()
             })
             .disposed(by: disposeBag)
     }
@@ -202,7 +203,7 @@ extension SettingViewModel {
         static let versionInformationButtonLatestTitle = "최신버전"
         static let versionInfoDictionaryKey = "CFBundleShortVersionString"
         static let appBundleID = "com.IntjDevelopers.WhatWeEat"
-        static let resultsKey = "reslts"
+        static let resultsKey = "results"
         static let versionKey = "version"
     }
 }

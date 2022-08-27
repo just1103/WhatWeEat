@@ -112,11 +112,11 @@ extension OnboardingPageViewController {
         outputObservable
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { (owner, _) in
                 let lastPageIndex = 2
-                self.hideButtonIfLastPage(lastPageIndex)
-                guard let lastPage = self.onboardingPages.last as? UIViewController else { return }
-                self.setViewControllers([lastPage], direction: .forward, animated: true)
+                owner.hideButtonIfLastPage(lastPageIndex)
+                guard let lastPage = owner.onboardingPages.last as? UIViewController else { return }
+                owner.setViewControllers([lastPage], direction: .forward, animated: true)
             })
             .disposed(by: disposeBag)
     }

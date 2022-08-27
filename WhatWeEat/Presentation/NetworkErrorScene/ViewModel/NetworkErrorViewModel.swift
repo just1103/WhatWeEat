@@ -24,9 +24,9 @@ final class NetworkErrorViewModel {
         inputObserver
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { (owner, _) in
                 if NetworkConnectionManager.shared.isCurrentlyConnected {
-                    self.coordinator.popCurrentPage()
+                    owner.coordinator.popCurrentPage()
                 }
             })
             .disposed(by: disposeBag)

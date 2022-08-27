@@ -265,28 +265,28 @@ extension CardGameViewController {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, initialCardIndiciesAndPinNumber) in
+            .subscribe(onNext: { (owner, initialCardIndiciesAndPinNumber) in
                 let ((first, second, third), pinNumber) = initialCardIndiciesAndPinNumber
                 guard
-                    let firstCard = self.cards[safe: first],
-                    let secondCard = self.cards[safe: second],
-                    let thirdCard = self.cards[safe: third]
+                    let firstCard = owner.cards[safe: first],
+                    let secondCard = owner.cards[safe: second],
+                    let thirdCard = owner.cards[safe: third]
                 else { return }
                 
-                self.view.addSubview(thirdCard)
-                self.view.addSubview(secondCard)
-                self.view.addSubview(firstCard)
+                owner.view.addSubview(thirdCard)
+                owner.view.addSubview(secondCard)
+                owner.view.addSubview(firstCard)
                 
-                thirdCard.frame = self.cardFrame(for: 2)
-                secondCard.frame = self.cardFrame(for: 1)
-                firstCard.frame = self.cardFrame(for: 0)
+                thirdCard.frame = owner.cardFrame(for: 2)
+                secondCard.frame = owner.cardFrame(for: 1)
+                firstCard.frame = owner.cardFrame(for: 0)
                 
                 guard let pinNumber = pinNumber else {
-                    self.pinNumberLabel.isHidden = true
+                    owner.pinNumberLabel.isHidden = true
                     return
                 }
-                self.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
-                self.pinNumberLabel.isHidden = false
+                owner.pinNumberLabel.text = "PIN NUMBER : \(pinNumber)"
+                owner.pinNumberLabel.isHidden = false
             })
             .disposed(by: disposeBag)
     }
@@ -319,8 +319,8 @@ extension CardGameViewController {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                self.showNextCard(with: cardIndicies, answerKind: .like)
+            .subscribe(onNext: { (owner, cardIndicies) in
+                owner.showNextCard(with: cardIndicies, answerKind: .like)
             })
             .disposed(by: disposeBag)
     }
@@ -329,8 +329,8 @@ extension CardGameViewController {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                self.showNextCard(with: cardIndicies, answerKind: .hate)
+            .subscribe(onNext: { (owner, cardIndicies) in
+                owner.showNextCard(with: cardIndicies, answerKind: .hate)
             })
             .disposed(by: disposeBag)
     }
@@ -339,8 +339,8 @@ extension CardGameViewController {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndicies) in
-                self.showNextCard(with: cardIndicies, answerKind: .skip)
+            .subscribe(onNext: { (owner, cardIndicies) in
+                owner.showNextCard(with: cardIndicies, answerKind: .skip)
             })
             .disposed(by: disposeBag)
     }
@@ -406,7 +406,7 @@ extension CardGameViewController {
         outputObservable
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, cardIndiciesAndResult) in
+            .subscribe(onNext: { (owner, cardIndiciesAndResult) in
                 let (previousCardIndicies, latestAnswer) = cardIndiciesAndResult
                 
                 var answerKind: AnswerKind?
@@ -420,7 +420,7 @@ extension CardGameViewController {
                 }
                 guard let answerKind = answerKind else { return }
 
-                self.showPreviousCard(with: previousCardIndicies, answerKind: answerKind)
+                owner.showPreviousCard(with: previousCardIndicies, answerKind: answerKind)
             })
             .disposed(by: disposeBag)
     }
@@ -473,9 +473,9 @@ extension CardGameViewController {
         indexPath
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, indexPath) in
+            .subscribe(onNext: { (owner, indexPath) in
                 guard
-                    let selectedCell = self.mainIngredientCard.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
+                    let selectedCell = owner.mainIngredientCard.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
                 else { return }
                 selectedCell.toggleSelectedCellUI()
             })
@@ -486,9 +486,9 @@ extension CardGameViewController {
         indexPath
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { (self, indexPath) in
+            .subscribe(onNext: { (owner, indexPath) in
                 guard
-                    let selectedCell = self.nationCard.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
+                    let selectedCell = owner.nationCard.choiceCollectionView.cellForItem(at: indexPath) as? GameSelectionCell
                 else { return }
                 selectedCell.toggleSelectedCellUI()
             })
