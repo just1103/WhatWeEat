@@ -4,11 +4,9 @@ on:
   push:
     branches: 
       - "develop"
-      - "master"
   pull_request:
     branches: 
       - "develop"
-      - "master"
 
 jobs:
   build:
@@ -17,9 +15,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Run tests
+    - name: Run unit tests
       run: |
         xcodebuild clean test -project WhatWeEat.xcodeproj \
         -scheme WhatWeEat \
-        -sdk iphonesimulator \
-        -destination 'platform=iOS Simulator,name=iPhone 13 Pro,OS=latest'
+        -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest'
