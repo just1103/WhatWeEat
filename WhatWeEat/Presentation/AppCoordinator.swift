@@ -47,10 +47,3 @@ final class AppCoordinator: CoordinatorProtocol, DislikedFoodSurveyCoordinatorDe
         navigationController?.popViewController(animated: true)
     }
 }
-
-// MARK: - NameSpaces
-extension AppCoordinator {
-    private enum Content {
-     
-    }
-}
